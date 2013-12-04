@@ -5,7 +5,7 @@ var Atrium = require("./app/index/route.common.js").Atrium;
 
 Program
     .version("0.0.1")
-    .option("-p, --port [number]", "Specify Port to Listen At", "4000", parseInt)
+    .option("-p, --port [number]", "Specify Port to Listen At", process.env.PORT || 4000, parseInt)
     .option("-c, --create-user", "Create A User Account")
     .option("-s, --create-subject", "Create A Subject")
     .parse(process.argv);
