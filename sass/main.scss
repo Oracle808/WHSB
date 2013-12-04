@@ -1,0 +1,410 @@
+
+// -apple-system-font is for iOS7, internally known as Helvetica Neue Interface M3
+$helvetica: "-apple-system-font", "Proxima Nova", "Helvetica Neue", "Helvetica", "Arial", "sans-serif";
+$georgia: "Georgia", "Cambria", "Times New Roman", "Times", "serif";
+
+// FUNCTION BELT
+@function to-string($list, $glue: '', $is-nested: false) {
+  	$result: null;
+
+  	@for $i from 1 through length($list) {
+    	$e: nth($list, $i);
+
+    	@if type-of($e) == list {
+     		$result: $result#{to-string($e, $glue, true)};
+    	} @else {
+      		$result: if($i != length($list) or $is-nested, $result#{$e}#{$glue}, $result#{$e});
+    	}
+  }
+
+  @return $result;
+}
+
+@function remove-nth($list, $index) {
+  	$result: null;
+        
+  	@if type-of($index) != number {
+    	@warn "$index: #{quote($index)} is not a number for `remove-nth`.";
+  	} @else if $index == 0 {
+    	@warn "List index 0 must be a non-zero integer for `remove-nth`.";
+  	} @else if abs($index) > length($list) {
+    	@warn "List index is #{$index} but list is only #{length($list)} item long for `remove-nth`.";
+  	} @else {
+    	$result: ();
+    	$index: if($index < 0, length($list) + $index + 1, $index);  
+
+    	@for $i from 1 through length($list) {
+      		@if $i != $index {
+        		$result: append($result, nth($list, $i));
+      		}
+    	}
+  }
+        
+  @return $result;
+}
+
+@function replace($list, $old-value, $new-value, $recursive: false) {
+  	$result: ();
+
+  	@for $i from 1 through length($list) {
+    	@if type-of(nth($list, $i)) == list and $recursive {
+      		$result: append($result, replace(nth($list, $i), $old-value, $new-value, $recursive));
+    	} @else {
+      		@if nth($list, $i) == $old-value {
+        		$result: append($result, $new-value);
+      		} @else {
+        		$result: append($result, nth($list, $i));
+      		}
+    	}
+  	}
+  	
+  	@return $result;
+}
+
+@mixin background-colour($colour) {
+    background-color:$colour;
+}
+
+@mixin font-family($family) {
+	font-family:$family;
+}
+
+@mixin font-size($size) {
+	font-size:$size;
+}
+
+@mixin font-colour($colour) {
+	color:$colour;
+}
+
+@mixin font-weight($weight) {
+	font-weight:$weight;
+}
+
+@mixin font-colour-link($colour, $hover) {
+	a, a:-webkit-any-link {
+		color:$colour;
+	}
+	a:hover, a:-webkit-any-link:hover {
+		color:$hover;
+	}
+}
+
+@mixin font-smoothing($smoothing) {
+	-webkit-font-smoothing:$smoothing;
+}
+
+@mixin transition($transition-property, $transition-time, $method) {
+    -webkit-transition: $transition-property $transition-time $method;
+    -moz-transition: $transition-property $transition-time $method;
+    -ms-transition: $transition-property $transition-time $method;
+    -o-transition: $transition-property $transition-time $method;
+    transition: $transition-property $transition-time $method;
+}
+
+@mixin box-shadow($shadow1, $shadow2:false, $shadow3:false, $shadow4:false, $shadow5:false) {
+ 	$params:to-string($shadow1, " ");
+ 
+ 	@if $shadow2 != false {
+ 		
+ 		$params: $shadow1, $shadow2;
+ 		
+ 		@if $shadow5 != false { $params: $shadow1, $shadow2, $shadow3, $shadow4, $shadow5; }
+	 	@else if $shadow4 != false { $params: $shadow1, $shadow2, $shadow3, $shadow4; }
+	    @else if $shadow3 != false { $params: $shadow1, $shadow2, $shadow3; }
+
+	  	@each $item in $params {
+			$params: replace($params, $item, if(length($item) == 5, "inset " + to-string(remove-nth($item, 5), " "), to-string($item, " ")));
+		}
+ 	}
+
+	box-shadow:$params;
+	-webkit-box-shadow:$params;
+	-moz-box-shadow:$params;
+
+}
+
+nav, form {
+	// input[type="search"] valid with HTML5
+	// input[type="datetime"] is not
+	input[type="text"], input[type="password"], input[type="search"] {
+		@include transition(all, 0.25s, ease-in-out);
+		@include font-size(14px);
+		outline:none;
+		border:none;
+		height:27px;
+		margin-right:8px;
+		margin-bottom:8px;
+		padding-left:4px;
+		padding-right:4px;
+		vertical-align:text-bottom;
+		border: 1px solid #DDDDDD;
+		&:not(:first-child-of-type) {
+		    margin-left:8px;
+		}
+	}
+	input[type="text"]:focus, input[type="search"]:focus, input[type="password"]:focus, textarea:focus {
+		@include box-shadow((0, 0, 5px, rgba(81, 203, 238, 1)));
+	  	border: 1px solid rgba(81, 203, 238, 1);
+	}
+}
+
+
+
+
+*, *:before, *:after { 
+	-moz-box-sizing: border-box; 
+	-webkit-box-sizing: border-box; 
+	box-sizing: border-box;
+	margin:0;
+	padding:0;
+}
+
+nav ul {
+	list-style-type:none;
+}
+
+nav ul li {
+	vertical-align:super;
+	margin-left:8px;
+	margin-right:8px;
+}
+
+nav ul li a {
+	text-decoration:none;	
+}
+
+// Max width is 400px, as you can't resize under that in Chrome
+.row { width: 1000px; max-width: 100%; min-width: 400px; margin: 0 auto; }
+.row .row { width: auto; max-width: none; min-width: 0; }
+
+$screen-xs: 480px;
+$screen-sm: 768px;
+$screen-md: 992px;
+$screen-lg: 1200px;
+
+$query-xs: "only screen and (max-width: " + $screen-xs + ")";
+$query-sm: "only screen and (max-width: " + $screen-sm + ")";
+$query-md: "only screen and (min-width: " + $screen-md + ")";
+$query-lg: "only screen and (min-width: " + $screen-lg + ")";
+
+// Clearfix is a dirty solution, sure, but what else is there?
+// And I've tried flexbox, it doesn't work with box-sizing well
+@mixin width($count) {
+	width:percentage(1/(12 / $count));
+	position: relative;
+	min-height: 1px;
+	float: left;
+	img {
+	    max-width:100%;
+	}
+}
+@mixin width-xs($count) {
+	@media #{$query-xs} {
+		width:percentage(1/(12 / $count));
+		position: relative;
+		min-height: 1px;
+		float: left;
+	}
+}
+
+@mixin push($count) {
+	margin-left:percentage(1/(12 / $count));
+}
+
+/* Nicolas Gallagher's micro clearfix */
+.row:before, .row:after, .clearfix:before, .clearfix:after { content:""; display:table; }
+.row:after, .clearfix:after { clear: both; }
+.row, .clearfix { zoom: 1; }
+
+
+/* COLOURS */
+$white: #fff;
+$black:#111111;
+$coal:#1f1f1f;
+$blue:#049cdb;
+$grey:#f0f0f0;
+$sotty:#999999;
+$magenta:#A9014B;
+$purple:#7a43b6;
+$yellow:#ffb515;
+$cyan:#46C7C7;
+$gold:#D4A017;
+$orange:#ff5c00;
+$brown:#804000;
+$rosy:#c0273c;
+$red:#e62727;
+$ruby:#dd2f2f;
+$green:#91bd09;
+$viridescent:#438d43;
+$saxe:#446CB3;
+
+@mixin dimension($d) {
+	@if $d == 1 {
+		display:-webkit-flex;       // NEW      - 
+		display:-webkit-box;        // OLD      - iOS 6-, Safari 3.1-6
+		display:-webkit-flexbox;    // TWEENER  -
+		display:-moz-box;           // OLD      - Firefox 19 (buggy but mostly works)
+		display:-ms-flexbox;        // TWEENER  - IE10
+		display:flex;		
+	} @else if $d == 2 {
+		width: auto; 
+		max-width: 100%; 
+		margin: 0 auto;
+	}
+}
+
+@mixin direction($val) {
+    flex-direction:$val;
+    -webkit-flex-direction: $val;
+    box-direction:$val;
+}
+
+
+@mixin margin-left($count) {
+	margin-left:percentage(1/(12 / $count));
+}
+
+@mixin margin-left-xs($count) {
+	@media #{$query-xs} {
+		margin-left:percentage(1/(12 / $count));
+	}
+}
+
+@mixin margin-right($count) {
+	margin-right:percentage(1/(12 / $count));
+}
+
+@mixin margin-right-xs($count) {
+	@media #{$query-xs} {
+		margin-right:percentage(1/(12 / $count));
+	}
+}
+
+@mixin margin-top($count) {
+	margin-top:$count;
+}
+
+@mixin margin-bottom($count) {
+	margin-bottom:$count;
+}
+
+@mixin user-select($val) {
+    -moz-user-select:$val;
+    -khtml-user-select:$val;
+    -webkit-user-select:$val;
+    user-select:$val;
+}
+
+/* RESET */
+
+html {
+	font-family: $helvetica;
+	height:100%;
+}
+
+body {
+	height:100%;
+}
+
+article h1 {
+	margin-bottom:5px;
+}
+
+article p, article table {
+	text-align:justify;
+}
+
+label, input, p {
+	@include font-size(16px);
+} 
+
+
+
+/* TABLE RESET */
+table {
+	color:#333333;
+	border-width: 1px;
+	border-color: #666666;
+	border-collapse: collapse;
+}
+table th {
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #666666;
+	background-color: #dedede;
+}
+table td {
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #666666;
+	background-color: #ffffff;
+}
+
+/* BUTTON RESET */
+
+@mixin button($vertical-margin) {
+    @include user-select(none);
+    white-space: nowrap;
+    margin-top:$vertical-margin;
+    margin-bottom:$vertical-margin;
+    margin-left:0px;
+    outline:none;
+    text-align: center;
+    vertical-align: bottom;
+}
+
+@mixin button-size($size) {
+    @if $size == big {
+        font-size:1.3rem;
+        height:45px;
+    } @else if $size == medium {
+        font-size:0.9rem;
+        height:27px;
+        padding-left:1.1em;
+        padding-right:1.1em;
+    } @else if $size == small {
+        font-size: 0.85rem;
+        height:20px;
+        padding-top:0.1em;
+        padding-bottom:0.1em;
+        padding-left:0.3em;
+        padding-right:0.3em;
+    }
+}
+
+@mixin button-background($colour) {
+    @if $colour == $white {
+        @include background-colour($colour);
+        color:$black;
+        border:1px solid #cccccc;
+        nav[role="navigation"].inverse & {
+            border:none;
+        }
+        &:hover {
+            @include background-colour(#ebebeb);
+            border:1px solid #adadad;
+        }
+    } @else {
+        @include background-colour($colour);
+        @include transition(background-color, 0.2s, ease);
+        color:$white;
+        border:none;
+        &:hover {
+            @include background-colour(darken($colour, 10%));
+            @include transition(background-color, 0.2s, ease);
+        }
+    }
+    &:active {
+        @include box-shadow((1px, 6px, 7px, -5px, darken($colour, 50%), true));
+    }
+
+}
+
+button {
+    @include button(0px);
+    @include button-background($white);
+    @include button-size(medium);
+}

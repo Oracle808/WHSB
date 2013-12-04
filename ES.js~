@@ -1,0 +1,88 @@
+// Inspired by Underscore. 
+// Manipulate raw elements, rather than yet another layer of abstraction.
+// Because let's be honest, using OO for simple elements is an abuse of
+// paradigm.
+
+var ES = new Object;
+
+ES.clone = function(el) {
+    return el.cloneNode(true);
+}
+
+ES.wrap = function(wrapper, el) {
+    var parent = el.parentNode; // link to parent node
+    wrapper.appendChild(el); 
+    parent.appendChild(wrapper);
+}
+
+ES.prepend = function(parent, child) {
+    return parent.insertBefore(child, parent.firstChild);
+}
+
+ES.append = function(parent, child) {
+    if(typeof child === "string") child = document.createTextNode(child);
+    return parent.appendChild(child);
+}
+
+ES.insertBefore = function(hook, el) {
+    hook.parentNode.insertBefore(el, hook);
+}
+
+ES.insertAfter = function(hook, el) {
+    hook.parentNode.insertAfter(el, hook);
+}
+
+ES.scrollTo = function(el) {
+    el.scrollIntoView();
+}
+
+// Cross-browser impl to get document's height.
+ES.getDocHeight = function() {
+  var d = document;
+  return Math.max(
+      Math.max(d.body.scrollHeight, d.documentElement.scrollHeight),
+      Math.max(d.body.offsetHeight, d.documentElement.offsetHeight),
+      Math.max(d.body.clientHeight, d.documentElement.clientHeight)
+  );
+};
+
+// Controllers
+ES.Controller = function(el) {
+    this.el = el;
+    for(var e in this.events) {
+	var m  = e.split(" ");
+	if(m.length === 1) {
+	    this.el.addEventListener(e, this[this.events[e]].bind(this), false);
+	} else {
+	    var n = m.slice(0, m.length-1);
+	    var o = m[m.length-1];
+	    var els = this.el.querySelectorAll(n.join(" "));
+	    for(var i = 0; i < els.length; i++) {
+		els[i].addEventListener(o, this[this.events[e]].bind(this), false);
+	    }
+	}
+    }
+}
+
+ES.Controller.extend = function(options) {
+    var parent = this; 
+    var child;
+
+    if (options && options.hasOwnProperty("constructor")) {
+        child = function() { options.constructor.apply(this, arguments); }; 
+    } else {
+	child = function() { parent.apply(this, arguments); };
+    }
+
+    inherits(child, parent);
+    extend(child.prototype, options);
+
+    if(options.implements) {
+	if(!options.implements instanceof Array) throw "Error: ES.Controller.extend: Implements must be an array";
+	options.implements.forEach(function(protocol) {
+	    if(!protocol(child)) throw "Error: ES.Controller.extend: Subclass must comply with its protocols.";
+	});
+    }
+    
+    return child;
+}

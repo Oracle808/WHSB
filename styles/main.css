@@ -1,0 +1,100 @@
+nav input[type="text"], nav input[type="password"], nav input[type="search"], form input[type="text"], form input[type="password"], form input[type="search"] {
+  -webkit-transition: all 0.25s ease-in-out;
+  -moz-transition: all 0.25s ease-in-out;
+  -ms-transition: all 0.25s ease-in-out;
+  -o-transition: all 0.25s ease-in-out;
+  transition: all 0.25s ease-in-out;
+  font-size: 14px;
+  outline: none;
+  border: none;
+  height: 27px;
+  margin-left: 8px;
+  margin-right: 8px;
+  padding-left: 4px;
+  padding-right: 4px;
+  vertical-align: text-bottom;
+  border: 1px solid #DDDDDD; }
+nav input[type="text"]:focus, nav input[type="search"]:focus, nav input[type="password"]:focus, nav textarea:focus, form input[type="text"]:focus, form input[type="search"]:focus, form input[type="password"]:focus, form textarea:focus {
+  box-shadow: 0 0 15px #51cbee;
+  -webkit-box-shadow: 0 0 15px #51cbee;
+  -moz-box-shadow: 0 0 15px #51cbee;
+  border: 1px solid #51cbee; }
+
+*, *:before, *:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0; }
+
+nav ul {
+  list-style-type: none; }
+
+nav ul li {
+  vertical-align: super;
+  margin-left: 8px;
+  margin-right: 8px; }
+
+nav ul li a {
+  text-decoration: none; }
+
+.row {
+  width: 1000px;
+  max-width: 100%;
+  min-width: 400px;
+  margin: 0 auto; }
+
+.row .row {
+  width: auto;
+  max-width: none;
+  min-width: 0; }
+
+/* Nicolas Gallagher's micro clearfix */
+.row:before, .row:after, .clearfix:before, .clearfix:after {
+  content: "";
+  display: table; }
+
+.row:after, .clearfix:after {
+  clear: both; }
+
+.row, .clearfix {
+  zoom: 1; }
+
+/* COLOURS */
+/* RESET */
+html {
+  font-family: "-apple-system-font", "Proxima Nova", "Helvetica Neue", "Helvetica", "Arial", "sans-serif";
+  height: 100%; }
+
+body {
+  height: 100%; }
+
+article h1 {
+  margin-bottom: 5px; }
+
+article p, article table {
+  text-align: justify; }
+
+label, input, p {
+  font-size: 16px; }
+
+/* TABLE RESET */
+table {
+  color: #333333;
+  border-width: 1px;
+  border-color: #666666;
+  border-collapse: collapse; }
+
+table th {
+  border-width: 1px;
+  padding: 8px;
+  border-style: solid;
+  border-color: #666666;
+  background-color: #dedede; }
+
+table td {
+  border-width: 1px;
+  padding: 8px;
+  border-style: solid;
+  border-color: #666666;
+  background-color: #ffffff; }

@@ -1,0 +1,545 @@
+@font-face {
+  font-family: 'Inconsolata';
+  font-style: normal;
+  font-weight: normal;
+  src: local("Inconsolata"), url("../fonts/Inconsolata.woff") format("woff");
+}
+
+nav input[type="text"], nav input[type="password"], nav input[type="search"], form input[type="text"], form input[type="password"], form input[type="search"] {
+  -webkit-transition: all 0.25s ease-in-out;
+  -moz-transition: all 0.25s ease-in-out;
+  -ms-transition: all 0.25s ease-in-out;
+  -o-transition: all 0.25s ease-in-out;
+  transition: all 0.25s ease-in-out;
+  font-size: 14px;
+  outline: none;
+  border: none;
+  height: 27px;
+  margin-right: 8px;
+  margin-bottom: 8px;
+  padding-left: 4px;
+  padding-right: 4px;
+  vertical-align: text-bottom;
+  border: 1px solid #DDDDDD;
+}
+nav input[type="text"]:not(:first-child-of-type), nav input[type="password"]:not(:first-child-of-type), nav input[type="search"]:not(:first-child-of-type), form input[type="text"]:not(:first-child-of-type), form input[type="password"]:not(:first-child-of-type), form input[type="search"]:not(:first-child-of-type) {
+  margin-left: 8px;
+}
+nav input[type="text"]:focus, nav input[type="search"]:focus, nav input[type="password"]:focus, nav textarea:focus, form input[type="text"]:focus, form input[type="search"]:focus, form input[type="password"]:focus, form textarea:focus {
+  box-shadow: 0 0 5px #51cbee;
+  -webkit-box-shadow: 0 0 5px #51cbee;
+  -moz-box-shadow: 0 0 5px #51cbee;
+  border: 1px solid #51cbee;
+}
+
+*, *:before, *:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+nav ul {
+  list-style-type: none;
+}
+
+nav ul li {
+  vertical-align: super;
+  margin-left: 8px;
+  margin-right: 8px;
+}
+
+nav ul li a {
+  text-decoration: none;
+}
+
+.row {
+  width: 1000px;
+  max-width: 100%;
+  min-width: 400px;
+  margin: 0 auto;
+}
+
+.row .row {
+  width: auto;
+  max-width: none;
+  min-width: 0;
+}
+
+/* Nicolas Gallagher's micro clearfix */
+.row:before, .row:after, .clearfix:before, .clearfix:after {
+  content: "";
+  display: table;
+}
+
+.row:after, .clearfix:after {
+  clear: both;
+}
+
+.row, .clearfix {
+  zoom: 1;
+}
+
+/* COLOURS */
+/* RESET */
+html {
+  font-family: "-apple-system-font", "Proxima Nova", "Helvetica Neue", "Helvetica", "Arial", "sans-serif";
+  height: 100%;
+}
+
+body {
+  height: 100%;
+}
+
+article h1 {
+  margin-bottom: 5px;
+}
+
+article p, article table {
+  text-align: justify;
+}
+
+label, input, p {
+  font-size: 16px;
+}
+
+/* TABLE RESET */
+table {
+  color: #333333;
+  border-width: 1px;
+  border-color: #666666;
+  border-collapse: collapse;
+}
+
+table th {
+  border-width: 1px;
+  padding: 8px;
+  border-style: solid;
+  border-color: #666666;
+  background-color: #dedede;
+}
+
+table td {
+  border-width: 1px;
+  padding: 8px;
+  border-style: solid;
+  border-color: #666666;
+  background-color: #ffffff;
+}
+
+/* BUTTON RESET */
+button {
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+  white-space: nowrap;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  margin-left: 0px;
+  outline: none;
+  text-align: center;
+  vertical-align: bottom;
+  background-color: white;
+  color: #111111;
+  border: 1px solid #cccccc;
+  font-size: 0.9rem;
+  height: 27px;
+  padding-left: 1.1em;
+  padding-right: 1.1em;
+}
+nav[role="navigation"].inverse button {
+  border: none;
+}
+button:hover {
+  background-color: #ebebeb;
+  border: 1px solid #adadad;
+}
+button:active {
+  box-shadow: 1px 6px 7px -5px gray true;
+  -webkit-box-shadow: 1px 6px 7px -5px gray true;
+  -moz-box-shadow: 1px 6px 7px -5px gray true;
+}
+
+/*@-webkit-keyframes pulse {
+ 0% {
+  opacity: 0;
+ }
+ 25% {
+  opacity: 0.2;
+ }
+ 50% {
+  opacity: 0;
+ }
+ 75% {
+  opacity: 0;
+ }
+ 100% {
+   opacity: 0.2;
+ }
+}
+*/
+/*
+@-webkit-keyframes flicker {
+  0% { opacity: 0.95; }
+  10% { opacity: 0.9; }
+  20% { opacity: 0.85; }
+  30% { opacity: 0.9; }
+  40% { opacity: 0.95; }
+  50% { opacity: 0.9; }
+  60% { opacity: 0.95; }
+  70% { opacity: 0.92; }
+  80% { opacity: 0.85; }
+  90% { opacity: 0.92; }
+  100% { opacity: 0.9; }
+}
+*/
+@-webkit-keyframes flicker {
+  0% {
+    opacity: 0.75;
+  }
+
+  10% {
+    opacity: 0.7;
+  }
+
+  20% {
+    opacity: 0.65;
+  }
+
+  30% {
+    opacity: 0.7;
+  }
+
+  40% {
+    opacity: 0.75;
+  }
+
+  50% {
+    opacity: 0.65;
+  }
+
+  60% {
+    opacity: 0.75;
+  }
+
+  70% {
+    opacity: 0.72;
+  }
+
+  80% {
+    opacity: 0.65;
+  }
+
+  90% {
+    opacity: 0.72;
+  }
+
+  100% {
+    opacity: 0.7;
+  }
+}
+
+::selection {
+  background: #0080FF;
+  text-shadow: none !important;
+}
+
+html, body {
+  margin: 0;
+  height: 100%;
+}
+
+body {
+  font-family: Inconsolata, monospace;
+  color: white;
+  background: -webkit-radial-gradient(center center, contain, #009600, black) center center no-repeat, black;
+  /*center center for the gradient scrolls with the page :(*/
+  /*background: -webkit-radial-gradient(center 75%, contain, rgba(0,75,0,0.8), black) center center no-repeat, black;*/
+  -webkit-background-size: 110% 100%;
+}
+
+.offscreen {
+  background: -webkit-linear-gradient(top, black, #333333);
+}
+
+.offscreen .Terminal {
+  background: rgba(0, 0, 0, 0.7);
+  height: 100%;
+  position: fixed;
+  text-shadow: none;
+  box-shadow: 0 0 15px black;
+}
+
+.hz {
+  -webkit-animation-name: hz;
+  -webkit-animation-duration: 30s;
+  -webkit-animation-iteration-count: infinite;
+}
+
+.flicker {
+  -webkit-animation-name: flicker;
+  -webkit-animation-duration: 1s;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: ease-in-out;
+}
+
+.interlace {
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: url("../images/interlace.png") top left repeat, rgba(255, 255, 255, 0.5);
+  width: 100%;
+  height: 100%;
+  opacity: 0.2;
+  z-index: 10;
+  pointer-events: none;
+  /*border-top-left-radius: 150px 50px;
+  border-top-right-radius: 150px 50px;
+  border-bottom-left-radius: 150px 50px;
+  border-bottom-right-radius: 150px 50px;*/
+}
+
+.hidden {
+  display: none !important;
+}
+
+.dim > * {
+  opacity: 0.4;
+}
+
+.dim .help {
+  opacity: 1;
+}
+
+.Terminal {
+  padding: 1em 1.5em 1em 1em;
+  /*text-shadow: 0 0 5px #C8C8C8;
+  /*overflow: hidden;
+  white-space: nowrap;*/
+  /*box-shadow: 10px 5px 20px rgba(255,255,255,0.2) inset,
+              -10px -5px 20px rgba(255,255,255,0.2) inset;
+  border-radius: 50px;
+  background: rgba(255, 255, 255, 0.1);*/
+}
+
+.Terminal output {
+  clear: both;
+  width: 100%;
+}
+
+.Terminal output h3 {
+  margin: 0;
+}
+
+.Terminal output pre {
+  margin: 0;
+}
+
+.Terminal output textarea {
+  width: 100%;
+  height: 200px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: inherit;
+  font: inherit;
+  outline: 0;
+  border-radius: 10px;
+  padding: 5px;
+}
+
+.Terminal output textarea::selection {
+  background: red;
+}
+
+.Terminal output textarea::-webkit-scrollbar {
+  width: 1ex;
+}
+
+.Terminal output textarea::-webkit-scrollbar-thumb {
+  border-top: 1px solid #fff;
+  background: #cccccc -webkit-linear-gradient(#f0f0f0, #d2d2d2);
+  border-radius: 1ex;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+.input-line {
+  display: -webkit-flex;
+  display: -webkit-box;
+  display: -webkit-flexbox;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-direction: row;
+  -webkit-flex-direction: row;
+  box-direction: row;
+  clear: both;
+}
+
+.input-line > input {
+  -webkit-box-flex: 1;
+  box-flex: 1;
+}
+
+.prompt {
+  white-space: nowrap;
+  color: #ffcc00;
+  /*green;*/
+  margin-right: 7px;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.cmdline {
+  outline: none;
+  background-color: transparent;
+  margin: 0;
+  font: inherit;
+  border: none;
+  color: inherit;
+}
+
+.folder {
+  color: #ffcc00;
+}
+
+.ls-files {
+  /*height: 45px;*/
+  /* Default, but changed by js depending on length of filename */
+  -webkit-column-width: 100px;
+  column-width: 100px;
+}
+
+.ls-files span {
+  cursor: pointer;
+}
+
+.ls-files span:hover {
+  text-decoration: underline;
+}
+
+button:not([disabled]):active {
+  background: -webkit-gradient(linear, 0% 40%, 0% 70%, from(#e3e3e3), to(#f9f9f9));
+}
+
+button[disabled] {
+  color: #ccc;
+}
+
+.help {
+  font-family: 'Droid Sans', Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  display: -webkit-box;
+  -webkit-box-align: center;
+  -webkit-box-pack: center;
+  -webkit-box-orient: vertical;
+  -webkit-user-select: none;
+  user-select: none;
+  font-size: 10pt;
+}
+
+.help,
+.help > section {
+  border-radius: 10px;
+}
+
+.help > section {
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.3);
+  -webkit-box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.6);
+  border-radius: 10px;
+  color: white;
+  position: relative;
+  width: 610px;
+}
+
+.help section > div:first-child {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.help section > div:last-child {
+  padding-top: 0;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.help > section > div {
+  background: black;
+  padding: 20px;
+}
+
+.help h2 {
+  padding-bottom: 8px;
+  margin-top: 0;
+  margin-bottom: 25px;
+  border-bottom: 1px solid #fff;
+  color: #ffcc00;
+}
+
+.help p strong {
+  width: 60px;
+  display: inline-block;
+}
+
+.help #close {
+  border-radius: 20px;
+  padding: 2px 6px 2px 7px;
+  border: 2px solid #fff;
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  cursor: pointer;
+  font-size: 90%;
+  font-weight: bold;
+  line-height: 17px;
+}
+
+.help #close:active {
+  right: 19px;
+  top: 21px;
+}
+
+.help .shortcuts {
+  -webkit-columns: 2;
+  columns: 2;
+}
+
+.prompt {
+  text-shadow: 0 0 5px #C8C8C8;
+}
+
+/* Themes */
+.cream {
+  color: black;
+  background: #fffff3;
+}
+
+.cream .interlace {
+  opacity: 0.1;
+}
+
+.cream .prompt {
+  color: purple;
+}
+
+.cream .cmdline {
+  color: black;
+}
+
+.inverse {
+  background: #002b36;
+  color: #657b83;
+  font-family: Menlo;
+}
+
+.inverse .interlace {
+  opacity: 0;
+}

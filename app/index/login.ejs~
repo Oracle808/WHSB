@@ -1,0 +1,15 @@
+<html>
+  <head>
+    <title>Login</title>
+    <link href="/login.min.css" rel="stylesheet"/>
+  </head>
+  <body>
+    <form action="/login" method="post">
+      <img src="/images/emblem.png"/>
+      <h2>Login</h2>
+      <input type="text" name="username" placeholder="Username"/><br/>
+      <input type="password" name="password" placeholder="Password"/><br/>
+      <button>Login</button>
+    </form>
+  </body>
+</html>

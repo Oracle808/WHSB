@@ -1,0 +1,30 @@
+{
+    "name": "Styles53",
+    "author": "Hashan Punchihewa <hashan.punchihewa@gmail.com>",
+    "description": "A dependable, innovative, and exciting VLE for the 21st century",
+    "version": "0.0.1",
+    "preferGlobal": false,
+    "main":"web.js",
+    "country": "United Kingdom of Great Britain and Northern Ireland",
+    "contributors": [
+	"Hashan Punchihewa <hashan.punchihewa@gmail.com>"
+    ],
+    "devDependencies": {
+	"grunt": "~0.4.1",
+	"grunt-contrib-uglify": "~0.2.7",
+	"grunt-asciify": "~0.2.2",
+	"grunt-contrib-sass": "~0.5.0",
+	"grunt-es6-module-transpiler": "~0.5.1",
+	"grunt-contrib-watch": "~0.5.3"
+    },
+    "keywords": [
+	"vle",
+	"http",
+	"education",
+	"whsb",
+	"innovatuion"
+    ],
+    "engines": {
+	"node": ">=0.10"
+    }
+}

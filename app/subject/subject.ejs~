@@ -1,0 +1,15 @@
+<html>
+	<head>
+	  <title><%= subject.name %></title>
+	</head>
+	<body>
+	  <header>
+	    <% include ../index/nav.ejs %>
+	  </header>
+	  <main>
+	    <ul>
+	      <li class="active">Posts</li>
+	      <li>
+	  </main>
+	</body>
+</html>

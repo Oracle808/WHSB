@@ -1,0 +1,31 @@
+@import "main";
+
+#Container {
+	margin-top:20px;
+	border-top:1px solid $black;
+}
+
+#Container label, input {
+	@include width(2);
+	@include font-size(1em);
+	padding:2px;
+	text-align:center;
+	outline:none;
+	border:0;
+	border-left:1px solid #333;
+	border-right:1px solid #333;
+	border-bottom:1px solid #333;
+}
+
+#Container label {
+	background:#555555;
+	@include font-colour($white);
+}
+
+#Container input {
+	background:$grey;
+}
+
+#Container input:focus {
+	background:#ffff66;
+}

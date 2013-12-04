@@ -1,0 +1,21 @@
+@import "main.scss";
+
+form {
+    @include width(4);
+    @include margin-left(4);
+    @include margin-right(4);
+
+    @include width-xs(12);
+    @include margin-left-xs(0);
+    @include margin-right-xs(0);
+
+    margin-top:40px;
+}
+
+form h2 {
+    margin-bottom:0.2em;
+}
+
+form input {
+    @include width(12);
+}
