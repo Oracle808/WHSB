@@ -16,7 +16,8 @@
 	"buffer-crc32": "*",
 	"formidable": "*",
 	"mime": "*",
-	"commander": "*"
+	"commander": "*",
+	"inquirer": "*"
     },
     "devDependencies": {
 	"grunt": "~0.4.1",
