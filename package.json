@@ -1,4 +1,4 @@
-{
+9{
     "name": "Styles53",
     "author": "Hashan Punchihewa <hashan.punchihewa@gmail.com>",
     "description": "A dependable, innovative, and exciting VLE for the 21st century",
@@ -16,7 +16,7 @@
 	"buffer-crc32": "*",
 	"formidable": "*",
 	"mime": "*",
-	"commander": '*"
+	"commander": "*"
     },
     "devDependencies": {
 	"grunt": "~0.4.1",
