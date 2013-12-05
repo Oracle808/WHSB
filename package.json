@@ -18,7 +18,8 @@
 	"mime": "*",
 	"commander": "*",
 	"inquirer": "*",
-	"bcrypt": "*"
+	"bcrypt": "*",
+	"passport-local":"*"
     },
     "devDependencies": {
 	"grunt": "~0.4.1",
