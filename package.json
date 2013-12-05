@@ -17,7 +17,8 @@
 	"formidable": "*",
 	"mime": "*",
 	"commander": "*",
-	"inquirer": "*"
+	"inquirer": "*",
+	"bcrypt": "*"
     },
     "devDependencies": {
 	"grunt": "~0.4.1",
