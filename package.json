@@ -15,7 +15,8 @@
 	"cookie-signature":"*",
 	"buffer-crc32": "*",
 	"formidable": "*",
-	"mime": "*"
+	"mime": "*",
+	"commander": '*"
     },
     "devDependencies": {
 	"grunt": "~0.4.1",
