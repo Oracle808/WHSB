@@ -4,11 +4,19 @@
     "description": "A dependable, innovative, and exciting VLE for the 21st century",
     "version": "0.0.1",
     "preferGlobal": false,
-    "main": "web.js",
+    "main": "app.js",
     "country": "United Kingdom of Great Britain and Northern Ireland",
     "contributors": [
 	"Hashan Punchihewa <hashan.punchihewa@gmail.com>"
     ],
+    "dependencies": {
+	"mongoose": "*",
+	"cookie": "*",
+	"cookie-signature":"*",
+	"buffer-crc32": "*",
+	"formidable": "*",
+	"mime": "*"
+    },
     "devDependencies": {
 	"grunt": "~0.4.1",
 	"grunt-contrib-uglify": "~0.2.7",
@@ -26,6 +34,6 @@
 	"innovatuion"
     ],
     "engines": {
-	"node": ">=0.10"
+	"node": "0.10.x"
     }
 }
