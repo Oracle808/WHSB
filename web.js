@@ -1,11 +1,11 @@
 var Program = require("commander");
 var Inquirer = require("inquirer");
 var Database = require("./models/index.common.js").Database;
-var Atrium = require("./app/index/route.common.js").Atrium;
+var path = require("path");
 
 Program
     .version("0.0.1")
-    .option("-p, --port [number]", "Specify Port to Listen At", "4000", parseInt)
+    .option("-p, --port [number]", "Specify Port to Listen At", process.env.PORT || 4000, parseInt)
     .option("-c, --create-user", "Create A User Account")
     .option("-s, --create-subject", "Create A Subject")
     .parse(process.argv);
@@ -36,12 +36,41 @@ if(Program.createUser) {
 	});
     });
 } else {
-    Atrium.listen(Program.port, {
-	favicon: true,
-	logger: true,
-	open: "app",
-	session: {
-	    secret: "uber seecret"
+    var http = require("http");
+    var express = require("express");
+    var app = express();
+
+    var Atrium = require("./app/index/route.common");
+    var Subject = require("./app/subject/route.common");
+    var reactive = require("./reactive");
+
+    var auth = function(req, res, next) {
+	if(req.session.user) {
+	    next();
+	} else {
+	    res.redirect("/login?redirect=" + encodeURIComponent(req.path));
 	}
+    };
+
+    app.set('port', process.env.PORT || 3000);
+    app.use(reactive.intercept());
+    app.use(express.favicon());
+    app.use(express.logger('dev'));
+    app.use(express.bodyParser());
+    app.use(express.methodOverride());
+    app.use(express.cookieParser('my secret here'));
+    app.use(express.session());
+    //	app.use(express.csrf());
+    app.use(express.static(path.join(__dirname, 'public')));
+    app.use(app.router);
+
+
+    app.get("/", auth, Atrium.index);
+    app.get("/login", Atrium.login.form);
+    app.post("/login", Atrium.login.attempt);
+    app.get("/:subject", auth, Subject.index);
+
+    http.createServer(app).listen(app.get("port"), function() {
+	console.log("Express server listening at " + app.get("port"));
     });
 }
