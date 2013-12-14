@@ -1,19 +1,44 @@
 <html>
-	<head>
-	  <title><%= subject.name %></title>
-	</head>
-	<body>
-	  <header>
-	    <% include ../index/nav.ejs %>
-	  </header>
-	  <main>
-	    <ul>
-	      <li class="active">Posts</li>
-	      <% if(subject.vocab_quizzes.length != 0) { %>
-              <li>Vocab Quizzes</li>
-	      <% } %>
-	      <li>Student Resources</li>
-	    </ul>
-	  </main>
-	</body>
+  <head>
+    <title><%= subject.name %></title>
+    <style src="./subject.scss"></style>
+    <script src="./subject.js"></script>
+  </head>
+  <body>
+    <% include ../index/header.ejs %>
+    <main class="row">
+      <nav>
+	<h4>Latin <small>Mrs Cavalier</small></h4>
+	<form>
+	  <input type="search" placeholder="Search"></input>
+	</form>
+	<ul>
+	  <li class="active"><a>Blog</a></li>
+	  <% if(subject.vocab_quizzes.length != 0) { %>
+          <li><a>Vocab Quizzes</a></li>
+	  <% } %>
+	  <li><a>Student Resources</a></li>
+	</ul>
+	<% if(user.role === "admin" || user.role === "teacher") { %>
+	<a href="#newPostForm" id="newPost">New Blog Post</a>
+	<% } %>
+      </nav>
+      <div>
+	<x-slidable id="newPostForm">
+	  <textarea></textarea>
+	</x-slidable>
+	<% subject.blog.forEach(function(post) { %>
+	<section>
+	  <h2><%= post.title %></h2>
+	  <% if(user.role === "admin" || user.role === "teacher") { %>
+	  <button class="editPost">Edit</button>
+	  <button class="deletePost">Delete</button>
+	  <br/>
+	  <% } %>
+	  <%= post.body %>
+	</section>
+	<% }); %>
+      </div>
+    </main>
+  </body>
 </html>

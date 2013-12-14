@@ -1,14 +1,12 @@
-@import "main.scss";
+@import "foundation";
 
 form {
-    @include width(4);
-    @include margin-left(4);
-    @include margin-right(4);
-
-    @include width-xs(12);
-    @include margin-left-xs(0);
-    @include margin-right-xs(0);
-
+    @media #{$medium-up} {
+	@include grid-column(4, $push:4);
+    }
+    @media #{$small-only} {
+	@include grid-column(12);
+    }
     margin-top:40px;
 }
 
@@ -17,5 +15,5 @@ form h2 {
 }
 
 form input {
-    @include width(12);
+    @include grid-column(12);
 }

@@ -1,36 +1,15 @@
 <!DOCTYPE html>
 <html lang="en-GB">
-<head>
-	<title>Styles53</title>
-	<link href="./styles/test.css" rel="stylesheet"/>
-	<script src="./scripts/test.js"></script>
-</head>
-<body>
-	<div class="row VocabularyQuiz" id="Container">
-		<label>amicus</label><input type="text" autofocus/>
-		<label>dominus</label><input type="text"/>
-		<label>mercator</label><input type="text"/>
-		<label>nomen</label><input type="text"/>
-		<label>ludus</label><input type="text"/>
-		<label>argentaria</label><input type="text"/>
-		<label>genus</label><input type="text"/>
-		<label>leo</label><input type="text"/>
-		<label>canis</label><input type="text"/>
-		<label>homo</label><input type="text"/>
-		<label>coquus</label><input type="text"/>
-		<label>pater</label><input type="text"/>
-		<label>mater</label><input type="text"/>
-		<label>infans</label><input type="text"/>
-		<label>femina</label><input type="text"/>
-		<label>nauta</label><input type="text"/>
-		<label>agricola</label><input type="text"/>
-		<label>iuvenis</label><input type="text"/>
-		<label>senex</label><input type="text"/>
-		<label>turba</label><input type="text"/>
-		<label>schola</label><input type="text"/>
-		<label>divisor</label><input type="text"/>
-		<label>abest</label><input type="text"/>
-
-	</div>
+  <head>
+    <title>Styles53</title>
+    <style src="./test.scss"></style>
+  </head>
+  <body>
+    <main-quiz class="row" id="Container">
+      <h1><%= doc.title %></h1>
+      <% for(var question in doc.body) { %>
+      <label><%= question %></label><input data-answer="<%= doc.body[question] %>"/>
+      <% } %>
+    </main-quiz>
 </body>
 </html>

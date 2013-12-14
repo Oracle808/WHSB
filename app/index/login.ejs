@@ -1,7 +1,7 @@
 <html>
   <head>
     <title>Login</title>
-    <link href="/login.min.css" rel="stylesheet"/>
+    <style src="./login.scss"></style>
   </head>
   <body>
     <form action="/login" method="post">
@@ -10,6 +10,7 @@
       <% if(locals.message) { %>
       <span class="error"><%= locals.message %></span>
       <% } %>
+      <input type="hidden" name="redirect" value="<%= redirect %>"/>
       <input type="text" name="username" placeholder="Username"/><br/>
       <input type="password" name="password" placeholder="Password"/><br/>
       <button>Login</button>

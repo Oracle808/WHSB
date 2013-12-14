@@ -1,20 +1,16 @@
 // A Beautiful Example of the Craft of a Controller
-var TS = require("../../scripts/Streams.common.js").TS;
-var subject = require("./subject.common.js").subject;
-
+var subject = require("./subject.web.js");
 var mongoose = require("mongoose");
 var Subject = mongoose.model("Subject");
 
-var SubjectController = TS.Resource.extend({
-    name: "subject", 
+var index = function(req, res) {
+    Subject.findById(req.param("subject"), function(err, doc) {
+	if(err) {
+	    res.error(err);
+	} else {
+	    res.render(subject, {subject: doc});
+	}
+    });
+};
 
-    get: function(req) {
-	var self = this;
-	Subject.findById(req.id, function(err, doc) {
-	    if(err) throw err;
-	    self.out.render(subject, {subject: doc});
-	});
-    }
-});
-
-exports.SubjectController = SubjectController;
+exports.index = index;

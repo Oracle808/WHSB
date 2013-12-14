@@ -1,0 +1,31 @@
+<header>
+ <nav class="top-bar" data-topbar>
+  <div class="row"> 
+  <ul class="title-area">
+    <li class="name">
+      <h1><a href="#">Pandora</a></h1>
+    </li>
+    <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+  </ul>
+
+  <section class="top-bar-section">
+    <!-- Right Nav Section -->
+    <ul class="right">
+      <li class="has-dropdown">
+        <a href="#"><%= user.username %> <span class="label round"><%= us.capitalize(user.role) %></span></a>
+        <ul class="dropdown">
+          <li><a href="#">First link in dropdown</a></li>
+        </ul>
+      </li>
+    </ul>
+
+    <!-- Left Nav Section -->
+    <ul class="left">
+      <li><a href="/">Subjects</a></li>
+      <li><a href="/apps">Apps</a></li>
+    </ul>
+  </section>
+  </div>
+ </nav>
+</header>
+

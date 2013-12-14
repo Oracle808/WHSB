@@ -1,43 +1,48 @@
 {
-    "name": "Styles53",
-    "author": "Hashan Punchihewa <hashan.punchihewa@gmail.com>",
-    "description": "A dependable, innovative, and exciting VLE for the 21st century",
-    "version": "0.0.1",
-    "preferGlobal": false,
-    "main": "app.js",
-    "country": "United Kingdom of Great Britain and Northern Ireland",
-    "contributors": [
-	"Hashan Punchihewa <hashan.punchihewa@gmail.com>"
-    ],
-    "dependencies": {
-	"mongoose": "*",
-	"cookie": "*",
-	"cookie-signature":"*",
-	"buffer-crc32": "*",
-	"formidable": "*",
-	"mime": "*",
-	"commander": "*",
-	"inquirer": "*",
-	"bcrypt": "*",
-	"passport-local":"*"
-    },
-    "devDependencies": {
-	"grunt": "~0.4.1",
-	"grunt-contrib-uglify": "~0.2.7",
-	"grunt-asciify": "~0.2.2",
-	"grunt-contrib-sass": "~0.5.0",
-	"grunt-es6-module-transpiler": "~0.5.1",
-	"grunt-contrib-watch": "~0.5.3",
-	"grunt-contrib-jshint": "~0.7.2"
-    },
-    "keywords": [
-	"vle",
-	"http",
-	"education",
-	"whsb",
-	"innovatuion"
-    ],
-    "engines": {
-	"node": "0.10.x"
-    }
+  "name": "Styles53",
+  "author": "Hashan Punchihewa <hashan.punchihewa@gmail.com>",
+  "description": "A dependable, innovative, and exciting VLE for the 21st century",
+  "version": "0.0.1",
+  "preferGlobal": false,
+  "main": "app.js",
+  "country": "United Kingdom of Great Britain and Northern Ireland",
+  "contributors": [
+    "Hashan Punchihewa <hashan.punchihewa@gmail.com>"
+  ],
+  "dependencies": {
+    "mongoose": "*",
+    "cookie": "*",
+    "cookie-signature": "*",
+    "buffer-crc32": "*",
+    "formidable": "*",
+    "mime": "*",
+    "commander": "*",
+    "inquirer": "*",
+    "bcrypt": "*",
+    "passport-local": "*",
+    "express": "3.4.*",
+    "underscore": "~1.5.2",
+    "underscore.string": "~2.3.3"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-uglify": "~0.2.7",
+    "grunt-asciify": "~0.2.2",
+    "grunt-contrib-sass": "~0.5.0",
+    "grunt-es6-module-transpiler": "~0.5.1",
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt-contrib-jshint": "~0.7.2",
+    "grunt-contrib-clean": "~0.5.0",
+    "grunt-execute": "~0.1.5"
+  },
+  "keywords": [
+    "vle",
+    "http",
+    "education",
+    "whsb",
+    "innovatuion"
+  ],
+  "engines": {
+    "node": "0.10.x"
+  }
 }

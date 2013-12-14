@@ -1,4 +1,4 @@
-@import "main";
+@import "foundation";
 
 #Container {
 	margin-top:20px;
@@ -6,8 +6,8 @@
 }
 
 #Container label, input {
-	@include width(2);
-	@include font-size(1em);
+	@include grid-column(2);
+	font-size:1em;
 	padding:2px;
 	text-align:center;
 	outline:none;
@@ -19,7 +19,7 @@
 
 #Container label {
 	background:#555555;
-	@include font-colour($white);
+	font-color:white;
 }
 
 #Container input {

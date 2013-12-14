@@ -1,0 +1,57 @@
+@import "foundation";
+
+$foreground: #fafafa;
+
+body {
+    background-image:url("images/ios7.png");
+}
+
+body main {
+    @include grid-row();
+}
+
+body main > nav {
+    @include grid-column(3);
+    background-color:$foreground;
+    padding-top:32px;
+    padding-right:20px;
+}
+
+body main > nav input[type="search"]:focus {
+    background-color:white;
+}
+
+body main > nav ul {
+    @include side-nav();
+}
+
+body main > nav #newPost {
+    @include button($full-width:true);
+}
+
+body main > div {
+    @include grid-column(9);
+}
+
+body main > div section {
+    background-color:$foreground;
+    margin-top:20px;
+    padding:20px;
+    text-align:justify;
+}
+
+body main > div section h2 {
+    margin-bottom:4px;
+}
+
+body main > div section .editPost {
+    @include button(rem-calc(6), $radius: $button-round);
+    font-size: rem-calc(12);
+    margin-bottom:8px;
+}
+
+body main > div section .deletePost {
+    @include button(rem-calc(6), $bg: $alert-color, $radius: $button-round);
+    font-size: rem-calc(12);
+    margin-bottom:8px;
+}

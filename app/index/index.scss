@@ -1,43 +1,15 @@
-@import "main";
+@import "foundation";
 
 html {
-	background:url("../images/ios7.png");
-	height:100%;
+    background:url("images/ios7.png");
+    height:100%;
 }
 
 body {
-	background:rgba(0, 0, 0, 0.4);
-	height:100%;
+    background:rgba(0, 0, 0, 0.4);
+    height:100%;
 }
 
-body header {
-	@include font-colour($white);
-	@include font-colour-link($sotty, $white);
-	height:50px;
-	width:100%;
-	background:$black;
-	padding:5px;
-}
-
-body header h3 {
-	font-size:1.9em;
-	font-weight:normal;
-	font-family:Lato;
-	-webkit-font-smoothing: antialiased;
-}
-
-body header .row * {
-	display:inline-block;
-}
-
-body #AppLattice img {
-	@include width(1.8);
-	@include margin-left(0.1);
-	@include margin-right(0.1);
-
-	@include width-xs(5.8);
-	@include margin-left-xs(0.1);
-	@include margin-right-xs(0.1);
-
-	@include margin-top(0.8em);
+body main {
+    @include block-grid(4, $spacing: 30px);
 }

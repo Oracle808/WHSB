@@ -1,27 +1,20 @@
 <!DOCTYPE html>
 <html lang="en-GB">
-<head>
-	<title>Styles53</title>
-	<link href="./index.min.css" rel="stylesheet"/>
-	<script src="./Streams.js"></script>
-</head>
-<body>
-	<header>
-		<div class="row">
-			<h3>WHSB</h3>
-			<form><input type="text" placeholder="Search" /></form>
-			<% include ./nav.ejs %>
-		</div>
-	</header>
-	<main class="row">
-		<div id="AppLattice">
-		  <% subjects.forEach(function(subject) { %>
-		  <a href="/subject/<%= subject._id %>">
-		    <img src="/icons/<%= subject.subject_name %>.png"/>
-		  </a>
-		  <% }); %>
-		</div>
-	</main>
-	<footer class="row"></footer>
-</body>
+  <head>
+    <title>Styles53</title>
+    <style src="./index.scss"></style>
+  </head>
+  <body>
+    <% include header.ejs %>
+    <main class="row">
+	<% subjects.forEach(function(subject) { %>
+	<li>
+	  <a href="/<%= subject._id %>">
+	    <img src="/icons/<%= subject.subject_name %>.png"/>
+	  </a>
+	</li>
+	<% }); %>
+    </main>
+    <footer class="row"></footer>
+  </body>
 </html>
