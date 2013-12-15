@@ -27,7 +27,8 @@
       "ejs":"*",
       "async":"*",
       "cli-color":"*",
-      "mute-stream":"*"
+      "mute-stream":"*",
+      "mongodb":"*"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
