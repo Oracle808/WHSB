@@ -17,15 +17,12 @@
     "formidable": "*",
     "mime": "*",
     "commander": "*",
-    "inquirer": "*",
+    "inquirer": "~0.3.5",
     "bcrypt": "*",
     "passport-local": "*",
     "express": "3.4.*",
     "underscore": "~1.5.2",
-    "underscore.string": "~2.3.3",
-      "lodash":"*",
-"ejs": "*",
-"async":"*"
+    "underscore.string": "~2.3.3"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
