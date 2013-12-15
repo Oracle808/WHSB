@@ -1,0 +1,21 @@
+module.exports.slideDown = function(el, duration=300) {
+    var simulacrumEl = el.cloneNode(true);
+    simulacrumEl.style.height = "auto";
+    var finalHeight = simulacrumEl.height;
+    el.style.height = '0px';
+
+    var y = 0;
+    var frameRate = 10;
+    var oneSecond = 1000;
+    var interval = oneSecond * duration / frameRate;
+    var totalFrames = oneSecond * duration / interval;
+    var heightIncrement = finalHeight / totalFrames;
+    var tween = function() {
+        y += heightIncrement;
+        el.style.height = y + 'px';
+        if (y<finalHeight) {
+            setTimeout(tween, interval);
+        }
+    };
+    tween();
+}

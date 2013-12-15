@@ -149,7 +149,9 @@ nav, form {
 	}
 }
 
-
+nav[role="roll"] {
+    
+}
 
 
 *, *:before, *:after { 
@@ -266,9 +268,13 @@ $saxe:#446CB3;
 }
 
 @mixin margin-left-xs($count) {
-	@media #{$query-xs} {
-		margin-left:percentage(1/(12 / $count));
+    @media #{$query-xs} {
+	@if $count == 0 {
+	    margin-left:0;
+	} @else {
+	    margin-left:percentage(1/(12 / $count));
 	}
+    }
 }
 
 @mixin margin-right($count) {
@@ -276,9 +282,13 @@ $saxe:#446CB3;
 }
 
 @mixin margin-right-xs($count) {
-	@media #{$query-xs} {
-		margin-right:percentage(1/(12 / $count));
+    @media #{$query-xs} {
+	@if $count == 0 {
+	    margin-right:0;
+	} @else {
+	    margin-right:percentage(1/(12 / $count));
 	}
+    }
 }
 
 @mixin margin-top($count) {

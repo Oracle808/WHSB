@@ -33,6 +33,33 @@ body main > div {
     @include grid-column(9);
 }
 
+body main > div #newPostForm {
+    @include grid-row($behavior:nest);
+    margin-top:20px;
+    background-color:white;
+    padding:20px;
+}
+
+body main > div #newPostForm input {
+    @include grid-column(12);
+}
+
+body main > div #newPostForm textarea {
+    @include grid-column(12);
+    resize: vertical;
+    min-height:200px;
+}
+
+body main #newPostForm #buttons {
+    @include grid-column(12, $float:right);
+}
+
+body main #newPostForm #buttons button[type="submit"] {
+    @include button(rem-calc(6), $radius: $button-round);
+    font-size: rem-calc(12);
+    margin-bottom:8px;
+}
+
 body main > div section {
     background-color:$foreground;
     margin-top:20px;

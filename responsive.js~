@@ -1,0 +1,20 @@
+var uu = require("underscore");
+
+module.exports.intercept = function() {
+    return function(req, res, next) {
+	res.render = function(func, vars) {
+	    res.writeHead(200);
+	    res.end(func(uu.extend(vars || {}, req.session, res.locals)));
+	};
+	res.error = function(error) {
+	    console.log("fdssdf");
+	    res.writeHead(501);
+	    res.end(error);
+	};
+	res.json = function(json) {
+	    res.writeHead(200);
+	    res.end(JSON.stringify(json));
+	};
+	next();
+    };
+};

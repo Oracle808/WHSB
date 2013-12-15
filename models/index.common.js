@@ -1,4 +1,3 @@
-var DS = require("../scripts/Streams.common.js").DS;
 var User = require("./User.common.js").User;
 var Subject = require("./User.common.js").Subject;
 

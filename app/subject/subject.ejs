@@ -2,6 +2,7 @@
   <head>
     <title><%= subject.name %></title>
     <style src="./subject.scss"></style>
+    <script src="./polyfill.js"></script>
     <script src="./subject.js"></script>
   </head>
   <body>
@@ -24,8 +25,15 @@
 	<% } %>
       </nav>
       <div>
-	<x-slidable id="newPostForm">
-	  <textarea></textarea>
+	<x-slidable id="newPostForm" hidden>
+	  <form action="/<%= subject._id %>" method="post">
+	    <input name="title" type="text" placeholder="Title" required/>
+	    <textarea name="body"></textarea>
+	    <span id="buttons">
+	      <button type="submit" formaction="/<%= subject._id %>?draft=true">Save As Draft</button>
+	      <button type="submit">Post</button>
+	    </span>
+	  </form>
 	</x-slidable>
 	<% subject.blog.forEach(function(post) { %>
 	<section>
