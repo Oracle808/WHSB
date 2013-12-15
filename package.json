@@ -3,8 +3,7 @@
   "author": "Hashan Punchihewa <hashan.punchihewa@gmail.com>",
   "description": "A dependable, innovative, and exciting VLE for the 21st century",
   "version": "0.0.1",
-  "preferGlobal": false,
-  "main": "app.js",
+  "main": "web.js",
   "country": "United Kingdom of Great Britain and Northern Ireland",
   "contributors": [
     "Hashan Punchihewa <hashan.punchihewa@gmail.com>"
@@ -28,7 +27,8 @@
       "async":"*",
       "cli-color":"*",
       "mute-stream":"*",
-      "mongodb":"*"
+      "mongodb":"*",
+      "regexp-clone":"*"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
