@@ -28,7 +28,8 @@
       "cli-color":"*",
       "mute-stream":"*",
       "mongodb":"*",
-      "regexp-clone":"*"
+      "regexp-clone":"*",
+      "sliced":"*"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
