@@ -24,7 +24,8 @@
     "underscore": "~1.5.2",
     "underscore.string": "~2.3.3",
       "lodash":"*",
-"ejs": "*"
+"ejs": "*",
+"async":"*"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
