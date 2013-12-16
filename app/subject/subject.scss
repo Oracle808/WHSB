@@ -36,6 +36,8 @@ body main > div {
 body main > div #newPostForm {
     @include grid-row($behavior:nest);
     margin-top:20px;
+    margin-left:0px;
+    margin-right:0px;
     background-color:white;
     padding:20px;
 }
