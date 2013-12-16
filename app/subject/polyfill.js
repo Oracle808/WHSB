@@ -1248,27 +1248,23 @@ Element.prototype.slideDown = function(duration=500) {
     simulacrum.style.left = "-9999px";
     this.parentNode.insertBefore(simulacrum, this);
     const finalHeight = simulacrum.clientHeight;
-    console.log(finalHeight);
     const heightIncrement = finalHeight / (duration / FRAME_RATE);
-    console.log(duration);
-    console.log(FRAME_RATE);
     simulacrum.remove();
+    var originalOverflow = this.style.overflow;
     this.style.height = "0px";
     this.style.display = "block";
     this.style.visibility = "visibile";
+    this.style.overflow = "hidden";
     var y = 0;
-    console.log(heightIncrement);
-    console.time("start");
     var tween = () => {
 	y += heightIncrement;
 	this.style.height = y + "px";
 	if (y < finalHeight) {
 	    setTimeout(tween, FRAME_RATE);
 	} else {
-	    console.timeEnd("start");
 	    this.style.height = "auto";
+	    this.style.overflow = originalOverflow;
 	}
-	console.log(y);
     };
     tween();
 };
