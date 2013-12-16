@@ -39,4 +39,6 @@ class SlidableElement extends HTMLDivElement {
     }
 }
 
-document.register("x-slidable", SlidableElement);
+document.register("x-slidable", {
+    prototype: SlidableElement.prototype
+});
