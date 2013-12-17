@@ -69,6 +69,7 @@ if(Program.createUser) {
     app.get("/login", Atrium.login.form);
     app.post("/login", Atrium.login.attempt);
     app.get("/:subject", auth, Subject.index);
+    app.post("/:subject", auth, Subject.publish);
 
     http.createServer(app).listen(app.get("port"), function() {
 	console.log("Express server listening at " + app.get("port"));

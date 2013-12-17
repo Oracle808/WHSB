@@ -21,6 +21,16 @@ var Subject = mongoose.Schema({
 	    required: true
 	}
     }],
+    blog_drafts: [{
+	title: {
+	    type: String,
+	    required: true
+	},
+	body: {
+	    type: String,
+	    required: true
+	}
+    }],
     vocab_quizzes: [{
 	title: {
 	    type: String,
