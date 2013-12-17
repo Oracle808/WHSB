@@ -15,10 +15,14 @@
 	</form>
 	<ul>
 	  <li class="active"><a>Blog</a></li>
+	  <% if((user.role === "admin" || user.role === "teacher") && user.blog_draft) { %>
+	  <li><a>Blog Drafts<span class="label"><%= user.blog_draft.length %></span></a></li>
+	  <% } %>
 	  <% if(subject.vocab_quizzes.length != 0) { %>
           <li><a>Vocab Quizzes</a></li>
 	  <% } %>
 	  <li><a>Student Resources</a></li>
+
 	</ul>
 	<% if(user.role === "admin" || user.role === "teacher") { %>
 	<a href="#newPostForm" id="newPost">New Blog Post</a>
@@ -35,7 +39,7 @@
 	    </span>
 	  </form>
 	</x-slidable>
-	<% subject.blog.forEach(function(post) { %>
+	<% subject.blog.reverse().forEach(function(post) { %>
 	<section>
 	  <h2><%= post.title %></h2>
 	  <% if(user.role === "admin" || user.role === "teacher") { %>
