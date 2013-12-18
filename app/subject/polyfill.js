@@ -24,6 +24,52 @@ Function.prototype.bind = Function.prototype.bind || function(oThis) {
     return fBound;
 };
 
+// * 
+// EMCAScript 6
+// * 
+
+if (typeof WeakMap === 'undefined') {
+    (function() {
+	var defineProperty = Object.defineProperty;
+	var counter = Date.now() % 1e9;
+
+	var WeakMapPolyfill = function() {
+        this.name = '__st' + (Math.random() * 1e9 >>> 0) + (counter++ + '__');
+      };
+
+      WeakMapPolyfill.prototype = {
+        set: function(key, value) {
+          var entry = key[this.name];
+          if (entry && entry[0] === key)
+            entry[1] = value;
+          else
+            defineProperty(key, this.name, {value: [key, value], writable: true});
+        },
+        get: function(key) {
+          var entry;
+          return (entry = key[this.name]) && entry[0] === key ?
+              entry[1] : undefined;
+        },
+        'delete': function(key) {
+          this.set(key, undefined);
+        }
+      };
+
+      window.WeakMapPolyfill = WeakMapPolyfill;
+      window.WeakMap = WeakMapPolyfill;
+    })();
+}
+
+Object.is = Object.is || function(v1, v2) {
+    if (v1 === 0 && v2 === 0) {
+	return 1 / v1 === 1 / v2;
+    }
+    if (v1 !== v1) {
+	return v2 !== v2;
+    }
+    return v1 === v2;
+};
+
 // *
 //     DOM Living Standard
 // *
@@ -50,48 +96,6 @@ Element.prototype.matches =
 // *
 
 // Mutation Observer
-
-(function(){
-
-  if (typeof WeakMap === 'undefined') {
-    (function() {
-      var defineProperty = Object.defineProperty;
-      var counter = Date.now() % 1e9;
-
-      var WeakMapPolyfill = function() {
-        this.name = '__st' + (Math.random() * 1e9 >>> 0) + (counter++ + '__');
-      };
-
-      WeakMapPolyfill.prototype = {
-        set: function(key, value) {
-          var entry = key[this.name];
-          if (entry && entry[0] === key)
-            entry[1] = value;
-          else
-            defineProperty(key, this.name, {value: [key, value], writable: true});
-        },
-        get: function(key) {
-          var entry;
-          return (entry = key[this.name]) && entry[0] === key ?
-              entry[1] : undefined;
-        },
-        'delete': function(key) {
-          this.set(key, undefined);
-        }
-      };
-
-      window.WeakMapPolyfill = WeakMapPolyfill;
-      window.WeakMap = WeakMapPolyfill;
-    })();
-  }
-
-})();
-
-/*
- * Copyright 2012 The Polymer Authors. All rights reserved.
- * Use of this source code is goverened by a BSD-style
- * license that can be found in the LICENSE file.
- */
 
 (function(){
 
@@ -1238,6 +1242,19 @@ Element.prototype.hide = function(duration) {
 };
 
 const FRAME_RATE = 10;
+
+var toBold(el) {
+    var before = el.value.splice(0, el.selectionStart);
+    var selection = el.value.splice(el.selectionStart, el.selectionEnd).replace(/<b>/, "").replace(/<b\/>/, "");
+    var after = el.value.splice(el.selectionEnd);
+    if(before.indexOf("<b/>") > before.indexOf("<b>")) {
+	selection = "<b>" + selection;
+    } 
+    if(after.indexOf("<b>") > after.indexOf("<b/>")) {
+	selection += "<b/>";
+    }
+    return before + selection + after;
+}
 
 Element.prototype.slideDown = function(duration=500) {
     var simulacrum = this.cloneNode(true);

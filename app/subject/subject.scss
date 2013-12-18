@@ -25,6 +25,11 @@ body main > nav ul {
     @include side-nav();
 }
 
+body main > nav #numberOfDrafts {
+    @include label();
+    vertical-align:bottom;
+}
+
 body main > nav #newPost {
     @include button($full-width:true);
 }
