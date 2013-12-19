@@ -8,6 +8,7 @@ body {
 
 body main {
     @include grid-row();
+    display:block; // Necessary for Lesser Chrome Compatibility
 }
 
 body main > nav {
@@ -55,6 +56,12 @@ body main > div #newPostForm textarea {
     @include grid-column(12);
     resize: vertical;
     min-height:200px;
+}
+
+body main #formattingButtons button {
+    @include button(rem-calc(8), $radius: $button-radius);
+    font-size:rem-calc(14);
+    margin-bottom:6px;
 }
 
 body main #newPostForm #buttons {

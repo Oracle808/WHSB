@@ -9,13 +9,13 @@ Function.prototype.bind = Function.prototype.bind || function(oThis) {
 	throw new TypeError("Function.prototype.bind - what is trying to be bound is not callable");
     }
 
-    var aArgs = Array.prototype.slice.call(arguments, 1), 
-    fToBind = this, 
+    var aArgs = Array.prototype.slice.call(arguments, 1),
+    fToBind = this,
     fNOP = function () {},
     fBound = function () {
 	return fToBind.apply(
-            this instanceof fNOP && oThis ? this : oThis,
-            aArgs.concat(Array.prototype.slice.call(arguments)));
+	    this instanceof fNOP && oThis ? this : oThis,
+	    aArgs.concat(Array.prototype.slice.call(arguments)));
     };
 
     fNOP.prototype = this.prototype;
@@ -24,9 +24,9 @@ Function.prototype.bind = Function.prototype.bind || function(oThis) {
     return fBound;
 };
 
-// * 
-// EMCAScript 6
-// * 
+// *
+//     EMCAScript 6
+// *
 
 if (typeof WeakMap === 'undefined') {
     (function() {
@@ -34,25 +34,25 @@ if (typeof WeakMap === 'undefined') {
 	var counter = Date.now() % 1e9;
 
 	var WeakMapPolyfill = function() {
-        this.name = '__st' + (Math.random() * 1e9 >>> 0) + (counter++ + '__');
+	this.name = '__st' + (Math.random() * 1e9 >>> 0) + (counter++ + '__');
       };
 
       WeakMapPolyfill.prototype = {
-        set: function(key, value) {
-          var entry = key[this.name];
-          if (entry && entry[0] === key)
-            entry[1] = value;
-          else
-            defineProperty(key, this.name, {value: [key, value], writable: true});
-        },
-        get: function(key) {
-          var entry;
-          return (entry = key[this.name]) && entry[0] === key ?
-              entry[1] : undefined;
-        },
-        'delete': function(key) {
-          this.set(key, undefined);
-        }
+	set: function(key, value) {
+	  var entry = key[this.name];
+	  if (entry && entry[0] === key)
+	    entry[1] = value;
+	  else
+	    defineProperty(key, this.name, {value: [key, value], writable: true});
+	},
+	get: function(key) {
+	  var entry;
+	  return (entry = key[this.name]) && entry[0] === key ?
+	      entry[1] : undefined;
+	},
+	'delete': function(key) {
+	  this.set(key, undefined);
+	}
       };
 
       window.WeakMapPolyfill = WeakMapPolyfill;
@@ -60,21 +60,24 @@ if (typeof WeakMap === 'undefined') {
     })();
 }
 
-Object.is = Object.is || function(v1, v2) {
-    if (v1 === 0 && v2 === 0) {
-	return 1 / v1 === 1 / v2;
-    }
-    if (v1 !== v1) {
-	return v2 !== v2;
-    }
-    return v1 === v2;
-};
-
 // *
 //     DOM Living Standard
 // *
 
-// Elements.prototype.matches
+const TAG_NAME = /^[a-zA-Z]+$/;
+
+const mutationMacro = function(nodes) {
+    if(nodes.length === 1) {
+	return typeof nodes === "string" ? window.document.createTextNode(nodes) : nodes;
+    } 
+    var fragment = window.document.createDocumentFragment();
+    var list = Array.prototype.slice.call(nodes);
+    for(var i = 0; i < list.length; i++) {
+	fragment.appendChild(typeof nodes === "string" ? window.document.createTextNode(list[i]) : list[i]);
+    }
+};
+
+// Element.prototype.matches
 Element.prototype.matches =
     Element.prototype.matches ||
     Element.prototype.matchesSelector ||
@@ -82,7 +85,11 @@ Element.prototype.matches =
     Element.prototype.msMatchesSelector ||
     Element.prototype.oMatchesSelector ||
     Element.prototype.webkitMatchesSelector ||
-    function (selector) {
+    function(selector) {
+	if(TAG_NAME.test(selector)) {
+	    return this.tagName === selector;
+	}
+
 	var node = this, nodes = (node.parentNode || node.document).querySelectorAll(selector), i = -1;
 
 	while (nodes[++i] && nodes[i] != node);
@@ -90,6 +97,34 @@ Element.prototype.matches =
 	return !!nodes[i];
     };
 
+// Element.prototype.prepend
+Element.prototype.prepend = Element.prototype.prepend || function() {
+    var nodes = mutationMacro(arguments);
+    if(this.firstChild) {
+	this.insertBefore(nodes, this.firstChild);
+    } else {
+	this.appendChild(nodes);
+    }
+};
+
+// Element.prototype.append
+Element.prototype.append = Element.prototype.append || function() {
+    this.appendChild(mutationMacro(arguments));
+};
+
+// Element.prototype.remove 
+Element.prototype.remove = Element.prototype.remove || function() {
+    if(this.parentNode) {
+	this.parentNode.removeChild(this);
+    }
+};
+
+// Element.prototype.replace
+Element.prototype.replace = Element.prototype.replace || function() {
+    if(this.parentNode) {
+	this.parentNode.replaceChild(mutationMacro(arguments), this);
+    }
+};
 
 // *
 //     Web Components
@@ -117,17 +152,17 @@ Element.prototype.matches =
       var setImmediateQueue = [];
       var sentinel = String(Math.random());
       window.addEventListener('message', function(e) {
-        if (e.data === sentinel) {
-          var queue = setImmediateQueue;
-          setImmediateQueue = [];
-          queue.forEach(function(func) {
-            func();
-          });
-        }
+	if (e.data === sentinel) {
+	  var queue = setImmediateQueue;
+	  setImmediateQueue = [];
+	  queue.forEach(function(func) {
+	    func();
+	  });
+	}
       });
       setImmediate = function(func) {
-        setImmediateQueue.push(func);
-        window.postMessage(sentinel, '*');
+	setImmediateQueue.push(func);
+	window.postMessage(sentinel, '*');
       };
     }
 
@@ -144,15 +179,15 @@ Element.prototype.matches =
     function scheduleCallback(observer) {
       scheduledObservers.push(observer);
       if (!isScheduled) {
-        isScheduled = true;
-        setImmediate(dispatchCallbacks);
+	isScheduled = true;
+	setImmediate(dispatchCallbacks);
       }
     }
 
     function wrapIfNeeded(node) {
       return window.ShadowDOMPolyfill &&
-          window.ShadowDOMPolyfill.wrapIfNeeded(node) ||
-          node;
+	  window.ShadowDOMPolyfill.wrapIfNeeded(node) ||
+	  node;
     }
 
     function dispatchCallbacks() {
@@ -164,38 +199,38 @@ Element.prototype.matches =
       scheduledObservers = [];
       // Sort observers based on their creation UID (incremental).
       observers.sort(function(o1, o2) {
-        return o1.uid_ - o2.uid_;
+	return o1.uid_ - o2.uid_;
       });
 
       var anyNonEmpty = false;
       observers.forEach(function(observer) {
 
-        // 2.1, 2.2
-        var queue = observer.takeRecords();
-        // 2.3. Remove all transient registered observers whose observer is mo.
-        removeTransientObserversFor(observer);
+	// 2.1, 2.2
+	var queue = observer.takeRecords();
+	// 2.3. Remove all transient registered observers whose observer is mo.
+	removeTransientObserversFor(observer);
 
-        // 2.4
-        if (queue.length) {
-          observer.callback_(queue, observer);
-          anyNonEmpty = true;
-        }
+	// 2.4
+	if (queue.length) {
+	  observer.callback_(queue, observer);
+	  anyNonEmpty = true;
+	}
       });
 
       // 3.
       if (anyNonEmpty)
-        dispatchCallbacks();
+	dispatchCallbacks();
     }
 
     function removeTransientObserversFor(observer) {
       observer.nodes_.forEach(function(node) {
-        var registrations = registrationsTable.get(node);
-        if (!registrations)
-          return;
-        registrations.forEach(function(registration) {
-          if (registration.observer === observer)
-            registration.removeTransientObservers();
-        });
+	var registrations = registrationsTable.get(node);
+	if (!registrations)
+	  return;
+	registrations.forEach(function(registration) {
+	  if (registration.observer === observer)
+	    registration.removeTransientObservers();
+	});
       });
     }
 
@@ -213,22 +248,22 @@ Element.prototype.matches =
      */
     function forEachAncestorAndObserverEnqueueRecord(target, callback) {
       for (var node = target; node; node = node.parentNode) {
-        var registrations = registrationsTable.get(node);
+	var registrations = registrationsTable.get(node);
 
-        if (registrations) {
-          for (var j = 0; j < registrations.length; j++) {
-            var registration = registrations[j];
-            var options = registration.options;
+	if (registrations) {
+	  for (var j = 0; j < registrations.length; j++) {
+	    var registration = registrations[j];
+	    var options = registration.options;
 
-            // Only target ignores subtree.
-            if (node !== target && !options.subtree)
-              continue;
+	    // Only target ignores subtree.
+	    if (node !== target && !options.subtree)
+	      continue;
 
-            var record = callback(options);
-            if (record)
-              registration.enqueue(record);
-          }
-        }
+	    var record = callback(options);
+	    if (record)
+	      registration.enqueue(record);
+	  }
+	}
       }
     }
 
@@ -248,77 +283,77 @@ Element.prototype.matches =
 
     MutationObserverPolyfill.prototype = {
       observe: function(target, options) {
-        target = wrapIfNeeded(target);
+	target = wrapIfNeeded(target);
 
-        // 1.1
-        if (!options.childList && !options.attributes && !options.characterData ||
+	// 1.1
+	if (!options.childList && !options.attributes && !options.characterData ||
 
-            // 1.2
-            options.attributeOldValue && !options.attributes ||
+	    // 1.2
+	    options.attributeOldValue && !options.attributes ||
 
-            // 1.3
-            options.attributeFilter && options.attributeFilter.length &&
-                !options.attributes ||
+	    // 1.3
+	    options.attributeFilter && options.attributeFilter.length &&
+		!options.attributes ||
 
-            // 1.4
-            options.characterDataOldValue && !options.characterData) {
+	    // 1.4
+	    options.characterDataOldValue && !options.characterData) {
 
-          throw new SyntaxError();
-        }
+	  throw new SyntaxError();
+	}
 
-        var registrations = registrationsTable.get(target);
-        if (!registrations)
-          registrationsTable.set(target, registrations = []);
+	var registrations = registrationsTable.get(target);
+	if (!registrations)
+	  registrationsTable.set(target, registrations = []);
 
-        // 2
-        // If target's list of registered observers already includes a registered
-        // observer associated with the context object, replace that registered
-        // observer's options with options.
-        var registration;
-        for (var i = 0; i < registrations.length; i++) {
-          if (registrations[i].observer === this) {
-            registration = registrations[i];
-            registration.removeListeners();
-            registration.options = options;
-            break;
-          }
-        }
+	// 2
+	// If target's list of registered observers already includes a registered
+	// observer associated with the context object, replace that registered
+	// observer's options with options.
+	var registration;
+	for (var i = 0; i < registrations.length; i++) {
+	  if (registrations[i].observer === this) {
+	    registration = registrations[i];
+	    registration.removeListeners();
+	    registration.options = options;
+	    break;
+	  }
+	}
 
-        // 3.
-        // Otherwise, add a new registered observer to target's list of registered
-        // observers with the context object as the observer and options as the
-        // options, and add target to context object's list of nodes on which it
-        // is registered.
-        if (!registration) {
-          registration = new Registration(this, target, options);
-          registrations.push(registration);
-          this.nodes_.push(target);
-        }
+	// 3.
+	// Otherwise, add a new registered observer to target's list of registered
+	// observers with the context object as the observer and options as the
+	// options, and add target to context object's list of nodes on which it
+	// is registered.
+	if (!registration) {
+	  registration = new Registration(this, target, options);
+	  registrations.push(registration);
+	  this.nodes_.push(target);
+	}
 
-        registration.addListeners();
+	registration.addListeners();
       },
 
       disconnect: function() {
-        this.nodes_.forEach(function(node) {
-          var registrations = registrationsTable.get(node);
-          for (var i = 0; i < registrations.length; i++) {
-            var registration = registrations[i];
-            if (registration.observer === this) {
-              registration.removeListeners();
-              registrations.splice(i, 1);
-              // Each node can only have one registered observer associated with
-              // this observer.
-              break;
-            }
-          }
-        }, this);
-        this.records_ = [];
+	this.nodes_.forEach(function(node) {
+	  var registrations = registrationsTable.get(node);
+	  for (var i = 0; i < registrations.length; i++) {
+	    var registration = registrations[i];
+	    if (registration.observer === this) {
+	      registration.removeListeners();
+	      registrations.splice(i, 1);
+	      // Each node can only have one registered observer associated with
+	      // this observer.
+	      break;
+	    }
+	  }
+	}, this);
+	this.records_ = [];
       },
 
       takeRecords: function() {
-        var copyOfRecords = this.records_;
-        this.records_ = [];
-        return copyOfRecords;
+	var copyOfRecords = this.records_;
+	this.records_ = [];
+	return copyOfRecords;
       }
     };
 
@@ -349,7 +384,7 @@ Element.prototype.matches =
       record.attributeNamespace = original.attributeNamespace;
       record.oldValue = original.oldValue;
       return record;
-    };
+    }
 
     // We keep track of the two (possibly one) records used in a single mutation.
     var currentRecord, recordWithOldValue;
@@ -371,7 +406,7 @@ Element.prototype.matches =
      */
     function getRecordWithOldValue(oldValue) {
       if (recordWithOldValue)
-        return recordWithOldValue;
+	return recordWithOldValue;
       recordWithOldValue = copyMutationRecord(currentRecord);
       recordWithOldValue.oldValue = oldValue;
       return recordWithOldValue;
@@ -400,12 +435,12 @@ Element.prototype.matches =
      */
     function selectRecord(lastRecord, newRecord) {
       if (lastRecord === newRecord)
-        return lastRecord;
+	return lastRecord;
 
       // Check if the the record we are adding represents the same record. If
       // so, we keep the one with the oldValue in it.
       if (recordWithOldValue && recordRepresentsCurrentMutation(lastRecord))
-        return recordWithOldValue;
+	return recordWithOldValue;
 
       return null;
     }
@@ -426,63 +461,63 @@ Element.prototype.matches =
 
     Registration.prototype = {
       enqueue: function(record) {
-        var records = this.observer.records_;
-        var length = records.length;
+	var records = this.observer.records_;
+	var length = records.length;
 
-        // There are cases where we replace the last record with the new record.
-        // For example if the record represents the same mutation we need to use
-        // the one with the oldValue. If we get same record (this can happen as we
-        // walk up the tree) we ignore the new record.
-        if (records.length > 0) {
-          var lastRecord = records[length - 1];
-          var recordToReplaceLast = selectRecord(lastRecord, record);
-          if (recordToReplaceLast) {
-            records[length - 1] = recordToReplaceLast;
-            return;
-          }
-        } else {
-          scheduleCallback(this.observer);
-        }
+	// There are cases where we replace the last record with the new record.
+	// For example if the record represents the same mutation we need to use
+	// the one with the oldValue. If we get same record (this can happen as we
+	// walk up the tree) we ignore the new record.
+	if (records.length > 0) {
+	  var lastRecord = records[length - 1];
+	  var recordToReplaceLast = selectRecord(lastRecord, record);
+	  if (recordToReplaceLast) {
+	    records[length - 1] = recordToReplaceLast;
+	    return;
+	  }
+	} else {
+	  scheduleCallback(this.observer);
+	}
 
-        records[length] = record;
+	records[length] = record;
       },
 
       addListeners: function() {
-        this.addListeners_(this.target);
+	this.addListeners_(this.target);
       },
 
       addListeners_: function(node) {
-        var options = this.options;
-        if (options.attributes)
-          node.addEventListener('DOMAttrModified', this, true);
+	var options = this.options;
+	if (options.attributes)
+	  node.addEventListener('DOMAttrModified', this, true);
 
-        if (options.characterData)
-          node.addEventListener('DOMCharacterDataModified', this, true);
+	if (options.characterData)
+	  node.addEventListener('DOMCharacterDataModified', this, true);
 
-        if (options.childList)
-          node.addEventListener('DOMNodeInserted', this, true);
+	if (options.childList)
+	  node.addEventListener('DOMNodeInserted', this, true);
 
-        if (options.childList || options.subtree)
-          node.addEventListener('DOMNodeRemoved', this, true);
+	if (options.childList || options.subtree)
+	  node.addEventListener('DOMNodeRemoved', this, true);
       },
 
       removeListeners: function() {
-        this.removeListeners_(this.target);
+	this.removeListeners_(this.target);
       },
 
       removeListeners_: function(node) {
-        var options = this.options;
-        if (options.attributes)
-          node.removeEventListener('DOMAttrModified', this, true);
+	var options = this.options;
+	if (options.attributes)
+	  node.removeEventListener('DOMAttrModified', this, true);
 
-        if (options.characterData)
-          node.removeEventListener('DOMCharacterDataModified', this, true);
+	if (options.characterData)
+	  node.removeEventListener('DOMCharacterDataModified', this, true);
 
-        if (options.childList)
-          node.removeEventListener('DOMNodeInserted', this, true);
+	if (options.childList)
+	  node.removeEventListener('DOMNodeInserted', this, true);
 
-        if (options.childList || options.subtree)
-          node.removeEventListener('DOMNodeRemoved', this, true);
+	if (options.childList || options.subtree)
+	  node.removeEventListener('DOMNodeRemoved', this, true);
       },
 
       /**
@@ -491,150 +526,150 @@ Element.prototype.matches =
        * @param {Node} node
        */
       addTransientObserver: function(node) {
-        // Don't add transient observers on the target itself. We already have all
-        // the required listeners set up on the target.
-        if (node === this.target)
-          return;
+	// Don't add transient observers on the target itself. We already have all
+	// the required listeners set up on the target.
+	if (node === this.target)
+	  return;
 
-        this.addListeners_(node);
-        this.transientObservedNodes.push(node);
-        var registrations = registrationsTable.get(node);
-        if (!registrations)
-          registrationsTable.set(node, registrations = []);
+	this.addListeners_(node);
+	this.transientObservedNodes.push(node);
+	var registrations = registrationsTable.get(node);
+	if (!registrations)
+	  registrationsTable.set(node, registrations = []);
 
-        // We know that registrations does not contain this because we already
-        // checked if node === this.target.
-        registrations.push(this);
+	// We know that registrations does not contain this because we already
+	// checked if node === this.target.
+	registrations.push(this);
       },
 
       removeTransientObservers: function() {
-        var transientObservedNodes = this.transientObservedNodes;
-        this.transientObservedNodes = [];
+	var transientObservedNodes = this.transientObservedNodes;
+	this.transientObservedNodes = [];
 
-        transientObservedNodes.forEach(function(node) {
-          // Transient observers are never added to the target.
-          this.removeListeners_(node);
+	transientObservedNodes.forEach(function(node) {
+	  // Transient observers are never added to the target.
+	  this.removeListeners_(node);
 
-          var registrations = registrationsTable.get(node);
-          for (var i = 0; i < registrations.length; i++) {
-            if (registrations[i] === this) {
-              registrations.splice(i, 1);
-              // Each node can only have one registered observer associated with
-              // this observer.
-              break;
-            }
-          }
-        }, this);
+	  var registrations = registrationsTable.get(node);
+	  for (var i = 0; i < registrations.length; i++) {
+	    if (registrations[i] === this) {
+	      registrations.splice(i, 1);
+	      // Each node can only have one registered observer associated with
+	      // this observer.
+	      break;
+	    }
+	  }
+	}, this);
       },
 
       handleEvent: function(e) {
-        // Stop propagation since we are managing the propagation manually.
-        // This means that other mutation events on the page will not work
-        // correctly but that is by design.
-        e.stopImmediatePropagation();
+	// Stop propagation since we are managing the propagation manually.
+	// This means that other mutation events on the page will not work
+	// correctly but that is by design.
+	e.stopImmediatePropagation();
 
-        switch (e.type) {
-          case 'DOMAttrModified':
-            // http://dom.spec.whatwg.org/#concept-mo-queue-attributes
+	switch (e.type) {
+	  case 'DOMAttrModified':
+	    // http://dom.spec.whatwg.org/#concept-mo-queue-attributes
 
-            var name = e.attrName;
-            var namespace = e.relatedNode.namespaceURI;
-            var target = e.target;
+	    var name = e.attrName;
+	    var namespace = e.relatedNode.namespaceURI;
+	    var target = e.target;
 
-            // 1.
-            var record = new getRecord('attributes', target);
-            record.attributeName = name;
-            record.attributeNamespace = namespace;
+	    // 1.
+	    var record = new getRecord('attributes', target);
+	    record.attributeName = name;
+	    record.attributeNamespace = namespace;
 
-            // 2.
-            var oldValue =
-                e.attrChange === MutationEvent.ADDITION ? null : e.prevValue;
+	    // 2.
+	    var oldValue =
+		e.attrChange === MutationEvent.ADDITION ? null : e.prevValue;
 
-            forEachAncestorAndObserverEnqueueRecord(target, function(options) {
-              // 3.1, 4.2
-              if (!options.attributes)
-                return;
+	    forEachAncestorAndObserverEnqueueRecord(target, function(options) {
+	      // 3.1, 4.2
+	      if (!options.attributes)
+		return;
 
-              // 3.2, 4.3
-              if (options.attributeFilter && options.attributeFilter.length &&
-                  options.attributeFilter.indexOf(name) === -1 &&
-                  options.attributeFilter.indexOf(namespace) === -1) {
-                return;
-              }
-              // 3.3, 4.4
-              if (options.attributeOldValue)
-                return getRecordWithOldValue(oldValue);
+	      // 3.2, 4.3
+	      if (options.attributeFilter && options.attributeFilter.length &&
+		  options.attributeFilter.indexOf(name) === -1 &&
+		  options.attributeFilter.indexOf(namespace) === -1) {
+		return;
+	      }
+	      // 3.3, 4.4
+	      if (options.attributeOldValue)
+		return getRecordWithOldValue(oldValue);
 
-              // 3.4, 4.5
-              return record;
-            });
+	      // 3.4, 4.5
+	      return record;
+	    });
 
-            break;
+	    break;
 
-          case 'DOMCharacterDataModified':
-            // http://dom.spec.whatwg.org/#concept-mo-queue-characterdata
-            var target = e.target;
+	  case 'DOMCharacterDataModified':
+	    // http://dom.spec.whatwg.org/#concept-mo-queue-characterdata
+	    var target = e.target;
 
-            // 1.
-            var record = getRecord('characterData', target);
+	    // 1.
+	    var record = getRecord('characterData', target);
 
-            // 2.
-            var oldValue = e.prevValue;
+	    // 2.
+	    var oldValue = e.prevValue;
 
 
-            forEachAncestorAndObserverEnqueueRecord(target, function(options) {
-              // 3.1, 4.2
-              if (!options.characterData)
-                return;
+	    forEachAncestorAndObserverEnqueueRecord(target, function(options) {
+	      // 3.1, 4.2
+	      if (!options.characterData)
+		return;
 
-              // 3.2, 4.3
-              if (options.characterDataOldValue)
-                return getRecordWithOldValue(oldValue);
+	      // 3.2, 4.3
+	      if (options.characterDataOldValue)
+		return getRecordWithOldValue(oldValue);
 
-              // 3.3, 4.4
-              return record;
-            });
+	      // 3.3, 4.4
+	      return record;
+	    });
 
-            break;
+	    break;
 
-          case 'DOMNodeRemoved':
-            this.addTransientObserver(e.target);
-            // Fall through.
-          case 'DOMNodeInserted':
-            // http://dom.spec.whatwg.org/#concept-mo-queue-childlist
-            var target = e.relatedNode;
-            var changedNode = e.target;
-            var addedNodes, removedNodes;
-            if (e.type === 'DOMNodeInserted') {
-              addedNodes = [changedNode];
-              removedNodes = [];
-            } else {
+	  case 'DOMNodeRemoved':
+	    this.addTransientObserver(e.target);
+	    // Fall through.
+	  case 'DOMNodeInserted':
+	    // http://dom.spec.whatwg.org/#concept-mo-queue-childlist
+	    var target = e.relatedNode;
+	    var changedNode = e.target;
+	    var addedNodes, removedNodes;
+	    if (e.type === 'DOMNodeInserted') {
+	      addedNodes = [changedNode];
+	      removedNodes = [];
+	    } else {
 
-              addedNodes = [];
-              removedNodes = [changedNode];
-            }
-            var previousSibling = changedNode.previousSibling;
-            var nextSibling = changedNode.nextSibling;
+	      addedNodes = [];
+	      removedNodes = [changedNode];
+	    }
+	    var previousSibling = changedNode.previousSibling;
+	    var nextSibling = changedNode.nextSibling;
 
-            // 1.
-            var record = getRecord('childList', target);
-            record.addedNodes = addedNodes;
-            record.removedNodes = removedNodes;
-            record.previousSibling = previousSibling;
-            record.nextSibling = nextSibling;
+	    // 1.
+	    var record = getRecord('childList', target);
+	    record.addedNodes = addedNodes;
+	    record.removedNodes = removedNodes;
+	    record.previousSibling = previousSibling;
+	    record.nextSibling = nextSibling;
 
-            forEachAncestorAndObserverEnqueueRecord(target, function(options) {
-              // 2.1, 3.2
-              if (!options.childList)
-                return;
+	    forEachAncestorAndObserverEnqueueRecord(target, function(options) {
+	      // 2.1, 3.2
+	      if (!options.childList)
+		return;
 
-              // 2.2, 3.3
-              return record;
-            });
+	      // 2.2, 3.3
+	      return record;
+	    });
 
-        }
+	}
 
-        clearRecords();
+	clearRecords();
       }
     };
 
@@ -654,19 +689,19 @@ if(!document.register) {
 	var definition = options || {};
 
 	if (!name) {
-            throw new Error('document.register: first argument `name` must not be empty');
+	    throw new Error('document.register: first argument `name` must not be empty');
 	}
 	if (name.indexOf('-') < 0) {
-            throw new Error('document.register: first argument (\'name\') must contain a dash (\'-\'). Argument provided was \'' + String(name) + '\'.');
+	    throw new Error('document.register: first argument (\'name\') must contain a dash (\'-\'). Argument provided was \'' + String(name) + '\'.');
 	}
 	// elements may only be registered once
 	if (getRegisteredDefinition(name)) {
-            throw new Error('DuplicateDefinitionError: a type with name \'' + String(name) + '\' is already registered');
+	    throw new Error('DuplicateDefinitionError: a type with name \'' + String(name) + '\' is already registered');
 	}
 	// must have a prototype, default to an extension of HTMLElement
 	// TODO(sjmiles): probably should throw if no prototype, check spec
 	if (!definition.prototype) {
-            throw new Error('Options missing required prototype property');
+	    throw new Error('Options missing required prototype property');
 	}
 
 	definition.name = name.toLowerCase();
@@ -696,7 +731,7 @@ if(!document.register) {
     var ancestry = function ancestry(extnds) {
 	var extendee = getRegisteredDefinition(extnds);
 	if (extendee) {
-            return ancestry(extendee['extends']).concat([extendee]);
+	    return ancestry(extendee['extends']).concat([extendee]);
 	}
 	return [];
     };
@@ -708,13 +743,13 @@ if(!document.register) {
 	// if our ancestry includes custom components, we only have a
 	// baseTag if one of them does
 	for (var i=0, a; (a=definition.ancestry[i]); i++) {
-            baseTag = a.is && a.tag;
+	    baseTag = a.is && a.tag;
 	}
 	// our tag is our baseTag, if it exists, and otherwise just our name
 	definition.tag = baseTag || definition.name;
 	if (baseTag) {
-            // if there is a base tag, use secondary 'is' specifier
-            definition.is = definition.name;
+	    // if there is a base tag, use secondary 'is' specifier
+	    definition.is = definition.name;
 	}
     };
 
@@ -722,24 +757,24 @@ if(!document.register) {
 	// if we don't support __proto__ we need to locate the native level
 	// prototype for precise mixing in
 	if (!Object.__proto__) {
-            // default prototype
-            var nativePrototype = HTMLElement.prototype;
-            // work out prototype when using type-extension
-            if (definition.is) {
+	    // default prototype
+	    var nativePrototype = HTMLElement.prototype;
+	    // work out prototype when using type-extension
+	    if (definition.is) {
 		var inst = document.createElement(definition.tag);
 		nativePrototype = Object.getPrototypeOf(inst);
-            }
-            // ensure __proto__ reference is installed at each point on the prototype
-            // chain.
-            // NOTE: On platforms without __proto__, a mixin strategy is used instead
-            // of prototype swizzling. In this case, this generated __proto__ provides
-            // limited support for prototype traversal.
-            var proto = definition.prototype, ancestor;
-            while (proto && (proto !== nativePrototype)) {
+	    }
+	    // ensure __proto__ reference is installed at each point on the prototype
+	    // chain.
+	    // NOTE: On platforms without __proto__, a mixin strategy is used instead
+	    // of prototype swizzling. In this case, this generated __proto__ provides
+	    // limited support for prototype traversal.
+	    var proto = definition.prototype, ancestor;
+	    while (proto && (proto !== nativePrototype)) {
 		var ancestor = Object.getPrototypeOf(proto);
 		proto.__proto__ = ancestor;
 		proto = ancestor;
-            }
+	    }
 	}
 	// cache this in case of mixin
 	definition['native'] = nativePrototype;
@@ -760,7 +795,7 @@ if(!document.register) {
     function upgrade(element, definition) {
 	// some definitions specify an 'is' attribute
 	if (definition.is) {
-            element.setAttribute('is', definition.is);
+	    element.setAttribute('is', definition.is);
 	}
 	// remove 'unresolved' attr, which is a standin for :unresolved.
 	element.removeAttribute('unresolved');
@@ -780,13 +815,13 @@ if(!document.register) {
     function implement(element, definition) {
 	// prototype swizzling is best
 	if (Object.__proto__) {
-            element.__proto__ = definition.prototype;
+	    element.__proto__ = definition.prototype;
 	} else {
-            // where above we can re-acquire inPrototype via
-            // getPrototypeOf(Element), we cannot do so when
-            // we use mixin, so we install a magic reference
-            customMixin(element, definition.prototype, definition['native']);
-            element.__proto__ = definition.prototype;
+	    // where above we can re-acquire inPrototype via
+	    // getPrototypeOf(Element), we cannot do so when
+	    // we use mixin, so we install a magic reference
+	    customMixin(element, definition.prototype, definition['native']);
+	    element.__proto__ = definition.prototype;
 	}
     }
 
@@ -802,22 +837,22 @@ if(!document.register) {
 	// the idea is to avoid mixing in native prototypes, so adding
 	// the second test is WLOG
 	while (p !== inNative && p !== HTMLUnknownElement.prototype) {
-            var keys = Object.getOwnPropertyNames(p);
-            for (var i=0, k; k=keys[i]; i++) {
+	    var keys = Object.getOwnPropertyNames(p);
+	    for (var i=0, k; k=keys[i]; i++) {
 		if (!used[k]) {
 		    Object.defineProperty(inTarget, k,
 					  Object.getOwnPropertyDescriptor(p, k));
 		    used[k] = 1;
 		}
-            }
-            p = Object.getPrototypeOf(p);
+	    }
+	    p = Object.getPrototypeOf(p);
 	}
     }
 
     function created(element) {
 	// invoke createdCallback
 	if (element.createdCallback) {
-            element.createdCallback();
+	    element.createdCallback();
 	}
     }
 
@@ -828,15 +863,15 @@ if(!document.register) {
 	// TODO(sjmiles): should support access via .attributes NamedNodeMap
 	// TODO(sjmiles): preserves user defined overrides, if any
 	if (prototype.setAttribute._polyfilled) {
-            return;
+	    return;
 	}
 	var setAttribute = prototype.setAttribute;
 	prototype.setAttribute = function(name, value) {
-            changeAttribute.call(this, name, value, setAttribute);
+	    changeAttribute.call(this, name, value, setAttribute);
 	}
 	var removeAttribute = prototype.removeAttribute;
 	prototype.removeAttribute = function(name) {
-            changeAttribute.call(this, name, null, removeAttribute);
+	    changeAttribute.call(this, name, null, removeAttribute);
 	}
 	prototype.setAttribute._polyfilled = true;
     }
@@ -848,8 +883,8 @@ if(!document.register) {
 	operation.apply(this, arguments);
 	var newValue = this.getAttribute(name);
 	if (this.attributeChangedCallback
-            && (newValue !== oldValue)) {
-            this.attributeChangedCallback(name, oldValue, newValue);
+	    && (newValue !== oldValue)) {
+	    this.attributeChangedCallback(name, oldValue, newValue);
 	}
     }
 
@@ -860,7 +895,7 @@ if(!document.register) {
 
     function getRegisteredDefinition(name) {
 	if (name) {
-            return registry[name.toLowerCase()];
+	    return registry[name.toLowerCase()];
 	}
     }
 
@@ -870,7 +905,7 @@ if(!document.register) {
 
     function generateConstructor(definition) {
 	return function() {
-            return instantiate(definition);
+	    return instantiate(definition);
 	};
     }
 
@@ -879,16 +914,16 @@ if(!document.register) {
 	// error check it, or perhaps there should only ever be one argument
 	var definition = getRegisteredDefinition(typeExtension || tag);
 	if (definition) {
-            return new definition.ctor();
+	    return new definition.ctor();
 	}
 	return domCreateElement(tag);
     }
 
     function upgradeElement(element) {
 	if (!element.__upgraded__ && (element.nodeType === Node.ELEMENT_NODE)) {
-            var type = element.getAttribute('is') || element.localName;
-            var definition = getRegisteredDefinition(type);
-            return definition && upgrade(element, definition);
+	    var type = element.getAttribute('is') || element.localName;
+	    var definition = getRegisteredDefinition(type);
+	    return definition && upgrade(element, definition);
 	}
     }
 
@@ -915,7 +950,7 @@ if(!document.register) {
     Node.prototype.cloneNode = cloneNode; // override
     scope.upgradeElement = upgradeElement;
 
-    
+
     (function(scope){
 
 	var logFlags = scope.logFlags;
@@ -1004,11 +1039,11 @@ if(!document.register) {
 	    }
 	}
 
-	// TODO(sorvell): on platforms without MutationObserver, mutations may not be 
+	// TODO(sorvell): on platforms without MutationObserver, mutations may not be
 	// reliable and therefore entered/leftView are not reliable.
 	// To make these callbacks less likely to fail, we defer all inserts and removes
-	// to give a chance for elements to be inserted into dom. 
-	// This ensures enteredViewCallback fires for elements that are created and 
+	// to give a chance for elements to be inserted into dom.
+	// This ensures enteredViewCallback fires for elements that are created and
 	// immediately added to dom.
 	var hasPolyfillMutations = (window.MutationObserver === window.MutationObserverPolyfill);
 
@@ -1224,7 +1259,7 @@ window.ES.BlockElement = class extends HTMLDivElement {
 	this.appendChild(el);
     }
     attr(key, value) {
-         if(value === undefined) {
+	 if(value === undefined) {
 	 return this.getAttribute(key) || undefined;
 	 } else {
 	 this.setAttribute(key, value);
@@ -1243,13 +1278,13 @@ Element.prototype.hide = function(duration) {
 
 const FRAME_RATE = 10;
 
-var toBold(el) {
+var toBold = function(el) {
     var before = el.value.splice(0, el.selectionStart);
     var selection = el.value.splice(el.selectionStart, el.selectionEnd).replace(/<b>/, "").replace(/<b\/>/, "");
     var after = el.value.splice(el.selectionEnd);
     if(before.indexOf("<b/>") > before.indexOf("<b>")) {
 	selection = "<b>" + selection;
-    } 
+    }
     if(after.indexOf("<b>") > after.indexOf("<b/>")) {
 	selection += "<b/>";
     }
