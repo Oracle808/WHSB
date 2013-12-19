@@ -1272,7 +1272,7 @@ Element.prototype.hide = function(duration) {
     if(duration) {
 	setTimeout(() => this.style.display = "none");
     } else {
-	this.style.disaply = "none";
+	this.style.display = "none";
     }
 };
 

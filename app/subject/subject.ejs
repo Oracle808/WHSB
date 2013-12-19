@@ -16,7 +16,7 @@
 	<ul>
 	  <li class="active"><a>Blog</a></li>
 	  <% if((user.role === "admin" || user.role === "teacher") && subject.blog_drafts) { %>
-	  <li><a>Blog Drafts<span class="label"><%= subject.blog_drafts.length %></span></a></li>
+	  <li><a>Blog Drafts <span id="numberOfDrafts"><%= subject.blog_drafts.length %></span></a></li>
 	  <% } %>
 	  <% if(subject.vocab_quizzes.length != 0) { %>
           <li><a>Vocab Quizzes</a></li>
@@ -32,9 +32,11 @@
 	<x-slidable id="newPostForm" hidden>
 	  <form action="/<%= subject._id %>" method="post">
 	    <input name="title" type="text" placeholder="Title" required/>
-	    <button>B</button>
-	    <button>I</button>
-	    <button>U</button>
+	    <span id="formattingButtons">
+	      <button>B</button>
+	      <button>I</button>
+	      <button>U</button>
+	    </span>
 	    <br/>
 	    <textarea name="body"></textarea>
 	    <span id="buttons">

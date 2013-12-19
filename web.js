@@ -52,6 +52,22 @@ if(Program.createUser) {
 	}
     };
 
+    var teacher = function(req, res, next) {
+	if(req.session.user.role === "teacher" || req.session.user.role === "admin") {
+	    next();
+	} else {
+	    res.forbid("An attempt was made to access a route restricted to staff.");
+	}
+    };
+
+    var admin = function(req, res, next) {
+	if(req.session.user.role === "admin") {
+	    next();
+	} else {
+	    res.forbid("An attempt was made to access a route prohibited to all but administrators.");
+	}
+    };
+
     app.set('port', process.env.PORT || 3000);
     app.use(reactive.intercept());
     app.use(express.favicon());
@@ -69,7 +85,7 @@ if(Program.createUser) {
     app.get("/login", Atrium.login.form);
     app.post("/login", Atrium.login.attempt);
     app.get("/:subject", auth, Subject.index);
-    app.post("/:subject", auth, Subject.publish);
+    app.post("/:subject", auth, teacher, Subject.publish);
 
     http.createServer(app).listen(app.get("port"), function() {
 	console.log("Express server listening at " + app.get("port"));

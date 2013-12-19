@@ -1,5 +1,6 @@
 const CSS_ID = /^\#[a-z]+[0-9]*/;
 
+
 // Long story cut short, allows custom els to override what an a[href=that_el] does
 window.onload = function() {
     document.querySelector("html").addEventListener("click", function(e) {
@@ -30,9 +31,13 @@ class SlidableElement extends HTMLDivElement {
     }
     attributeChangedCallback(key, oldVal, newVal) {
 	if(key === "hidden") { 
-	    if(this.getAttribute("hidden") === null) {
-		this.slideDown(this.getAttribute("duration") || undefined)
+	    console.log("fsdfds " + oldVal + " " + newVal);
+	    console.log(typeof newVal);
+	    if(newVal === null) {
+		console.log("1");
+		this.slideDown(this.getAttribute("duration") || undefined);
 	    } else {
+		console.log("2");
 		this.hide();
 	    }
 	}
