@@ -1,6 +1,7 @@
 <html>
   <head>
     <title>Login</title>
+    <link href="./foundation-icons/foundation-icons.css" rel="stylesheet"/>
     <style src="./login.scss"></style>
   </head>
   <body>
@@ -13,8 +14,11 @@
       <input type="hidden" name="redirect" value="<%= redirect %>"/>
       <input type="text" name="username" placeholder="Username"/><br/>
       <input type="password" name="password" placeholder="Password"/><br/>
-      <button>Login</button>
-      <img id="html5Logo" src="/images/html5.png" width="357" height="64" alt="HTML5 Powered with Connectivity / Realtime, CSS3 / Styling, Device Access, Graphics, 3D &amp; Effects, Multimedia, Performance &amp; Integration, Semantics, and Offline &amp; Storage" title="HTML5 Powered with Connectivity / Realtime, CSS3 / Styling, Device Access, Graphics, 3D &amp; Effects, Multimedia, Performance &amp; Integration, Semantics, and Offline &amp; Storage"/>
+      <button><i class="fi-lock"></i> Login</button>
     </form>
+    <footer>
+      <!-- Because we're all in this together -->
+      <img id="html5Logo" src="/images/html5.png" width="357" height="64" alt="HTML5 Powered with Connectivity / Realtime, CSS3 / Styling, Device Access, Graphics, 3D &amp; Effects, Multimedia, Performance &amp; Integration, Semantics, and Offline &amp; Storage" title="HTML5 Powered with Connectivity / Realtime, CSS3 / Styling, Device Access, Graphics, 3D &amp; Effects, Multimedia, Performance &amp; Integration, Semantics, and Offline &amp; Storage"/>
+    </footer>
   </body>
 </html>

@@ -18,7 +18,11 @@ form input {
     @include grid-column(12);
 }
 
-form #html5Logo {
+footer {
+    @include grid-column(12);
+}
+
+footer #html5Logo {
     margin-top:40px;
     margin-left:auto;
     margin-right:auto;
