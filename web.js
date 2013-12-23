@@ -68,6 +68,11 @@ if(Program.createUser) {
 	}
     };
 
+    var logout = function(req, res) {
+	delete req.session.user;
+	res.redirect("/login");
+    };
+
     app.set('port', process.env.PORT || 3000);
     app.use(reactive.intercept());
     app.use(express.favicon());
@@ -84,6 +89,7 @@ if(Program.createUser) {
     app.get("/", auth, Atrium.index);
     app.get("/login", Atrium.login.form);
     app.post("/login", Atrium.login.attempt);
+    app.get("/logout", auth, logout);
     app.get("/:subject", auth, Subject.index);
     app.post("/:subject", auth, teacher, Subject.publish);
 

@@ -11,5 +11,10 @@ body {
 }
 
 body main {
-    @include block-grid(4, $spacing: 30px);
+    @media #{$medium-up} {
+	@include block-grid(4, $spacing: 30px);
+    }
+    @media #{$small-only} {
+	@include block-grid(2, $spacing: 15px);
+    }
 }

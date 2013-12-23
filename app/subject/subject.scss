@@ -2,8 +2,12 @@
 
 $foreground: #fafafa;
 
-body {
+html {
     background-image:url("images/ios7.png");
+}
+
+body {
+    background-color:rgba(0, 0, 0, 0.4);
 }
 
 body main {
@@ -76,23 +80,55 @@ body main #newPostForm #buttons button[type="submit"] {
 
 body main > div section {
     background-color:$foreground;
-    margin-top:20px;
     padding:20px;
     text-align:justify;
+    @include grid-row();
+    margin-top:20px;
 }
 
-body main > div section h2 {
-    margin-bottom:4px;
+body main > div section .heading {
+    & {
+	@include grid-column(12, $collapse:true);
+    }
+    h2 {
+	margin-bottom:0;
+	font-family:Impact;
+	text-transform:uppercase;
+	float:left;
+    }
 }
 
-body main > div section .editPost {
-    @include button(rem-calc(6), $radius: $button-round);
-    font-size: rem-calc(12);
-    margin-bottom:8px;
+body main > div section .heading .buttons {
+    & {
+	float:right;
+    }
+   .editPost {
+	@include button(rem-calc(6), $radius: $button-round);
+	font-size: rem-calc(12);
+	margin-bottom:8px;
+    }
+    .publishPost {
+	@include button(rem-calc(6), $bg: #66CD00, $radius:$button-round);
+	font-size: rem-calc(12);
+	margin-bottom:8px;
+    }
+    .deletePost {
+	@include button(rem-calc(6), $bg: $alert-color, $radius: $button-round);
+	font-size: rem-calc(12);
+	margin-bottom:8px;
+    }
 }
 
-body main > div section .deletePost {
-    @include button(rem-calc(6), $bg: $alert-color, $radius: $button-round);
-    font-size: rem-calc(12);
-    margin-bottom:8px;
+body main > div section h6.indicatorDraft {
+    color:#e59400;
+    font-weight:bold;
+    @include grid-column(12, $collapse:true);
+}
+
+body main > div section .body {
+    @include grid-column(12, $collapse:true);
+}
+
+body main > div section {
+    word-wrap:break-word;
 }

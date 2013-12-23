@@ -12,9 +12,11 @@
     <!-- Right Nav Section -->
     <ul class="right">
       <li class="has-dropdown">
-        <a href="#"><%= user.username %> <span class="label round"><%= us.capitalize(user.role) %></span></a>
-        <ul class="dropdown">
-          <li><a href="#">First link in dropdown</a></li>
+        <a href="#userOptions"><%= user.username %> <span class="label round"><%= us.capitalize(user.role) %></span></a>
+        <ul class="dropdown" id="userOptions">
+	  <li><a href="/logout">Logout</a></li>
+          <li><a href="/users">Manages Users</a></li>
+	  <li><a href="/users/new">Create a New User</a></li>
         </ul>
       </li>
     </ul>

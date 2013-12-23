@@ -8,10 +8,17 @@ window.onload = function() {
 	// Do not use href, returns a url with id appended
 	var href = el.getAttribute("href");
 	if(el.matches("a") && CSS_ID.test(href)) {
-	    document.querySelector(href).scrollIntoView();
-	    return false;
-	} else {
-	    return true;
+	    var target = document.querySelector(href);
+	    if(target.matches("ul")) {
+		if(target.isVisible()) {
+		    target.hide();
+		} else {
+		    target.show();
+		}
+	    } else {
+		target.scrollIntoView();
+	    }
+	    e.preventDefault();
 	}
     });
 };
@@ -31,13 +38,9 @@ class SlidableElement extends HTMLDivElement {
     }
     attributeChangedCallback(key, oldVal, newVal) {
 	if(key === "hidden") { 
-	    console.log("fsdfds " + oldVal + " " + newVal);
-	    console.log(typeof newVal);
 	    if(newVal === null) {
-		console.log("1");
 		this.slideDown(this.getAttribute("duration") || undefined);
 	    } else {
-		console.log("2");
 		this.hide();
 	    }
 	}

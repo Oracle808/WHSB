@@ -21,7 +21,7 @@ var index = function(req, res) {
 
 var login = {
     form: function(req, res) {
-	res.render(loginPage, {redirect: req.param("redirect")});
+	res.render(loginPage, {redirect: req.param("redirect") || "/"});
     }, 
     attempt: function(req, res) {
 	User.findOne({username: req.body.username}, function(err, user) {

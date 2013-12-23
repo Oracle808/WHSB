@@ -15,8 +15,15 @@ var index = function(req, res) {
 };
 
 var publish = function(req, res) {
-    var data = {title: req.body.title, body: req.body.body};
-    var update = {$push: (req.query.draft === "true" ? { blog_drafts: data } : { blog: data })};
+    var update = {
+	$push: {
+	    blog: {
+		title: req.body.title,
+		body: req.body.body,
+		draft: req.query.drafts === "true"
+	    }
+	}
+    };
     Subject.findByIdAndUpdate(req.param("subject"), update, function(err, doc) {
 	if(err) {
 	    res.error(err);

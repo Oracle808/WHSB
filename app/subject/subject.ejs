@@ -14,10 +14,7 @@
 	  <input type="search" placeholder="Search"></input>
 	</form>
 	<ul>
-	  <li class="active"><a>Blog</a></li>
-	  <% if((user.role === "admin" || user.role === "teacher") && subject.blog_drafts) { %>
-	  <li><a>Blog Drafts <span id="numberOfDrafts"><%= subject.blog_drafts.length %></span></a></li>
-	  <% } %>
+	  <li class="active"><a href="/<%= subject._id %>">Blog</a></li>
 	  <% if(subject.vocab_quizzes.length != 0) { %>
           <li><a>Vocab Quizzes</a></li>
 	  <% } %>
@@ -40,21 +37,36 @@
 	    <br/>
 	    <textarea name="body"></textarea>
 	    <span id="buttons">
-	      <button type="submit" formaction="/<%= subject._id %>?draft=true">Save As Draft</button>
+	      <button type="submit" formaction="/<%= subject._id %>?drafts=true">Save As Draft</button>
 	      <button type="submit">Publish</button>
 	    </span>
 	  </form>
 	</x-slidable>
+
 	<% subject.blog.reverse().forEach(function(post) { %>
+	<% if(!post.draft || user.role === "teacher" || user.role === "admin") { %>
 	<section>
-	  <h2><%= post.title %></h2>
-	  <% if(user.role === "admin" || user.role === "teacher") { %>
-	  <button class="editPost">Edit</button>
-	  <button class="deletePost">Delete</button>
+	  <div class="heading">
+	    <h2><%= post.title %></h2>
+	    <% if(user.role === "admin" || user.role === "teacher") { %>
+	    <div class="buttons">
+	      <button class="editPost">Edit</button>
+	      <button class="deletePost">Delete</button>
+	      <% if(post.draft) { %>
+	      <button class="publishPost">Publish</button>
+	      <% } %>
+	    </div>
+	  </div>
+	  <% if(post.draft) { %>
+	  <h6 class="indicatorDraft">Draft</h6>
+	  <% } %>
 	  <br/>
 	  <% } %>
-	  <%= post.body %>
+	  <div class="body">
+	  <%= us.prune(post.body, 500) %>
+	  </div>
 	</section>
+	<% } %>
 	<% }); %>
       </div>
     </main>

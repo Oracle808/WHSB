@@ -1268,12 +1268,19 @@ window.ES.BlockElement = class extends HTMLDivElement {
 };
 */
 
-Element.prototype.hide = function(duration) {
-    if(duration) {
-	setTimeout(() => this.style.display = "none");
-    } else {
-	this.style.display = "none";
-    }
+Element.prototype.hide = function() {
+    this.style.display = "none";
+    this.style.visibility = "none";
+};
+
+Element.prototype.show = function() {
+    this.style.display = "block";
+    this.style.visibility = "visibile";
+};
+
+Element.prototype.isVisible = function() {
+    var style = window.getComputedStyle(this);
+    return (style.getPropertyValue("display") !== "none" && style.getPropertyValue("visibility") !== "none");
 };
 
 const FRAME_RATE = 10;
@@ -1289,7 +1296,7 @@ var toBold = function(el) {
 	selection += "<b/>";
     }
     return before + selection + after;
-}
+};
 
 Element.prototype.slideDown = function(duration=500) {
     var simulacrum = this.cloneNode(true);
