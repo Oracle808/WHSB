@@ -92,6 +92,7 @@ if(Program.createUser) {
     app.get("/logout", auth, logout);
     app.get("/:subject", auth, Subject.index);
     app.post("/:subject", auth, teacher, Subject.publish);
+    app.get("/:subject/:post", auth, Subject.get);
 
     http.createServer(app).listen(app.get("port"), function() {
 	console.log("Express server listening at " + app.get("port"));

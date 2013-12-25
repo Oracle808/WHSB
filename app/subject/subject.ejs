@@ -4,6 +4,7 @@
     <style src="./subject.scss"></style>
     <script src="./polyfill.js"></script>
     <script src="./subject.js"></script>
+    <link href="/foundation-icons/foundation-icons.css" rel="stylesheet"/>
   </head>
   <body>
     <% include ../index/header.ejs %>
@@ -44,28 +45,37 @@
 	</x-slidable>
 
 	<% subject.blog.reverse().forEach(function(post) { %>
-	<% if(!post.draft || user.role === "teacher" || user.role === "admin") { %>
-	<section>
-	  <div class="heading">
-	    <h2><%= post.title %></h2>
+	<% if(!post.draft || user.role === "admin" || user.role === "teacher") { %>
+	<article class="post">
+
+	  <header class="postHeading">
+	    <h2>
+	      <a href="/<%= subject._id %>/<%= post._id %>"><%= post.title %></a>
+	    </h2>
+	  </header>
+
+	  <section class="postActions">
 	    <% if(user.role === "admin" || user.role === "teacher") { %>
-	    <div class="buttons">
-	      <button class="editPost">Edit</button>
-	      <button class="deletePost">Delete</button>
-	      <% if(post.draft) { %>
-	      <button class="publishPost">Publish</button>
-	      <% } %>
-	    </div>
-	  </div>
-	  <% if(post.draft) { %>
-	  <h6 class="indicatorDraft">Draft</h6>
-	  <% } %>
-	  <br/>
-	  <% } %>
-	  <div class="body">
-	  <%= us.prune(post.body, 500) %>
-	  </div>
-	</section>
+	    <a class="deletePost" title="Remove"><i class="fi-x"></i></a>
+	    <a class="editPost" title="Edit"><i class="fi-pencil"></i></a>
+	    <% if(post.draft) { %>
+	    <a class="publishPost" title="Publish"><i class="fi-check"></i></a>
+	    <% } %>
+	    <% } %>
+	  </section>	   
+
+	  <section class="postMeta">
+	    <% if(post.draft) { %>
+	    <h6 class="indicatorDraft">Draft</h6>
+	    <% } %>
+	  </section>
+
+	  <section class="postExcerpt">
+	  <%- (full ? post.body.replace("\n", "<br/><br/>") : us.prune(post.body, 450).replace("\n", "<br/><br/>")) %>
+	  </section>
+
+	</article>
+
 	<% } %>
 	<% }); %>
       </div>

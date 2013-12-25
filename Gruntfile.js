@@ -30,6 +30,7 @@ module.exports = function(grunt) {
 	webify: {
 	    web: {
 		options: {
+		    esnext: true,
 		    sass: {
 			includePaths: ["./sass", "./app"]
 		    }
@@ -42,25 +43,22 @@ module.exports = function(grunt) {
 		    },
 		    {
 			expand: true,
-			src: [MODEL_FILES, APP_FILES, SCRIPT_FILES].concat(NO_WEB_FILES).concat(NO_TRANSPILED_FILES),
+			src: [MODEL_FILES, APP_FILES].concat(NO_WEB_FILES).concat(NO_TRANSPILED_FILES),
 			ext: ".common.js"
 		    }
 		]
-	    }
-	},
-	execute: {
-	    dev: {
-		src: CONFIGURATION.main
 	    }
 	}
     });
 
     // This is how you develop...
-    grunt.loadNpmTasks("grunt-contrib-clean");           // GET RID OF EXISTING BUILT FILES
+//    grunt.loadNpmTasks("grunt-contrib-clean");           // GET RID OF EXISTING BUILT FILES
     grunt.loadNpmTasks("grunt-asciify");                 // ASCIIFY MINIFIED FILES
     grunt.loadNpmTasks("grunt-webify");                  // BUILD & MINIFY THEM FOR THE WEB
-    grunt.loadNpmTasks("grunt-execute");                 // RUN LOCAL TEST SERVER
+    grunt.loadNpmTasks("grunt-foreman");                 // TEST SERVER
+    grunt.loadNpmTasks("grunt-newer");                   // FOR SPEED
 
-    grunt.registerTask("default", ["clean", "asciify", "webify"]);
-    grunt.registerTask("serve", ["default", "execute"]);
+    grunt.registerTask("default", ["asciify", "newer:webify"]);
+    grunt.registerTask("serve", ["default", "foreman"]);
+
 };

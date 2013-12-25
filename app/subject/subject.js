@@ -39,11 +39,41 @@ class SlidableElement extends HTMLDivElement {
     attributeChangedCallback(key, oldVal, newVal) {
 	if(key === "hidden") { 
 	    if(newVal === null) {
-		this.slideDown(this.getAttribute("duration") || undefined);
+		this.slideDown();
 	    } else {
 		this.hide();
 	    }
 	}
+    }
+    slideDown() {
+	const duration = this.dataset.duration || 500;
+	var simulacrum = this.cloneNode(true);
+	simulacrum.style.height = "auto";
+	simulacrum.style.display = "block";
+	simulacrum.style.visibility = "hidden";
+	simulacrum.style.position = "absolute";
+	simulacrum.style.left = "-9999px";
+	this.parentNode.insertBefore(simulacrum, this);
+	const finalHeight = simulacrum.clientHeight;
+	const heightIncrement = finalHeight / (duration / FRAME_RATE);
+	const originalOverflow = this.style.overflow;
+	simulacrum.remove();
+	this.style.height = "0px";
+	this.style.display = "block";
+	this.style.visibility = "visibile";
+	this.style.overflow = "hidden";
+	var y = 0;
+	var tween = () => {
+	    y += heightIncrement;
+	    this.style.height = y + "px";
+	    if (y < finalHeight) {
+		setTimeout(tween, FRAME_RATE);
+	    } else {
+		this.style.height = "auto";
+		this.style.overflow = originalOverflow;
+	    }
+	};
+	tween();
     }
 }
 
