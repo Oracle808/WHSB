@@ -84,7 +84,7 @@ if(Program.createUser) {
     //	app.use(express.csrf());
     app.use(express.static(path.join(__dirname, 'public')));
     app.use(app.router);
-
+    app.use(reactive.howler());
 
     app.get("/", auth, Atrium.index);
     app.get("/login", Atrium.login.form);
@@ -92,6 +92,7 @@ if(Program.createUser) {
     app.get("/logout", auth, logout);
     app.get("/:subject", auth, Subject.index);
     app.post("/:subject", auth, teacher, Subject.publish);
+    app.get("/:subject/nova", auth, teacher, Subject.nova);
     app.get("/:subject/:post", auth, Subject.get);
 
     http.createServer(app).listen(app.get("port"), function() {

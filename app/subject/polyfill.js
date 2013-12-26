@@ -1275,7 +1275,7 @@ Element.prototype.hide = function() {
 
 Element.prototype.show = function() {
     this.style.display = "block";
-    this.style.visibility = "visibile";
+    this.style.visibilty = "visible";
 };
 
 Element.prototype.isVisible = function() {

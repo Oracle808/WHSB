@@ -6,11 +6,11 @@
     <script src="./subject.js"></script>
     <link href="/foundation-icons/foundation-icons.css" rel="stylesheet"/>
   </head>
-  <body>
+   <body>
     <% include ../index/header.ejs %>
     <main class="row">
       <nav>
-	<h4>Latin <small>Mrs Cavalier</small></h4>
+	<h4><%= subject.subject_name %> <small>Mrs Cavalier</small></h4>
 	<form>
 	  <input type="search" placeholder="Search"></input>
 	</form>
@@ -23,11 +23,15 @@
 
 	</ul>
 	<% if(user.role === "admin" || user.role === "teacher") { %>
-	<a href="#newPostForm" id="newPost"><i class="fi-plus"></i> New Blog Post</a>
+	<a href="/<%= subject._id %>/nova" target="#newPostForm" id="newPost"><i class="fi-plus"></i> New Blog Post</a>
 	<% } %>
       </nav>
       <div>
+	<% if(locals.showNewPostForm) { %>
+	<x-slidable id="newPostForm">
+	  <% } else { %>
 	<x-slidable id="newPostForm" hidden>
+	  <% } %>
 	  <form action="/<%= subject._id %>" method="post">
 	    <input name="title" type="text" placeholder="Title" required/>
 	    <span id="formattingButtons">
