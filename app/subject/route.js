@@ -46,6 +46,16 @@ var publish = function(req, res) {
     });
 };
 
+var del = function(req, res) {
+    Subject.findByIdAndUpdate(req.param("subject"), {$pull: {blog: {_id: req.param("post")}}}, function(err, doc) {
+	if(err) {
+	    res.error(err);
+	} else {
+	    res.redirect("/" + req.param("subject"));
+	}
+    });
+};
+
 var get = function(req, res) {
     Subject.findById(req.param("subject"), {name: true, vocab_quizzes: true, blog:{$elemMatch:{_id: req.param("post")}}}, function(err, doc) {
 	if(err) {
@@ -81,4 +91,4 @@ var feed = function(req, res) {
     });
 };
 
-export { index, publish, get, nova, feed };
+export { index, publish, get, nova, feed, del };

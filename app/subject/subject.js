@@ -23,7 +23,7 @@ window.onload = function() {
     {
 	let toBeShown = document.querySelectorAll(".jsmore");
 	for(let i = 0; i < toBeShown.length; i++) {
-	    toBeShown[i].style.display = "block";
+	    toBeShown[i].classList.remove("jsmore");
 	}
     }
 

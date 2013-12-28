@@ -66,10 +66,15 @@
 
 	  <section class="postActions">
 	    <% if(user.role === "admin" || user.role === "teacher") { %>
-	    <a class="deletePost" title="Remove"><i class="fi-x"></i></a>
-	    <a class="editPost" title="Edit"><i class="fi-pencil"></i></a>
+	    <form action="/<%= subject._id %>/<%= post._id %>" method="post">
+	      <input type="hidden" name="_method" value="delete"/>
+	      <button class="deletePost" title="Remove" type="submit">
+		<i class="fi-x"></i>
+	      </button>
+	    </form>
+	    <button class="editPost" title="Edit"><i class="fi-pencil"></i></button>
 	    <% if(post.draft) { %>
-	    <a class="publishPost" title="Publish"><i class="fi-check"></i></a>
+	    <button class="publishPost" title="Publish"><i class="fi-check"></i></button>
 	    <% } %>
 	    <% } %>
 	  </section>	   

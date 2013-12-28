@@ -95,6 +95,7 @@ if(Program.createUser) {
     app.get("/:subject/nova", auth, teacher, Subject.nova);
     app.get("/:subject/feed", auth, Subject.feed);
     app.get("/:subject/:post", auth, Subject.get);
+    app.del("/:subject/:post", auth, teacher, Subject.del);
 
     http.createServer(app).listen(app.get("port"), function() {
 	console.log("Express server listening at " + app.get("port"));
