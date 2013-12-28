@@ -2,6 +2,14 @@
 
 $foreground: #fafafa;
 
+main, x-slidable, x-richtexteditor {
+    display:block;
+}
+
+.jsmore {
+    display:none !important;
+}
+
 html {
     background-image:url("/images/ios7.png");
 }
@@ -12,7 +20,6 @@ body {
 
 body main {
     @include grid-row();
-    display:block; // Necessary for Lesser Chrome Compatibility
 }
 
 body main > nav {
@@ -28,6 +35,17 @@ body main > nav input[type="search"]:focus {
 
 body main > nav ul {
     @include side-nav();
+}
+
+body main > nav ul li a {
+    display:inline-block;
+}
+
+body main > nav ul li a + a {
+    float:right;
+    margin-top:3.5px;
+    margin-left:5px;
+    margin-right:0.1px;
 }
 
 body main > nav #numberOfDrafts {
@@ -54,6 +72,14 @@ body main > div #newPostForm {
 
 body main > div #newPostForm input {
     @include grid-column(12);
+}
+
+body main > div #newPostForm x-richtexteditor {
+    @extend textarea;
+    @include grid-column(12);
+    outline:none;
+    resize: vertical;
+    min-height:200px;
 }
 
 body main > div #newPostForm textarea {

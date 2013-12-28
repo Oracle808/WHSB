@@ -3,6 +3,9 @@ var subject = require("./subject.web.js");
 var mongoose = require("mongoose");
 var Subject = mongoose.model("Subject");
 var User = mongoose.model("User");
+var RSS = require("rss");
+var uu = require("underscore");
+var us = require("underscore.string");
 
 var index = function(req, res) {
     Subject.findById(req.param("subject"), function(err, doc) {
@@ -53,4 +56,29 @@ var get = function(req, res) {
     });
 };
 
-export { index, publish, get, nova };
+var feed = function(req, res) {
+    Subject.findById(req.param("subject"), {name: true, subject_name: true, blog: true, teacher: true}, function(err, doc) {
+	var news = new RSS({
+	    title: doc.name,
+	    generator: "WHSB Feed Generator",
+	    feed_url: req.host + req.path,
+	    site: req.host,
+	    author: doc.teacher,
+	    webMaster: "Hashan Punchihewa",
+	    copyright: "Copyright Westcliff High School for Boys",
+	    language: "English",
+	    categories: ["School"]
+	});
+	doc.blog.forEach(function(post) {
+	    news.item({
+		title: post.title,
+		description: us.prune(post.body, 450),
+		guid: post._id,
+		date: post.date
+	    });
+	});
+	res.end(news.xml());
+    });
+};
+
+export { index, publish, get, nova, feed };

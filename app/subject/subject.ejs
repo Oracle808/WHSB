@@ -10,27 +10,32 @@
     <% include ../index/header.ejs %>
     <main class="row">
       <nav>
-	<h4><%= subject.subject_name %> <small>Mrs Cavalier</small></h4>
+	<h4><%= subject.subject_name %> <small><%= subject.teacher %></small></h4>
 	<form>
 	  <input type="search" placeholder="Search"></input>
 	</form>
 	<ul>
-	  <li class="active"><a href="/<%= subject._id %>">Blog</a></li>
+	  <li class="active">
+	    <a href="/<%= subject._id %>">
+	      Blog 
+	    </a>
+	    <% if(user.role === "admin" || user.role === "teacher") { %>
+	    <a href="/<%= subject._id %>/nova" cite="#newPostForm" title="New Blog Post"><i class="fi-plus"></i></a>
+	    <% } %>
+	    <a href="/<%= subject._id %>/feed" title="Get RSS Feed"><i class="fi-rss"></i></a>
+	  </li>
 	  <% if(subject.vocab_quizzes.length != 0) { %>
           <li><a>Vocab Quizzes</a></li>
 	  <% } %>
 	  <li><a>Student Resources</a></li>
-
 	</ul>
-	<% if(user.role === "admin" || user.role === "teacher") { %>
-	<a href="/<%= subject._id %>/nova" target="#newPostForm" id="newPost"><i class="fi-plus"></i> New Blog Post</a>
-	<% } %>
+
       </nav>
       <div>
 	<% if(locals.showNewPostForm) { %>
 	<x-slidable id="newPostForm">
 	  <% } else { %>
-	<x-slidable id="newPostForm" hidden>
+	<x-slidable id="newPostForm" class="jsmore" hidden>
 	  <% } %>
 	  <form action="/<%= subject._id %>" method="post">
 	    <input name="title" type="text" placeholder="Title" required/>
@@ -40,7 +45,8 @@
 	      <button>U</button>
 	    </span>
 	    <br/>
-	    <textarea name="body"></textarea>
+	    <x-richtexteditor class="jsmore" for="#content"></x-richtexteditor>
+	    <textarea name="body" class="jsless" id="content"></textarea>
 	    <span id="buttons">
 	      <button type="submit" formaction="/<%= subject._id %>?drafts=true">Save As Draft</button>
 	      <button type="submit">Publish</button>

@@ -6,10 +6,16 @@ var SALT_WORK_FACTOR = 10;
 
 var Subject = mongoose.Schema({
     name: {
-	type: String
+	type: String,
+	required: true
     },
     subject_name: {
-	type: String
+	type: String,
+	required: true
+    },
+    teacher: {
+	type: String,
+	required:true
     },
     blog: [{
 	title: {
@@ -22,6 +28,10 @@ var Subject = mongoose.Schema({
 	},
 	draft: {
 	    type: Boolean
+	},
+	date: {
+	    type: Date,
+	    default: Date.now
 	}
     }],
     vocab_quizzes: [{

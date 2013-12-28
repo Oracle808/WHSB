@@ -1,15 +1,45 @@
 const CSS_ID = /^\#[a-z]+[0-9]*/;
 
-// Long story cut short, allows custom els to override what an a[href=that_el] does
+var getClosestParentWhichIs = function(el, criteria) {
+    while(!el.matches(criteria)) {
+	if(el.parentNode) {
+	    el = el.parentNode;
+	} else {
+	    return false;
+	}
+    }
+    return el;
+};
+
 window.onload = function() {
+    // Hide .jsless 
+    {
+	let toBeHidden = document.querySelectorAll(".jsless");
+	for(let i = 0; i < toBeHidden.length; i++) {
+	    toBeHidden[i].style.display = "none";
+	}
+    }
+    // Show .jsmore -- BUGGY // FIX LATER
+    {
+	let toBeShown = document.querySelectorAll(".jsmore");
+	for(let i = 0; i < toBeShown.length; i++) {
+	    toBeShown[i].style.display = "block";
+	}
+    }
+
+    // Long story cut short, allows custom els to override what an a[href=that_el] does
     document.querySelector("html").addEventListener("click", function(e) {
-	var el = e.target;
-	if(el.matches("a") && CSS_ID.test(el.target)) {
-	    var target = document.querySelector(el.target);
-	    target.scrollIntoView();
+	var el = getClosestParentWhichIs(e.target, "a");
+	if(!el) {
+	    return;
+	}
+	var cite = el.getAttribute("cite");
+	if(cite) {
+	    var target = document.querySelector(cite);
+	    target.scrollIntoView(e);
 	    e.preventDefault();
 	    if(history.pushState) {
-		history.pushState({state: el.target}, document.title, el.href);
+		history.pushState({state: cite}, document.title, el.href);
 	    }
 	} else if(CSS_ID.test(el.href)) {
 	    if(target.matches("ul")) {
@@ -85,4 +115,21 @@ class SlidableElement extends HTMLDivElement {
 
 document.register("x-slidable", {
     prototype: SlidableElement.prototype
+});
+
+class RichTextEditor extends HTMLDivElement {
+    createdCallback() {
+	this.contentEditable = true;
+	this.addEventListener("DOMSubtreeModified", () => {
+	    document.querySelector(this.getAttribute("for")).value = this.innerHTML;
+	});
+    }
+    scrollIntoView(e) {
+	var el = e.target;
+	document.execCommand(el.getAttribute("action"));
+    }
+}
+
+document.register("x-richtexteditor", {
+    prototype: RichTextEditor.prototype
 });
