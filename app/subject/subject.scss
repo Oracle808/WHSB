@@ -26,39 +26,35 @@ body main {
     @include grid-row();
 }
 
-body main > nav {
-    @include grid-column(3);
-    background-color:$foreground;
-    padding-top:32px;
-    padding-right:20px;
-}
-
-body main > nav input[type="search"]:focus {
-    background-color:white;
-}
-
-body main > nav ul {
-    @include side-nav();
-}
-
-body main > nav ul li a {
-    display:inline-block;
-}
-
-body main > nav ul li a + a {
-    float:right;
-    margin-top:3.5px;
-    margin-left:5px;
-    margin-right:0.1px;
-}
-
-body main > nav #numberOfDrafts {
-    @include label();
-    vertical-align:bottom;
-}
-
-body main > nav #newPost {
-    @include button($full-width:true);
+nav#intraSubjectNavigation {
+    & {
+	@include grid-column(3);
+	background-color:$foreground;
+	padding-top:32px;
+	padding-right:20px;
+    }
+    ul {
+	@include side-nav();
+    }
+    li a {
+	display:inline-block;
+    }
+    ul li a + a {
+	float:right;
+	margin-top:3.5px;
+	margin-left:5px;
+	margin-right:0.1px;
+    }
+    #numberOfDrafts {
+	@include label();
+	vertical-align:bottom;
+    }
+    #newPost {
+	@include button($full-width:true);
+    }
+    input[type="search"]:focus {
+	background-color:white;
+    }
 }
 
 body main > div {
