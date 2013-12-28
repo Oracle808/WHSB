@@ -145,9 +145,12 @@ article .postMeta {
     & {
 	@include grid-column(12, $collapse:true);
     }
+    h6 {
+	font-weight:bold;
+	color:#777;
+    }
     h6.indicatorDraft {
 	color:#e79e19;
-	font-weight:bold;
     }
 }
 
