@@ -11,10 +11,25 @@ body {
 }
 
 body main {
-    @media #{$medium-up} {
-	@include block-grid(4, $spacing: 30px);
-    }
     @media #{$small-only} {
 	@include block-grid(2, $spacing: 15px);
+    }
+    @media #{$medium-up} {
+	@include block-grid(4, $spacing: 30px);
+	padding-top:10px;
+    }
+}
+
+body main img {
+    @media #{$large-up} {
+	padding:20px;
+	-webkit-transition-property: padding;
+	-webkit-transition-duration: 0.5s;
+    }
+}
+
+body main img:hover {
+    @media #{$large-up} {
+	padding:0px;
     }
 }
