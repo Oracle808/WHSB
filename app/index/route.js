@@ -1,6 +1,5 @@
 var loginPage = require("./login.web.js");
 var indexPage = require("./index.web.js");
-
 var mongoose = require("mongoose");
 var User = mongoose.model("User");
 var Subject = mongoose.model("Subject");
@@ -14,14 +13,14 @@ var index = function(req, res) {
 	    if(err) {
 		res.error(err);
 	    } else {
-		res.render(indexPage, {subjects: subjects});
+		res.dust(indexPage, {subjects: subjects});
 	    }
 	});
 }
 
 var login = {
     form: function(req, res) {
-	res.render(loginPage, {redirect: req.param("redirect") || "/"});
+	res.dust(loginPage, {redirect: req.param("redirect") || "/"});
     }, 
     attempt: function(req, res) {
 	User.findOne({username: req.body.username}, function(err, user) {
@@ -31,13 +30,13 @@ var login = {
 			res.error(err);
 		    } else if(identical) {
 			req.session.user = user;
-			res.redirect(req.param("redirect") || "/");
+			res.redirect(req.body.redirect || "/");
 		    } else {
-			res.render(loginPage, { message: "Username or password incorrect." });
+			res.dust(loginPage, { message: "Username or password incorrect." });
 		    }
 		});
 	    } else {
-		res.render(loginPage, { message: "Username or password incorrect." });
+		res.dust(loginPage, { message: "Username or password incorrect.", redirect: req.body.redirect || "/"});
 	    }
 	});
     }
