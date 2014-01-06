@@ -32,7 +32,8 @@ module.exports = function(grunt) {
 		options: {
 		    esnext: true,
 		    sass: {
-			includePaths: ["./sass", "./app"]
+			includePaths: ["./app"],
+			outputStyle: "expanded"
 		    }
 		},
 		files: [

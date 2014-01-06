@@ -1,5 +1,0 @@
-@import "foundation/components/top-bar";
-
-nav ul li a {
-    text-decoration:none;
-}
