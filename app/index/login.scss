@@ -11,7 +11,12 @@ form {
 }
 
 form h2 {
-    margin-bottom:0.2em;
+    margin-bottom:0.2rem;
+}
+
+form label#errorMessage {
+    @extend span.error;
+    padding-top:0.5rem;
 }
 
 form input {

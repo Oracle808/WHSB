@@ -1,6 +1,6 @@
 module.exports = function(grunt) {
 
-    var TEMPLATE_FILES = ["app/**/*.ejs"];
+    var TEMPLATE_FILES = ["app/**/*.ejs", "app/**/*.dust"];
     var TRANSPILED_FILES = ["app/**/*.common.js", "components/**/*.common.js", "scripts/**/*.common.js", "models/**/*.common.js"];
     var NO_TRANSPILED_FILES = ["!app/**/*.common.js", "!components/**/*.common.js", "!scripts/**/*.common.js", "!models/**/*.common.js"];
     var WEB_FILES = ["app/**/*.web.js", "scripts/**/*.web.js", "components/**/*.web.js"];
@@ -56,9 +56,8 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks("grunt-asciify");                 // ASCIIFY MINIFIED FILES
     grunt.loadNpmTasks("grunt-webify");                  // BUILD & MINIFY THEM FOR THE WEB
     grunt.loadNpmTasks("grunt-foreman");                 // TEST SERVER
-    grunt.loadNpmTasks("grunt-newer");                   // FOR SPEED
 
-    grunt.registerTask("default", ["asciify", "newer:webify"]);
+    grunt.registerTask("default", ["asciify", "webify"]);
     grunt.registerTask("serve", ["default", "foreman"]);
 
 };

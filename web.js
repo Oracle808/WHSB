@@ -42,6 +42,7 @@ if(Program.createUser) {
 
     var Atrium = require("./app/index/route.common");
     var Subject = require("./app/subject/route.common");
+    var VocabQuiz = require("./app/vocab_quiz/route.common");
     var reactive = require("./reactive");
 
     var auth = function(req, res, next) {
@@ -94,6 +95,8 @@ if(Program.createUser) {
     app.post("/:subject", auth, teacher, Subject.publish);
     app.get("/:subject/nova", auth, teacher, Subject.nova);
     app.get("/:subject/feed", auth, Subject.feed);
+    app.get("/:subject/vocab_quizzes", auth, VocabQuiz.index);
+    app.get("/:subject/vocab_quizzes/:quiz", auth, VocabQuiz.get);
     app.get("/:subject/:post", auth, Subject.get);
     app.del("/:subject/:post", auth, teacher, Subject.del);
 

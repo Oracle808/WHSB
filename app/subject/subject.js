@@ -1,59 +1,3 @@
-const CSS_ID = /^\#[a-z]+[0-9]*/;
-
-var getClosestParentWhichIs = function(el, criteria) {
-    while(!el.matches(criteria)) {
-	if(el.parentNode) {
-	    el = el.parentNode;
-	} else {
-	    return false;
-	}
-    }
-    return el;
-};
-
-window.onload = function() {
-    // Hide .jsless 
-    {
-	let toBeHidden = document.querySelectorAll(".jsless");
-	for(let i = 0; i < toBeHidden.length; i++) {
-	    toBeHidden[i].style.display = "none";
-	}
-    }
-    // Show .jsmore -- BUGGY // FIX LATER
-    {
-	let toBeShown = document.querySelectorAll(".jsmore");
-	for(let i = 0; i < toBeShown.length; i++) {
-	    toBeShown[i].classList.remove("jsmore");
-	}
-    }
-
-    // Long story cut short, allows custom els to override what an a[href=that_el] does
-    document.querySelector("html").addEventListener("click", function(e) {
-	var el = getClosestParentWhichIs(e.target, "a");
-	if(!el) {
-	    return;
-	}
-	var cite = el.getAttribute("cite");
-	if(cite) {
-	    var target = document.querySelector(cite);
-	    target.scrollIntoView(e);
-	    e.preventDefault();
-	    if(history.pushState) {
-		history.pushState({state: cite}, document.title, el.href);
-	    }
-	} else if(CSS_ID.test(el.href)) {
-	    if(target.matches("ul")) {
-		if(target.isVisible()) {
-		    target.hide();
-		} else {
-		    target.show();
-		}
-		e.preventDefault();
-	    }
-	}
-    });
-};
-
 class SlidableElement extends HTMLDivElement {
     enteredViewCallback() {
 	if(this.getAttribute("hidden") === "null") {
@@ -70,7 +14,7 @@ class SlidableElement extends HTMLDivElement {
 	}
     }
     attributeChangedCallback(key, oldVal, newVal) {
-	if(key === "hidden") { 
+	if(key === "hidden") {
 	    if(newVal === null) {
 		this.slideDown();
 	    } else {
@@ -83,8 +27,8 @@ class SlidableElement extends HTMLDivElement {
 	this.style.visibility = "visibile";
     }
     slideDown() {
-	const duration = this.dataset.duration || 500;
-	var simulacrum = this.cloneNode(true);
+	const duration = this.getAttribute("duration") || 500;
+	let simulacrum = this.cloneNode(true);
 	simulacrum.style.height = "auto";
 	simulacrum.style.display = "block";
 	simulacrum.style.visibility = "hidden";
@@ -92,18 +36,18 @@ class SlidableElement extends HTMLDivElement {
 	simulacrum.style.left = "-9999px";
 	this.parentNode.insertBefore(simulacrum, this);
 	const finalHeight = simulacrum.clientHeight;
-	const heightIncrement = finalHeight / (duration / FRAME_RATE);
 	const originalOverflow = this.style.overflow;
 	simulacrum.remove();
 	this.style.height = "0px";
 	this.style.overflow = "hidden";
 	this.show();
-	var y = 0;
-	var tween = () => {
-	    y += heightIncrement;
-	    this.style.height = y + "px";
-	    if (y < finalHeight) {
-		setTimeout(tween, FRAME_RATE);
+	const startTime = Date.now();
+
+	const tween = () => {
+	    const heightToBeSet = (((Date.now() - startTime) / duration) * finalHeight);
+	    if(heightToBeSet < finalHeight) {
+		this.style.height = heightToBeSet + "px";
+		window.requestAnimationFrame(tween);
 	    } else {
 		this.style.height = "auto";
 		this.style.overflow = originalOverflow;
@@ -120,16 +64,95 @@ document.register("x-slidable", {
 class RichTextEditor extends HTMLDivElement {
     createdCallback() {
 	this.contentEditable = true;
-	this.addEventListener("DOMSubtreeModified", () => {
-	    document.querySelector(this.getAttribute("for")).value = this.innerHTML;
-	});
+	this.addEventListener("DOMSubtreeModified", this.update.bind(this));
     }
     scrollIntoView(e) {
 	var el = e.target;
 	document.execCommand(el.getAttribute("action"));
     }
+    update() {
+	var textarea = this.getAttribute("for");
+	if(textarea) {
+	    document.querySelector(textarea).value = (this.innerHTML);
+	}
+    }
 }
 
 document.register("x-richtexteditor", {
     prototype: RichTextEditor.prototype
+});
+
+function Snowflake() {
+    this.x = 0;
+    this.y = 0;
+    this.vy = 0;
+    this.vx = 0;
+    this.r = 0;
+}
+
+Snowflake.prototype.reset = function(width, height) {
+    this.x = Math.random() * width;
+    this.y = Math.random() * -height;
+    this.vy = 1 + Math.random() * 3;
+    this.vx = 0.5 - Math.random();
+    this.r = 1 + Math.random() * 2;
+    this.o = 0.5 + Math.random() * 0.5;
+};
+
+class SnowfallElement extends HTMLDivElement {
+    createdCallback() {
+	this.count = parseInt(this.getAttribute("count")) || 300;
+	this.canvas = document.createElement('canvas');
+
+	this.canvas.style.zIndex = "-25";
+	this.canvas.style.width = "100%";
+	this.canvas.style.position = "absolute";
+	this.canvas.style.left = "0";
+	this.canvas.style.top = "0";
+
+	this.ctx = this.canvas.getContext("2d");
+
+	this.snowflakes = [];
+	for(var i = 0; i < this.count; i++) {
+	    var snowflake = new Snowflake();
+	    snowflake.reset(this.clientWidth, this.clientHeight);
+	    this.snowflakes.push(snowflake);
+	}
+
+	this.reset();
+	window.addEventListener("resize", this.reset.bind(this));
+	window.requestAnimationFrame(this.update.bind(this));
+
+	this.appendChild(this.canvas);
+    }
+    reset() {
+	this.canvas.width = this.clientWidth;
+	this.canvas.height = this.clientHeight;
+	this.ctx.fillStyle = "#FFF";
+    }
+    update() {
+	this.ctx.clearRect(0, 0, this.clientWidth, this.clientHeight);
+
+	for (var i = 0; i < this.count; i++) {
+	    var snowflake = this.snowflakes[i];
+	    snowflake.y += snowflake.vy;
+	    snowflake.x += snowflake.vx;
+
+	    this.ctx.globalAlpha = snowflake.o;
+	    this.ctx.beginPath();
+	    this.ctx.arc(snowflake.x, snowflake.y, snowflake.r, 0, Math.PI * 2, false);
+	    this.ctx.closePath();
+	    this.ctx.fill();
+
+	    if (snowflake.y > this.clientHeight || snowflake.x > this.clientWidth) {
+		snowflake.reset(this.clientWidth, this.clientHeight);
+	    }
+	}
+
+	window.requestAnimationFrame(this.update.bind(this));
+    }
+}
+
+document.register("x-snowfall", {
+    prototype: SnowfallElement.prototype
 });

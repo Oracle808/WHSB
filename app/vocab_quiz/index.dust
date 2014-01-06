@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en-gb">
+  <head>
+    <title>Vocabulary Quizzes</title>
+    <script src="../subject/polyfill.js"></script>
+    <style src="../subject/subject.scss"></style>
+  </head>
+  <body>
+    {>"app/header/head.dust"/}
+    <main>
+      {>"app/subject/nav.dust" active="vocab_quizzes"/}
+      <div>
+	<article>
+	  <h1>Vocabulary Quizzes</h1>
+	  <ol>
+	    {#subject.vocab_quizzes subject=subject._id}
+	      <li><a href="/{subject}/vocab_quizzes/{_id}">{title}</a></li>
+	      {/subject.vocab_quizzes}
+	  </ol>
+	</article>
+      </div>
+    </main>
+  </body>
+</html>

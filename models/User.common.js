@@ -1,4 +1,4 @@
-var mongoose = require("mongoose");
+ var mongoose = require("mongoose");
 var ObjectId = mongoose.Schema.Types.ObjectId;
 var Mixed = mongoose.Schema.Types.Mixed;
 var bcrypt = require("bcrypt");
@@ -39,10 +39,16 @@ var Subject = mongoose.Schema({
 	    type: String,
 	    required: true
 	},
-	body: {
-	    type: Mixed,
-	    required: true
-	}
+	body:[{
+	    question: {
+		type: String,
+		required: true
+	    },
+	    answer: {
+		type: String,
+		required: true
+	    }
+	}]
     }]
 });
 

@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
   <head>
     <title><%= subject.name %></title>
@@ -7,7 +8,7 @@
     <link href="/foundation-icons/foundation-icons.css" rel="stylesheet"/>
   </head>
    <body>
-    <% include ../index/header.ejs %>
+    <% include ../header/header.ejs %>
     <main class="row">
       <nav id="intraSubjectNavigation">
 	<h4><%= subject.subject_name %> <small><%= subject.teacher %></small></h4>
@@ -25,7 +26,7 @@
 	    <a href="/<%= subject._id %>/feed" title="Get RSS Feed"><i class="fi-rss"></i></a>
 	  </li>
 	  <% if(subject.vocab_quizzes.length != 0) { %>
-          <li><a>Vocab Quizzes</a></li>
+          <li><a href="/<%= subject._id %>/vocab_quizzes">Vocab Quizzes</a></li>
 	  <% } %>
 	  <li><a>Student Resources</a></li>
 	</ul>

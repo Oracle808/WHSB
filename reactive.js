@@ -1,5 +1,34 @@
 var uu = require("underscore");
 var us = require("underscore.string");
+var dust = require("dustjs-linkedin");
+var crypto = require('crypto')
+var fs = require("fs");
+
+dust.helper = require("dustjs-helpers");
+
+dust.helpers.first = function(chunk, ctx, bodies, params) {
+    if(ctx.get("$idx") === 0) {
+	if(bodies.block) {
+	    return chunk.render(bodies.block, ctx);
+	} else {
+	    return chunk.write("true");
+	}
+    } else {
+	if(bodies["else"]) {
+	    return chunk.render(bodies["else"], ctx);
+	} else {
+	    return chunk.write("false");
+	}
+    }
+};
+
+dust.filters.e = unescape;
+
+dust.onLoad = function(name, cb) {
+    fs.readFile(name, function(err, out) {
+	cb(err, out.toString());
+    });
+};
 
 module.exports.intercept = function(opts) {
     return function(req, res, next) {
@@ -13,12 +42,27 @@ module.exports.intercept = function(opts) {
 	    } else if(uu.isObject(func)) {
 		if(req.accepts("json")) {
 		    res.type("json");
-		    res.end(JSON.stringify(json));
+		    res.end(JSON.stringify(func));
 		} else {
 		    res.type("txt");
-		    res.end(JSON.stringify(json));
+		    res.end(JSON.stringify(func));
 		}
 	    }
+	};
+	res.dust = function(func, vars) {
+	    var shasum = crypto.createHash('sha1');
+	    var template = func();
+	    shasum.update(template);
+	    var id = shasum.digest("hex");
+	    var compiled = dust.compile(func(), id);
+	    dust.loadSource(compiled);
+	    dust.render(id, uu.extend(req.query, req.session, res.locals, vars || {}), function(err, out) {
+		if(err) {
+		    res.error(err);
+		} else {
+		    res.end(out);
+		}
+	    });
 	};
 	res.json = function(json) {
 	    if(!res.headersSent) {
@@ -26,6 +70,10 @@ module.exports.intercept = function(opts) {
 	    }
 
 	    res.end(JSON.stringify(json));
+	};
+	res.rss = function(xml) {
+	    res.type("application/rss+xml");
+	    res.end(xml);
 	};
 	res.error = function(error) {
 	    if(!res.headersSent) {
@@ -44,7 +92,7 @@ module.exports.intercept = function(opts) {
 		} else {
 		    res.json(error);
 		}
-	    } 
+	    }
 	};
 	res.forbid = function(error) {
 	    res.writeHead(403);

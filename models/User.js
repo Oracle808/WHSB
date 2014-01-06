@@ -39,10 +39,16 @@ var Subject = mongoose.Schema({
 	    type: String,
 	    required: true
 	},
-	body: {
-	    type: Mixed,
-	    required: true
-	}
+	body:[{
+	    question: {
+		type: String,
+		required: true
+	    },
+	    answer: [{
+		type: String,
+		required: true
+	    }]
+	}]
     }]
 });
 
