@@ -22,8 +22,6 @@ dust.helpers.first = function(chunk, ctx, bodies, params) {
     }
 };
 
-dust.filters.e = unescape;
-
 dust.onLoad = function(name, cb) {
     fs.readFile(name, function(err, out) {
 	cb(err, out.toString());

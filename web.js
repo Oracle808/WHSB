@@ -41,8 +41,8 @@ if(Program.createUser) {
     var app = express();
 
     var Atrium = require("./app/index/route.common");
-    var Subject = require("./app/subject/route.common");
-    var VocabQuiz = require("./app/vocab_quiz/route.common");
+    var Subjects = require("./app/subjects/route.common");
+    var VocabQuizzes = require("./app/vocab_quizzes/route.common");
     var reactive = require("./reactive");
 
     var auth = function(req, res, next) {
@@ -91,14 +91,13 @@ if(Program.createUser) {
     app.get("/login", Atrium.login.form);
     app.post("/login", Atrium.login.attempt);
     app.get("/logout", auth, logout);
-    app.get("/:subject", auth, Subject.index);
-    app.post("/:subject", auth, teacher, Subject.publish);
-    app.get("/:subject/nova", auth, teacher, Subject.nova);
-    app.get("/:subject/feed", auth, Subject.feed);
-    app.get("/:subject/vocab_quizzes", auth, VocabQuiz.index);
-    app.get("/:subject/vocab_quizzes/:quiz", auth, VocabQuiz.get);
-    app.get("/:subject/:post", auth, Subject.get);
-    app.del("/:subject/:post", auth, teacher, Subject.del);
+    app.get("/subjects/:subject", auth, Subjects.index);
+    app.post("/subjects/:subject", auth, teacher, Subjects.publish);
+    app.get("/subjects/:subject/feed", auth, Subjects.feed);
+    app.get("/subjects/:subject/posts/:post", auth, Subjects.get);
+    app.del("/subjects/:subject/posts/:post", auth, teacher, Subjects.del);
+    app.get("/subjects/:subject/vocab_quizzes", auth, VocabQuizzes.index);
+    app.get("/subjects/:subject/vocab_quizzes/:quiz", auth, VocabQuizzes.get);
 
     http.createServer(app).listen(app.get("port"), function() {
 	console.log("Express server listening at " + app.get("port"));
