@@ -44,10 +44,10 @@ var Subject = mongoose.Schema({
 		type: String,
 		required: true
 	    },
-	    answer: {
+	    answer: [{
 		type: String,
 		required: true
-	    }
+	    }]
 	}]
     }]
 });

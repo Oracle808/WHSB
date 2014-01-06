@@ -1,4 +1,4 @@
-var User = require("./User.common.js").User;
+ var User = require("./User.common.js").User;
 var Subject = require("./User.common.js").Subject;
 
 var mongoose = require("mongoose");
