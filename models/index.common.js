@@ -2,7 +2,7 @@
 var Subject = require("./User.common.js").Subject;
 
 var mongoose = require("mongoose");
-mongoose.connect("mongodb://whsb:vertex@ds053718.mongolab.com:53718/pandora");
+mongoose.connect(process.env["DATABASE_CONNECTION"]);
 
 var Database = new Object;
 Database.user = mongoose.model("User", User);
