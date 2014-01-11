@@ -14,7 +14,7 @@
       <input type="hidden" name="redirect" value="{redirect}"/>
       <input type="text" name="username" placeholder="Username" aria-required="true" required/><br/>
       <input type="password" name="password" placeholder="Password" aria-required="true" required/><br/>
-      <button><i class="fi-lock"></i> Login</button>
+      <button type="submit"><i class="fi-lock"></i> Login</button>
     </form>
     <footer>
       <!-- Because we're all in this together -->
