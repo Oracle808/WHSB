@@ -9,6 +9,7 @@
     <script src="../../components/x-richtexteditor.js"></script>
     <script src="../../components/x-snowfall.js"></script>
     <link href="/foundation-icons/foundation-icons.css" rel="stylesheet"/>
+    {>"app/header/global.dust"/}
   </head>
   <body>
     <x-snowfall count="800">

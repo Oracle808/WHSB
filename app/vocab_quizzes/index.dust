@@ -5,6 +5,7 @@
     <script src="../subjects/polyfill.js"></script>
     <style src="../subjects/subject.scss"></style>
     <style src="../header/head.scss"></style>
+    {>"app/header/global.dust"/}
   </head>
   <body>
     {>"app/header/head.dust"/}

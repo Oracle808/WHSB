@@ -3,6 +3,7 @@
     <title>Login</title>
     <link href="./foundation-icons/foundation-icons.css" rel="stylesheet"/>
     <style src="./login.scss"></style>
+    {>"app/header/global.dust"/}
   </head>
   <body>
     <form action="/login" method="post">
