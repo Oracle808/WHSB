@@ -9,10 +9,7 @@
     "Hashan Punchihewa <hashan.punchihewa@gmail.com>"
   ],
   "dependencies": {
-    "mongoose": "*",
-    "cookie": "*",
-    "cookie-signature": "*",
-    "buffer-crc32": "*",
+    "mongoose": "3.8.4",
     "formidable": "*",
     "mime": "*",
     "commander": "*",
