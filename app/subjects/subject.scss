@@ -2,7 +2,7 @@
 
 $foreground: #fafafa;
 
-main, x-slidable, x-richtexteditor, x-snowfall {
+main, x-slidable, x-richtexteditor, x-snowfall, x-deletable, x-bubble {
     display:block;
 }
 
@@ -54,15 +54,27 @@ nav#intraSubjectNavigation {
 	    width:70%;
 	    display:inline-block;
 	}
-	ul li a + a {
+	ul li a + form {
+	    display:inline-block;
+	}
+	ul li a + a, ul li a + button, ul li a + form button {
+	    @extend  a;
 	    margin-left:5px;
 	    float:right;
+	    background-color:$foreground !important;
+	    padding:0 !important;
+	    margin-top:0 !important;
+	    margin-right:0 !important;
+	    margin-bottom:0 !important;
+	}
+	ul li.header {
+	    text-transform:uppercase;
 	}
 	#numberOfDrafts {
 	    @include label();
 	    vertical-align:bottom;
 	}
-	#newPost {
+	#newLink {
 	    @include button($full-width:true);
 	}
 	input[type="search"]:focus {
@@ -195,3 +207,7 @@ article .postExcerpt {
     word-wrap:break-word;
 }
 
+#newLinkForm {
+    background-color:white;
+    padding:20px;
+}

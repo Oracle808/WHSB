@@ -15,7 +15,7 @@ if(Program.createUser) {
     Inquirer.prompt([
 	{name: "username", message: "Username: "},
 	{name: "password", message: "Password: ", type: "password"},
-	{name: "role", message: "Role: ", type: "list", choices: ["pupil", "teacher", "admin"]}
+	{name: "role", message: "Role: ", type: "list", choices: ["student", "teacher", "admin"]}
     ], function(data) {
 	Database.user.create({
 	    username: data["username"],
@@ -33,6 +33,12 @@ if(Program.createUser) {
 	    subject_name: data["subjectName"],
 	    blog: [],
 	    vocab_quizzes: []
+	}, function(err) {
+	    if(err) {
+		throw err;
+	    } else {
+		console.log("Done.");
+	    }
 	});
     });
 } else {
@@ -98,6 +104,8 @@ if(Program.createUser) {
     app.del("/subjects/:subject/posts/:post", auth, teacher, Subjects.del);
     app.get("/subjects/:subject/vocab_quizzes", auth, VocabQuizzes.index);
     app.get("/subjects/:subject/vocab_quizzes/:quiz", auth, VocabQuizzes.get);
+    app.del("/subjects/:subject/links/:link", auth, Subjects.delLink);
+    app.post("/subjects/:subject/links", auth, teacher, Subjects.postLink);
 
     http.createServer(app).listen(app.get("port"), function() {
 	console.log("Express server listening at " + app.get("port"));

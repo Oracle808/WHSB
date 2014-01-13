@@ -1,6 +1,6 @@
 class SlidableElement extends HTMLDivElement {
     enteredViewCallback() {
-	if(this.getAttribute("hidden") === "null") {
+	if(this.hasAttribute("hidden")) {
 	    this.hide();
 	} else {
 	    this.show();
@@ -29,9 +29,7 @@ class SlidableElement extends HTMLDivElement {
 	this.style.display = "block";
 	this.style.visibility = "visibile";
     }
-    slideDown() {
-
-	const duration = this.getAttribute("duration") || 500;
+    mockHeight() {
 	let simulacrum = this.cloneNode(true);
 	simulacrum.style.height = "auto";
 	simulacrum.style.display = "block";
@@ -39,11 +37,17 @@ class SlidableElement extends HTMLDivElement {
 	simulacrum.style.position = "absolute";
 	simulacrum.style.left = "-9999px";
 	this.parentNode.insertBefore(simulacrum, this);
+	const x = simulacrum.clientHeight;
+	simulacrum.remove();
+	return x;
+    }
+    slideDown() {
+
+	const duration = this.getAttribute("duration") || 500;
 	const initialHeight = this.isHidden() ? 0 : this.clientHeight;
-	const finalHeight = simulacrum.clientHeight;
+	const finalHeight = this.mockHeight();
 	const additionalHeight = finalHeight - initialHeight;
 	const originalOverflow = this.style.overflow;
-	simulacrum.remove();
 	this.style.height = initialHeight + "px";
 	this.style.overflow = "hidden";
 	this.show();

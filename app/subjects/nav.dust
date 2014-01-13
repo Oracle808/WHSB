@@ -1,3 +1,10 @@
+<x-bubble for="#newLink" id="newLinkForm" hidden>
+  <form action="/subjects/{subject._id}/links" method="post">
+    <input name="title" placeholder="Title" type="text"/>
+    <input name="url" placeholder="Url" type="url"/>
+    <button type="submit">Submit</button>
+  </form>
+</x-bubble>
 <nav id="intraSubjectNavigation">
   <h4>{subject.subject_name} <small>{subject.teacher}</small></h4>
   <form>
@@ -20,5 +27,19 @@
     {/subject.vocab_quizzes}
     
     <li><a>Student Resources</a></li>
+
+    {?subject.links}
+      <li class="header">Links</li>
+      {#subject.links}
+	<li>
+	  <a href="{url}">{title}</a>
+	  <form action="/subjects/{subject._id}/links/{_id}" method="post">
+	    <input type="hidden" name="_method" value="delete"/>
+	    <button type="submit"><i class="fi-x"></i></button>
+	  </form>
+	</li>
+      {/subject.links}
+    {/subject.links}
+    <li><a id="newLink" cite="#newLinkForm">New Link</a></li>
   </ul>	
 </nav>

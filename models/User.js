@@ -17,6 +17,14 @@ var Subject = mongoose.Schema({
 	type: String,
 	required:true
     },
+    links : [{
+	title: {
+	    type: String
+	}, 
+	url: {
+	    type: String
+	}
+    }],
     blog: [{
 	title: {
 	    type: String,

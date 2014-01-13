@@ -8,6 +8,7 @@
     <script src="./quiz.js"></script>
     <style src="../header/head.scss"></style>
     <link href="/foundation-icons/foundation-icons.css" rel="stylesheet"/>
+    {>"app/header/global.dust"/}
   </head>
   <body>
     {>"app/header/head.dust"/}
@@ -27,11 +28,7 @@
 	      <x-quiz id="quiz_{$idx}"class="postExcerpt">
 		{#body}
 		  <label>{question}</label>
-		  {@first}
-		    <input type="text" required autofocus pattern="{#answer}{.}{@sep}|{/sep}{/answer}"/>
-		    {:else}
-		    <input type="text" required pattern="{#answer}{.}{@sep}|{/sep}{/answer}"/>
-		  {/first}
+		  <input type="text" required {@first}autofocus{/first} pattern="{#answer}{.}{@sep}|{/sep}{/answer}"/>
 		{/body}
 	      </x-quiz>
 	    </x-clearable>

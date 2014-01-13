@@ -12,7 +12,7 @@ var index = function(req, res) {
     if(req.session.user.role === "student") {
 	blogSelect = {$elemMatch: {draft:false}};
     }
-    Subject.findById(req.param("subject"), {name: true, subject_name: true, vocab_quizzes: true, teacher: true, blog: blogSelect}, function(err, doc) {
+    Subject.findById(req.param("subject"), {name: true, subject_name: true, vocab_quizzes: true, teacher: true, blog: blogSelect, links:true}, function(err, doc) {
 	if(err) {
 	    res.error(err);
 	} else {
@@ -48,8 +48,30 @@ var publish = function(req, res) {
     });
 };
 
+var postLink = function(req, res) {
+    var update = {
+	$push: {
+	    links: {
+		title: req.body.title,
+		url: req.body.url
+	    }
+	}
+    };
+    Subject.findByIdAndUpdate(req.param("subject"), update, function(err, doc) {
+	if(err) {
+	    res.error(err);
+	} else {
+	    var blog = doc.blog.reverse();
+	    uu.each(blog, function(article) {
+		article.body = us.prune(article.body, 350);
+	    });
+	    res.dust(blogTemplate, {subject:doc, blog: blog});
+	}
+    });
+};
+
 var get = function(req, res) {
-    Subject.findById(req.param("subject"), {name: true, vocab_quizzes: true, blog:{$elemMatch:{_id: req.param("post")}}}, function(err, doc) {
+    Subject.findById(req.param("subject"), {name: true, vocab_quizzes: true, teacher: true, links: true, blog:{$elemMatch:{_id: req.param("post")}}}, function(err, doc) {
 	if(err) {
 	    res.error(err);
 	} else {
@@ -94,4 +116,14 @@ var del = function(req, res) {
     });
 };
 
-export { index, publish, get, feed, del };
+var delLink = function(req, res) {
+    Subject.findByIdAndUpdate(req.param("subject"), {$pull: {links: {_id: req.param("link")}}}, function(err, doc) {
+	if(err) {
+	    res.error(err);
+	} else {
+	    res.redirect("/subjects/" + req.param("subject"));
+	}
+    });
+};
+
+export { index, publish, get, postLink, feed, del, delLink };
