@@ -12,12 +12,30 @@ var nova = function(req, res) {
 	if(err) {
 	    res.error(err);
 	} else {
-	     list = uu.filter(list, function(file) {
-		 return us.endsWith(file, ".png");
-	     });
-	     User.find({role:/(teacher|admin)/}, function(err, ls) {
-		 res.dust(novaTemplate, {subjects: list, teachers: ls});
-	     });
+	    list = uu.filter(list, function(file) {
+		return us.endsWith(file, ".png");
+	    });
+	    list = uu.map(list, function(file) {
+		return file.replace(/.png$/, "");
+	    });
+	    User.find({role:"teacher"}, function(err, ls) {
+		res.dust(novaTemplate, {subjects: list, teachers: ls});
+	    });
+	}
+    });
+};
+
+var post = function(req, res) {
+    var subject = {
+	subject_name: req.body.subject_name,
+	name: req.body.name, 
+	teacher: req.body.teacher
+    };
+    Subject.create(subject, function(err) {
+	if(err) {
+	    res.error(err);
+	} else {
+	    nova(req, res);
 	}
     });
 };
@@ -54,4 +72,4 @@ var delLink = function(req, res) {
     });
 };
 
-export { nova, postLink, delLink };
+export { nova, post, postLink, delLink };

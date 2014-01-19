@@ -1,49 +1,41 @@
  // A Beautiful Example of the Craft of a Controller
-var blogTemplate = require("./blog.web.js");
 var mongoose = require("mongoose");
 var Subject = mongoose.model("Subject");
 var User = mongoose.model("User");
-var RSS = require("rss");
 var uu = require("underscore");
 var us = require("underscore.string");
+var fs = require("fs");
+var novaTemplate = require("./nova.web.js");
 
-var index = function(req, res) {
-    var blogSelect = true;
-    if(req.session.user.role === "student") {
-	blogSelect = {$elemMatch: {draft:false}};
-    }
-    Subject.findById(req.param("subject"), {name: true, subject_name: true, vocab_quizzes: true, teacher: true, blog: blogSelect, links:true}, function(err, doc) {
+var nova = function(req, res) {
+    fs.readdir("public/icons", function(err, list) {
 	if(err) {
 	    res.error(err);
 	} else {
-	    var blog = doc.blog.reverse();
-	    uu.each(blog, function(article) {
-		article.body = us.prune(article.body, 350);
+	    list = uu.filter(list, function(file) {
+		return us.endsWith(file, ".png");
 	    });
-	    res.dust(blogTemplate, {subject:doc, blog: blog});
+	    list = uu.map(list, function(file) {
+		return file.replace(/.png$/, "");
+	    });
+	    User.find({role:"teacher"}, function(err, ls) {
+		res.dust(novaTemplate, {subjects: list, teachers: ls});
+	    });
 	}
     });
 };
 
-var publish = function(req, res) {
-    var update = {
-	$push: {
-	    blog: {
-		title: req.body.title,
-		body: decodeURIComponent(req.body.body),
-		draft: req.query.drafts === "true"
-	    }
-	}
+var post = function(req, res) {
+    var subject = {
+	subject_name: req.body.subject_name,
+	name: req.body.name, 
+	teacher: req.body.teacher
     };
-    Subject.findByIdAndUpdate(req.param("subject"), update, function(err, doc) {
+    Subject.create(subject, function(err) {
 	if(err) {
 	    res.error(err);
 	} else {
-	    var blog = doc.blog.reverse();
-	    uu.each(blog, function(article) {
-		article.body = us.prune(article.body, 350);
-	    });
-	    res.dust(blogTemplate, {subject:doc, blog: blog});
+	    nova(req, res);
 	}
     });
 };
@@ -70,52 +62,6 @@ var postLink = function(req, res) {
     });
 };
 
-var get = function(req, res) {
-    Subject.findById(req.param("subject"), {name: true, vocab_quizzes: true, teacher: true, links: true, blog:{$elemMatch:{_id: req.param("post")}}}, function(err, doc) {
-	if(err) {
-	    res.error(err);
-	} else {
-	    var blog = doc.blog.reverse();
-	    res.dust(blogTemplate, {subject:doc, blog: blog});
-	}
-    });
-};
-
-var feed = function(req, res) {
-    Subject.findById(req.param("subject"), {name: true, subject_name: true, blog: true, teacher: true}, function(err, doc) {
-	var news = new RSS({
-	    title: doc.name,
-	    generator: "WHSB Feed Generator",
-	    feed_url: req.host + req.path,
-	    site: req.host,
-	    author: doc.teacher,
-	    webMaster: "Hashan Punchihewa",
-	    copyright: "Copyright Westcliff High School for Boys",
-	    language: "English",
-	    categories: ["School"]
-	});
-	doc.blog.forEach(function(post) {
-	    news.item({
-		title: post.title,
-		description: us.prune(post.body, 350),
-		guid: post._id,
-		date: post.date
-	    });
-	});
-	res.rss(news.xml());
-    });
-};
-
-var del = function(req, res) {
-    Subject.findByIdAndUpdate(req.param("subject"), {$pull: {blog: {_id: req.param("post")}}}, function(err, doc) {
-	if(err) {
-	    res.error(err);
-	} else {
-	    res.redirect("/subjects/" + req.param("subject"));
-	}
-    });
-};
-
 var delLink = function(req, res) {
     Subject.findByIdAndUpdate(req.param("subject"), {$pull: {links: {_id: req.param("link")}}}, function(err, doc) {
 	if(err) {
@@ -126,10 +72,7 @@ var delLink = function(req, res) {
     });
 };
 
-exports.index = index;
-exports.publish = publish;
-exports.get = get;
+exports.nova = nova;
+exports.post = post;
 exports.postLink = postLink;
-exports.feed = feed;
-exports.del = del;
 exports.delLink = delLink;

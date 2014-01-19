@@ -1,4 +1,4 @@
-// A Beautiful Example of the Craft of a Controller
+ // A Beautiful Example of the Craft of a Controller
 var blogTemplate = require("./blog.web.js");
 var mongoose = require("mongoose");
 var Subject = mongoose.model("Subject");
@@ -105,4 +105,8 @@ var del = function(req, res) {
 };
 
 
-export { index, publish, get, feed, del };
+exports.index = index;
+exports.publish = publish;
+exports.get = get;
+exports.feed = feed;
+exports.del = del;

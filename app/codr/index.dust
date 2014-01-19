@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Codr</title>
+    <style src="app/header/head.scss"></style>
+    <style src="app/subjects/subject.scss"></style>
+    <script src="app/subjects/polyfill.js"></script>
+    <style src="./index.scss"></style>
+    <script src="components/x-coderunner.js"></script>
+  </head>
+  <body>
+    {>"app/header/head.dust"/}
+    <main>
+      <article>
+	<h2>Codr</h2>
+	<button cite="#codeBox">Run Code</button>
+	<x-coderunner id="codeBox" lang="javascript" for="#console"></x-coderunner>
+	<output id="console"></output>
+      </article>
+    </main>
+  </body>
+</html>

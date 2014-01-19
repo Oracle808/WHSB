@@ -5,8 +5,8 @@ var vocabQuizPage = require("./quiz.web.js");
 var uu = require("underscore");
 
 var index = function(req, res) {
-    Subject.findById(req.param("subject"), function(err, doc) {
-	if(err) { 
+    Subject.findById(req.param("subject")).populate("teacher").exec(function(err, doc) {
+	if(err) {
 	    res.error(err);
 	} else {
 	    res.dust(vocabQuizList, {subject: doc});
@@ -15,7 +15,7 @@ var index = function(req, res) {
 };
 
 var get = function(req, res) {
-    Subject.findById(req.param("subject"), {name: true, subject_name: true, teacher: true, vocab_quizzes: {$elemMatch: {_id: req.param("quiz")}}}, function(err, doc) {
+    Subject.findById(req.param("subject")).select({name: true, subject_name: true, teacher: true, vocab_quizzes: {$elemMatch: {_id: req.param("quiz")}}}).populate("teacher").exec(function(err, doc) {
 	if(err) {
 	    res.error(err);
 	} else {

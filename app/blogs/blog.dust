@@ -16,9 +16,9 @@
   <body>
     <x-snowfall count="800">
       {>"app/header/head.dust"/}
-      <div>
+      <main>
 	{>"app/subjects/nav.dust" active="blog"/}
-	<main>
+	<div>
 	  {@ne key=user.role value="student"}
 	    <x-slidable id="newPostForm" {^nova}class="jsmore" hidden{/nova}>
 	      <form action="/subjects/{subject._id}" method="post">
@@ -85,8 +85,8 @@
 	      </article>
 	    </x-deletable>
 	  {/blog}
-	</main>
-      </div>
+	</div>
+      </main>
     </x-snowfall>
   </body>
 </html>

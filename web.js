@@ -51,6 +51,7 @@ if(Program.createUser) {
     var Subjects = require("./app/subjects/route.common");
     var VocabQuizzes = require("./app/vocab_quizzes/route.common");
     var Apps = require("./app/apps/route.common");
+    var Codr = require("./app/codr/route.common");
 
     var reactive = require("./reactive");
 
@@ -106,8 +107,8 @@ if(Program.createUser) {
     app.post("/login", Atrium.login.attempt);
     app.get("/logout", auth, logout);
     // SUBJECTS
-    app.get("/subjects/nova", auth, Subjects.nova);
-    app.post("/subjects/nova", auth, Subjects.post);
+    app.get("/subjects/nova", auth, admin, Subjects.nova);
+    app.post("/subjects/nova", auth, admin, Subjects.post);
     // SUBJECT BLOGS
     app.get("/subjects/:subject", auth, Blogs.index);
     app.post("/subjects/:subject", auth, teacher, Blogs.publish);
@@ -122,6 +123,7 @@ if(Program.createUser) {
     app.del("/subjects/:subject/links/:link", auth, Subjects.delLink);
     // APPS
     app.get("/apps", auth, Apps.index);
+    app.get("/apps/codr", auth, Codr.index);
 
     http.createServer(app).listen(app.get("port"), function() {
 	console.log("Express server listening at " + app.get("port"));

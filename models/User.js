@@ -14,8 +14,9 @@ var Subject = mongoose.Schema({
 	required: true
     },
     teacher: {
-	type: String,
-	required:true
+	type: ObjectId,
+	required:true,
+	ref: "User"
     },
     links : [{
 	title: {
@@ -72,7 +73,7 @@ var User = mongoose.Schema({
     role: {
 	type: String,
 	required: true,
-	default: "pupil"
+	default: "student"
     },
     subjects: [{
 	type: ObjectId,
