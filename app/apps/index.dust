@@ -2,21 +2,19 @@
 <html lang="en-GB">
   <head>
     <title>WHSB</title>
-    <style src="./index.scss"></style>
-    <style src="../header/head.scss"></style>
+    <style src="app/index/index.scss"></style>
+    <style src="app/header/head.scss"></style>
     {>"app/header/global.dust"/}
   </head>
   <body>
     {>"app/header/head.dust"/}
     <main>
       <ul>
-	{#subjects}
-	  <li>
-	    <a href="/subjects/{_id}">
-	      <img src="/icons/{subject_name}.png"/>
-	    </a>
-	  </li>
-	{/subjects}
+	<li>
+	  <a href="/apps/codr">
+	    <img src="/images/Codr.png"/>
+	  </a>
+	</li>
       </ul>
     </main>
   </body>
