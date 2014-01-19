@@ -6,7 +6,7 @@
   </form>
 </x-bubble>
 <nav id="intraSubjectNavigation">
-  <h4>{subject.subject_name} <small>{subject.teacher}</small></h4>
+  <h4>{subject.subject_name} <small>{subject.teacher.username}</small></h4>
   <form>
     <input type="search" placeholder="Search"></input>
   </form>

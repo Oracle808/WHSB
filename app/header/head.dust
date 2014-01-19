@@ -16,14 +16,16 @@
         <ul class="dropdown" id="userOptions">
 	  <li><a href="/logout">Logout</a></li>
           <li><a href="/users">Manages Users</a></li>
-	  <li><a href="/users/new">Create a New User</a></li>
+	  <li><a href="/users/nova">Create a New User</a></li>
+	  <li><a href="/subjects/nova">Create a New Subject</a></li>
         </ul>
       </li>
     </ul>
 
     <!-- Left Nav Section -->
     <ul class="left">
-      <li><a href="/">Subjects</a></li>
+      <li><a href="/">Classes</a></li>
+      <li><a href="/clubs">Clubs</a></li>
       <li><a href="/apps">Apps</a></li>
     </ul>
   </section>
