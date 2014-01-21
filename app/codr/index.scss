@@ -4,3 +4,14 @@ x-coderunner {
     min-height:200px;
     font-family: "Consolas", "monospace";
 }
+
+h2, button {
+    display:inline-block;
+}
+
+button {
+    @include button(rem-calc(7));
+    font-size:rem-calc(14);
+    vertical-align:super;
+    margin-left:5px;
+}

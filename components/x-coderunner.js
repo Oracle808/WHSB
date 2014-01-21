@@ -94,6 +94,10 @@ class CodeRunnerElement extends HTMLDivElement {
 	}
     }
     scrollIntoView() {
+	var output = document.querySelector(this.getAttribute("for"));
+	while(output.hasChildNodes()) {
+	    output.removeChild(output.lastChild);
+	}
 	eval("(function() { var console = {}; console.log = function(s) { document.querySelector(\"" + this.getAttribute("for") + "\").innerHTML += s.toString() + \"<br>\"; };" + this.getSource() + "})();");
     }
     getSource() {
