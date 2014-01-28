@@ -1,17 +1,41 @@
-x-coderunner {
+ x-coderunner {
     @extend textarea;
     display:block;
     min-height:200px;
     font-family: "Consolas", "monospace";
 }
 
-h2, button {
-    display:inline-block;
-}
-
 button {
     @include button(rem-calc(7));
     font-size:rem-calc(14);
-    vertical-align:super;
     margin-left:5px;
+}
+
+$red: #D84A33;
+$purple:#852b99;
+$green: #35aa47;
+
+button[cite="#codeBox"] {
+    background-color:$green;
+}
+
+button[cite="#openFileDialog"] {
+    background-color:$purple;
+}
+
+button[cite="#saveFileDialog"] {
+    background-color:$red;
+}
+
+article .heading {
+    .buttons, .title {
+	@include grid-column(4);
+    }
+    .title {
+	text-align:center;
+    }
+}
+
+article .editor {
+    @include grid-column(12);
 }

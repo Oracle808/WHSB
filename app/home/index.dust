@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+  <head>
+    <title>WHSB</title>
+    <style src="./index.scss"></style>
+    <style src="../header/head.scss"></style>
+    {>"app/header/global.dust"/}
+  </head>
+  <body>
+    {>"app/header/head.dust"/}
+    <main>
+      <ul>
+	{#subjects}
+	  <li>
+	    <a href="/subjects/{_id}">
+	      <img src="/icons/{subject_name}.png"/>
+	    </a>
+	  </li>
+	{/subjects}
+      </ul>
+    </main>
+  </body>
+</html>

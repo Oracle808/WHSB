@@ -8,18 +8,35 @@
     <style src="./index.scss"></style>
     <script src="components/x-coderunner.js"></script>
     <script src="components/x-opendialog.js"></script>
+    <script src="components/x-savedialog.js"></script>
     <link href="/foundation-icons/foundation-icons.css" rel="stylesheet"/>
   </head>
   <body>
     {>"app/header/head.dust"/}
     <main>
       <article>
-	<h2>Codr</h2>
-	<button cite="#codeBox"><i class="fi-play"></i></button>
-	<button cite="#openFileDialog"><i class="fi-upload"></i></button>
-	<x-opendialog id="openFileDialog" for="#codeBox">
-	  <x-coderunner id="codeBox" lang="javascript" for="#console"></x-coderunner>
-	</x-opendialog>
+	<header class="heading">
+	  <section class="buttons">
+	    <button cite="#codeBox"><i class="fi-play"></i></button>
+	    <button cite="#openFileDialog"><i class="fi-upload"></i></button>
+	    <button cite="#saveFileDialog"><i class="fi-archive"></i></button>
+	  </section>
+	  <section class="title">
+	    <h2>Codr</h2>
+	  </section>
+	  <section class="buttons">
+	    <button cite="#openDocs">Documentation</button>
+	  </section>
+	</header>
+
+	<section class="editor">
+	  <x-savedialog id="saveFileDialog" for="#codeBox">
+	    <x-opendialog id="openFileDialog" for="#codeBox">
+	      <x-coderunner id="codeBox" lang="javascript" for="#console"></x-coderunner>
+	    </x-opendialog>
+	  </x-savedialog>
+	</section>
+
 	<output id="console"></output>
       </article>
     </main>

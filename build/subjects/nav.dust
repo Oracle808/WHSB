@@ -1,0 +1,45 @@
+<x-bubble for="#newLink" id="newLinkForm" hidden>
+  <form action="/subjects/{subject._id}/links" method="post">
+    <input name="title" placeholder="Title" type="text"/>
+    <input name="url" placeholder="Url" type="url"/>
+    <button type="submit">Submit</button>
+  </form>
+</x-bubble>
+<nav id="intraSubjectNavigation">
+  <h4>{subject.subject_name} <small>{subject.teacher.username}</small></h4>
+  <form>
+    <input type="search" placeholder="Search"></input>
+  </form>
+  <ul>
+    
+    <li {@eq key=active value="blog"}class="active"{/eq}>
+      <a href="/subjects/{subject._id}">
+	Blog
+	{@ne key=user.role value="student"}
+	  <a href="/subjects/{subject._id}?nova=true" cite="#newPostForm" title="New Blog Post"><i class="fi-plus"></i></a>
+	{/ne}
+	<a href="/subjects/{subject._id}/feed" title="Get RSS Feed"><i class="fi-rss"></i></a>      
+      </a>      
+    </li>
+    
+    {?subject.vocab_quizzes}
+      <li {@eq key=active value="vocab_quizzes"}class="active"{/eq}><a href="/subjects/{subject._id}/vocab_quizzes">Vocab Quizzes</a></li>
+    {/subject.vocab_quizzes}
+    
+    <li><a>Student Resources</a></li>
+
+    {?subject.links}
+      <li class="header">Links</li>
+      {#subject.links}
+	<li>
+	  <a href="{url}">{title}</a>
+	  <form action="/subjects/{subject._id}/links/{_id}" method="post">
+	    <input type="hidden" name="_method" value="delete"/>
+	    <button type="submit"><i class="fi-x"></i></button>
+	  </form>
+	</li>
+      {/subject.links}
+    {/subject.links}
+    <li><a id="newLink" cite="#newLinkForm">New Link</a></li>
+  </ul>	
+</nav>

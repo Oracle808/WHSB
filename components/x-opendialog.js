@@ -9,6 +9,7 @@ class OpenDialogElement extends HTMLDivElement {
 	    var reader = new FileReader();
 	    reader.addEventListener("load", (e) => {
 		this.proxy.innerText = e.target.result;
+		this.proxy.setAttribute("name", fileElem.files[0].name);
 		fileElem.remove();
 	    });
 	    reader.readAsText(fileElem.files[0]);

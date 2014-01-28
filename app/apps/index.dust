@@ -2,7 +2,7 @@
 <html lang="en-GB">
   <head>
     <title>WHSB</title>
-    <style src="app/index/index.scss"></style>
+    <style src="app/home/index.scss"></style>
     <style src="app/header/head.scss"></style>
     {>"app/header/global.dust"/}
   </head>

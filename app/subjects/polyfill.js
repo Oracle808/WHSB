@@ -1324,18 +1324,20 @@ window.onload = function() {
     const CSS_ID = /^#/;
 
     document.addEventListener("click", function(e) {
-	console.log(e.target);
 	el = getClosestParentWhichIs(e.target, "[cite], [exec]") || e.target;
 	var cite = el.getAttribute("cite");
 	var exec = el.getAttribute("exec");
 	var href = el.getAttribute("href");
 	if(cite) {
-	    var target = document.querySelector(cite);
-	    target.scrollIntoView({target: el});
-	    e.stopPropagation();
-	    e.preventDefault();
 	    if(history.pushState) {
 		history.pushState({state: cite}, document.title, el.href || location.href);
+	    }
+	    while(cite) {
+		var target = document.querySelector(cite);
+		target.scrollIntoView({target: el});
+		e.stopPropagation();
+		e.preventDefault();
+		cite = target.getAttribute("chain");
 	    }
 	} else if(exec) {
 	    document.execCommand(exec);
@@ -1349,12 +1351,9 @@ window.onload = function() {
 		    target.show();
 		}
 		e.preventDefault();
-	    } else if(target.matches("dialog")) {
-		if(!target.showModal) {
-		    dialogPolyfill.registerDialog(target);
-		}
-		target.showModal();
 	    }
+	} else {
+	    console.log(el);
 	}
     });
 

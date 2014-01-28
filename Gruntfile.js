@@ -1,16 +1,9 @@
 module.exports = function(grunt) {
 
-    var TEMPLATE_FILES = ["app/**/*.ejs", "app/**/*.dust"];
-    var TRANSPILED_FILES = ["app/**/*.common.js", "components/**/*.common.js", "scripts/**/*.common.js", "models/**/*.common.js"];
-    var NO_TRANSPILED_FILES = ["!app/**/*.common.js", "!components/**/*.common.js", "!scripts/**/*.common.js", "!models/**/*.common.js"];
-    var WEB_FILES = ["app/**/*.web.js", "scripts/**/*.web.js", "components/**/*.web.js"];
-    var NO_WEB_FILES = ["!app/**/*.web.js", "!scripts/**/*.web.js", "!components/**/*.web.js", "!models/**/*.web.js"];
-    var MINIFIED_CSS_FILES = ["components/**/*.min.css", "app/**/*.min.css", "scripts/**/*.min.css"];
+    var TEMPLATE_FILES = "**/*.dust";
     var MODEL_FILES = "models/**/*.js";
-    var APP_FILES = "app/**/*.js";
-    var COMPONENT_FILES = ["components/**/*.js"];
-    var SCRIPT_FILES = "scripts/**/*.js";
-    var SASS_FILES = ["components/**/*.scss", "app/**/*.scss", "components/**/*.sass", "app/**/*.sass", "sass/**/*.sass"];
+    var NO_MODEL_FILES = "!models/**/*.js";
+    var APP_FILES = "**/*.js";
 
     var CONFIGURATION = grunt.file.readJSON("package.json");
 
@@ -18,7 +11,7 @@ module.exports = function(grunt) {
 	pkg: CONFIGURATION,
 	clean: {
 	    build: {
-		src: TRANSPILED_FILES.concat(WEB_FILES).concat(MINIFIED_CSS_FILES)
+		src: "build/"
 	    }
 	},
 	asciify: {
@@ -32,19 +25,26 @@ module.exports = function(grunt) {
 		options: {
 		    esnext: true,
 		    sass: {
-			includePaths: ["./app"],
+			includePaths: ["app", "bower_components/foundation/scss"],
 			outputStyle: "expanded"
 		    }
 		},
 		files: [
 		    {
 			expand: true,
+			cwd:"app/",
 			src: TEMPLATE_FILES,
-			ext: ".web.js"
+			dest: "build/"
 		    },
 		    {
 			expand: true,
-			src: [MODEL_FILES, APP_FILES].concat(NO_WEB_FILES).concat(NO_TRANSPILED_FILES),
+			cwd:"app/",
+			src: APP_FILES,
+			dest:"build/"
+		    },
+		    {
+			expand: true,
+			src: MODEL_FILES.concat(NO_MODEL_FILES),
 			ext: ".common.js"
 		    }
 		]
@@ -53,12 +53,12 @@ module.exports = function(grunt) {
     });
 
     // This is how you develop...
-//    grunt.loadNpmTasks("grunt-contrib-clean");           // GET RID OF EXISTING BUILT FILES
+    grunt.loadNpmTasks("grunt-contrib-clean");           // CLEAN BUILD
     grunt.loadNpmTasks("grunt-asciify");                 // ASCIIFY MINIFIED FILES
     grunt.loadNpmTasks("grunt-webify");                  // BUILD & MINIFY THEM FOR THE WEB
     grunt.loadNpmTasks("grunt-foreman");                 // TEST SERVER
 
-    grunt.registerTask("default", ["asciify", "webify"]);
+    grunt.registerTask("default", ["clean", "asciify", "webify"]);
     grunt.registerTask("serve", ["default", "foreman"]);
 
 };

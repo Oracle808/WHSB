@@ -43,7 +43,7 @@ if (window.getSelection && document.createRange) {
 	var sel = window.getSelection();
 	sel.removeAllRanges();
 	sel.addRange(range);
-    }
+    };
 } else if (document.selection) {
     saveSelection = function(containerEl) {
 	var selectedTextRange = document.selection.createRange();
@@ -55,7 +55,7 @@ if (window.getSelection && document.createRange) {
 	return {
 	    start: start,
 	    end: start + selectedTextRange.text.length
-	}
+	};
     };
 
     restoreSelection = function(containerEl, savedSel) {
@@ -68,29 +68,31 @@ if (window.getSelection && document.createRange) {
     };
 }
 
+var replace = function(str, regex, colour) {
+    return str.replace(regex, function(match) {
+	return "<span style=\"color:" + colour + "\">" + match + "</span>";
+    });
+};
+
 class CodeRunnerElement extends HTMLDivElement {
     createdCallback() {
 	this.contentEditable = true;
-	this.addEventListener("keyup", this.highlightSyntax.bind(this));
+	this.addEventListener("keypress", this.highlightSyntax.bind(this));
     }
     highlightSyntax(e) {
 	if(e.keyCode !== 13) {
 	    var s = saveSelection(this);
-	    var data = this.getSource();
-	    console.log(data);
-	    //	data = data.replace(/"([^\\"\n]|\\.)*"/g, function(match) {
-	    //      data = data.replace(/"[a-zA-Z0-9\{\}\s\(\)]*(")?/g, function(match) {
-	    data = data.replace(/"([a-zA-Z0-9]|\s|\}|\{|\(|\)|\s)*(")?/g, function(match) {
-		return "<span style=\"color:#090\">" + match + "</span>";
-	    });
-	    data = data.replace(/'([^\\'\n]|\\.)*'/g, function(match) {
-		return "<span style=\"color:#090\">" + match + "</span>";
-	    });
-	    data = data.replace(/\/\/.*$/gm, function(match) {
-		return "<span style=\"color:#a50\">" + match + "</span>";
-	    });
+	    var data = this.toDataURL();
+	    var character = String.fromCharCode(e.keyCode);
+	    data = data.slice(0, s.start) + character + data.slice(s.end);
+	    data = replace(data, /"([a-zA-Z0-9]|\s|\}|\{|\(|\)|\s|\\|#)*(")?/g, "#090");
+	    data = replace(data, /'([a-zA-Z0-9]|\s|\}|\{|\(|\)|\s|\\|#)*(')?/g, "#090");
+	    data = replace(data, /\/\/.*$/gm, "#A50");
 	    this.innerHTML = ("<div>" + data.replace(/\n/g, "</div><div>") + "</div>").replace(/<div><\/div>/g, "<div><br></div>");
+	    s.start++;
+	    s.end++;
 	    restoreSelection(this, s);
+	    e.preventDefault();
 	}
     }
     scrollIntoView() {
@@ -98,9 +100,9 @@ class CodeRunnerElement extends HTMLDivElement {
 	while(output.hasChildNodes()) {
 	    output.removeChild(output.lastChild);
 	}
-	eval("(function() { var console = {}; console.log = function(s) { document.querySelector(\"" + this.getAttribute("for") + "\").innerHTML += s.toString() + \"<br>\"; };" + this.getSource() + "})();");
+	eval("(function() { var console = {}; console.log = function(s) { document.querySelector(\"" + this.getAttribute("for") + "\").innerHTML += s.toString() + \"<br>\"; };" + this.toDataURL() + "})();");
     }
-    getSource() {
+    toDataURL() {
 	return this.innerHTML.replace(/<\/div>(?!$)/g, "\n").replace(/(<([^>]+)>)/ig,"");
     }
 }

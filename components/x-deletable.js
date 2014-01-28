@@ -1,9 +1,9 @@
 class DeletableElement extends HTMLDivElement {
     scrollIntoView(e) {
-	if(e.target.formAction || e.target.form.action) {
+	var route = e.target.formAction || e.target.form.action;
+	if(route) {
 	    var req = new XMLHttpRequest();
-	    console.log(e.target.formAction);
-	    req.open("delete", e.target.formAction);
+	    req.open("delete", route);
 	    req.send();
 	}
 	this.remove();

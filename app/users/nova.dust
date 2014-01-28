@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mass User Creation</title>
+    <style src="app/subjects/subject.scss"></style>
+    <style src="app/header/head.scss"></style>
+    <style src="./nova.scss"></style>
+    <script src="app/subjects/polyfill.js"></script>
+    <script src="components/x-appendable.js"></script>
+    <link href="/foundation-icons/foundation-icons.css" rel="stylesheet"/>
+    {>"app/header/global.dust"/}
+  </head>
+  <body>
+    {>"app/header/head.dust"/}
+    <main>
+      <article>
+	<p>Mass User Creation is an easy way to create the user accounts for many pupils, who share some subjects. <i>Nota Bene:</i> Only the accounts of pupils can be created this way.</p>
+	<p>The passwords are formulated from the date such that a pupil born on the 5th May 2014, would have the password <i>050514</i>.</p>
+
+	<form method="post">
+	  <fieldset id="users">
+	    <legend>Users</legend>
+	    <div id="instantiatedUsers">
+	      <fieldset class="user" name="users[]">
+		<table>
+		  <tr>
+		    <td>
+		      <input type="text" name="username" placeholder="Username" aria-required="true" autofocus/>
+		    </td>
+		    <td>
+		      <input type="date" name="dofb" aria-required="true"/>
+		    </td>
+		    <td>
+		      <button class="deleteButton"><i class="fi-x"></i></button>
+		    </td>
+		  </tr>
+		</table>
+	      </fieldset>
+	    </div>
+
+	    <x-appendable id="newUser" to="instantiatedUsers" chain="instantiatedUsers" cite="#newUser">
+	      <fieldset class="user" name="users[]">
+		<table>
+		  <tr>
+		    <td>
+		      <input type="text" placeholder="Click to add user" disabled/>
+		      <input type="text" name="username" placeholder="Username"/>
+		    </td>
+		    <td>
+		      <input type="date" disabled/>
+		      <input type="date" name="dofb" aria-required="true"/>
+		    </td>
+		    <td>
+		      <button class="deleteButton"><i class="fi-x"></i></button>
+		    </td>
+		  </tr>
+		</table>
+	      </fieldset>
+	    </x-appendable>
+	  </fieldset>
+	  
+	  <fieldset>
+	    <legend>Shared Subjects</legend>
+	    <select multiple name="subjects[]" id="subjects">
+	      {#subjects}
+		<option value="{_id}">{name}</option>
+	      {/subjects}
+	    </select>
+	  </fieldset>
+	  <button type="submit">Submit</button>
+	</form>
+
+
+      </article>
+    </main>
+  </body>
+</html>
