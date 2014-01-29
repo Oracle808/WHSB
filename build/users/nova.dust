@@ -6019,10 +6019,7 @@ select[multiple] {
 #users table td {
   padding: 0; }
 
-#instantiatedUsers [disabled] {
-  display: none; }
-
-#newUser [disabled] ~ input {
+#newUser {
   display: none; }
 
 .deleteButton {
@@ -6042,16 +6039,64 @@ select[multiple] {
   padding-bottom: 0.3125rem;
   padding-left: 0.5rem;
   /*     @else                            { font-size: $padding - rem-calc(2); } */
-  background-color: #fafafa;
-  border-color: #c8c8c8;
+  background-color: white;
+  border-color: #cccccc;
   color: #333333; }
   .deleteButton:hover, .deleteButton:focus {
-    background-color: #c8c8c8; }
+    background-color: #cccccc; }
   .deleteButton:hover, .deleteButton:focus {
     color: #333333; }
+
+.deleteButton[disabled] {
+  border-style: solid;
+  border-width: 0px;
+  cursor: pointer;
+  font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+  font-weight: normal;
+  line-height: normal;
+  margin: 0 0 1.25rem;
+  position: relative;
+  text-decoration: none;
+  text-align: center;
+  display: inline-block;
+  padding-top: 0.25rem;
+  padding-right: 0.5rem;
+  padding-bottom: 0.3125rem;
+  padding-left: 0.5rem;
+  /*     @else                            { font-size: $padding - rem-calc(2); } */
+  background-color: white;
+  border-color: #cccccc;
+  color: #333333;
+  cursor: default;
+  opacity: 0.7;
+  -webkit-box-shadow: none;
+  box-shadow: none; }
+  .deleteButton[disabled]:hover, .deleteButton[disabled]:focus {
+    background-color: #cccccc; }
+  .deleteButton[disabled]:hover, .deleteButton[disabled]:focus {
+    color: #333333; }
+  .deleteButton[disabled]:hover, .deleteButton[disabled]:focus {
+    background-color: white; }
 </style></head>
   <body>
     {>"app/header/head.dust"/}
+
+    <x-appendable id="newUser" to="instantiatedUsers" chain="instantiatedUsers">
+      <table>
+	<tr>
+	  <td>
+	    <input type="text" name="username[]" placeholder="Username" aria-required="true"/>
+	  </td>
+	  <td>
+	    <input type="date" name="dofb[]" placeholder="Date of Birth" aria-required="true"/>
+	  </td>
+	  <td>
+	    <button class="deleteButton"><i class="fi-x"></i></button>
+	  </td>
+	</tr>
+      </table>
+    </x-appendable>
+
     <main>
       <article>
 	<p>Mass User Creation is an easy way to create the user accounts for many pupils, who share some subjects. <i>Nota Bene:</i> Only the accounts of pupils can be created this way.</p>
@@ -6065,10 +6110,10 @@ select[multiple] {
 		<table>
 		  <tr>
 		    <td>
-		      <input type="text" name="username" placeholder="Username" aria-required="true" autofocus/>
+		      <input type="text" name="username[]" placeholder="Username" aria-required="true" autofocus/>
 		    </td>
 		    <td>
-		      <input type="date" name="dofb" aria-required="true"/>
+		      <input type="date" name="dofb[]"  placeholder="Date Of Birth" aria-required="true"/>
 		    </td>
 		    <td>
 		      <button class="deleteButton"><i class="fi-x"></i></button>
@@ -6078,25 +6123,22 @@ select[multiple] {
 	      </fieldset>
 	    </div>
 
-	    <x-appendable id="newUser" to="instantiatedUsers" chain="instantiatedUsers" cite="#newUser">
-	      <fieldset class="user" name="users[]">
-		<table>
-		  <tr>
-		    <td>
-		      <input type="text" placeholder="Click to add user" disabled/>
-		      <input type="text" name="username" placeholder="Username"/>
-		    </td>
-		    <td>
-		      <input type="date" disabled/>
-		      <input type="date" name="dofb" aria-required="true"/>
-		    </td>
-		    <td>
-		      <button class="deleteButton"><i class="fi-x"></i></button>
-		    </td>
-		  </tr>
-		</table>
-	      </fieldset>
-	    </x-appendable>
+	    <fieldset class="user" name="users[]" cite="#newUser">
+	      <table>
+		<tr>
+		  <td>
+		    <input type="text" placeholder="Click to add user" disabled/>
+		  </td>
+		  <td>
+		    <input type="date" disabled/>
+		  </td>
+		  <td>
+		    <button class="deleteButton" disabled><i class="fi-x"></i></button>
+		  </td>
+		</tr>
+	      </table>
+	    </fieldset>
+
 	  </fieldset>
 	  
 	  <fieldset>

@@ -24,14 +24,14 @@ select[multiple] {
     padding:0;
 }
 
-#instantiatedUsers [disabled] {
-    display:none;
-}
-
-#newUser [disabled] ~ input {
+#newUser {
     display:none;
 }
 
 .deleteButton {
-    @include button(rem-calc(4), $bg: $foreground);
+    @include button(rem-calc(4), $bg:white);
+}
+
+.deleteButton[disabled] {
+    @include button(rem-calc(4), $bg:white, $disabled: true);
 }

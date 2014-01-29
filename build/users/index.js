@@ -1,6 +1,7 @@
 var massUserCreationTemplate = require("./nova.dust");
 var mongoose = require("mongoose");
 var Subject = mongoose.model("Subject");
+var User = mongoose.model("User");
 
 var massUserCreation = function(req, res) {
     Subject.find({}, function(err, docs) {
@@ -19,7 +20,7 @@ var getMonth = function(date) {
 
 var getDay = function(date) {
     var day = date.getDate();
-    return month < 10 ? "0" + day : day.toString();
+    return day < 10 ? "0" + day : day.toString();
 };
 
 var getYear = function(date) {
@@ -28,18 +29,24 @@ var getYear = function(date) {
 };
 
 var postMassUserCreation = function(req, res) {
-    console.log(req.body.users);
-    if(req.body.users) {
-	for(var i = 0; i < req.body.users; i++) {
-	    var date = req.body.users[i].dofb;
-	    Subject.create({
-		username: req.body.users[i].username,
+    if(req.body.username && req.body.dofb) {
+	var docs = [];
+	for(var i = 0; (i < req.body.username.length) && (i < req.body.dofb.length); i++) {
+	    var date = req.body.dofb[i].split("-");
+
+	    docs.push({
+		username: req.body.username[i],
 		role: "student",
-		password: getDay(date) + getMonth(date) + getYear(date),
+		password: date[2] + date[1] + date[0].slice(2),
 		subjects: req.body.subjects
 	    });
 	}
-    }
+	User.create(docs, function(err) {
+	    if(err) {
+		res.error(err);
+	    }
+	});
+    } 
     res.end();
 };
 

@@ -12,6 +12,23 @@
   </head>
   <body>
     {>"app/header/head.dust"/}
+
+    <x-appendable id="newUser" to="instantiatedUsers" chain="instantiatedUsers">
+      <table>
+	<tr>
+	  <td>
+	    <input type="text" name="username[]" placeholder="Username" aria-required="true"/>
+	  </td>
+	  <td>
+	    <input type="date" name="dofb[]" placeholder="Date of Birth" aria-required="true"/>
+	  </td>
+	  <td>
+	    <button class="deleteButton"><i class="fi-x"></i></button>
+	  </td>
+	</tr>
+      </table>
+    </x-appendable>
+
     <main>
       <article>
 	<p>Mass User Creation is an easy way to create the user accounts for many pupils, who share some subjects. <i>Nota Bene:</i> Only the accounts of pupils can be created this way.</p>
@@ -25,10 +42,10 @@
 		<table>
 		  <tr>
 		    <td>
-		      <input type="text" name="username" placeholder="Username" aria-required="true" autofocus/>
+		      <input type="text" name="username[]" placeholder="Username" aria-required="true" autofocus/>
 		    </td>
 		    <td>
-		      <input type="date" name="dofb" aria-required="true"/>
+		      <input type="date" name="dofb[]"  placeholder="Date Of Birth" aria-required="true"/>
 		    </td>
 		    <td>
 		      <button class="deleteButton"><i class="fi-x"></i></button>
@@ -38,25 +55,22 @@
 	      </fieldset>
 	    </div>
 
-	    <x-appendable id="newUser" to="instantiatedUsers" chain="instantiatedUsers" cite="#newUser">
-	      <fieldset class="user" name="users[]">
-		<table>
-		  <tr>
-		    <td>
-		      <input type="text" placeholder="Click to add user" disabled/>
-		      <input type="text" name="username" placeholder="Username"/>
-		    </td>
-		    <td>
-		      <input type="date" disabled/>
-		      <input type="date" name="dofb" aria-required="true"/>
-		    </td>
-		    <td>
-		      <button class="deleteButton"><i class="fi-x"></i></button>
-		    </td>
-		  </tr>
-		</table>
-	      </fieldset>
-	    </x-appendable>
+	    <fieldset class="user" name="users[]" cite="#newUser">
+	      <table>
+		<tr>
+		  <td>
+		    <input type="text" placeholder="Click to add user" disabled/>
+		  </td>
+		  <td>
+		    <input type="date" disabled/>
+		  </td>
+		  <td>
+		    <button class="deleteButton" disabled><i class="fi-x"></i></button>
+		  </td>
+		</tr>
+	      </table>
+	    </fieldset>
+
 	  </fieldset>
 	  
 	  <fieldset>
