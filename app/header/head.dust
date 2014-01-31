@@ -14,13 +14,13 @@
       <li class="has-dropdown">
         <a href="#userOptions">{user.username} <span class="label round">{user.role|c}</span></a>
         <ul class="dropdown" id="userOptions">
-	  <li><a href="/logout">Logout</a></li>
           <li><a href="/users">Manages Users</a></li>
 	  {@eq key=user.role value="admin"}
+	    <li><a href="/subjects/nova">Create a New Subject</a></li>
 	    <li><a href="/users/nova">Create a New User</a></li>
 	    <li><a href="/users/massUserCreation">Mass User Creation</a></li>
-	    <li><a href="/subjects/nova">Create a New Subject</a></li>
 	  {/eq}
+	  <li><a href="/logout">Logout</a></li>
         </ul>
       </li>
     </ul>

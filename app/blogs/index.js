@@ -99,7 +99,11 @@ var del = function(req, res) {
 	if(err) {
 	    res.error(err);
 	} else {
-	    res.redirect("/subjects/" + req.param("subject"));
+	    if(req.xhr) {
+		res.end();
+	    } else {
+		res.redirect("/subjects/" + req.param("subject"));
+	    }
 	}
     });
 };
