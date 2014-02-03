@@ -1200,20 +1200,38 @@ var OpenDialogElement = function($__super) {
       $__superCall(this, $__proto, "constructor", arguments);
     },
     createdCallback: function() {
-      this.proxy = document.querySelector(this.getAttribute("for"));
+      if (this.hasAttribute("for")) {
+        this.proxy = document.querySelector(this.getAttribute("for"));
+      } else if (this.hasAttribute("action")) {
+        this.action = this.getAttribute("action");
+      }
     },
     scrollIntoView: function() {
       var $__0 = this;
       var fileElem = document.createElement("input");
       fileElem.type = "file";
       fileElem.addEventListener("change", (function() {
-        var reader = new FileReader();
-        reader.addEventListener("load", (function(e) {
-          $__0.proxy.innerText = e.target.result;
-          $__0.proxy.setAttribute("name", fileElem.files[0].name);
-          fileElem.remove();
-        }));
-        reader.readAsText(fileElem.files[0]);
+        if ($__0.proxy) {
+          var reader = new FileReader();
+          reader.addEventListener("load", (function(e) {
+            if ($__0.proxy) {
+              $__0.proxy.innerText = e.target.result;
+              $__0.proxy.setAttribute("name", fileElem.files[0].name);
+              fileElem.remove();
+            }
+          }));
+          reader.readAsText(fileElem.files[0]);
+        } else if ($__0.action) {
+          if (FormData) {
+            var data = new FormData();
+            for (var i = 0; i < fileElem.files.length; i++) {
+              data.append("files[]", fileElem.files[i]);
+            }
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", $__0.action, true);
+            xhr.send(data);
+          }
+        }
       }));
       fileElem.click();
     }
@@ -2168,7 +2186,7 @@ select {
       font-size: 1rem; }
       .accordion dd > a:hover {
         background: #e3e3e3; }
-  .accordion .content, .accordion nav#intraSubjectNavigation, .accordion article {
+  .accordion .content {
     display: none;
     padding: 0.9375rem; }
     .accordion .content.active {
@@ -4574,7 +4592,7 @@ table {
     display: table; }
   .tabs-content:after {
     clear: both; }
-  .tabs-content > .content, .tabs-content > nav#intraSubjectNavigation, .tabs-content > article {
+  .tabs-content > .content {
     display: none;
     float: left;
     padding: 0.9375rem 0; }
@@ -4584,7 +4602,7 @@ table {
       padding: 0.9375rem; }
   .tabs-content.vertical {
     display: block; }
-    .tabs-content.vertical > .content, .tabs-content.vertical > nav#intraSubjectNavigation, .tabs-content.vertical > article {
+    .tabs-content.vertical > .content {
       padding: 0 0.9375rem; }
 
 @media only screen and (min-width:40.063em) {
@@ -5771,11 +5789,6 @@ main {
   main:after {
     clear: both; }
 
-.content, nav#intraSubjectNavigation, article {
-  background-color: #fafafa; }
-  .content input, .content input:focus, .content select, .content select:focus {
-    background-color: white; }
-
 @media only screen and (min-width:40.063em) {
   nav#intraSubjectNavigation {
     position: relative;
@@ -5784,7 +5797,8 @@ main {
     width: 25%;
     float: left;
     padding-top: 32px;
-    padding-right: 20px; }
+    padding-right: 20px;
+    background-color: #fafafa; }
   nav#intraSubjectNavigation ul {
     display: block;
     margin: 0;
@@ -5816,7 +5830,7 @@ main {
   nav#intraSubjectNavigation ul li a + a, nav#intraSubjectNavigation ul li a + nav#intraSubjectNavigation ul li a + a, nav#intraSubjectNavigation ul li a + nav#intraSubjectNavigation ul li a + a, nav#intraSubjectNavigation ul li a + nav#intraSubjectNavigation ul li a + button, nav#intraSubjectNavigation ul li a + nav#intraSubjectNavigation ul li a + button, nav#intraSubjectNavigation ul li a + nav#intraSubjectNavigation ul li a + form button, nav#intraSubjectNavigation ul li a + form nav#intraSubjectNavigation ul li a + button, nav#intraSubjectNavigation ul li a + button, nav#intraSubjectNavigation ul li a + form button {
     margin-left: 40px;
     float: right;
-    background-color: #fafafa !important;
+    background-color: white !important;
     padding: 0 !important;
     margin-top: 0 !important;
     margin-right: 0 !important;
@@ -5891,48 +5905,31 @@ body main > div {
   overflow: auto; }
 
 main #newPostForm {
-  width: auto;
-  margin-left: -0.9375rem;
-  margin-right: -0.9375rem;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
   margin-top: 0;
   margin-bottom: 0;
-  max-width: none;
+  max-width: 62.5rem;
   *zoom: 1;
-  margin-top: 20px;
-  margin-left: 0px;
-  margin-right: 0px;
   background-color: white;
-  padding: 20px; }
+  margin-top: 20px;
+  padding: 20px;
+  margin-left: 0px;
+  margin-right: 0px; }
   main #newPostForm:before, main #newPostForm:after {
     content: " ";
     display: table; }
   main #newPostForm:after {
     clear: both; }
+  main #newPostForm input, main #newPostForm input:focus, main #newPostForm select, main #newPostForm select:focus {
+    background-color: white; }
 
-main #newPostForm input {
-  position: relative;
-  padding-left: 0.9375rem;
-  padding-right: 0.9375rem;
-  width: 100%;
-  float: left; }
+textarea, main #newPostForm x-richtexteditor, x-coderunner {
+  resize: vertical;
+  outline: none; }
 
 main #newPostForm x-richtexteditor {
-  position: relative;
-  padding-left: 0.9375rem;
-  padding-right: 0.9375rem;
-  width: 100%;
-  float: left;
-  outline: none;
-  resize: vertical;
-  min-height: 200px; }
-
-main #newPostForm textarea, main #newPostForm main #newPostForm x-richtexteditor, main #newPostForm main #newPostForm x-richtexteditor, main #newPostForm x-coderunner {
-  position: relative;
-  padding-left: 0.9375rem;
-  padding-right: 0.9375rem;
-  width: 100%;
-  float: left;
-  resize: vertical;
   min-height: 200px; }
 
 .toolbar ul {
@@ -5997,12 +5994,70 @@ main #newPostForm textarea, main #newPostForm main #newPostForm x-richtexteditor
 
 main #newPostForm #buttons {
   position: relative;
+  padding-left: 0;
+  padding-right: 0;
+  width: 100%;
+  float: left; }
+
+#newPostForm #buttons button {
+  margin-bottom: 0px;
+  margin-left: 5px; }
+
+.publishButton {
+  border-style: solid;
+  border-width: 0px;
+  cursor: pointer;
+  font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+  font-weight: normal;
+  line-height: normal;
+  margin: 0 0 1.25rem;
+  position: relative;
+  text-decoration: none;
+  text-align: center;
+  display: inline-block;
+  padding-top: 0.375rem;
+  padding-right: 0.75rem;
+  padding-bottom: 0.4375rem;
+  padding-left: 0.75rem;
+  /*     @else                            { font-size: $padding - rem-calc(2); } */
+  background-color: #e55b00;
+  border-color: #b74600;
+  color: white;
+  border-style: solid;
+  border-width: 0px;
+  cursor: pointer;
+  font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+  font-weight: normal;
+  line-height: normal;
+  margin: 0 0 1.25rem;
+  position: relative;
+  text-decoration: none;
+  text-align: center;
+  display: inline-block;
+  padding-top: 0.375rem;
+  padding-right: 0.75rem;
+  padding-bottom: 0.4375rem;
+  padding-left: 0.75rem;
+  /*     @else                            { font-size: $padding - rem-calc(2); } */
+  background-color: #e55b00;
+  border-color: #b74600;
+  color: white;
+  position: relative;
   padding-left: 0.9375rem;
   padding-right: 0.9375rem;
-  width: 100%;
-  float: right; }
+  width: 16.66667%;
+  float: right;
+  font-size: 0.75rem; }
+  .publishButton:hover, .publishButton:focus {
+    background-color: #b74600; }
+  .publishButton:hover, .publishButton:focus {
+    color: white; }
+  .publishButton:hover, .publishButton:focus {
+    background-color: #b74600; }
+  .publishButton:hover, .publishButton:focus {
+    color: white; }
 
-main #newPostForm #buttons button[type="submit"] {
+.draftButton {
   border-style: solid;
   border-width: 0px;
   cursor: pointer;
@@ -6022,13 +6077,15 @@ main #newPostForm #buttons button[type="submit"] {
   background-color: #008cba;
   border-color: #007295;
   color: white;
-  -webkit-border-radius: 1000px;
-  border-radius: 1000px;
-  font-size: 0.75rem;
-  margin-bottom: 8px; }
-  main #newPostForm #buttons button[type="submit"]:hover, main #newPostForm #buttons button[type="submit"]:focus {
+  position: relative;
+  padding-left: 0.9375rem;
+  padding-right: 0.9375rem;
+  width: 16.66667%;
+  float: right;
+  font-size: 0.75rem; }
+  .draftButton:hover, .draftButton:focus {
     background-color: #007295; }
-  main #newPostForm #buttons button[type="submit"]:hover, main #newPostForm #buttons button[type="submit"]:focus {
+  .draftButton:hover, .draftButton:focus {
     color: white; }
 
 article {
@@ -6039,6 +6096,7 @@ article {
   margin-bottom: 0;
   max-width: 62.5rem;
   *zoom: 1;
+  background-color: white;
   margin-top: 20px;
   padding: 20px; }
   article:before, article:after {
@@ -6046,6 +6104,8 @@ article {
     display: table; }
   article:after {
     clear: both; }
+  article input, article input:focus, article select, article select:focus {
+    background-color: white; }
 
 article .postHeading {
   position: relative;
@@ -6085,14 +6145,14 @@ article .postActions a, article .postActions nav#intraSubjectNavigation ul li a 
   padding-bottom: 0.3125rem;
   padding-left: 0.5rem;
   /*     @else                            { font-size: $padding - rem-calc(2); } */
-  background-color: #fafafa;
-  border-color: #c8c8c8;
+  background-color: white;
+  border-color: #cccccc;
   color: #333333;
   font-size: 0.875rem;
   margin-bottom: 8px;
   float: right; }
   article .postActions a:hover, article .postActions a:focus, article .postActions button:hover, article .postActions button:focus {
-    background-color: #c8c8c8; }
+    background-color: #cccccc; }
   article .postActions a:hover, article .postActions a:focus, article .postActions button:hover, article .postActions button:focus {
     color: #333333; }
 
@@ -6122,7 +6182,7 @@ article .postExcerpt {
   padding: 20px; }
 
 body {
-  padding-top: 40px; }
+  padding-top: 45px; }
 
 x-coderunner {
   display: block;

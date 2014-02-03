@@ -23,8 +23,36 @@ dust.helpers.first = function(chunk, ctx, bodies, params) {
 	if(bodies["else"]) {
 	    return chunk.render(bodies["else"], ctx);
 	} else {
-	    return chunk.write("false");
+	    return chunk;
 	}
+    }
+};
+
+dust.helpers.contains = function(chunk, ctx, bodies, params) {
+    var key = params.key ? dust.helpers.tap(params.key, chunk, ctx) : ctx.get("selectKey");
+    var value = dust.heplers.tap(params.value, chunk, ctx);
+    if(key.indexOf(value) !== -1) {
+	if(bodies.block) {
+	    return chunk.render(bodies.block, ctx);
+	} else {
+	    return chunk.write("contains");
+	}
+    } else {
+	if(bodies["else"]) {
+	    return chunk.render(bodies["else"], ctx);
+	} else {
+	    return chunk;
+	}
+    }
+};
+
+dust.helpers.pluck = function(chunk, ctx, bodies, params) {
+    var key = dust.helpers.tap(params.key, chunk, ctx);
+    var value = dust.helpers.tap(params.value, chunk, ctx);
+    if(bodies.block) {
+	return chunk.render(bodies.block, ctx.push({isSelect: true, isResolved: false, selectKey: uu.pluck(key, value)}));
+    } else {
+	return chunk;
     }
 };
 

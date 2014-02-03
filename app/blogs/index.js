@@ -1,4 +1,3 @@
-// A Beautiful Example of the Craft of a Controller
 var blogTemplate = require("./blog.dust");
 var mongoose = require("mongoose");
 var Subject = mongoose.model("Subject");

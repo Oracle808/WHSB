@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hand-in</title>
+    <style src="app/subjects/subject.scss"></style>
+    <style src="app/header/head.scss"></style>
+    <style src="app/hand_in/list.scss"></style>
+    <script src="app/subjects/polyfill.js"></script>
+    <script src="components/x-bubble.js"></script>
+    <script src="components/x-slidable.js"></script>
+    {>"app/header/global.dust"/}
+  </head>
+  <body>
+    {>"app/header/head.dust"/}
+    <main>
+      {>"app/subjects/nav.dust" active="hand_in"/}
+      <div>
+	{@ne key=user.role value="student"}
+	  <section class="toolbar">
+	    <button cite="#newSlotForm">Add Hand-in Folder</button>
+	  </section>
+	  <x-slidable id="newSlotForm" hidden>
+	    <form method="post">
+	      <input type="text" placeholder="Title" aria-required="true" required/>
+	      <textarea placeholder="Description"></textarea>
+	      <button type="submit">Submit</button>
+	    </form>
+	  </x-slidable>
+	{/ne}
+	{#subject.hand_in}
+	  <article>
+	    <section class="slotHeading">
+	      <h2>{name}<small>{description}</small></h2>
+	    </section>
+	    <section class="slotActions">
+	      {@pluck key=files value="user"}
+		{@contains value=user._id}
+		  <span class="submitted">Submitted</span>
+		{:else}
+		  {@eq key=user.role value="student"}
+		    <button>Submit</button>
+		  {:else}
+		    <button>View</button>
+		  {/eq}
+		{/contains}
+	      {/pluck}
+	    </section>
+	  </article>
+	{/subject.hand_in}
+      </div>
+    </main>
+  </body>
+</html>

@@ -4573,7 +4573,7 @@ main {
     padding: 0px; } }
 
 body {
-  padding-top: 40px; }
+  padding-top: 45px; }
 </style></head>
   <body>
     {>"app/header/head.dust"/}

@@ -1,4 +1,3 @@
-// A Beautiful Example of the Craft of a Controller
 var blogTemplate = require("./blog.dust");
 var mongoose = require("mongoose");
 var Subject = mongoose.model("Subject");
@@ -99,7 +98,11 @@ var del = function(req, res) {
 	if(err) {
 	    res.error(err);
 	} else {
-	    res.redirect("/subjects/" + req.param("subject"));
+	    if(req.xhr) {
+		res.end();
+	    } else {
+		res.redirect("/subjects/" + req.param("subject"));
+	    }
 	}
     });
 };

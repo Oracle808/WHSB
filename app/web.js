@@ -55,6 +55,7 @@ if(Program.createUser) {
     var Apps = require("./apps");
     var Codr = require("./codr");
     var Users = require("./users");
+    var HandIn = require("./hand_in");
 
     var auth = function(req, res, next) {
 	if(req.session.user) {
@@ -122,6 +123,9 @@ if(Program.createUser) {
     // SUBJECT LINKS
     app.post("/subjects/:subject/links", auth, teacher, Subjects.postLink);
     app.del("/subjects/:subject/links/:link", auth, Subjects.delLink);
+    // HAND-IN
+    app.get("/subjects/:subject/hand_in", auth, HandIn.index);
+    app.post("/subjects/:subject/hand_in", auth, teacher, HandIn.post);
     // APPS
     app.get("/apps", auth, Apps.index);
     app.get("/apps/codr", auth, Codr.index);

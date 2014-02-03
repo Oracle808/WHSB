@@ -1,4 +1,4 @@
-<x-bubble for="#newLink" id="newLinkForm" hidden>
+<x-bubble class="jsmore" for="#newLink" id="newLinkForm" hidden>
   <form action="/subjects/{subject._id}/links" method="post">
     <input name="title" placeholder="Title" type="text"/>
     <input name="url" placeholder="Url" type="url"/>
@@ -26,7 +26,8 @@
       <li {@eq key=active value="vocab_quizzes"}class="active"{/eq}><a href="/subjects/{subject._id}/vocab_quizzes">Vocab Quizzes</a></li>
     {/subject.vocab_quizzes}
     
-    <li><a>Student Resources</a></li>
+    <li><a href="/subjects/{subject._id}/hand_in">Hand-in</a></li>
+    <li><a>Resources</a></li>
 
     {?subject.links}
       <li class="header">Links</li>
@@ -40,6 +41,7 @@
 	</li>
       {/subject.links}
     {/subject.links}
+
     <li><a id="newLink" cite="#newLinkForm">New Link</a></li>
   </ul>	
 </nav>

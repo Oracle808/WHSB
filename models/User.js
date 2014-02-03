@@ -97,6 +97,27 @@ var Subject = mongoose.Schema({
 		required: true
 	    }]
 	}]
+    }],
+    hand_in: [{
+	name: {
+	    type: String,
+	    required: true
+	},
+	description: {
+	    type: String,
+	    required: true
+	},
+	files: [{
+	    user: {
+		type: ObjectId,
+		required: true,
+		ref: "user"
+	    },
+	    file: {
+		type: ObjectId,
+		required:true
+	    }
+	}]
     }]
 });
 
