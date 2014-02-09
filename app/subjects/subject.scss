@@ -1,6 +1,9 @@
 @import "foundation";
 
-$foreground: #fafafa;
+$foreground: #fff;
+$middleground: #f0f4f4;
+$content-margin:20px;
+$info: #33b5e5;
 
 main, x-slidable, x-richtexteditor, x-snowfall, x-deletable, x-bubble {
     display:block;
@@ -15,7 +18,10 @@ main, x-slidable, x-richtexteditor, x-snowfall, x-deletable, x-bubble {
 }
 
 html {
-    background-image:url("/images/ios7.png");
+    background-image:url("/images/ios7_xlarge.png");
+    @media #{$xxlarge-up} {
+	background-image:url("/images/ios7.png");
+    }
     height:100%;
 }
 
@@ -39,8 +45,11 @@ main {
     height:100%;
 }
 
-.content {
+@mixin content {
+    @include grid-row();
     background-color:$foreground;
+    margin-top:$content-margin;
+    padding:20px;
 
     input, input:focus, select, select:focus {
 	background-color:white;
@@ -49,11 +58,11 @@ main {
 
 nav#intraSubjectNavigation {
     @media #{$medium-up} {
-	@extend .content;
 	& {
 	    @include grid-column(3);
 	    padding-top:32px;
 	    padding-right:20px;
+	    background-color:$middleground;
 	}
 	ul {
 	    @include side-nav();
@@ -106,29 +115,18 @@ body main > div  {
 }
 
 main #newPostForm {
-    @include grid-row($behavior:nest);
-    margin-top:20px;
+    @include content;
     margin-left:0px;
     margin-right:0px;
-    background-color:white;
-    padding:20px;
 }
 
-main #newPostForm input {
-    @include grid-column(12);
+textarea {
+    resize:vertical;
+    outline:none;
 }
 
 main #newPostForm x-richtexteditor {
     @extend textarea;
-    @include grid-column(12);
-    outline:none;
-    resize: vertical;
-    min-height:200px;
-}
-
-main #newPostForm textarea {
-    @include grid-column(12);
-    resize: vertical;
     min-height:200px;
 }
 
@@ -149,20 +147,39 @@ main #newPostForm textarea {
 }
 
 main #newPostForm #buttons {
-    @include grid-column(12, $float:right);
+    @include grid-column(12, $collapse:true);
 }
 
-main #newPostForm #buttons button[type="submit"] {
-    @include button(rem-calc(6), $radius: $button-round);
+$warning: #e55b00;
+
+#newPostForm #buttons button {
+    margin-left:5px;
+}
+
+@mixin mini-button($colour:$primary-color, $float:left) {
+    @include button(rem-calc(6), $colour);
+    font-size:rem-calc(12);
+    margin-bottom:0px;
+    float:$float;
+}
+
+@mixin small-button($colour:$primary-color) {
+    @include button(rem-calc(6), $colour);
+    @include grid-column(2, $float:right);
     font-size: rem-calc(12);
-    margin-bottom:8px;
+    margin-bottom:0px;
+}
+
+.publishButton {
+    @include small-button($warning);
+}
+
+.draftButton {
+    @include small-button();
 }
 
 article {
-    @extend .content;
-    @include grid-row();
-    margin-top:20px;
-    padding:20px;
+    @include content;
 }
 
 article .postHeading {
@@ -187,10 +204,10 @@ article .postActions {
 	float:right;
     }
     a, button {
-	@include button(rem-calc(4), $bg: $foreground);
-	font-size: rem-calc(14);
-	margin-bottom:8px;
-	float:right;
+//	@include button(rem-calc(4), $bg: $foreground);
+//	font-size: rem-calc(14);
+//	margin-bottom:8px;
+	@include mini-button($foreground, $float:right);
     }
 }
 
@@ -216,4 +233,22 @@ article .postExcerpt {
 #newLinkForm {
     background-color:white;
     padding:20px;
+}
+
+// mobile-list
+@mixin mobile-list($bg: $foreground) {
+    margin-top:$content-margin;
+    margin-left:0;
+    list-style-type:none;
+    
+    li {
+	@include grid-row();
+	background-color:$bg;
+	border-bottom:1px solid darken($bg, 10%);
+	padding:5px;
+
+    }
+    li:last-child {
+	border-bottom:none;
+    }
 }

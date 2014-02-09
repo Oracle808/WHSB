@@ -45,12 +45,14 @@ if(Program.createUser) {
     var http = require("http");
     var express = require("express");
     var app = express();
+    var busboy = require("connect-busboy");
 
     var reactive = require("./reactive");
 
     var Atrium = require("./home");
     var Blogs = require("./blogs");
     var Subjects = require("./subjects");
+    var Quizzes = require("./quizzes");
     var VocabQuizzes = require("./vocab_quizzes");
     var Apps = require("./apps");
     var Codr = require("./codr");
@@ -90,7 +92,8 @@ if(Program.createUser) {
     app.use(reactive.intercept());
     app.use(express.favicon());
     app.use(express.logger('dev'));
-    app.use(express.bodyParser());
+    app.use(express.json());
+    app.use(express.urlencoded());
     app.use(express.methodOverride());
     app.use(express.cookieParser('my secret here'));
     app.use(express.session());
@@ -117,6 +120,12 @@ if(Program.createUser) {
     app.get("/subjects/:subject/feed", auth, Blogs.feed);
     app.get("/subjects/:subject/posts/:post", auth, Blogs.get);
     app.del("/subjects/:subject/posts/:post", auth, teacher, Blogs.del);
+    // SUBJECT QUIZZES
+    app.get("/subjects/:subject/quizzes", auth, Quizzes.list);
+    app.get("/subjects/:subject/quizzes/nova", auth, Quizzes.nova);
+    app.post("/subjects/:subject/quizzes", auth, Quizzes.publish);
+    app.get("/subjects/:subject/quizzes/:quiz", auth, Quizzes.get);
+    app.post("/subjects/:subject/quizzes/:quiz", auth, Quizzes.submit);
     // SUBJECT VOCAB QUIZZES
     app.get("/subjects/:subject/vocab_quizzes", auth, VocabQuizzes.index);
     app.get("/subjects/:subject/vocab_quizzes/:quiz", auth, VocabQuizzes.get);
@@ -126,6 +135,9 @@ if(Program.createUser) {
     // HAND-IN
     app.get("/subjects/:subject/hand_in", auth, HandIn.index);
     app.post("/subjects/:subject/hand_in", auth, teacher, HandIn.post);
+    app.get("/subjects/:subject/hand_in/:hand_in_slot/files", auth, teacher, HandIn.get);
+    app.post("/subjects/:subject/hand_in/:hand_in_slot/files", auth, busboy({limits: {files: 10, fileSize: 2 * 1024 * 1024}}), HandIn.upload);
+    app.get("/subjects/:subject/hand_in/:hand_in_slot/files/:file", auth, HandIn.download);
     // APPS
     app.get("/apps", auth, Apps.index);
     app.get("/apps/codr", auth, Codr.index);

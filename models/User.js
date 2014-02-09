@@ -55,7 +55,7 @@ var Subject = mongoose.Schema({
     teacher: {
 	type: ObjectId,
 	required:true,
-	ref: "user"
+	ref: "User"
     },
     links : [{
 	title: {
@@ -82,6 +82,45 @@ var Subject = mongoose.Schema({
 	    default: Date.now
 	}
     }],
+    quizzes: [{
+	title: {
+	    type: String,
+	    required: true
+	}, 
+	questions: {
+	    type: [{
+		problem: {
+		    type: String,
+		    required: true
+		},
+		help_text: {
+		    type: String
+		},
+		solution: {
+		    type: Mixed,
+		    required: true
+		},
+		wrongs: [String]
+	    }],
+	    required: true
+	},
+	attempts: [{
+	    date: {
+		type: Date,
+		default: Date.now,
+		required: true
+	    },
+	    score: {
+		type: Number,
+		required:true
+	    },
+	    user: {
+		type: ObjectId,
+		ref: "User"
+	    },
+	    answers: [Mixed]
+	}]
+    }],
     vocab_quizzes: [{
 	title: {
 	    type: String,
@@ -103,15 +142,14 @@ var Subject = mongoose.Schema({
 	    type: String,
 	    required: true
 	},
-	description: {
-	    type: String,
-	    required: true
+	due_in: {
+	    type: Date
 	},
 	files: [{
 	    user: {
 		type: ObjectId,
 		required: true,
-		ref: "user"
+		ref: "User"
 	    },
 	    file: {
 		type: ObjectId,

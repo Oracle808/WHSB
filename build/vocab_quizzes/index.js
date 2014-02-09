@@ -1,6 +1,6 @@
 var mongoose = require("mongoose");
 var Subject = mongoose.model("Subject");
-var vocabQuizList = require("./index.dust");
+var vocabQuizList = require("../quizzes/index.dust");
 var vocabQuizPage = require("./quiz.dust");
 var uu = require("underscore");
 
@@ -9,7 +9,7 @@ var index = function(req, res) {
 	if(err) {
 	    res.error(err);
 	} else {
-	    res.dust(vocabQuizList, {subject: doc});
+	    res.dust(vocabQuizList, {subject: doc, quizzes: doc.vocab_quizzes, title: "Vocabulary Quizzes", route: "vocab_quizzes"});
 	}
     });
 };

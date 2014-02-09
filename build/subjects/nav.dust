@@ -27,6 +27,7 @@
     {/subject.vocab_quizzes}
     
     <li><a href="/subjects/{subject._id}/hand_in">Hand-in</a></li>
+    <li><a href="/subjects/{subject._id}/quizzes">Quizzes</a></li>
     <li><a>Resources</a></li>
 
     {?subject.links}

@@ -6,7 +6,7 @@ var GridFS = require("../../models/gridfs.common");
 var uu = require("underscore");
 
 var index = function(req, res) {
-    Subject.findById(req.param("subject"), function(err, doc) {
+    Subject.findById(req.param("subject")).exec(function(err, doc) {
 	if(err) {
 	    res.error(err);
 	} else {
@@ -16,7 +16,7 @@ var index = function(req, res) {
 };
 
 var post = function(req, res) {
-    Subject.findByIdAndUpdate(req.param("subject"), {$push: {hand_in: {name: req.body.name, description: req.body.description, files: []}}}, function(err, doc) {
+    Subject.findByIdAndUpdate(req.param("subject"), {$push: {hand_in: {name: req.body.name, files: []}}}, function(err, doc) {
 	if(err) {
 	    res.error(err);
 	} else {

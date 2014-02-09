@@ -2,7 +2,7 @@ module.exports = function(grunt) {
 
     var TEMPLATE_FILES = "**/*.dust";
     var MODEL_FILES = "models/**/*.js";
-    var NO_MODEL_FILES = "!models/**/*.js";
+    var NO_MODEL_FILES = "!models/**/*.common.js";
     var APP_FILES = "**/*.js";
 
     var CONFIGURATION = grunt.file.readJSON("package.json");
@@ -11,7 +11,7 @@ module.exports = function(grunt) {
 	pkg: CONFIGURATION,
 	clean: {
 	    build: {
-		src: "build/"
+		src: ["build/", "models/**/*.common.js"]
 	    }
 	},
 	asciify: {
@@ -44,7 +44,7 @@ module.exports = function(grunt) {
 		    },
 		    {
 			expand: true,
-			src: MODEL_FILES.concat(NO_MODEL_FILES),
+			src: MODEL_FILES,
 			ext: ".common.js"
 		    }
 		]

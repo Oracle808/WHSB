@@ -1,8 +1,14 @@
 @import "foundation";
 
 form {
-    @media #{$medium-up} {
+    @media #{$xlarge-up} {
 	@include grid-column(4, $push:4);
+    }
+    @media #{$large-only} {
+	@include grid-column(6, $push:3);
+    }
+    @media #{$medium-only} {
+	@include grid-column(8, $push: 2);
     }
     @media #{$small-only} {
 	@include grid-column(12);

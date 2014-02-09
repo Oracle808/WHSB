@@ -9,6 +9,8 @@
     
     
     
+    
+    <link href="/foundation-icons/foundation-icons.css" rel="stylesheet"/>
     {>"app/header/global.dust"/}
   <script type="text/javascript">;(function(e,t,n){function i(n,s){if(!t[n]){if(!e[n]){var o=typeof require=="function"&&require;if(!s&&o)return o(n,!0);if(r)return r(n,!0);throw new Error("Cannot find module '"+n+"'")}var u=t[n]={exports:{}};e[n][0].call(u.exports,function(t){var r=e[n][1][t];return i(r?r:t)},u,u.exports)}return t[n].exports}var r=typeof require=="function"&&require;for(var s=0;s<n.length;s++)i(n[s]);return i})({1:[function(require,module,exports){
 var $__TypeError = TypeError,
@@ -1280,6 +1282,20 @@ var OpenDialogElement = function($__super) {
   return $OpenDialogElement;
 }(HTMLDivElement);
 document.register("x-opendialog", {prototype: OpenDialogElement.prototype});
+var DestroyableElement = function($__super) {
+  'use strict';
+  var $__proto = $__getProtoParent($__super);
+  var $DestroyableElement = ($__createClass)({
+    constructor: function() {
+      $__superCall(this, $__proto, "constructor", arguments);
+    },
+    scrollIntoView: function() {
+      this.remove();
+    }
+  }, {}, $__proto, $__super, false);
+  return $DestroyableElement;
+}(HTMLElement);
+document.register("x-destroy", {prototype: DestroyableElement.prototype});
 
 
 },{}]},{},[1])
@@ -5773,8 +5789,11 @@ main, x-slidable, x-richtexteditor, x-snowfall, x-deletable, x-bubble {
   display: none !important; }
 
 html {
-  background-image: url("/images/ios7.png");
+  background-image: url("/images/ios7_xlarge.png");
   height: 100%; }
+  @media only screen and (min-width:120.063em) {
+    html {
+      background-image: url("/images/ios7.png"); } }
 
 body {
   background-color: rgba(0, 0, 0, 0.4);
@@ -5812,7 +5831,7 @@ main {
     float: left;
     padding-top: 32px;
     padding-right: 20px;
-    background-color: #fafafa; }
+    background-color: #f0f4f4; }
   nav#intraSubjectNavigation ul {
     display: block;
     margin: 0;
@@ -6014,29 +6033,9 @@ main #newPostForm #buttons {
   float: left; }
 
 #newPostForm #buttons button {
-  margin-bottom: 0px;
   margin-left: 5px; }
 
 .publishButton {
-  border-style: solid;
-  border-width: 0px;
-  cursor: pointer;
-  font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
-  font-weight: normal;
-  line-height: normal;
-  margin: 0 0 1.25rem;
-  position: relative;
-  text-decoration: none;
-  text-align: center;
-  display: inline-block;
-  padding-top: 0.375rem;
-  padding-right: 0.75rem;
-  padding-bottom: 0.4375rem;
-  padding-left: 0.75rem;
-  /*     @else                            { font-size: $padding - rem-calc(2); } */
-  background-color: #e55b00;
-  border-color: #b74600;
-  color: white;
   border-style: solid;
   border-width: 0px;
   cursor: pointer;
@@ -6061,11 +6060,8 @@ main #newPostForm #buttons {
   padding-right: 0.9375rem;
   width: 16.66667%;
   float: right;
-  font-size: 0.75rem; }
-  .publishButton:hover, .publishButton:focus {
-    background-color: #b74600; }
-  .publishButton:hover, .publishButton:focus {
-    color: white; }
+  font-size: 0.75rem;
+  margin-bottom: 0px; }
   .publishButton:hover, .publishButton:focus {
     background-color: #b74600; }
   .publishButton:hover, .publishButton:focus {
@@ -6096,7 +6092,8 @@ main #newPostForm #buttons {
   padding-right: 0.9375rem;
   width: 16.66667%;
   float: right;
-  font-size: 0.75rem; }
+  font-size: 0.75rem;
+  margin-bottom: 0px; }
   .draftButton:hover, .draftButton:focus {
     background-color: #007295; }
   .draftButton:hover, .draftButton:focus {
@@ -6154,16 +6151,16 @@ article .postActions a, article .postActions nav#intraSubjectNavigation ul li a 
   text-decoration: none;
   text-align: center;
   display: inline-block;
-  padding-top: 0.25rem;
-  padding-right: 0.5rem;
-  padding-bottom: 0.3125rem;
-  padding-left: 0.5rem;
+  padding-top: 0.375rem;
+  padding-right: 0.75rem;
+  padding-bottom: 0.4375rem;
+  padding-left: 0.75rem;
   /*     @else                            { font-size: $padding - rem-calc(2); } */
   background-color: white;
   border-color: #cccccc;
   color: #333333;
-  font-size: 0.875rem;
-  margin-bottom: 8px;
+  font-size: 0.75rem;
+  margin-bottom: 0px;
   float: right; }
   article .postActions a:hover, article .postActions a:focus, article .postActions button:hover, article .postActions button:focus {
     background-color: #cccccc; }
@@ -6206,7 +6203,7 @@ body {
   margin-bottom: 0;
   max-width: 62.5rem;
   *zoom: 1;
-  background-color: #fafafa; }
+  background-color: #f0f4f4; }
   .toolbar:before, .toolbar:after {
     content: " ";
     display: table; }
@@ -6239,6 +6236,7 @@ body {
   width: 16.66667%;
   float: right;
   font-size: 0.75rem;
+  margin-bottom: 0px;
   margin-bottom: 0; }
   .toolbar button:hover, .toolbar button:focus {
     background-color: #007295; }
@@ -6254,9 +6252,9 @@ textarea, main #newPostForm x-richtexteditor {
   min-height: 50px; }
 
 #hand_in_slots, #handed_in_files {
+  margin-top: 20px;
   margin-left: 0;
-  list-style-type: none;
-  margin-top: 20px; }
+  list-style-type: none; }
   #hand_in_slots li, #handed_in_files li {
     width: 100%;
     margin-left: auto;
@@ -6266,76 +6264,86 @@ textarea, main #newPostForm x-richtexteditor {
     max-width: 62.5rem;
     *zoom: 1;
     background-color: white;
-    border-bottom: 1px solid grey;
+    border-bottom: 1px solid #e6e6e6;
     padding: 5px; }
     #hand_in_slots li:before, #hand_in_slots li:after, #handed_in_files li:before, #handed_in_files li:after {
       content: " ";
       display: table; }
     #hand_in_slots li:after, #handed_in_files li:after {
       clear: both; }
-    #hand_in_slots li .viewButton, #hand_in_slots li .uploadButton, #handed_in_files li .viewButton, #handed_in_files li .uploadButton {
-      border-style: solid;
-      border-width: 0px;
-      cursor: pointer;
-      font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
-      font-weight: normal;
-      line-height: normal;
-      margin: 0 0 1.25rem;
-      position: relative;
-      text-decoration: none;
-      text-align: center;
-      display: inline-block;
-      padding-top: 0.375rem;
-      padding-right: 0.75rem;
-      padding-bottom: 0.4375rem;
-      padding-left: 0.75rem;
-      /*     @else                            { font-size: $padding - rem-calc(2); } */
-      background-color: #00b700;
-      border-color: #029200;
-      color: white;
-      position: relative;
-      padding-left: 0.9375rem;
-      padding-right: 0.9375rem;
-      width: 16.66667%;
-      float: right;
-      font-size: 0.75rem;
-      margin-right: 5px; }
-      #hand_in_slots li .viewButton:hover, #hand_in_slots li .viewButton:focus, #hand_in_slots li .uploadButton:hover, #hand_in_slots li .uploadButton:focus, #handed_in_files li .viewButton:hover, #handed_in_files li .viewButton:focus, #handed_in_files li .uploadButton:hover, #handed_in_files li .uploadButton:focus {
-        background-color: #029200; }
-      #hand_in_slots li .viewButton:hover, #hand_in_slots li .viewButton:focus, #hand_in_slots li .uploadButton:hover, #hand_in_slots li .uploadButton:focus, #handed_in_files li .viewButton:hover, #handed_in_files li .viewButton:focus, #handed_in_files li .uploadButton:hover, #handed_in_files li .uploadButton:focus {
-        color: white; }
-    #hand_in_slots li .deleteButton, #handed_in_files li .deleteButton {
-      border-style: solid;
-      border-width: 0px;
-      cursor: pointer;
-      font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
-      font-weight: normal;
-      line-height: normal;
-      margin: 0 0 1.25rem;
-      position: relative;
-      text-decoration: none;
-      text-align: center;
-      display: inline-block;
-      padding-top: 0.375rem;
-      padding-right: 0.75rem;
-      padding-bottom: 0.4375rem;
-      padding-left: 0.75rem;
-      /*     @else                            { font-size: $padding - rem-calc(2); } */
-      background-color: #e55b00;
-      border-color: #b74600;
-      color: white;
-      position: relative;
-      padding-left: 0.9375rem;
-      padding-right: 0.9375rem;
-      width: 16.66667%;
-      float: right;
-      font-size: 0.75rem; }
-      #hand_in_slots li .deleteButton:hover, #hand_in_slots li .deleteButton:focus, #handed_in_files li .deleteButton:hover, #handed_in_files li .deleteButton:focus {
-        background-color: #b74600; }
-      #hand_in_slots li .deleteButton:hover, #hand_in_slots li .deleteButton:focus, #handed_in_files li .deleteButton:hover, #handed_in_files li .deleteButton:focus {
-        color: white; }
   #hand_in_slots li:last-child, #handed_in_files li:last-child {
     border-bottom: none; }
+  #hand_in_slots .viewButton, #hand_in_slots .uploadButton, #handed_in_files .viewButton, #handed_in_files .uploadButton {
+    border-style: solid;
+    border-width: 0px;
+    cursor: pointer;
+    font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+    font-weight: normal;
+    line-height: normal;
+    margin: 0 0 1.25rem;
+    position: relative;
+    text-decoration: none;
+    text-align: center;
+    display: inline-block;
+    padding-top: 0.375rem;
+    padding-right: 0.75rem;
+    padding-bottom: 0.4375rem;
+    padding-left: 0.75rem;
+    /*     @else                            { font-size: $padding - rem-calc(2); } */
+    background-color: #00b700;
+    border-color: #029200;
+    color: white;
+    position: relative;
+    padding-left: 0.9375rem;
+    padding-right: 0.9375rem;
+    width: 16.66667%;
+    float: right;
+    font-size: 0.75rem;
+    margin-bottom: 0px;
+    margin-right: 5px; }
+    #hand_in_slots .viewButton:hover, #hand_in_slots .viewButton:focus, #hand_in_slots .uploadButton:hover, #hand_in_slots .uploadButton:focus, #handed_in_files .viewButton:hover, #handed_in_files .viewButton:focus, #handed_in_files .uploadButton:hover, #handed_in_files .uploadButton:focus {
+      background-color: #029200; }
+    #hand_in_slots .viewButton:hover, #hand_in_slots .viewButton:focus, #hand_in_slots .uploadButton:hover, #hand_in_slots .uploadButton:focus, #handed_in_files .viewButton:hover, #handed_in_files .viewButton:focus, #handed_in_files .uploadButton:hover, #handed_in_files .uploadButton:focus {
+      color: white; }
+  #hand_in_slots .deleteButton, #handed_in_files .deleteButton {
+    border-style: solid;
+    border-width: 0px;
+    cursor: pointer;
+    font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+    font-weight: normal;
+    line-height: normal;
+    margin: 0 0 1.25rem;
+    position: relative;
+    text-decoration: none;
+    text-align: center;
+    display: inline-block;
+    padding-top: 0.375rem;
+    padding-right: 0.75rem;
+    padding-bottom: 0.4375rem;
+    padding-left: 0.75rem;
+    /*     @else                            { font-size: $padding - rem-calc(2); } */
+    background-color: #e55b00;
+    border-color: #b74600;
+    color: white;
+    position: relative;
+    padding-left: 0.9375rem;
+    padding-right: 0.9375rem;
+    width: 16.66667%;
+    float: right;
+    font-size: 0.75rem;
+    margin-bottom: 0px; }
+    #hand_in_slots .deleteButton:hover, #hand_in_slots .deleteButton:focus, #handed_in_files .deleteButton:hover, #handed_in_files .deleteButton:focus {
+      background-color: #b74600; }
+    #hand_in_slots .deleteButton:hover, #hand_in_slots .deleteButton:focus, #handed_in_files .deleteButton:hover, #handed_in_files .deleteButton:focus {
+      color: white; }
+  #hand_in_slots x-destroy ~ *, #handed_in_files x-destroy ~ * {
+    display: none; }
+  #hand_in_slots .submitted, #handed_in_files .submitted {
+    position: relative;
+    padding-left: 0.9375rem;
+    padding-right: 0.9375rem;
+    width: 8.33333%;
+    float: right; }
 </style></head>
   <body>
     {>"app/header/head.dust"/}
@@ -6349,7 +6357,6 @@ textarea, main #newPostForm x-richtexteditor {
 	  <x-slidable id="newSlotForm" hidden>
 	    <form method="post">
 	      <input type="text" name="name" placeholder="Title" aria-required="true" required/>
-	      <textarea name="description" placeholder="Description"></textarea>
 	      <button type="submit" class="publishButton">Submit</button>
 	    </form>
 	  </x-slidable>
@@ -6360,20 +6367,25 @@ textarea, main #newPostForm x-richtexteditor {
 	      {name}
 	      {@eq key=user.role value="student"}
 		{@pluck key=files value="user"}
-		  {@contains value=user._id}
-		    <span class="submitted">Submitted</span>
-		  {:else}
-		    <x-opendialog id="handInSlot{$idx}" action="/subjects/{subject._id}/hand_in/{_id}/files">
-		      <button class="uploadButton" cite="#handInSlot{$idx}">Upload</button>
-		    </x-opendialog>
-		  {/contains}
+		  {@stringify}		
+		    {@lacks value=user._id}
+		      <x-destroy id="destroy{$idx}">
+			<x-opendialog id="handInSlot{$idx}" action="/subjects/{subject._id}/hand_in/{_id}/files" cite="destroy{$idx}">
+			  <button class="uploadButton" cite="#handInSlot{$idx}">
+			    Submit		    
+			  </button>
+			</x-opendialog>
+		      </x-destroy>
+		    {/lacks}
+		  {/stringify}
 		{/pluck}
-		  {:else}
+		<span class="submitted"><i class="fi-check"></i></span>
+		{:else}
 		<button class="deleteButton">Delete</button>
 		<a href="/subjects/{subject._id}/hand_in/{_id}/files" class="viewButton">View</a>
 	      {/eq}
-	    </li>
-	  {/subject.hand_in}
+	    </li> 
+		{/subject.hand_in}
 	</ul>
       </div>
     </main>

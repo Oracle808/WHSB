@@ -29,8 +29,12 @@ dust.helpers.first = function(chunk, ctx, bodies, params) {
 };
 
 dust.helpers.contains = function(chunk, ctx, bodies, params) {
-    var key = params.key ? dust.helpers.tap(params.key, chunk, ctx) : ctx.get("selectKey");
-    var value = dust.heplers.tap(params.value, chunk, ctx);
+    try {
+	var key = params.key ? dust.helper.helpers.tap(params.key, chunk, ctx) : ctx.get("selectKey");
+	var value = dust.helper.helpers.tap(params.value, chunk, ctx);
+    } catch (e) {
+	throw e;
+    }
     if(key.indexOf(value) !== -1) {
 	if(bodies.block) {
 	    return chunk.render(bodies.block, ctx);
@@ -46,13 +50,66 @@ dust.helpers.contains = function(chunk, ctx, bodies, params) {
     }
 };
 
+dust.helpers.lacks = function(chunk, ctx, bodies, params) {
+    console.log("vcxvxccv");
+    try {
+	var key = params.key ? dust.helper.helpers.tap(params.key, chunk, ctx) : ctx.get("selectKey");
+	var value = dust.helper.helpers.tap(params.value, chunk, ctx);
+    } catch (e) {
+	throw e;
+    }
+    console.log(typeof key[0]);
+    console.log(typeof value);
+    if(key.indexOf(value) !== -1) {
+	if(bodies["else"]) {
+	    return chunk.render(bodies["else"], ctx);
+	} else {
+	    return chunk;
+	}
+    } else {
+	if(bodies.block) {
+	    return chunk.render(bodies.block, ctx);
+	} else {
+	    return chunk.write("lacks");
+	}
+    }
+};
+
 dust.helpers.pluck = function(chunk, ctx, bodies, params) {
     var key = dust.helpers.tap(params.key, chunk, ctx);
     var value = dust.helpers.tap(params.value, chunk, ctx);
+    console.log(key);
+    console.log(value);
     if(bodies.block) {
+	console.log(uu.pluck(key, value));
 	return chunk.render(bodies.block, ctx.push({isSelect: true, isResolved: false, selectKey: uu.pluck(key, value)}));
     } else {
 	return chunk;
+    }
+};
+
+dust.helpers.stringify = function(chunk, ctx, bodies, params) {
+    var key = (params && params.key) ? dust.helpers.tap(params.key, chunk, ctx) : ctx.get("selectKey");
+    if(uu.isArray(key)) {
+	key = uu.map(key, function(v) {
+	    return v.toString();
+	});
+    } else {
+	key = key.toString();
+    }
+    if(bodies.block) {
+	return chunk.render(bodies.block, ctx.push({isSelect: true, isResolved: false, selectKey: key}));
+    } else {
+	return chunk.write(key);
+    }
+};
+
+dust.helpers["typeof"] = function(chunk, ctx, bodies, params) {
+    var key = typeof ((params && params.key) ? dust.helpers.tap(params.key, chunk, ctx) : ctx.get("selectKey"));
+    if(bodies.block) {
+	return chunk.render(bodies.block, ctx.push({isSelect: true, isResolved: false, selectKey: key}));
+    } else {
+	return chunk.write(key);
     }
 };
 
@@ -107,6 +164,7 @@ module.exports.intercept = function(opts) {
 	    res.end(xml);
 	};
 	res.error = function(error) {
+	    console.log(error);
 	    if(!res.headersSent) {
 		res.writeHead(500);
 	    }

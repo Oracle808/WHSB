@@ -8,6 +8,9 @@
     <script src="app/subjects/polyfill.js"></script>
     <script src="components/x-bubble.js"></script>
     <script src="components/x-slidable.js"></script>
+    <script src="components/x-opendialog.js"></script>
+    <script src="components/x-destroy.js"></script>
+    <link href="/foundation-icons/foundation-icons.css" rel="stylesheet"/>
     {>"app/header/global.dust"/}
   </head>
   <body>
@@ -21,32 +24,37 @@
 	  </section>
 	  <x-slidable id="newSlotForm" hidden>
 	    <form method="post">
-	      <input type="text" placeholder="Title" aria-required="true" required/>
-	      <textarea placeholder="Description"></textarea>
-	      <button type="submit">Submit</button>
+	      <input type="text" name="name" placeholder="Title" aria-required="true" required/>
+	      <button type="submit" class="publishButton">Submit</button>
 	    </form>
 	  </x-slidable>
 	{/ne}
-	{#subject.hand_in}
-	  <article>
-	    <section class="slotHeading">
-	      <h2>{name}<small>{description}</small></h2>
-	    </section>
-	    <section class="slotActions">
-	      {@pluck key=files value="user"}
-		{@contains value=user._id}
-		  <span class="submitted">Submitted</span>
+	<ul id="hand_in_slots">
+	  {#subject.hand_in}
+	    <li>
+	      {name}
+	      {@eq key=user.role value="student"}
+		{@pluck key=files value="user"}
+		  {@stringify}		
+		    {@lacks value=user._id}
+		      <x-destroy id="destroy{$idx}">
+			<x-opendialog id="handInSlot{$idx}" action="/subjects/{subject._id}/hand_in/{_id}/files" cite="destroy{$idx}">
+			  <button class="uploadButton" cite="#handInSlot{$idx}">
+			    Submit		    
+			  </button>
+			</x-opendialog>
+		      </x-destroy>
+		    {/lacks}
+		  {/stringify}
+		{/pluck}
+		<span class="submitted"><i class="fi-check"></i></span>
 		{:else}
-		  {@eq key=user.role value="student"}
-		    <button>Submit</button>
-		  {:else}
-		    <button>View</button>
-		  {/eq}
-		{/contains}
-	      {/pluck}
-	    </section>
-	  </article>
-	{/subject.hand_in}
+		<button class="deleteButton">Delete</button>
+		<a href="/subjects/{subject._id}/hand_in/{_id}/files" class="viewButton">View</a>
+	      {/eq}
+	    </li> 
+		{/subject.hand_in}
+	</ul>
       </div>
     </main>
   </body>

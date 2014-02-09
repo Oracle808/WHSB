@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{quiz.title}</title>
+    <style src="app/subjects/subject.scss"></style>
+    <style src="app/header/head.scss"></style>
+    {>"app/header/global.dust"/}
+  </head>
+  <body>
+    {>"app/header/head.dust"/}
+    <main>
+      {>"app/subjects/nav.dust" active="quizzes"/}
+      <div>
+	{?attempt}
+	  <article>
+	    <h3>You got {attempt.score} out of {quiz.questions.length}</h3>
+	  </article>
+	{/attempt}
+	<article>
+	  <form method="post" action="/subjects/{subject._id}/quizzes/{quiz._id}">
+	    {#quiz.questions}
+	      <div class="question">
+		<p class="problem">
+		  <b>{problem}</b>
+		  {help_text}
+		</p>
+		{@typeof key=solution}
+		  {@eq value="number"}
+		    <input name="answer{$idx}" type="number" {?attempt} value="{attempt.answers[$idx]}" disabled {/attempt} aria-required="true" required/>
+		  {/eq}
+		  {@eq value="string"}
+		    <input name="answer{$idx}" type="text" {?attempt} value="{attempt.answers[$idx]}" disabled {/attempt} aria-required="true" required/>
+		  {/eq}
+		{/typeof}
+	      </div>
+	    {/quiz.questions}
+	    <button type="submit">Submit</button>
+	  </form>
+	</article>
+      </div>
+    </main>
+  </body>
+</html>

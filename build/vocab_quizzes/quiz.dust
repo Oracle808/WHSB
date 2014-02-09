@@ -5651,8 +5651,11 @@ main, x-slidable, x-richtexteditor, x-snowfall, x-deletable, x-bubble {
   display: none !important; }
 
 html {
-  background-image: url("/images/ios7.png");
+  background-image: url("/images/ios7_xlarge.png");
   height: 100%; }
+  @media only screen and (min-width:120.063em) {
+    html {
+      background-image: url("/images/ios7.png"); } }
 
 body {
   background-color: rgba(0, 0, 0, 0.4);
@@ -5690,7 +5693,7 @@ main {
     float: left;
     padding-top: 32px;
     padding-right: 20px;
-    background-color: #fafafa; }
+    background-color: #f0f4f4; }
   nav#intraSubjectNavigation ul {
     display: block;
     margin: 0;
@@ -5892,29 +5895,9 @@ main #newPostForm #buttons {
   float: left; }
 
 #newPostForm #buttons button {
-  margin-bottom: 0px;
   margin-left: 5px; }
 
 .publishButton {
-  border-style: solid;
-  border-width: 0px;
-  cursor: pointer;
-  font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
-  font-weight: normal;
-  line-height: normal;
-  margin: 0 0 1.25rem;
-  position: relative;
-  text-decoration: none;
-  text-align: center;
-  display: inline-block;
-  padding-top: 0.375rem;
-  padding-right: 0.75rem;
-  padding-bottom: 0.4375rem;
-  padding-left: 0.75rem;
-  /*     @else                            { font-size: $padding - rem-calc(2); } */
-  background-color: #e55b00;
-  border-color: #b74600;
-  color: white;
   border-style: solid;
   border-width: 0px;
   cursor: pointer;
@@ -5939,11 +5922,8 @@ main #newPostForm #buttons {
   padding-right: 0.9375rem;
   width: 16.66667%;
   float: right;
-  font-size: 0.75rem; }
-  .publishButton:hover, .publishButton:focus {
-    background-color: #b74600; }
-  .publishButton:hover, .publishButton:focus {
-    color: white; }
+  font-size: 0.75rem;
+  margin-bottom: 0px; }
   .publishButton:hover, .publishButton:focus {
     background-color: #b74600; }
   .publishButton:hover, .publishButton:focus {
@@ -5974,7 +5954,8 @@ main #newPostForm #buttons {
   padding-right: 0.9375rem;
   width: 16.66667%;
   float: right;
-  font-size: 0.75rem; }
+  font-size: 0.75rem;
+  margin-bottom: 0px; }
   .draftButton:hover, .draftButton:focus {
     background-color: #007295; }
   .draftButton:hover, .draftButton:focus {
@@ -6032,16 +6013,16 @@ article .postActions a, article .postActions nav#intraSubjectNavigation ul li a 
   text-decoration: none;
   text-align: center;
   display: inline-block;
-  padding-top: 0.25rem;
-  padding-right: 0.5rem;
-  padding-bottom: 0.3125rem;
-  padding-left: 0.5rem;
+  padding-top: 0.375rem;
+  padding-right: 0.75rem;
+  padding-bottom: 0.4375rem;
+  padding-left: 0.75rem;
   /*     @else                            { font-size: $padding - rem-calc(2); } */
   background-color: white;
   border-color: #cccccc;
   color: #333333;
-  font-size: 0.875rem;
-  margin-bottom: 8px;
+  font-size: 0.75rem;
+  margin-bottom: 0px;
   float: right; }
   article .postActions a:hover, article .postActions a:focus, article .postActions button:hover, article .postActions button:focus {
     background-color: #cccccc; }

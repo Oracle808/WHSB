@@ -1,0 +1,38 @@
+.toolbar {
+    @include grid-row();
+    background-color:$middleground;
+}
+
+.toolbar button {
+    @include small-button();
+    margin-bottom:0;
+}
+
+#newSlotForm {
+    background-color:$foreground;
+    margin-top:$content-margin;
+    padding:$content-margin;
+}
+
+textarea {
+    min-height:50px;
+}
+
+#hand_in_slots, #handed_in_files {
+    @include mobile-list();
+
+    .viewButton, .uploadButton {
+	@include small-button(#00b700);
+	margin-right:5px;
+    }
+    .deleteButton {
+	@include small-button($warning);
+    }
+
+    x-destroy ~ * {
+	display:none;
+    }
+    .submitted {
+	@include grid-column(1, $float:right);
+    }
+}
