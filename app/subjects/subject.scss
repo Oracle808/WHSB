@@ -1,9 +1,34 @@
-@import "foundation";
+@import "foundation/functions";
 
+// BACKGROUND
 $foreground: #fff;
 $middleground: #f0f4f4;
-$content-margin:20px;
+
+// SPACING
+$minor-margin: 5px;
+$content-margin: $minor-margin * 4;
+
+// COLOURS
 $info: #33b5e5;
+$warning: #e55b00;
+//$orange: #FF9900;
+$orange: #e58900;
+$red: #D84A33;
+$purple:#852b99;
+$green: #35aa47;
+
+// BUTTONS
+$button-tny: rem-calc(6);
+$button-sml: rem-calc(10);
+
+$button-font-tny: rem-calc(12);
+$button-font-sml: rem-calc(14);
+$button-margin-bottom: 0px;
+
+// SIDE NAV
+$side-nav-list-margin: 0px;
+
+@import "foundation";
 
 main, x-slidable, x-richtexteditor, x-snowfall, x-deletable, x-bubble {
     display:block;
@@ -24,14 +49,11 @@ body {
     }
     width:100%;
     height:100%;
-    z-index:-20;
 }
-
 
 x-snowfall {
     width:100%;
     height:100%;
-    z-index:-10;
     position:relative;
 }
 
@@ -52,32 +74,30 @@ main {
 }
 
 nav#intraSubjectNavigation {
+    @media #{$small-only} {
+	@include grid-column(3, $collapse: true, $pull: 3);
+    }
     @media #{$medium-up} {
 	& {
-	    @include grid-column(3);
-	    padding-top:32px;
-	    padding-right:20px;
+	    @include grid-column(3, $collapse: true);
 	    background-color:$middleground;
 	}
 	ul {
 	    @include side-nav();
 	}
-	ul li a:first-child {
-	    width:70%;
-	    display:inline-block;
+	h4 {
+	    padding-top:$content-margin;
 	}
-	ul li a + form {
-	    display:inline-block;
+	h4, form, ul li {
+	    padding-left:$content-margin;
+	    padding-right:$content-margin;
 	}
-	ul li a + a, ul li a + button, ul li a + form button {
-	    @extend  a;
-	    margin-left:40px;
-	    float:right;
-	    background-color:$foreground !important;
-	    padding:0 !important;
-	    margin-top:0 !important;
-	    margin-right:0 !important;
-	    margin-bottom:0 !important;
+	ul li {	    
+	    padding-top:$minor-margin;
+	    padding-bottom:$minor-margin;
+	}
+	ul li:hover {
+	    background-color:darken($middleground, 5%);
 	}
 	ul li.header {
 	    text-transform:uppercase;
@@ -90,9 +110,6 @@ nav#intraSubjectNavigation {
 	    @include button($full-width:true);
 	}
 
-    }
-    @media #{$small-only} {
-	display:none;
     }
 }
 
@@ -107,119 +124,6 @@ body main > div  {
 	height:100%;
 	overflow:auto;
     }
-}
-
-main #newPostForm {
-    @include content;
-    margin-left:0px;
-    margin-right:0px;
-}
-
-textarea {
-    resize:vertical;
-    outline:none;
-}
-
-main #newPostForm x-richtexteditor {
-    @extend textarea;
-    min-height:200px;
-}
-
-.toolbar ul {
-    @include button-group-container();
-    margin-right:10px;
-    display:inline-block;
-}
-
-.toolbar ul button {
-    @include button(
-	$padding:rem-calc(7),
-	$bg: $secondary-color
-    );
-    @include button-group-style(
-	$radius: true
-    );
-}
-
-main #newPostForm #buttons {
-    @include grid-column(12, $collapse:true);
-}
-
-$warning: #e55b00;
-
-
-#newPostForm #buttons {
-    @extend %button-group;
-}
-
-@mixin mini-button($colour:$primary-color, $float:left) {
-    @include button(rem-calc(6), $colour);
-    font-size:rem-calc(12);
-    margin-bottom:0px;
-    float:$float;
-}
-
-@mixin small-button($colour:$primary-color, $float:left) {
-    @include button(rem-calc(10), $colour);
-    font-size: rem-calc(14);
-    margin-bottom:0px;
-}
-
-.publishButton {
-    @include small-button($warning);
-}
-
-.draftButton {
-    @include small-button();
-}
-
-article {
-    @include content;
-}
-
-article .postHeading {
-    & {
-	@include grid-column(10, $collapse:true);
-    }
-    h2 {
-	margin-bottom:0;
-	font-weight:bold;
-    }
-    h2 a {
-	transition: color 0.3s ease-in-out;
-    }
-    h2 a:not(:hover) {
-	color:#333;
-    }
-}
-
-article .postActions {
-    & {
-	@include grid-column(2, $collapse: true);
-	float:right;
-    }
-    a, button {
-	@include mini-button($foreground, $float:right);
-    }
-}
-
-article .postMeta {
-    & {
-	@include grid-column(12, $collapse:true);
-    }
-    h6 {
-	font-weight:bold;
-	color:#777;
-    }
-    h6.indicatorDraft {
-	color:#e79e19;
-    }
-}
-
-article .postExcerpt {
-    @include grid-column(12, $collapse:true);
-    word-wrap:break-word;
-    text-align:justify;
 }
 
 #newLinkForm {
@@ -243,4 +147,10 @@ article .postExcerpt {
     li:last-child {
 	border-bottom:none;
     }
-}p
+}
+
+// bar
+%bar {
+    padding: $minor-margin;
+    background-color:$middleground;
+}

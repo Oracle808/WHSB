@@ -5,37 +5,46 @@
     font-family: "Consolas", "monospace";
 }
 
-button {
-    @include button(rem-calc(7));
-    font-size:rem-calc(14);
-    margin-left:5px;
+
+#actions {
+    @include button-group-container();
 }
 
-$red: #D84A33;
-$purple:#852b99;
-$green: #35aa47;
+#actions li {
+    @include button-group-style();
+}
+
+button {
+    @include button-size($button-sml);
+}
 
 button[cite="#codeBox"] {
-    background-color:$green;
+    @include button-style($green);
+ 
 }
 
 button[cite="#openFileDialog"] {
-    background-color:$purple;
+    @include button-style($purple);
 }
 
 button[cite="#saveFileDialog"] {
-    background-color:$red;
+    @include button-style($red);
+}
+
+button[cite="#documentation"] {
+    @include button-style($info);
+    float:right;
 }
 
 article .heading {
-    .buttons, .title {
+    #actions, #title, #links {
 	@include grid-column(4);
     }
-    .title {
+    #title {
 	text-align:center;
     }
 }
 
-article .editor {
+article .heding, article .editor {
     @include grid-column(12);
 }

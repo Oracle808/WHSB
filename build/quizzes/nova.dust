@@ -1401,7 +1401,7 @@ img {
   display: inline-block;
   vertical-align: middle; }
 
-textarea, main #newPostForm x-richtexteditor {
+textarea {
   height: auto;
   min-height: 50px; }
 
@@ -2202,9 +2202,9 @@ select {
   .accordion dd {
     display: block;
     margin-bottom: 0 !important; }
-    .accordion dd.active a, .accordion dd.active nav#intraSubjectNavigation ul li a + a, nav#intraSubjectNavigation ul li a + .accordion dd.active a, .accordion dd.active nav#intraSubjectNavigation ul li a + button, nav#intraSubjectNavigation ul li a + .accordion dd.active button, .accordion dd.active nav#intraSubjectNavigation ul li a + form button, nav#intraSubjectNavigation ul li a + form .accordion dd.active button {
+    .accordion dd.active a {
       background: #e8e8e8; }
-    .accordion dd > a, .accordion dd > nav#intraSubjectNavigation ul li a + a, nav#intraSubjectNavigation ul li a + .accordion dd > a, .accordion dd > nav#intraSubjectNavigation ul li a + button, nav#intraSubjectNavigation ul li a + .accordion dd > button, .accordion dd > nav#intraSubjectNavigation ul li a + form button, nav#intraSubjectNavigation ul li a + form .accordion dd > button {
+    .accordion dd > a {
       background: #efefef;
       color: #222222;
       padding: 1rem;
@@ -2598,24 +2598,24 @@ select {
     float: left;
     font-size: 0.6875rem;
     text-transform: uppercase; }
-    .breadcrumbs > *:hover a, .breadcrumbs > *:hover nav#intraSubjectNavigation ul li a + a, nav#intraSubjectNavigation ul li a + .breadcrumbs > *:hover a, .breadcrumbs > *:hover nav#intraSubjectNavigation ul li a + button, nav#intraSubjectNavigation ul li a + .breadcrumbs > *:hover button, .breadcrumbs > *:hover nav#intraSubjectNavigation ul li a + form button, nav#intraSubjectNavigation ul li a + form .breadcrumbs > *:hover button, .breadcrumbs > *:focus a, .breadcrumbs > *:focus nav#intraSubjectNavigation ul li a + a, nav#intraSubjectNavigation ul li a + .breadcrumbs > *:focus a, .breadcrumbs > *:focus nav#intraSubjectNavigation ul li a + button, nav#intraSubjectNavigation ul li a + .breadcrumbs > *:focus button, .breadcrumbs > *:focus nav#intraSubjectNavigation ul li a + form button, nav#intraSubjectNavigation ul li a + form .breadcrumbs > *:focus button {
+    .breadcrumbs > *:hover a, .breadcrumbs > *:focus a {
       text-decoration: underline; }
-    .breadcrumbs > * a, .breadcrumbs > * nav#intraSubjectNavigation ul li a + a, nav#intraSubjectNavigation ul li a + .breadcrumbs > * a, .breadcrumbs > * nav#intraSubjectNavigation ul li a + button, nav#intraSubjectNavigation ul li a + .breadcrumbs > * button, .breadcrumbs > * nav#intraSubjectNavigation ul li a + form button, nav#intraSubjectNavigation ul li a + form .breadcrumbs > * button, .breadcrumbs > * span {
+    .breadcrumbs > * a, .breadcrumbs > * span {
       text-transform: uppercase;
       color: #008cba; }
     .breadcrumbs > *.current {
       cursor: default;
       color: #333333; }
-      .breadcrumbs > *.current a, .breadcrumbs > *.current nav#intraSubjectNavigation ul li a + a, nav#intraSubjectNavigation ul li a + .breadcrumbs > *.current a, .breadcrumbs > *.current nav#intraSubjectNavigation ul li a + button, nav#intraSubjectNavigation ul li a + .breadcrumbs > *.current button, .breadcrumbs > *.current nav#intraSubjectNavigation ul li a + form button, nav#intraSubjectNavigation ul li a + form .breadcrumbs > *.current button {
+      .breadcrumbs > *.current a {
         cursor: default;
         color: #333333; }
-      .breadcrumbs > *.current:hover, .breadcrumbs > *.current:hover a, .breadcrumbs > *.current:hover nav#intraSubjectNavigation ul li a + a, nav#intraSubjectNavigation ul li a + .breadcrumbs > *.current:hover a, .breadcrumbs > *.current:hover nav#intraSubjectNavigation ul li a + button, nav#intraSubjectNavigation ul li a + .breadcrumbs > *.current:hover button, .breadcrumbs > *.current:hover nav#intraSubjectNavigation ul li a + form button, nav#intraSubjectNavigation ul li a + form .breadcrumbs > *.current:hover button, .breadcrumbs > *.current:focus, .breadcrumbs > *.current:focus a, .breadcrumbs > *.current:focus nav#intraSubjectNavigation ul li a + a, nav#intraSubjectNavigation ul li a + .breadcrumbs > *.current:focus a, .breadcrumbs > *.current:focus nav#intraSubjectNavigation ul li a + button, nav#intraSubjectNavigation ul li a + .breadcrumbs > *.current:focus button, .breadcrumbs > *.current:focus nav#intraSubjectNavigation ul li a + form button, nav#intraSubjectNavigation ul li a + form .breadcrumbs > *.current:focus button {
+      .breadcrumbs > *.current:hover, .breadcrumbs > *.current:hover a, .breadcrumbs > *.current:focus, .breadcrumbs > *.current:focus a {
         text-decoration: none; }
     .breadcrumbs > *.unavailable {
       color: #999999; }
-      .breadcrumbs > *.unavailable a, .breadcrumbs > *.unavailable nav#intraSubjectNavigation ul li a + a, nav#intraSubjectNavigation ul li a + .breadcrumbs > *.unavailable a, .breadcrumbs > *.unavailable nav#intraSubjectNavigation ul li a + button, nav#intraSubjectNavigation ul li a + .breadcrumbs > *.unavailable button, .breadcrumbs > *.unavailable nav#intraSubjectNavigation ul li a + form button, nav#intraSubjectNavigation ul li a + form .breadcrumbs > *.unavailable button {
+      .breadcrumbs > *.unavailable a {
         color: #999999; }
-      .breadcrumbs > *.unavailable:hover, .breadcrumbs > *.unavailable:hover a, .breadcrumbs > *.unavailable:hover nav#intraSubjectNavigation ul li a + a, nav#intraSubjectNavigation ul li a + .breadcrumbs > *.unavailable:hover a, .breadcrumbs > *.unavailable:hover nav#intraSubjectNavigation ul li a + button, nav#intraSubjectNavigation ul li a + .breadcrumbs > *.unavailable:hover button, .breadcrumbs > *.unavailable:hover nav#intraSubjectNavigation ul li a + form button, nav#intraSubjectNavigation ul li a + form .breadcrumbs > *.unavailable:hover button, .breadcrumbs > *.unavailable:focus, .breadcrumbs > *.unavailable a:focus {
+      .breadcrumbs > *.unavailable:hover, .breadcrumbs > *.unavailable:hover a, .breadcrumbs > *.unavailable:focus, .breadcrumbs > *.unavailable a:focus {
         text-decoration: none;
         color: #999999;
         cursor: default; }
@@ -2636,7 +2636,7 @@ button, .button {
   font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
   font-weight: normal;
   line-height: normal;
-  margin: 0 0 1.25rem;
+  margin: 0 0 0px;
   position: relative;
   text-decoration: none;
   text-align: center;
@@ -2694,18 +2694,18 @@ button, .button {
     font-size: 1.25rem;
     /*     @else                            { font-size: $padding - rem-calc(2); } */ }
   button.small, .button.small {
-    padding-top: 0.875rem;
-    padding-right: 1.75rem;
-    padding-bottom: 0.9375rem;
-    padding-left: 1.75rem;
-    font-size: 0.8125rem;
-    /*     @else                            { font-size: $padding - rem-calc(2); } */ }
-  button.tiny, .button.tiny {
     padding-top: 0.625rem;
     padding-right: 1.25rem;
     padding-bottom: 0.6875rem;
     padding-left: 1.25rem;
-    font-size: 0.6875rem;
+    font-size: 0.875rem;
+    /*     @else                            { font-size: $padding - rem-calc(2); } */ }
+  button.tiny, .button.tiny {
+    padding-top: 0.375rem;
+    padding-right: 0.75rem;
+    padding-bottom: 0.4375rem;
+    padding-left: 0.75rem;
+    font-size: 0.75rem;
     /*     @else                            { font-size: $padding - rem-calc(2); } */ }
   button.expand, .button.expand {
     padding-right: 0;
@@ -2808,14 +2808,14 @@ button, .button {
     border-color: rgba(255, 255, 255, 0.5); }
   .button-group.radius > *:last-child button, .button-group.radius > *:last-child .button {
     border-right: 0; }
-  .button-group.radius > *:first-child, .button-group.radius > *:first-child > a, .button-group.radius > *:first-child > nav#intraSubjectNavigation ul li a + a, nav#intraSubjectNavigation ul li a + .button-group.radius > *:first-child > a, .button-group.radius > *:first-child > nav#intraSubjectNavigation ul li a + button, nav#intraSubjectNavigation ul li a + .button-group.radius > *:first-child > button, .button-group.radius > *:first-child > nav#intraSubjectNavigation ul li a + form button, nav#intraSubjectNavigation ul li a + form .button-group.radius > *:first-child > button, .button-group.radius > *:first-child > button, .button-group.radius > *:first-child > .button {
+  .button-group.radius > *:first-child, .button-group.radius > *:first-child > a, .button-group.radius > *:first-child > button, .button-group.radius > *:first-child > .button {
     -moz-border-radius-bottomleft: 3px;
     -moz-border-radius-topleft: 3px;
     -webkit-border-bottom-left-radius: 3px;
     -webkit-border-top-left-radius: 3px;
     border-bottom-left-radius: 3px;
     border-top-left-radius: 3px; }
-  .button-group.radius > *:last-child, .button-group.radius > *:last-child > a, .button-group.radius > *:last-child > nav#intraSubjectNavigation ul li a + a, nav#intraSubjectNavigation ul li a + .button-group.radius > *:last-child > a, .button-group.radius > *:last-child > nav#intraSubjectNavigation ul li a + button, nav#intraSubjectNavigation ul li a + .button-group.radius > *:last-child > button, .button-group.radius > *:last-child > nav#intraSubjectNavigation ul li a + form button, nav#intraSubjectNavigation ul li a + form .button-group.radius > *:last-child > button, .button-group.radius > *:last-child > button, .button-group.radius > *:last-child > .button {
+  .button-group.radius > *:last-child, .button-group.radius > *:last-child > a, .button-group.radius > *:last-child > button, .button-group.radius > *:last-child > .button {
     -moz-border-radius-topright: 3px;
     -moz-border-radius-bottomright: 3px;
     -webkit-border-top-right-radius: 3px;
@@ -2827,14 +2827,14 @@ button, .button {
     border-color: rgba(255, 255, 255, 0.5); }
   .button-group.round > *:last-child button, .button-group.round > *:last-child .button {
     border-right: 0; }
-  .button-group.round > *:first-child, .button-group.round > *:first-child > a, .button-group.round > *:first-child > nav#intraSubjectNavigation ul li a + a, nav#intraSubjectNavigation ul li a + .button-group.round > *:first-child > a, .button-group.round > *:first-child > nav#intraSubjectNavigation ul li a + button, nav#intraSubjectNavigation ul li a + .button-group.round > *:first-child > button, .button-group.round > *:first-child > nav#intraSubjectNavigation ul li a + form button, nav#intraSubjectNavigation ul li a + form .button-group.round > *:first-child > button, .button-group.round > *:first-child > button, .button-group.round > *:first-child > .button {
+  .button-group.round > *:first-child, .button-group.round > *:first-child > a, .button-group.round > *:first-child > button, .button-group.round > *:first-child > .button {
     -moz-border-radius-bottomleft: 1000px;
     -moz-border-radius-topleft: 1000px;
     -webkit-border-bottom-left-radius: 1000px;
     -webkit-border-top-left-radius: 1000px;
     border-bottom-left-radius: 1000px;
     border-top-left-radius: 1000px; }
-  .button-group.round > *:last-child, .button-group.round > *:last-child > a, .button-group.round > *:last-child > nav#intraSubjectNavigation ul li a + a, nav#intraSubjectNavigation ul li a + .button-group.round > *:last-child > a, .button-group.round > *:last-child > nav#intraSubjectNavigation ul li a + button, nav#intraSubjectNavigation ul li a + .button-group.round > *:last-child > button, .button-group.round > *:last-child > nav#intraSubjectNavigation ul li a + form button, nav#intraSubjectNavigation ul li a + form .button-group.round > *:last-child > button, .button-group.round > *:last-child > button, .button-group.round > *:last-child > .button {
+  .button-group.round > *:last-child, .button-group.round > *:last-child > a, .button-group.round > *:last-child > button, .button-group.round > *:last-child > .button {
     -moz-border-radius-topright: 1000px;
     -moz-border-radius-bottomright: 1000px;
     -webkit-border-top-right-radius: 1000px;
@@ -3133,7 +3133,7 @@ button, .button {
     margin: 0; }
     .f-dropdown li:hover, .f-dropdown li:focus {
       background: #eeeeee; }
-    .f-dropdown li a, .f-dropdown li nav#intraSubjectNavigation ul li a + a, nav#intraSubjectNavigation ul li a + .f-dropdown li a, .f-dropdown li nav#intraSubjectNavigation ul li a + button, nav#intraSubjectNavigation ul li a + .f-dropdown li button, .f-dropdown li nav#intraSubjectNavigation ul li a + form button, nav#intraSubjectNavigation ul li a + form .f-dropdown li button {
+    .f-dropdown li a {
       display: block;
       padding: 0.5rem;
       color: #555555; }
@@ -3433,7 +3433,7 @@ span.postfix, label.postfix {
   border-bottom-right-radius: 1000px; }
 
 /* We use this to get basic styling on all basic form elements */
-input[type="text"], input[type="password"], input[type="date"], input[type="datetime"], input[type="datetime-local"], input[type="month"], input[type="week"], input[type="email"], input[type="number"], input[type="search"], input[type="tel"], input[type="time"], input[type="url"], textarea, main #newPostForm x-richtexteditor {
+input[type="text"], input[type="password"], input[type="date"], input[type="datetime"], input[type="datetime-local"], input[type="month"], input[type="week"], input[type="email"], input[type="number"], input[type="search"], input[type="tel"], input[type="time"], input[type="url"], textarea {
   -webkit-appearance: none;
   -webkit-border-radius: 0;
   border-radius: 0;
@@ -3526,7 +3526,7 @@ span.error, small.error {
   background: #f04124;
   color: white; }
 
-.error input, .error textarea, .error main #newPostForm x-richtexteditor, main #newPostForm .error x-richtexteditor, .error select {
+.error input, .error textarea, .error select {
   margin-bottom: 0; }
 .error label, .error label.error {
   color: #f04124; }
@@ -4023,20 +4023,20 @@ ul.pagination {
     color: #222222;
     font-size: 0.875rem;
     margin-left: 0.3125rem; }
-    ul.pagination li a, ul.pagination li nav#intraSubjectNavigation ul li a + a, nav#intraSubjectNavigation ul li a + ul.pagination li a, ul.pagination li nav#intraSubjectNavigation ul li a + button, nav#intraSubjectNavigation ul li a + ul.pagination li button, ul.pagination li nav#intraSubjectNavigation ul li a + form button, nav#intraSubjectNavigation ul li a + form ul.pagination li button {
+    ul.pagination li a {
       display: block;
       padding: 0.0625rem 0.625rem 0.0625rem;
       color: #999999;
       -webkit-border-radius: 3px;
       border-radius: 3px; }
-    ul.pagination li:hover a, ul.pagination li:hover nav#intraSubjectNavigation ul li a + a, nav#intraSubjectNavigation ul li a + ul.pagination li:hover a, ul.pagination li:hover nav#intraSubjectNavigation ul li a + button, nav#intraSubjectNavigation ul li a + ul.pagination li:hover button, ul.pagination li:hover nav#intraSubjectNavigation ul li a + form button, nav#intraSubjectNavigation ul li a + form ul.pagination li:hover button, ul.pagination li a:focus {
+    ul.pagination li:hover a, ul.pagination li a:focus {
       background: #e6e6e6; }
-    ul.pagination li.unavailable a, ul.pagination li.unavailable nav#intraSubjectNavigation ul li a + a, nav#intraSubjectNavigation ul li a + ul.pagination li.unavailable a, ul.pagination li.unavailable nav#intraSubjectNavigation ul li a + button, nav#intraSubjectNavigation ul li a + ul.pagination li.unavailable button, ul.pagination li.unavailable nav#intraSubjectNavigation ul li a + form button, nav#intraSubjectNavigation ul li a + form ul.pagination li.unavailable button {
+    ul.pagination li.unavailable a {
       cursor: default;
       color: #999999; }
-    ul.pagination li.unavailable:hover a, ul.pagination li.unavailable:hover nav#intraSubjectNavigation ul li a + a, nav#intraSubjectNavigation ul li a + ul.pagination li.unavailable:hover a, ul.pagination li.unavailable:hover nav#intraSubjectNavigation ul li a + button, nav#intraSubjectNavigation ul li a + ul.pagination li.unavailable:hover button, ul.pagination li.unavailable:hover nav#intraSubjectNavigation ul li a + form button, nav#intraSubjectNavigation ul li a + form ul.pagination li.unavailable:hover button, ul.pagination li.unavailable a:focus {
+    ul.pagination li.unavailable:hover a, ul.pagination li.unavailable a:focus {
       background: transparent; }
-    ul.pagination li.current a, ul.pagination li.current nav#intraSubjectNavigation ul li a + a, nav#intraSubjectNavigation ul li a + ul.pagination li.current a, ul.pagination li.current nav#intraSubjectNavigation ul li a + button, nav#intraSubjectNavigation ul li a + ul.pagination li.current button, ul.pagination li.current nav#intraSubjectNavigation ul li a + form button, nav#intraSubjectNavigation ul li a + form ul.pagination li.current button {
+    ul.pagination li.current a {
       background: #008cba;
       color: white;
       font-weight: bold;
@@ -4091,7 +4091,7 @@ ul.pagination {
       margin-bottom: 0.625rem; }
       .panel.callout h1.subheader, .panel.callout h2.subheader, .panel.callout h3.subheader, .panel.callout h4.subheader, .panel.callout h5.subheader, .panel.callout h6.subheader {
         line-height: 1.4; }
-    .panel.callout a, .panel.callout nav#intraSubjectNavigation ul li a + a, nav#intraSubjectNavigation ul li a + .panel.callout a, .panel.callout nav#intraSubjectNavigation ul li a + button, nav#intraSubjectNavigation ul li a + .panel.callout button, .panel.callout nav#intraSubjectNavigation ul li a + form button, nav#intraSubjectNavigation ul li a + form .panel.callout button {
+    .panel.callout a {
       color: #008cba; }
   .panel.radius {
     -webkit-border-radius: 3px;
@@ -4253,9 +4253,9 @@ ul.pagination {
   list-style-position: inside;
   font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif; }
   .side-nav li {
-    margin: 0 0 0.4375rem 0;
+    margin: 0px;
     font-size: 0.875rem; }
-    .side-nav li a, .side-nav li nav#intraSubjectNavigation ul li a + a, nav#intraSubjectNavigation ul li a + .side-nav li a, .side-nav li nav#intraSubjectNavigation ul li a + button, nav#intraSubjectNavigation ul li a + .side-nav li button, .side-nav li nav#intraSubjectNavigation ul li a + form button, nav#intraSubjectNavigation ul li a + form .side-nav li button {
+    .side-nav li a {
       display: block;
       color: #008cba; }
     .side-nav li.active > a:first-child {
@@ -4374,12 +4374,12 @@ ul.pagination {
     font-weight: normal;
     font-size: 0.875rem;
     color: #999999; }
-    .sub-nav dt a, .sub-nav dt nav#intraSubjectNavigation ul li a + a, nav#intraSubjectNavigation ul li a + .sub-nav dt a, .sub-nav dt nav#intraSubjectNavigation ul li a + button, nav#intraSubjectNavigation ul li a + .sub-nav dt button, .sub-nav dt nav#intraSubjectNavigation ul li a + form button, nav#intraSubjectNavigation ul li a + form .sub-nav dt button, .sub-nav dd a, .sub-nav dd nav#intraSubjectNavigation ul li a + a, nav#intraSubjectNavigation ul li a + .sub-nav dd a, .sub-nav dd nav#intraSubjectNavigation ul li a + button, nav#intraSubjectNavigation ul li a + .sub-nav dd button, .sub-nav dd nav#intraSubjectNavigation ul li a + form button, nav#intraSubjectNavigation ul li a + form .sub-nav dd button, .sub-nav li a, .sub-nav li nav#intraSubjectNavigation ul li a + a, nav#intraSubjectNavigation ul li a + .sub-nav li a, .sub-nav li nav#intraSubjectNavigation ul li a + button, nav#intraSubjectNavigation ul li a + .sub-nav li button, .sub-nav li nav#intraSubjectNavigation ul li a + form button, nav#intraSubjectNavigation ul li a + form .sub-nav li button {
+    .sub-nav dt a, .sub-nav dd a, .sub-nav li a {
       text-decoration: none;
       color: #999999; }
       .sub-nav dt a:hover, .sub-nav dd a:hover, .sub-nav li a:hover {
         color: #0087b1; }
-    .sub-nav dt.active a, .sub-nav dt.active nav#intraSubjectNavigation ul li a + a, nav#intraSubjectNavigation ul li a + .sub-nav dt.active a, .sub-nav dt.active nav#intraSubjectNavigation ul li a + button, nav#intraSubjectNavigation ul li a + .sub-nav dt.active button, .sub-nav dt.active nav#intraSubjectNavigation ul li a + form button, nav#intraSubjectNavigation ul li a + form .sub-nav dt.active button, .sub-nav dd.active a, .sub-nav dd.active nav#intraSubjectNavigation ul li a + a, nav#intraSubjectNavigation ul li a + .sub-nav dd.active a, .sub-nav dd.active nav#intraSubjectNavigation ul li a + button, nav#intraSubjectNavigation ul li a + .sub-nav dd.active button, .sub-nav dd.active nav#intraSubjectNavigation ul li a + form button, nav#intraSubjectNavigation ul li a + form .sub-nav dd.active button, .sub-nav li.active a, .sub-nav li.active nav#intraSubjectNavigation ul li a + a, nav#intraSubjectNavigation ul li a + .sub-nav li.active a, .sub-nav li.active nav#intraSubjectNavigation ul li a + button, nav#intraSubjectNavigation ul li a + .sub-nav li.active button, .sub-nav li.active nav#intraSubjectNavigation ul li a + form button, nav#intraSubjectNavigation ul li a + form .sub-nav li.active button {
+    .sub-nav dt.active a, .sub-nav dd.active a, .sub-nav li.active a {
       -webkit-border-radius: 3px;
       border-radius: 3px;
       font-weight: normal;
@@ -4577,7 +4577,7 @@ table {
     margin-bottom: 0 !important;
     top: 1px;
     float: left; }
-    .tabs dd > a, .tabs dd > nav#intraSubjectNavigation ul li a + a, nav#intraSubjectNavigation ul li a + .tabs dd > a, .tabs dd > nav#intraSubjectNavigation ul li a + button, nav#intraSubjectNavigation ul li a + .tabs dd > button, .tabs dd > nav#intraSubjectNavigation ul li a + form button, nav#intraSubjectNavigation ul li a + form .tabs dd > button {
+    .tabs dd > a {
       display: block;
       background: #efefef;
       color: #222222;
@@ -4589,16 +4589,16 @@ table {
       font-size: 1rem; }
       .tabs dd > a:hover {
         background: #e1e1e1; }
-    .tabs dd.active a, .tabs dd.active nav#intraSubjectNavigation ul li a + a, nav#intraSubjectNavigation ul li a + .tabs dd.active a, .tabs dd.active nav#intraSubjectNavigation ul li a + button, nav#intraSubjectNavigation ul li a + .tabs dd.active button, .tabs dd.active nav#intraSubjectNavigation ul li a + form button, nav#intraSubjectNavigation ul li a + form .tabs dd.active button {
+    .tabs dd.active a {
       background: white; }
-  .tabs.radius dd:first-child a, .tabs.radius dd:first-child nav#intraSubjectNavigation ul li a + a, nav#intraSubjectNavigation ul li a + .tabs.radius dd:first-child a, .tabs.radius dd:first-child nav#intraSubjectNavigation ul li a + button, nav#intraSubjectNavigation ul li a + .tabs.radius dd:first-child button, .tabs.radius dd:first-child nav#intraSubjectNavigation ul li a + form button, nav#intraSubjectNavigation ul li a + form .tabs.radius dd:first-child button {
+  .tabs.radius dd:first-child a {
     -moz-border-radius-bottomleft: 3px;
     -moz-border-radius-topleft: 3px;
     -webkit-border-bottom-left-radius: 3px;
     -webkit-border-top-left-radius: 3px;
     border-bottom-left-radius: 3px;
     border-top-left-radius: 3px; }
-  .tabs.radius dd:last-child a, .tabs.radius dd:last-child nav#intraSubjectNavigation ul li a + a, nav#intraSubjectNavigation ul li a + .tabs.radius dd:last-child a, .tabs.radius dd:last-child nav#intraSubjectNavigation ul li a + button, nav#intraSubjectNavigation ul li a + .tabs.radius dd:last-child button, .tabs.radius dd:last-child nav#intraSubjectNavigation ul li a + form button, nav#intraSubjectNavigation ul li a + form .tabs.radius dd:last-child button {
+  .tabs.radius dd:last-child a {
     -moz-border-radius-topright: 3px;
     -moz-border-radius-bottomright: 3px;
     -webkit-border-top-right-radius: 3px;
@@ -4794,7 +4794,7 @@ meta.foundation-mq-topbar {
       line-height: 45px;
       font-size: 1.0625rem;
       margin: 0; }
-      .top-bar .name h1 a, .top-bar .name h1 nav#intraSubjectNavigation ul li a + a, nav#intraSubjectNavigation ul li a + .top-bar .name h1 a, .top-bar .name h1 nav#intraSubjectNavigation ul li a + button, nav#intraSubjectNavigation ul li a + .top-bar .name h1 button, .top-bar .name h1 nav#intraSubjectNavigation ul li a + form button, nav#intraSubjectNavigation ul li a + form .top-bar .name h1 button {
+      .top-bar .name h1 a {
         font-weight: normal;
         color: white;
         width: 50%;
@@ -4804,7 +4804,7 @@ meta.foundation-mq-topbar {
     position: absolute;
     right: 0;
     top: 0; }
-    .top-bar .toggle-topbar a, .top-bar .toggle-topbar nav#intraSubjectNavigation ul li a + a, nav#intraSubjectNavigation ul li a + .top-bar .toggle-topbar a, .top-bar .toggle-topbar nav#intraSubjectNavigation ul li a + button, nav#intraSubjectNavigation ul li a + .top-bar .toggle-topbar button, .top-bar .toggle-topbar nav#intraSubjectNavigation ul li a + form button, nav#intraSubjectNavigation ul li a + form .top-bar .toggle-topbar button {
+    .top-bar .toggle-topbar a {
       color: white;
       text-transform: uppercase;
       font-size: 0.8125rem;
@@ -4819,7 +4819,7 @@ meta.foundation-mq-topbar {
       top: 50%;
       margin-top: -16px;
       padding-left: 40px; }
-      .top-bar .toggle-topbar.menu-icon a, .top-bar .toggle-topbar.menu-icon nav#intraSubjectNavigation ul li a + a, nav#intraSubjectNavigation ul li a + .top-bar .toggle-topbar.menu-icon a, .top-bar .toggle-topbar.menu-icon nav#intraSubjectNavigation ul li a + button, nav#intraSubjectNavigation ul li a + .top-bar .toggle-topbar.menu-icon button, .top-bar .toggle-topbar.menu-icon nav#intraSubjectNavigation ul li a + form button, nav#intraSubjectNavigation ul li a + form .top-bar .toggle-topbar.menu-icon button {
+      .top-bar .toggle-topbar.menu-icon a {
         height: 34px;
         line-height: 33px;
         padding: 0;
@@ -4841,7 +4841,7 @@ meta.foundation-mq-topbar {
     background: transparent; }
     .top-bar.expanded .title-area {
       background: #333333; }
-    .top-bar.expanded .toggle-topbar a, .top-bar.expanded .toggle-topbar nav#intraSubjectNavigation ul li a + a, nav#intraSubjectNavigation ul li a + .top-bar.expanded .toggle-topbar a, .top-bar.expanded .toggle-topbar nav#intraSubjectNavigation ul li a + button, nav#intraSubjectNavigation ul li a + .top-bar.expanded .toggle-topbar button, .top-bar.expanded .toggle-topbar nav#intraSubjectNavigation ul li a + form button, nav#intraSubjectNavigation ul li a + form .top-bar.expanded .toggle-topbar button {
+    .top-bar.expanded .toggle-topbar a {
       color: #888888; }
       .top-bar.expanded .toggle-topbar a span {
         -webkit-box-shadow: 0 10px 0 1px #888888, 0 16px 0 1px #888888, 0 22px 0 1px #888888;
@@ -4866,7 +4866,7 @@ meta.foundation-mq-topbar {
     clear: both;
     height: 1px;
     width: 100%; }
-  .top-bar-section ul li > a, .top-bar-section ul li > nav#intraSubjectNavigation ul li a + a, nav#intraSubjectNavigation ul li a + .top-bar-section ul li > a, .top-bar-section ul li > nav#intraSubjectNavigation ul li a + button, nav#intraSubjectNavigation ul li a + .top-bar-section ul li > button, .top-bar-section ul li > nav#intraSubjectNavigation ul li a + form button, nav#intraSubjectNavigation ul li a + form .top-bar-section ul li > button {
+  .top-bar-section ul li > a {
     display: block;
     width: 100%;
     color: white;
@@ -4895,10 +4895,10 @@ meta.foundation-mq-topbar {
       background: #f04124; }
       .top-bar-section ul li > a.button.alert:hover {
         background: #d4290f; }
-  .top-bar-section ul li:hover > a, .top-bar-section ul li:hover > nav#intraSubjectNavigation ul li a + a, nav#intraSubjectNavigation ul li a + .top-bar-section ul li:hover > a, .top-bar-section ul li:hover > nav#intraSubjectNavigation ul li a + button, nav#intraSubjectNavigation ul li a + .top-bar-section ul li:hover > button, .top-bar-section ul li:hover > nav#intraSubjectNavigation ul li a + form button, nav#intraSubjectNavigation ul li a + form .top-bar-section ul li:hover > button {
+  .top-bar-section ul li:hover > a {
     background: #272727;
     color: white; }
-  .top-bar-section ul li.active > a, .top-bar-section ul li.active > nav#intraSubjectNavigation ul li a + a, nav#intraSubjectNavigation ul li a + .top-bar-section ul li.active > a, .top-bar-section ul li.active > nav#intraSubjectNavigation ul li a + button, nav#intraSubjectNavigation ul li a + .top-bar-section ul li.active > button, .top-bar-section ul li.active > nav#intraSubjectNavigation ul li a + form button, nav#intraSubjectNavigation ul li a + form .top-bar-section ul li.active > button {
+  .top-bar-section ul li.active > a {
     background: #008cba;
     color: white; }
     .top-bar-section ul li.active > a:hover {
@@ -4933,14 +4933,14 @@ meta.foundation-mq-topbar {
     .top-bar-section .dropdown li {
       width: 100%;
       height: auto; }
-      .top-bar-section .dropdown li a, .top-bar-section .dropdown li nav#intraSubjectNavigation ul li a + a, nav#intraSubjectNavigation ul li a + .top-bar-section .dropdown li a, .top-bar-section .dropdown li nav#intraSubjectNavigation ul li a + button, nav#intraSubjectNavigation ul li a + .top-bar-section .dropdown li button, .top-bar-section .dropdown li nav#intraSubjectNavigation ul li a + form button, nav#intraSubjectNavigation ul li a + form .top-bar-section .dropdown li button {
+      .top-bar-section .dropdown li a {
         font-weight: normal;
         padding: 8px 15px; }
         .top-bar-section .dropdown li a.parent-link {
           font-weight: normal; }
       .top-bar-section .dropdown li.title h5 {
         margin-bottom: 0; }
-        .top-bar-section .dropdown li.title h5 a, .top-bar-section .dropdown li.title h5 nav#intraSubjectNavigation ul li a + a, nav#intraSubjectNavigation ul li a + .top-bar-section .dropdown li.title h5 a, .top-bar-section .dropdown li.title h5 nav#intraSubjectNavigation ul li a + button, nav#intraSubjectNavigation ul li a + .top-bar-section .dropdown li.title h5 button, .top-bar-section .dropdown li.title h5 nav#intraSubjectNavigation ul li a + form button, nav#intraSubjectNavigation ul li a + form .top-bar-section .dropdown li.title h5 button {
+        .top-bar-section .dropdown li.title h5 a {
           color: white;
           line-height: 22.5px;
           display: block; }
@@ -4973,7 +4973,7 @@ meta.foundation-mq-topbar {
       display: none; }
     .top-bar .title-area {
       float: left; }
-    .top-bar .name h1 a, .top-bar .name h1 nav#intraSubjectNavigation ul li a + a, nav#intraSubjectNavigation ul li a + .top-bar .name h1 a, .top-bar .name h1 nav#intraSubjectNavigation ul li a + button, nav#intraSubjectNavigation ul li a + .top-bar .name h1 button, .top-bar .name h1 nav#intraSubjectNavigation ul li a + form button, nav#intraSubjectNavigation ul li a + form .top-bar .name h1 button {
+    .top-bar .name h1 a {
       width: auto; }
     .top-bar input, .top-bar .button {
       font-size: 0.875rem;
@@ -5007,7 +5007,7 @@ meta.foundation-mq-topbar {
       background: #333333; }
       .top-bar-section li:not(.has-form) a:not(.button):hover {
         background: #272727; }
-    .top-bar-section .has-dropdown > a, .top-bar-section .has-dropdown > nav#intraSubjectNavigation ul li a + a, nav#intraSubjectNavigation ul li a + .top-bar-section .has-dropdown > a, .top-bar-section .has-dropdown > nav#intraSubjectNavigation ul li a + button, nav#intraSubjectNavigation ul li a + .top-bar-section .has-dropdown > button, .top-bar-section .has-dropdown > nav#intraSubjectNavigation ul li a + form button, nav#intraSubjectNavigation ul li a + form .top-bar-section .has-dropdown > button {
+    .top-bar-section .has-dropdown > a {
       padding-right: 35px !important; }
       .top-bar-section .has-dropdown > a:after {
         content: "";
@@ -5037,7 +5037,7 @@ meta.foundation-mq-topbar {
       top: auto;
       background: transparent;
       min-width: 100%; }
-      .top-bar-section .dropdown li a, .top-bar-section .dropdown li nav#intraSubjectNavigation ul li a + a, nav#intraSubjectNavigation ul li a + .top-bar-section .dropdown li a, .top-bar-section .dropdown li nav#intraSubjectNavigation ul li a + button, nav#intraSubjectNavigation ul li a + .top-bar-section .dropdown li button, .top-bar-section .dropdown li nav#intraSubjectNavigation ul li a + form button, nav#intraSubjectNavigation ul li a + form .top-bar-section .dropdown li button {
+      .top-bar-section .dropdown li a {
         color: white;
         line-height: 1;
         white-space: nowrap;
@@ -5070,10 +5070,10 @@ meta.foundation-mq-topbar {
       left: 0; }
       .top-bar-section .left li .dropdown li .dropdown {
         left: 100%; }
-  .no-js .top-bar-section ul li:hover > a, .no-js .top-bar-section ul li:hover > nav#intraSubjectNavigation ul li a + a, nav#intraSubjectNavigation ul li a + .no-js .top-bar-section ul li:hover > a, .no-js .top-bar-section ul li:hover > nav#intraSubjectNavigation ul li a + button, nav#intraSubjectNavigation ul li a + .no-js .top-bar-section ul li:hover > button, .no-js .top-bar-section ul li:hover > nav#intraSubjectNavigation ul li a + form button, nav#intraSubjectNavigation ul li a + form .no-js .top-bar-section ul li:hover > button {
+  .no-js .top-bar-section ul li:hover > a {
     background: #272727;
     color: white; }
-  .no-js .top-bar-section ul li:active > a, .no-js .top-bar-section ul li:active > nav#intraSubjectNavigation ul li a + a, nav#intraSubjectNavigation ul li a + .no-js .top-bar-section ul li:active > a, .no-js .top-bar-section ul li:active > nav#intraSubjectNavigation ul li a + button, nav#intraSubjectNavigation ul li a + .no-js .top-bar-section ul li:active > button, .no-js .top-bar-section ul li:active > nav#intraSubjectNavigation ul li a + form button, nav#intraSubjectNavigation ul li a + form .no-js .top-bar-section ul li:active > button {
+  .no-js .top-bar-section ul li:active > a {
     background: #008cba;
     color: white; }
   .no-js .top-bar-section .has-dropdown:hover > .dropdown {
@@ -5085,7 +5085,7 @@ div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, p, blockquote, t
   padding: 0; }
 
 /* Default Link Styles */
-a, nav#intraSubjectNavigation ul li a + a, nav#intraSubjectNavigation ul li a + button, nav#intraSubjectNavigation ul li a + form button {
+a {
   color: #008cba;
   text-decoration: none;
   line-height: inherit; }
@@ -5248,7 +5248,7 @@ blockquote {
     color: #555555; }
     blockquote cite:before {
       content: "\2014 \0020"; }
-    blockquote cite a, blockquote cite nav#intraSubjectNavigation ul li a + a, nav#intraSubjectNavigation ul li a + blockquote cite a, blockquote cite nav#intraSubjectNavigation ul li a + button, nav#intraSubjectNavigation ul li a + blockquote cite button, blockquote cite nav#intraSubjectNavigation ul li a + form button, nav#intraSubjectNavigation ul li a + form blockquote cite button, blockquote cite a:visited {
+    blockquote cite a, blockquote cite a:visited {
       color: #555555; }
 
 blockquote, blockquote p {
@@ -5308,7 +5308,7 @@ blockquote, blockquote p {
     /* Black prints faster: h5bp.com/s */
     box-shadow: none !important;
     text-shadow: none !important; }
-  a, nav#intraSubjectNavigation ul li a + a, nav#intraSubjectNavigation ul li a + button, nav#intraSubjectNavigation ul li a + form button, a:visited {
+  a, a:visited {
     text-decoration: underline; }
   a[href]:after {
     content: " (" attr(href) ")"; }
@@ -5486,7 +5486,7 @@ ul.off-canvas-list {
     border-top: 1px solid #5e5e5e;
     border-bottom: none;
     margin: 0; }
-  ul.off-canvas-list li a, ul.off-canvas-list li nav#intraSubjectNavigation ul li a + a, nav#intraSubjectNavigation ul li a + ul.off-canvas-list li a, ul.off-canvas-list li nav#intraSubjectNavigation ul li a + button, nav#intraSubjectNavigation ul li a + ul.off-canvas-list li button, ul.off-canvas-list li nav#intraSubjectNavigation ul li a + form button, nav#intraSubjectNavigation ul li a + form ul.off-canvas-list li button {
+  ul.off-canvas-list li a {
     display: block;
     padding: 0.66667rem;
     color: rgba(255, 255, 255, 0.7);
@@ -5785,23 +5785,17 @@ main, x-slidable, x-richtexteditor, x-snowfall, x-deletable, x-bubble {
 .jsmore {
   display: none !important; }
 
-html {
+body {
   background-image: url("/images/ios7_xlarge.png");
+  width: 100%;
   height: 100%; }
   @media only screen and (min-width:120.063em) {
-    html {
+    body {
       background-image: url("/images/ios7.png"); } }
-
-body {
-  background-color: rgba(0, 0, 0, 0.4);
-  width: 100%;
-  height: 100%;
-  z-index: -20; }
 
 x-snowfall {
   width: 100%;
   height: 100%;
-  z-index: -10;
   position: relative; }
 
 main {
@@ -5819,15 +5813,22 @@ main {
   main:after {
     clear: both; }
 
+@media only screen and (max-width: 40em) {
+  nav#intraSubjectNavigation {
+    position: relative;
+    padding-left: 0;
+    padding-right: 0;
+    width: 25%;
+    right: 25%;
+    left: auto;
+    float: left; } }
 @media only screen and (min-width:40.063em) {
   nav#intraSubjectNavigation {
     position: relative;
-    padding-left: 0.9375rem;
-    padding-right: 0.9375rem;
+    padding-left: 0;
+    padding-right: 0;
     width: 25%;
     float: left;
-    padding-top: 32px;
-    padding-right: 20px;
     background-color: #f0f4f4; }
   nav#intraSubjectNavigation ul {
     display: block;
@@ -5837,9 +5838,9 @@ main {
     list-style-position: inside;
     font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif; }
     nav#intraSubjectNavigation ul li {
-      margin: 0 0 0.4375rem 0;
+      margin: 0px;
       font-size: 0.875rem; }
-      nav#intraSubjectNavigation ul li a, nav#intraSubjectNavigation ul li nav#intraSubjectNavigation ul li a + a, nav#intraSubjectNavigation ul li a + nav#intraSubjectNavigation ul li a, nav#intraSubjectNavigation ul li nav#intraSubjectNavigation ul li a + button, nav#intraSubjectNavigation ul li a + nav#intraSubjectNavigation ul li button, nav#intraSubjectNavigation ul li nav#intraSubjectNavigation ul li a + form button, nav#intraSubjectNavigation ul li a + form nav#intraSubjectNavigation ul li button {
+      nav#intraSubjectNavigation ul li a {
         display: block;
         color: #008cba; }
       nav#intraSubjectNavigation ul li.active > a:first-child {
@@ -5852,19 +5853,16 @@ main {
         padding: 0;
         list-style: none;
         border-top-color: white; }
-  nav#intraSubjectNavigation ul li a:first-child {
-    width: 70%;
-    display: inline-block; }
-  nav#intraSubjectNavigation ul li a + form {
-    display: inline-block; }
-  nav#intraSubjectNavigation ul li a + a, nav#intraSubjectNavigation ul li a + nav#intraSubjectNavigation ul li a + a, nav#intraSubjectNavigation ul li a + nav#intraSubjectNavigation ul li a + a, nav#intraSubjectNavigation ul li a + nav#intraSubjectNavigation ul li a + button, nav#intraSubjectNavigation ul li a + nav#intraSubjectNavigation ul li a + button, nav#intraSubjectNavigation ul li a + nav#intraSubjectNavigation ul li a + form button, nav#intraSubjectNavigation ul li a + form nav#intraSubjectNavigation ul li a + button, nav#intraSubjectNavigation ul li a + button, nav#intraSubjectNavigation ul li a + form button {
-    margin-left: 40px;
-    float: right;
-    background-color: white !important;
-    padding: 0 !important;
-    margin-top: 0 !important;
-    margin-right: 0 !important;
-    margin-bottom: 0 !important; }
+  nav#intraSubjectNavigation h4 {
+    padding-top: 20px; }
+  nav#intraSubjectNavigation h4, nav#intraSubjectNavigation form, nav#intraSubjectNavigation ul li {
+    padding-left: 20px;
+    padding-right: 20px; }
+  nav#intraSubjectNavigation ul li {
+    padding-top: 5px;
+    padding-bottom: 5px; }
+  nav#intraSubjectNavigation ul li:hover {
+    background-color: #e1e9e9; }
   nav#intraSubjectNavigation ul li.header {
     text-transform: uppercase; }
   nav#intraSubjectNavigation #numberOfDrafts {
@@ -5889,7 +5887,7 @@ main {
     font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
     font-weight: normal;
     line-height: normal;
-    margin: 0 0 1.25rem;
+    margin: 0 0 0px;
     position: relative;
     text-decoration: none;
     text-align: center;
@@ -5912,9 +5910,6 @@ main {
       background-color: #007295; }
     nav#intraSubjectNavigation #newLink:hover, nav#intraSubjectNavigation #newLink:focus {
       color: white; } }
-@media only screen and (max-width: 40em) {
-  nav#intraSubjectNavigation {
-    display: none; } }
 
 @media only screen and (min-width:40.063em) {
   body main > div {
@@ -5934,260 +5929,10 @@ body main > div {
   height: 100%;
   overflow: auto; }
 
-main #newPostForm {
-  width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 0;
-  margin-bottom: 0;
-  max-width: 62.5rem;
-  *zoom: 1;
-  background-color: white;
-  margin-top: 20px;
-  padding: 20px;
-  margin-left: 0px;
-  margin-right: 0px; }
-  main #newPostForm:before, main #newPostForm:after {
-    content: " ";
-    display: table; }
-  main #newPostForm:after {
-    clear: both; }
-  main #newPostForm input, main #newPostForm input:focus, main #newPostForm select, main #newPostForm select:focus {
-    background-color: white; }
-
-textarea, main #newPostForm x-richtexteditor {
-  resize: vertical;
-  outline: none; }
-
-main #newPostForm x-richtexteditor {
-  min-height: 200px; }
-
-.toolbar ul {
-  list-style: none;
-  margin: 0;
-  *zoom: 1;
-  margin-right: 10px;
-  display: inline-block; }
-  .toolbar ul:before, .toolbar ul:after {
-    content: " ";
-    display: table; }
-  .toolbar ul:after {
-    clear: both; }
-
-.toolbar ul button {
-  border-style: solid;
-  border-width: 0px;
-  cursor: pointer;
-  font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
-  font-weight: normal;
-  line-height: normal;
-  margin: 0 0 1.25rem;
-  position: relative;
-  text-decoration: none;
-  text-align: center;
-  display: inline-block;
-  padding-top: 0.4375rem;
-  padding-right: 0.875rem;
-  padding-bottom: 0.5rem;
-  padding-left: 0.875rem;
-  /*     @else                            { font-size: $padding - rem-calc(2); } */
-  background-color: #e7e7e7;
-  border-color: #b9b9b9;
-  color: #333333;
-  margin: 0;
-  float: left; }
-  .toolbar ul button:hover, .toolbar ul button:focus {
-    background-color: #b9b9b9; }
-  .toolbar ul button:hover, .toolbar ul button:focus {
-    color: #333333; }
-  .toolbar ul button > button, .toolbar ul button .button {
-    border-right: 1px solid;
-    border-color: rgba(255, 255, 255, 0.5); }
-  .toolbar ul button:last-child button, .toolbar ul button:last-child .button {
-    border-right: 0; }
-  .toolbar ul button:first-child {
-    margin-left: 0; }
-  .toolbar ul button:first-child, .toolbar ul button:first-child > a, .toolbar ul button:first-child > nav#intraSubjectNavigation ul li a + a, nav#intraSubjectNavigation ul li a + .toolbar ul button:first-child > a, .toolbar ul button:first-child > nav#intraSubjectNavigation ul li a + button, nav#intraSubjectNavigation ul li a + .toolbar ul button:first-child > button, .toolbar ul button:first-child > nav#intraSubjectNavigation ul li a + form button, nav#intraSubjectNavigation ul li a + form .toolbar ul button:first-child > button, .toolbar ul button:first-child > button, .toolbar ul button:first-child > .button {
-    -moz-border-radius-bottomleft: 3px;
-    -moz-border-radius-topleft: 3px;
-    -webkit-border-bottom-left-radius: 3px;
-    -webkit-border-top-left-radius: 3px;
-    border-bottom-left-radius: 3px;
-    border-top-left-radius: 3px; }
-  .toolbar ul button:last-child, .toolbar ul button:last-child > a, .toolbar ul button:last-child > nav#intraSubjectNavigation ul li a + a, nav#intraSubjectNavigation ul li a + .toolbar ul button:last-child > a, .toolbar ul button:last-child > nav#intraSubjectNavigation ul li a + button, nav#intraSubjectNavigation ul li a + .toolbar ul button:last-child > button, .toolbar ul button:last-child > nav#intraSubjectNavigation ul li a + form button, nav#intraSubjectNavigation ul li a + form .toolbar ul button:last-child > button, .toolbar ul button:last-child > button, .toolbar ul button:last-child > .button {
-    -moz-border-radius-topright: 3px;
-    -moz-border-radius-bottomright: 3px;
-    -webkit-border-top-right-radius: 3px;
-    -webkit-border-bottom-right-radius: 3px;
-    border-top-right-radius: 3px;
-    border-bottom-right-radius: 3px; }
-
-main #newPostForm #buttons {
-  position: relative;
-  padding-left: 0;
-  padding-right: 0;
-  width: 100%;
-  float: left; }
-
-#newPostForm #buttons button {
-  margin-left: 5px; }
-
-.publishButton {
-  border-style: solid;
-  border-width: 0px;
-  cursor: pointer;
-  font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
-  font-weight: normal;
-  line-height: normal;
-  margin: 0 0 1.25rem;
-  position: relative;
-  text-decoration: none;
-  text-align: center;
-  display: inline-block;
-  padding-top: 0.375rem;
-  padding-right: 0.75rem;
-  padding-bottom: 0.4375rem;
-  padding-left: 0.75rem;
-  /*     @else                            { font-size: $padding - rem-calc(2); } */
-  background-color: #e55b00;
-  border-color: #b74600;
-  color: white;
-  position: relative;
-  padding-left: 0.9375rem;
-  padding-right: 0.9375rem;
-  width: 16.66667%;
-  float: right;
-  font-size: 0.75rem;
-  margin-bottom: 0px; }
-  .publishButton:hover, .publishButton:focus {
-    background-color: #b74600; }
-  .publishButton:hover, .publishButton:focus {
-    color: white; }
-
-.draftButton {
-  border-style: solid;
-  border-width: 0px;
-  cursor: pointer;
-  font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
-  font-weight: normal;
-  line-height: normal;
-  margin: 0 0 1.25rem;
-  position: relative;
-  text-decoration: none;
-  text-align: center;
-  display: inline-block;
-  padding-top: 0.375rem;
-  padding-right: 0.75rem;
-  padding-bottom: 0.4375rem;
-  padding-left: 0.75rem;
-  /*     @else                            { font-size: $padding - rem-calc(2); } */
-  background-color: #008cba;
-  border-color: #007295;
-  color: white;
-  position: relative;
-  padding-left: 0.9375rem;
-  padding-right: 0.9375rem;
-  width: 16.66667%;
-  float: right;
-  font-size: 0.75rem;
-  margin-bottom: 0px; }
-  .draftButton:hover, .draftButton:focus {
-    background-color: #007295; }
-  .draftButton:hover, .draftButton:focus {
-    color: white; }
-
-article {
-  width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 0;
-  margin-bottom: 0;
-  max-width: 62.5rem;
-  *zoom: 1;
-  background-color: white;
-  margin-top: 20px;
-  padding: 20px; }
-  article:before, article:after {
-    content: " ";
-    display: table; }
-  article:after {
-    clear: both; }
-  article input, article input:focus, article select, article select:focus {
-    background-color: white; }
-
-article .postHeading {
-  position: relative;
-  padding-left: 0;
-  padding-right: 0;
-  width: 83.33333%;
-  float: left; }
-article .postHeading h2 {
-  margin-bottom: 0;
-  font-weight: bold; }
-article .postHeading h2 a, article .postHeading h2 nav#intraSubjectNavigation ul li a + a, nav#intraSubjectNavigation ul li a + article .postHeading h2 a, article .postHeading h2 nav#intraSubjectNavigation ul li a + button, nav#intraSubjectNavigation ul li a + article .postHeading h2 button, article .postHeading h2 nav#intraSubjectNavigation ul li a + form button, nav#intraSubjectNavigation ul li a + form article .postHeading h2 button {
-  transition: color 0.3s ease-in-out; }
-article .postHeading h2 a:not(:hover) {
-  color: #333333; }
-
-article .postActions {
-  position: relative;
-  padding-left: 0;
-  padding-right: 0;
-  width: 16.66667%;
-  float: left;
-  float: right; }
-article .postActions a, article .postActions nav#intraSubjectNavigation ul li a + a, nav#intraSubjectNavigation ul li a + article .postActions a, article .postActions nav#intraSubjectNavigation ul li a + button, nav#intraSubjectNavigation ul li a + article .postActions button, article .postActions nav#intraSubjectNavigation ul li a + form button, nav#intraSubjectNavigation ul li a + form article .postActions button, article .postActions button {
-  border-style: solid;
-  border-width: 0px;
-  cursor: pointer;
-  font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
-  font-weight: normal;
-  line-height: normal;
-  margin: 0 0 1.25rem;
-  position: relative;
-  text-decoration: none;
-  text-align: center;
-  display: inline-block;
-  padding-top: 0.375rem;
-  padding-right: 0.75rem;
-  padding-bottom: 0.4375rem;
-  padding-left: 0.75rem;
-  /*     @else                            { font-size: $padding - rem-calc(2); } */
-  background-color: white;
-  border-color: #cccccc;
-  color: #333333;
-  font-size: 0.75rem;
-  margin-bottom: 0px;
-  float: right; }
-  article .postActions a:hover, article .postActions a:focus, article .postActions button:hover, article .postActions button:focus {
-    background-color: #cccccc; }
-  article .postActions a:hover, article .postActions a:focus, article .postActions button:hover, article .postActions button:focus {
-    color: #333333; }
-
-article .postMeta {
-  position: relative;
-  padding-left: 0;
-  padding-right: 0;
-  width: 100%;
-  float: left; }
-article .postMeta h6 {
-  font-weight: bold;
-  color: #777777; }
-article .postMeta h6.indicatorDraft {
-  color: #e79e19; }
-
-article .postExcerpt {
-  position: relative;
-  padding-left: 0;
-  padding-right: 0;
-  width: 100%;
-  float: left;
-  word-wrap: break-word;
-  text-align: justify; }
-
 #newLinkForm {
   background-color: white;
   padding: 20px; }
+
 
 body {
   padding-top: 45px; }
@@ -6218,69 +5963,13 @@ body {
   width: 66.66667%;
   float: left; }
 
-#createButton {
-  border-style: solid;
-  border-width: 0px;
-  cursor: pointer;
-  font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
-  font-weight: normal;
-  line-height: normal;
-  margin: 0 0 1.25rem;
-  position: relative;
-  text-decoration: none;
-  text-align: center;
-  display: inline-block;
-  padding-top: 0.375rem;
-  padding-right: 0.75rem;
-  padding-bottom: 0.4375rem;
-  padding-left: 0.75rem;
-  /*     @else                            { font-size: $padding - rem-calc(2); } */
-  background-color: #008cba;
-  border-color: #007295;
-  color: white;
-  position: relative;
-  padding-left: 0.9375rem;
-  padding-right: 0.9375rem;
-  width: 16.66667%;
-  float: right;
-  font-size: 0.75rem;
-  margin-bottom: 0px; }
-  #createButton:hover, #createButton:focus {
-    background-color: #007295; }
-  #createButton:hover, #createButton:focus {
-    color: white; }
-
-#submitButton {
-  border-style: solid;
-  border-width: 0px;
-  cursor: pointer;
-  font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
-  font-weight: normal;
-  line-height: normal;
-  margin: 0 0 1.25rem;
-  position: relative;
-  text-decoration: none;
-  text-align: center;
-  display: inline-block;
-  padding-top: 0.375rem;
-  padding-right: 0.75rem;
-  padding-bottom: 0.4375rem;
-  padding-left: 0.75rem;
-  /*     @else                            { font-size: $padding - rem-calc(2); } */
-  background-color: #008cba;
-  border-color: #007295;
-  color: white;
-  position: relative;
-  padding-left: 0.9375rem;
-  padding-right: 0.9375rem;
-  width: 16.66667%;
-  float: right;
-  font-size: 0.75rem;
-  margin-bottom: 0px; }
-  #submitButton:hover, #submitButton:focus {
-    background-color: #007295; }
-  #submitButton:hover, #submitButton:focus {
-    color: white; }
+#createButton, #submitButton {
+  padding-top: 0.625rem;
+  padding-right: 1.25rem;
+  padding-bottom: 0.6875rem;
+  padding-left: 1.25rem;
+  font-size: 0.875rem;
+  /*     @else                            { font-size: $padding - rem-calc(2); } */ }
 </style></head>
   <body>
     {>"app/header/head.dust"/}

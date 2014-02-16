@@ -32,7 +32,7 @@
 	<ul id="hand_in_slots">
 	  {#subject.hand_in}
 	    <li>
-	      {name}
+	      <a href="/subjects/{subject._id}/hand_in/{_id}/files">{name}</a>
 	      {@eq key=user.role value="student"}
 		{@pluck key=files value="user"}
 		  {@stringify}		
@@ -49,8 +49,7 @@
 		{/pluck}
 		<span class="submitted"><i class="fi-check"></i></span>
 		{:else}
-		<button class="deleteButton">Delete</button>
-		<a href="/subjects/{subject._id}/hand_in/{_id}/files" class="viewButton">View</a>
+		<button class="deleteButton"><i class="fi-x"></i></button>
 	      {/eq}
 	    </li> 
 		{/subject.hand_in}

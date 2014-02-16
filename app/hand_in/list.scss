@@ -1,11 +1,5 @@
 .toolbar {
-    @include grid-row();
-    background-color:$middleground;
-}
-
-.toolbar button {
-    @include small-button();
-    margin-bottom:0;
+    @extend %bar;
 }
 
 #newSlotForm {
@@ -21,17 +15,23 @@ textarea {
 #hand_in_slots, #handed_in_files {
     @include mobile-list();
 
-    .viewButton, .uploadButton {
-	@include small-button(#00b700);
-	margin-right:5px;
+    .uploadButton, .deleteButton {
+	@include button-size($button-sml);
+	@extend .right;
     }
+
+    .uploadButton {
+	@include button-style(#00b700);
+    }
+
     .deleteButton {
-	@include small-button($warning);
+	@include button-style($warning);
     }
 
     x-destroy ~ * {
 	display:none;
     }
+
     .submitted {
 	@include grid-column(1, $float:right);
     }

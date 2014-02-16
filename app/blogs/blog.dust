@@ -3,6 +3,7 @@
   <head>
     <title>{subject.title}</title>
     <style src="app/subjects/subject.scss"></style>
+    <style src="app/blogs/blog.scss"></style>
     <style src="app/header/head.scss"></style>
     <script src="app/subjects/polyfill.js"></script>
     <script src="components/x-slidable.js"></script>
@@ -19,6 +20,12 @@
       <main>
 	{>"app/subjects/nav.dust" active="blog"/}
 	<div>
+	  <div id="action-bar">
+	    <a href="/subjects/{subject._id}?nova=true" cite="#newPostForm">New Post <i class="fi-plus"></i></a>
+	    <button>New Image<i class="fi-plus"></i></button>
+	    <a href="/subjects/{subject._id}/feed" id="rss-link">RSS <i class="fi-rss"></i></a>
+	  </div>
+
 	  {@ne key=user.role value="student"}
 	    <x-slidable id="newPostForm" {^nova}class="jsmore" hidden{/nova}>
 	      <form action="/subjects/{subject._id}" method="post">

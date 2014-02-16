@@ -12,10 +12,6 @@
     @include grid-column(8);
 }
 
-#createButton {
-    @include small-button();
-}
-
-#submitButton {
-    @include small-button();
+#createButton, #submitButton {
+    @include button-size($button-sml);
 }

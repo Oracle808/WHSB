@@ -16,16 +16,16 @@
     <main>
       <article>
 	<header class="heading">
-	  <section class="buttons">
-	    <button cite="#codeBox"><i class="fi-play"></i></button>
-	    <button cite="#openFileDialog"><i class="fi-upload"></i></button>
-	    <button cite="#saveFileDialog"><i class="fi-archive"></i></button>
-	  </section>
-	  <section class="title">
+	  <ul id="actions">
+	    <li><button cite="#codeBox"><i class="fi-play"></i></button></li>
+	    <li><button cite="#openFileDialog"><i class="fi-upload"></i></button></li>
+	    <li><button cite="#saveFileDialog"><i class="fi-archive"></i></button></li>
+	  </ul>
+	  <section id="title">
 	    <h2>Codr</h2>
 	  </section>
-	  <section class="buttons">
-	    <button cite="#openDocs">Documentation</button>
+	  <section id="links">
+	    <button cite="#documentation">Documentation</button>
 	  </section>
 	</header>
 
@@ -42,3 +42,4 @@
     </main>
   </body>
 </html>
+
