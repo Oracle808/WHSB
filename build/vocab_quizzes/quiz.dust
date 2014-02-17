@@ -5651,9 +5651,21 @@ main, x-slidable, x-richtexteditor, x-snowfall, x-deletable, x-bubble {
   display: none !important; }
 
 body {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0;
+  margin-bottom: 0;
+  max-width: 62.5rem;
+  *zoom: 1;
   background-image: url("/images/ios7_xlarge.png");
   width: 100%;
   height: 100%; }
+  body:before, body:after {
+    content: " ";
+    display: table; }
+  body:after {
+    clear: both; }
   @media only screen and (min-width:120.063em) {
     body {
       background-image: url("/images/ios7.png"); } }
@@ -5663,136 +5675,115 @@ x-snowfall {
   height: 100%;
   position: relative; }
 
-main {
+nav#intraSubjectNavigation {
+  position: relative;
+  padding-left: 0.9375rem;
+  padding-right: 0.9375rem;
   width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 0;
-  margin-bottom: 0;
-  max-width: 62.5rem;
-  *zoom: 1;
-  height: 100%; }
-  main:before, main:after {
-    content: " ";
-    display: table; }
-  main:after {
-    clear: both; }
-
-@media only screen and (max-width: 40em) {
-  nav#intraSubjectNavigation {
-    position: relative;
-    padding-left: 0;
-    padding-right: 0;
-    width: 25%;
-    right: 25%;
-    left: auto;
-    float: left; } }
-@media only screen and (min-width:40.063em) {
-  nav#intraSubjectNavigation {
-    position: relative;
-    padding-left: 0;
-    padding-right: 0;
-    width: 25%;
-    float: left;
-    background-color: #f0f4f4; }
-  nav#intraSubjectNavigation ul {
-    display: block;
-    margin: 0;
-    padding: 0.875rem 0;
-    list-style-type: none;
-    list-style-position: inside;
-    font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif; }
+  float: left; }
+  @media only screen and (max-width: 40em) {
+    nav#intraSubjectNavigation {
+      position: relative;
+      padding-left: 0;
+      padding-right: 0;
+      width: 25%;
+      right: 25%;
+      left: auto;
+      float: left; } }
+  @media only screen and (min-width:40.063em) {
+    nav#intraSubjectNavigation {
+      position: relative;
+      padding-left: 0;
+      padding-right: 0;
+      width: 25%;
+      float: left;
+      background-color: #f0f4f4; }
+    nav#intraSubjectNavigation ~ main {
+      position: relative;
+      padding-left: 0.9375rem;
+      padding-right: 0.9375rem;
+      width: 75%;
+      float: left; }
+    nav#intraSubjectNavigation ul {
+      display: block;
+      margin: 0;
+      padding: 0.875rem 0;
+      list-style-type: none;
+      list-style-position: inside;
+      font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif; }
+      nav#intraSubjectNavigation ul li {
+        margin: 0px;
+        font-size: 0.875rem; }
+        nav#intraSubjectNavigation ul li a {
+          display: block;
+          color: #008cba; }
+        nav#intraSubjectNavigation ul li.active > a:first-child {
+          color: #4d4d4d;
+          font-weight: normal;
+          font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif; }
+        nav#intraSubjectNavigation ul li.divider {
+          border-top: 1px solid;
+          height: 0;
+          padding: 0;
+          list-style: none;
+          border-top-color: white; }
+    nav#intraSubjectNavigation h4 {
+      padding-top: 20px; }
+    nav#intraSubjectNavigation h4, nav#intraSubjectNavigation form, nav#intraSubjectNavigation ul li {
+      padding-left: 20px;
+      padding-right: 20px; }
     nav#intraSubjectNavigation ul li {
-      margin: 0px;
-      font-size: 0.875rem; }
-      nav#intraSubjectNavigation ul li a {
-        display: block;
-        color: #008cba; }
-      nav#intraSubjectNavigation ul li.active > a:first-child {
-        color: #4d4d4d;
-        font-weight: normal;
-        font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif; }
-      nav#intraSubjectNavigation ul li.divider {
-        border-top: 1px solid;
-        height: 0;
-        padding: 0;
-        list-style: none;
-        border-top-color: white; }
-  nav#intraSubjectNavigation h4 {
-    padding-top: 20px; }
-  nav#intraSubjectNavigation h4, nav#intraSubjectNavigation form, nav#intraSubjectNavigation ul li {
-    padding-left: 20px;
-    padding-right: 20px; }
-  nav#intraSubjectNavigation ul li {
-    padding-top: 5px;
-    padding-bottom: 5px; }
-  nav#intraSubjectNavigation ul li:hover {
-    background-color: #e1e9e9; }
-  nav#intraSubjectNavigation ul li.header {
-    text-transform: uppercase; }
-  nav#intraSubjectNavigation #numberOfDrafts {
-    font-weight: normal;
-    font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
-    text-align: center;
-    text-decoration: none;
-    line-height: 1;
-    white-space: nowrap;
-    display: inline-block;
-    position: relative;
-    margin-bottom: inherit;
-    padding: 0.25rem 0.5rem 0.375rem;
-    font-size: 0.6875rem;
-    background-color: #008cba;
-    color: white;
-    vertical-align: bottom; }
-  nav#intraSubjectNavigation #newLink {
-    border-style: solid;
-    border-width: 0px;
-    cursor: pointer;
-    font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
-    font-weight: normal;
-    line-height: normal;
-    margin: 0 0 0px;
-    position: relative;
-    text-decoration: none;
-    text-align: center;
-    display: inline-block;
-    padding-top: 1rem;
-    padding-right: 2rem;
-    padding-bottom: 1.0625rem;
-    padding-left: 2rem;
-    font-size: 1rem;
-    /*     @else                            { font-size: $padding - rem-calc(2); } */
-    padding-top: 1rem;
-    padding-bottom: 1.0625rem;
-    padding-right: 0;
-    padding-left: 0;
-    width: 100%;
-    background-color: #008cba;
-    border-color: #007295;
-    color: white; }
-    nav#intraSubjectNavigation #newLink:hover, nav#intraSubjectNavigation #newLink:focus {
-      background-color: #007295; }
-    nav#intraSubjectNavigation #newLink:hover, nav#intraSubjectNavigation #newLink:focus {
-      color: white; } }
-
-@media only screen and (min-width:40.063em) {
-  body main > div {
-    position: relative;
-    padding-left: 0.9375rem;
-    padding-right: 0.9375rem;
-    width: 75%;
-    float: left; } }
-@media only screen and (max-width: 40em) {
-  body main > div {
-    position: relative;
-    padding-left: 0.9375rem;
-    padding-right: 0.9375rem;
-    width: 100%;
-    float: left; } }
-body main > div {
-  height: 100%;
-  overflow: auto; }
+      padding-top: 5px;
+      padding-bottom: 5px; }
+    nav#intraSubjectNavigation ul li:hover {
+      background-color: #e1e9e9; }
+    nav#intraSubjectNavigation ul li.header {
+      text-transform: uppercase; }
+    nav#intraSubjectNavigation #numberOfDrafts {
+      font-weight: normal;
+      font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+      text-align: center;
+      text-decoration: none;
+      line-height: 1;
+      white-space: nowrap;
+      display: inline-block;
+      position: relative;
+      margin-bottom: inherit;
+      padding: 0.25rem 0.5rem 0.375rem;
+      font-size: 0.6875rem;
+      background-color: #008cba;
+      color: white;
+      vertical-align: bottom; }
+    nav#intraSubjectNavigation #newLink {
+      border-style: solid;
+      border-width: 0px;
+      cursor: pointer;
+      font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+      font-weight: normal;
+      line-height: normal;
+      margin: 0 0 0px;
+      position: relative;
+      text-decoration: none;
+      text-align: center;
+      display: inline-block;
+      padding-top: 1rem;
+      padding-right: 2rem;
+      padding-bottom: 1.0625rem;
+      padding-left: 2rem;
+      font-size: 1rem;
+      /*     @else                            { font-size: $padding - rem-calc(2); } */
+      padding-top: 1rem;
+      padding-bottom: 1.0625rem;
+      padding-right: 0;
+      padding-left: 0;
+      width: 100%;
+      background-color: #008cba;
+      border-color: #007295;
+      color: white; }
+      nav#intraSubjectNavigation #newLink:hover, nav#intraSubjectNavigation #newLink:focus {
+        background-color: #007295; }
+      nav#intraSubjectNavigation #newLink:hover, nav#intraSubjectNavigation #newLink:focus {
+        color: white; } }
 
 #newLinkForm {
   background-color: white;
@@ -5848,29 +5839,27 @@ body {
 </style></head>
   <body>
     {>"app/header/head.dust"/}
+    {>"app/subjects/nav.dust" active="vocab_quizzes"/}
     <main>
-      {>"app/subjects/nav.dust" active="vocab_quizzes"/}
-      <div>
-	{#quiz}
-	  <article class="container">
-	    <header class="postHeading">
-	      <h1>{title}</h1>
-	    </header>
-	    <section class="postActions">
-	      <a class="checkAnswers" cite="#quiz_{$idx}"><i class="fi-check" title="Check"></i></a>
-	      <a cite="#quiz_clear_{$idx}"><i class="fi-refresh" title="Redo"></i></a>
-	    </section>
-	    <x-clearable id="quiz_clear_{$idx}" readonly formnovalidate>
-	      <x-quiz id="quiz_{$idx}"class="postExcerpt">
-		{#body}
-		  <label>{question}</label>
-		  <input type="text" required {@first}autofocus{/first} pattern="{#answer}{.}{@sep}|{/sep}{/answer}"/>
-		{/body}
-	      </x-quiz>
-	    </x-clearable>
-	  </article>
-	{/quiz}
-      </div>
+      {#quiz}
+	<article class="container">
+	  <header class="postHeading">
+	    <h1>{title}</h1>
+	  </header>
+	  <section class="postActions">
+	    <a class="checkAnswers" cite="#quiz_{$idx}"><i class="fi-check" title="Check"></i></a>
+	    <a cite="#quiz_clear_{$idx}"><i class="fi-refresh" title="Redo"></i></a>
+	  </section>
+	  <x-clearable id="quiz_clear_{$idx}" readonly formnovalidate>
+	    <x-quiz id="quiz_{$idx}"class="postExcerpt">
+	      {#body}
+		<label>{question}</label>
+		<input type="text" required {@first}autofocus{/first} pattern="{#answer}{.}{@sep}|{/sep}{/answer}"/>
+	      {/body}
+	    </x-quiz>
+	  </x-clearable>
+	</article>
+      {/quiz}
     </main>
   </body>
 </html>

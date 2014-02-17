@@ -1457,7 +1457,7 @@ img {
   display: inline-block;
   vertical-align: middle; }
 
-textarea, main #newPostForm x-richtexteditor {
+textarea, #newPostForm x-richtexteditor {
   height: auto;
   min-height: 50px; }
 
@@ -3489,7 +3489,7 @@ span.postfix, label.postfix {
   border-bottom-right-radius: 1000px; }
 
 /* We use this to get basic styling on all basic form elements */
-input[type="text"], input[type="password"], input[type="date"], input[type="datetime"], input[type="datetime-local"], input[type="month"], input[type="week"], input[type="email"], input[type="number"], input[type="search"], input[type="tel"], input[type="time"], input[type="url"], textarea, main #newPostForm x-richtexteditor {
+input[type="text"], input[type="password"], input[type="date"], input[type="datetime"], input[type="datetime-local"], input[type="month"], input[type="week"], input[type="email"], input[type="number"], input[type="search"], input[type="tel"], input[type="time"], input[type="url"], textarea, #newPostForm x-richtexteditor {
   -webkit-appearance: none;
   -webkit-border-radius: 0;
   border-radius: 0;
@@ -3582,7 +3582,7 @@ span.error, small.error {
   background: #f04124;
   color: white; }
 
-.error input, .error textarea, .error main #newPostForm x-richtexteditor, main #newPostForm .error x-richtexteditor, .error select {
+.error input, .error textarea, .error #newPostForm x-richtexteditor, #newPostForm .error x-richtexteditor, .error select {
   margin-bottom: 0; }
 .error label, .error label.error {
   color: #f04124; }
@@ -5842,9 +5842,21 @@ main, x-slidable, x-richtexteditor, x-snowfall, x-deletable, x-bubble {
   display: none !important; }
 
 body {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0;
+  margin-bottom: 0;
+  max-width: 62.5rem;
+  *zoom: 1;
   background-image: url("/images/ios7_xlarge.png");
   width: 100%;
   height: 100%; }
+  body:before, body:after {
+    content: " ";
+    display: table; }
+  body:after {
+    clear: both; }
   @media only screen and (min-width:120.063em) {
     body {
       background-image: url("/images/ios7.png"); } }
@@ -5854,136 +5866,115 @@ x-snowfall {
   height: 100%;
   position: relative; }
 
-main {
+nav#intraSubjectNavigation {
+  position: relative;
+  padding-left: 0.9375rem;
+  padding-right: 0.9375rem;
   width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 0;
-  margin-bottom: 0;
-  max-width: 62.5rem;
-  *zoom: 1;
-  height: 100%; }
-  main:before, main:after {
-    content: " ";
-    display: table; }
-  main:after {
-    clear: both; }
-
-@media only screen and (max-width: 40em) {
-  nav#intraSubjectNavigation {
-    position: relative;
-    padding-left: 0;
-    padding-right: 0;
-    width: 25%;
-    right: 25%;
-    left: auto;
-    float: left; } }
-@media only screen and (min-width:40.063em) {
-  nav#intraSubjectNavigation {
-    position: relative;
-    padding-left: 0;
-    padding-right: 0;
-    width: 25%;
-    float: left;
-    background-color: #f0f4f4; }
-  nav#intraSubjectNavigation ul {
-    display: block;
-    margin: 0;
-    padding: 0.875rem 0;
-    list-style-type: none;
-    list-style-position: inside;
-    font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif; }
+  float: left; }
+  @media only screen and (max-width: 40em) {
+    nav#intraSubjectNavigation {
+      position: relative;
+      padding-left: 0;
+      padding-right: 0;
+      width: 25%;
+      right: 25%;
+      left: auto;
+      float: left; } }
+  @media only screen and (min-width:40.063em) {
+    nav#intraSubjectNavigation {
+      position: relative;
+      padding-left: 0;
+      padding-right: 0;
+      width: 25%;
+      float: left;
+      background-color: #f0f4f4; }
+    nav#intraSubjectNavigation ~ main {
+      position: relative;
+      padding-left: 0.9375rem;
+      padding-right: 0.9375rem;
+      width: 75%;
+      float: left; }
+    nav#intraSubjectNavigation ul {
+      display: block;
+      margin: 0;
+      padding: 0.875rem 0;
+      list-style-type: none;
+      list-style-position: inside;
+      font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif; }
+      nav#intraSubjectNavigation ul li {
+        margin: 0px;
+        font-size: 0.875rem; }
+        nav#intraSubjectNavigation ul li a {
+          display: block;
+          color: #008cba; }
+        nav#intraSubjectNavigation ul li.active > a:first-child {
+          color: #4d4d4d;
+          font-weight: normal;
+          font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif; }
+        nav#intraSubjectNavigation ul li.divider {
+          border-top: 1px solid;
+          height: 0;
+          padding: 0;
+          list-style: none;
+          border-top-color: white; }
+    nav#intraSubjectNavigation h4 {
+      padding-top: 20px; }
+    nav#intraSubjectNavigation h4, nav#intraSubjectNavigation form, nav#intraSubjectNavigation ul li {
+      padding-left: 20px;
+      padding-right: 20px; }
     nav#intraSubjectNavigation ul li {
-      margin: 0px;
-      font-size: 0.875rem; }
-      nav#intraSubjectNavigation ul li a {
-        display: block;
-        color: #008cba; }
-      nav#intraSubjectNavigation ul li.active > a:first-child {
-        color: #4d4d4d;
-        font-weight: normal;
-        font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif; }
-      nav#intraSubjectNavigation ul li.divider {
-        border-top: 1px solid;
-        height: 0;
-        padding: 0;
-        list-style: none;
-        border-top-color: white; }
-  nav#intraSubjectNavigation h4 {
-    padding-top: 20px; }
-  nav#intraSubjectNavigation h4, nav#intraSubjectNavigation form, nav#intraSubjectNavigation ul li {
-    padding-left: 20px;
-    padding-right: 20px; }
-  nav#intraSubjectNavigation ul li {
-    padding-top: 5px;
-    padding-bottom: 5px; }
-  nav#intraSubjectNavigation ul li:hover {
-    background-color: #e1e9e9; }
-  nav#intraSubjectNavigation ul li.header {
-    text-transform: uppercase; }
-  nav#intraSubjectNavigation #numberOfDrafts {
-    font-weight: normal;
-    font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
-    text-align: center;
-    text-decoration: none;
-    line-height: 1;
-    white-space: nowrap;
-    display: inline-block;
-    position: relative;
-    margin-bottom: inherit;
-    padding: 0.25rem 0.5rem 0.375rem;
-    font-size: 0.6875rem;
-    background-color: #008cba;
-    color: white;
-    vertical-align: bottom; }
-  nav#intraSubjectNavigation #newLink {
-    border-style: solid;
-    border-width: 0px;
-    cursor: pointer;
-    font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
-    font-weight: normal;
-    line-height: normal;
-    margin: 0 0 0px;
-    position: relative;
-    text-decoration: none;
-    text-align: center;
-    display: inline-block;
-    padding-top: 1rem;
-    padding-right: 2rem;
-    padding-bottom: 1.0625rem;
-    padding-left: 2rem;
-    font-size: 1rem;
-    /*     @else                            { font-size: $padding - rem-calc(2); } */
-    padding-top: 1rem;
-    padding-bottom: 1.0625rem;
-    padding-right: 0;
-    padding-left: 0;
-    width: 100%;
-    background-color: #008cba;
-    border-color: #007295;
-    color: white; }
-    nav#intraSubjectNavigation #newLink:hover, nav#intraSubjectNavigation #newLink:focus {
-      background-color: #007295; }
-    nav#intraSubjectNavigation #newLink:hover, nav#intraSubjectNavigation #newLink:focus {
-      color: white; } }
-
-@media only screen and (min-width:40.063em) {
-  body main > div {
-    position: relative;
-    padding-left: 0.9375rem;
-    padding-right: 0.9375rem;
-    width: 75%;
-    float: left; } }
-@media only screen and (max-width: 40em) {
-  body main > div {
-    position: relative;
-    padding-left: 0.9375rem;
-    padding-right: 0.9375rem;
-    width: 100%;
-    float: left; } }
-body main > div {
-  height: 100%;
-  overflow: auto; }
+      padding-top: 5px;
+      padding-bottom: 5px; }
+    nav#intraSubjectNavigation ul li:hover {
+      background-color: #e1e9e9; }
+    nav#intraSubjectNavigation ul li.header {
+      text-transform: uppercase; }
+    nav#intraSubjectNavigation #numberOfDrafts {
+      font-weight: normal;
+      font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+      text-align: center;
+      text-decoration: none;
+      line-height: 1;
+      white-space: nowrap;
+      display: inline-block;
+      position: relative;
+      margin-bottom: inherit;
+      padding: 0.25rem 0.5rem 0.375rem;
+      font-size: 0.6875rem;
+      background-color: #008cba;
+      color: white;
+      vertical-align: bottom; }
+    nav#intraSubjectNavigation #newLink {
+      border-style: solid;
+      border-width: 0px;
+      cursor: pointer;
+      font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+      font-weight: normal;
+      line-height: normal;
+      margin: 0 0 0px;
+      position: relative;
+      text-decoration: none;
+      text-align: center;
+      display: inline-block;
+      padding-top: 1rem;
+      padding-right: 2rem;
+      padding-bottom: 1.0625rem;
+      padding-left: 2rem;
+      font-size: 1rem;
+      /*     @else                            { font-size: $padding - rem-calc(2); } */
+      padding-top: 1rem;
+      padding-bottom: 1.0625rem;
+      padding-right: 0;
+      padding-left: 0;
+      width: 100%;
+      background-color: #008cba;
+      border-color: #007295;
+      color: white; }
+      nav#intraSubjectNavigation #newLink:hover, nav#intraSubjectNavigation #newLink:focus {
+        background-color: #007295; }
+      nav#intraSubjectNavigation #newLink:hover, nav#intraSubjectNavigation #newLink:focus {
+        color: white; } }
 
 #newLinkForm {
   background-color: white;
@@ -6026,11 +6017,11 @@ body main > div {
   #newPostForm input, #newPostForm input:focus, #newPostForm select, #newPostForm select:focus {
     background-color: white; }
 
-textarea, main #newPostForm x-richtexteditor {
+textarea, #newPostForm x-richtexteditor {
   resize: vertical;
   outline: none; }
 
-main #newPostForm x-richtexteditor {
+#newPostForm x-richtexteditor {
   min-height: 200px; }
 
 .toolbar ul {
@@ -6200,80 +6191,78 @@ body {
   <body>
     <x-snowfall count="800">
       {>"app/header/head.dust"/}
+      {>"app/subjects/nav.dust" active="blog"/}
       <main>
-	{>"app/subjects/nav.dust" active="blog"/}
-	<div>
-	  <div id="action-bar">
-	    <a href="/subjects/{subject._id}?nova=true" cite="#newPostForm">New Post <i class="fi-plus"></i></a>
-	    <button>New Image<i class="fi-plus"></i></button>
-	    <a href="/subjects/{subject._id}/feed" id="rss-link">RSS <i class="fi-rss"></i></a>
-	  </div>
-
-	  {@ne key=user.role value="student"}
-	    <x-slidable id="newPostForm" {^nova}class="jsmore" hidden{/nova}>
-	      <form action="/subjects/{subject._id}" method="post">
-		<input name="title" type="text" placeholder="Title" required/>
-		<div class="toolbar jsmore">
-		  <ul>
-		    <button exec="bold"><i class="fi-bold"></i></button>
-		    <button exec="italic"><i class="fi-italic"></i></button>
-		    <button exec="underline"><i class="fi-underline"></i></button>
-		  </ul>
-		  <ul>
-		    <button exec="insertOrderedList"><i class="fi-list-number"></i></button>
-		    <button exec="insertUnorderedList"><i class="fi-list-bullet"></i></button>
-		  </ul>
-		  <ul>
-		    <button exec="subscript"><i class="fi-subscript"></i></button>
-		    <button exec="superscript"><i class="fi-superscript"></i></button>
-		  </ul>
-		</div>
-		<br/>
-		<x-richtexteditor class="jsmore" for="#content"></x-richtexteditor>
-		<textarea name="body" class="jsless" id="content"></textarea>
-		<span id="buttons">
-		  <button type="submit" class="publishButton">Publish</button>
-		  <button type="submit" class="draftButton" formaction="/subjects/{subject._id}?drafts=true">Save As Draft</button>
-		</span>
-	      </form>
-	    </x-slidable>
-	  {/ne}
-
-	  {#blog}
-	    <x-deletable id="post_{$idx}">
-	      <article class="post">
-		<header class="postHeading">
-	    	  <h2><a href="/subjects/{subject._id}/posts/{_id}">{title}</a></h2>
-	  	</header>
-
-	  	<section class="postActions">
-	    	  {@ne key=user.role value="student"}
-	    	    <form action="/subjects/{subject._id}/posts/{_id}" method="post">
-	      	      <input type="hidden" name="_method" value="delete"/>
-	     	      <button class="deletePost" title="Remove" cite="#post_{$idx}" type="submit"><i class="fi-x"></i></button>
-	    	    </form>
-	    	    <button class="editPost" title="Edit"><i class="fi-pencil"></i></button>
-	    	    {?draft}
-	    	      <button class="publishPost" title="Publish"><i class="fi-check"></i></button>
-	   	    {/draft}
-	    	  {/ne}
-	  	</section>	   
-
-	  	<section class="postMeta">
-	    	  {?draft}
-	    	    <h6 class="indicatorDraft">Draft</h6>
-	    	  {:else}
-	    	    <h6>Published on {date}</h6>
-	    	  {/draft}
-	  	</section>
-
-	  	<section class="postExcerpt">
-	  	  {body|s}
-	  	</section>
-	      </article>
-	    </x-deletable>
-	  {/blog}
+	<div id="action-bar">
+	  <a href="/subjects/{subject._id}?nova=true" cite="#newPostForm">New Post <i class="fi-plus"></i></a>
+	  <button>New Image<i class="fi-plus"></i></button>
+	  <a href="/subjects/{subject._id}/feed" id="rss-link">RSS <i class="fi-rss"></i></a>
 	</div>
+
+	{@ne key=user.role value="student"}
+	  <x-slidable id="newPostForm" {^nova}class="jsmore" hidden{/nova}>
+	    <form action="/subjects/{subject._id}" method="post">
+	      <input name="title" type="text" placeholder="Title" required/>
+	      <div class="toolbar jsmore">
+		<ul>
+		  <button exec="bold"><i class="fi-bold"></i></button>
+		  <button exec="italic"><i class="fi-italic"></i></button>
+		  <button exec="underline"><i class="fi-underline"></i></button>
+		</ul>
+		<ul>
+		  <button exec="insertOrderedList"><i class="fi-list-number"></i></button>
+		  <button exec="insertUnorderedList"><i class="fi-list-bullet"></i></button>
+		</ul>
+		<ul>
+		  <button exec="subscript"><i class="fi-subscript"></i></button>
+		  <button exec="superscript"><i class="fi-superscript"></i></button>
+		</ul>
+	      </div>
+	      <br/>
+	      <x-richtexteditor class="jsmore" for="#content"></x-richtexteditor>
+	      <textarea name="body" class="jsless" id="content"></textarea>
+	      <span id="buttons">
+		<button type="submit" class="publishButton">Publish</button>
+		<button type="submit" class="draftButton" formaction="/subjects/{subject._id}?drafts=true">Save As Draft</button>
+	      </span>
+	    </form>
+	  </x-slidable>
+	{/ne}
+
+	{#blog}
+	  <x-deletable id="post_{$idx}">
+	    <article class="post">
+	      <header class="postHeading">
+	    	<h2><a href="/subjects/{subject._id}/posts/{_id}">{title}</a></h2>
+	      </header>
+
+	      <section class="postActions">
+	    	{@ne key=user.role value="student"}
+	    	  <form action="/subjects/{subject._id}/posts/{_id}" method="post">
+	      	    <input type="hidden" name="_method" value="delete"/>
+	     	    <button class="deletePost" title="Remove" cite="#post_{$idx}" type="submit"><i class="fi-x"></i></button>
+	    	  </form>
+	    	  <button class="editPost" title="Edit"><i class="fi-pencil"></i></button>
+	    	  {?draft}
+	    	    <button class="publishPost" title="Publish"><i class="fi-check"></i></button>
+	   	  {/draft}
+	    	{/ne}
+	      </section>	   
+
+	      <section class="postMeta">
+	    	{?draft}
+	    	  <h6 class="indicatorDraft">Draft</h6>
+	    	{:else}
+	    	  <h6>Published on {date}</h6>
+	    	{/draft}
+	      </section>
+
+	      <section class="postExcerpt">
+	  	{body|s}
+	      </section>
+	    </article>
+	  </x-deletable>
+	{/blog}
       </main>
     </x-snowfall>
   </body>

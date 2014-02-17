@@ -43,6 +43,7 @@ main, x-slidable, x-richtexteditor, x-snowfall, x-deletable, x-bubble {
 }
 
 body {
+    @include grid-row();
     background-image:url("/images/ios7_xlarge.png");
     @media #{$xxlarge-up} {
 	background-image:url("/images/ios7.png");
@@ -57,11 +58,6 @@ x-snowfall {
     position:relative;
 }
 
-main {
-    @include grid-row();
-    height:100%;
-}
-
 @mixin content {
     @include grid-row();
     background-color:$foreground;
@@ -74,6 +70,7 @@ main {
 }
 
 nav#intraSubjectNavigation {
+    @include grid-column(12);
     @media #{$small-only} {
 	@include grid-column(3, $collapse: true, $pull: 3);
     }
@@ -81,6 +78,9 @@ nav#intraSubjectNavigation {
 	& {
 	    @include grid-column(3, $collapse: true);
 	    background-color:$middleground;
+	}
+	& ~ main {
+	    @include grid-column(9);
 	}
 	ul {
 	    @include side-nav();
@@ -110,19 +110,6 @@ nav#intraSubjectNavigation {
 	    @include button($full-width:true);
 	}
 
-    }
-}
-
-body main > div  {
-    @media #{$medium-up} {
-	@include grid-column(9);
-    }
-    @media #{$small-only} {
-	@include grid-column(12);
-    }
-    & {
-	height:100%;
-	overflow:auto;
     }
 }
 

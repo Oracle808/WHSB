@@ -14,9 +14,8 @@
   </head>
   <body>
     {>"app/header/head.dust"/}
+    {>"app/subjects/nav.dust"/}
     <main>
-      {>"app/subjects/nav.dust"/}
-      <div>
 	  <x-appendable id="newQuestion" to="questions">
 	    <article>
 	      <input type="text" name="questions" placeholder="Question" aria-required="true" required/>
@@ -39,7 +38,6 @@
 	    </header>
 	    <div id="questions"></div>
 	  </form>
-      </div>
     </main>
   </body>
 </html>

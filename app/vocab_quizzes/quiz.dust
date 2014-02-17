@@ -12,29 +12,27 @@
   </head>
   <body>
     {>"app/header/head.dust"/}
+    {>"app/subjects/nav.dust" active="vocab_quizzes"/}
     <main>
-      {>"app/subjects/nav.dust" active="vocab_quizzes"/}
-      <div>
-	{#quiz}
-	  <article class="container">
-	    <header class="postHeading">
-	      <h1>{title}</h1>
-	    </header>
-	    <section class="postActions">
-	      <a class="checkAnswers" cite="#quiz_{$idx}"><i class="fi-check" title="Check"></i></a>
-	      <a cite="#quiz_clear_{$idx}"><i class="fi-refresh" title="Redo"></i></a>
-	    </section>
-	    <x-clearable id="quiz_clear_{$idx}" readonly formnovalidate>
-	      <x-quiz id="quiz_{$idx}"class="postExcerpt">
-		{#body}
-		  <label>{question}</label>
-		  <input type="text" required {@first}autofocus{/first} pattern="{#answer}{.}{@sep}|{/sep}{/answer}"/>
-		{/body}
-	      </x-quiz>
-	    </x-clearable>
-	  </article>
-	{/quiz}
-      </div>
+      {#quiz}
+	<article class="container">
+	  <header class="postHeading">
+	    <h1>{title}</h1>
+	  </header>
+	  <section class="postActions">
+	    <a class="checkAnswers" cite="#quiz_{$idx}"><i class="fi-check" title="Check"></i></a>
+	    <a cite="#quiz_clear_{$idx}"><i class="fi-refresh" title="Redo"></i></a>
+	  </section>
+	  <x-clearable id="quiz_clear_{$idx}" readonly formnovalidate>
+	    <x-quiz id="quiz_{$idx}"class="postExcerpt">
+	      {#body}
+		<label>{question}</label>
+		<input type="text" required {@first}autofocus{/first} pattern="{#answer}{.}{@sep}|{/sep}{/answer}"/>
+	      {/body}
+	    </x-quiz>
+	  </x-clearable>
+	</article>
+      {/quiz}
     </main>
   </body>
 </html>

@@ -11,18 +11,16 @@
   </head>
   <body>
     {>"app/header/head.dust"/}
+    {>"app/subjects/nav.dust" active=route/}
     <main>
-      {>"app/subjects/nav.dust" active=route/}
-      <div>
-	<article>
-	  <h1>{title}</h1>
-	</article>
-	<ol id="quizzes">
-	  {#quizzes}
-	    <li><a href="/subjects/{subject._id}/{route}/{_id}">{title}</a></li>
-	  {/quizzes}
-	</ol> 
-      </div>
-    </main>
+      <article>
+	<h1>{title}</h1>
+      </article>
+      <ol id="quizzes">
+	{#quizzes}
+	  <li><a href="/subjects/{subject._id}/{route}/{_id}">{title}</a></li>
+	{/quizzes}
+      </ol> 
+    </main> 
   </body>
 </html>
