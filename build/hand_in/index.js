@@ -4,6 +4,7 @@ var listView = require("./list.dust");
 var detailView = require("./detail.dust");
 var GridFS = require("../../models/gridfs.common");
 var uu = require("underscore");
+var async = require("async");
 
 var index = function(req, res) {
     Subject.findById(req.param("subject")).exec(function(err, doc) {
@@ -59,7 +60,7 @@ var upload = function(req, res) {
 				store.close();
 			    });
 			}
-		    }); 
+		    });
 		});
 		req.busboy.on("end", function() {
 		    if(previousFile) {
@@ -90,9 +91,42 @@ var download = function(req, res) {
     GridFS.getGridFile(req.param("file"), function(err, file) {
 	if(err) {
 	    res.error(err);
-	} else { 
+	} else {
 	    res.attachment(file.filename);
 	    file.stream(true).pipe(res);
+	}
+    });
+};
+
+var del = function(req, res) {
+    Subject.findById(req.param("subject")).exec(function(err, doc) {
+	if(err) {
+	    res.error(err);
+	} else {
+	    var hand_in_slot;
+	    for(var i = 0; i < doc.hand_in.length; i++) {
+		if(doc.hand_in[i]._id.equals(req.param("hand_in_slot"))) {
+		    hand_in_slot = doc.hand_in[i];
+		}
+	    }
+	    if(!hand_in_slot) {
+		res.error("Hand in slot doesn't exist");
+	    } else {
+		async.each(uu.pluck(hand_in_slot.files, "file"), GridFS.deleteGridFile, function(err) {
+		    if(err) {
+			res.error(err);
+		    } else {
+			doc.hand_in.pull(hand_in_slot);
+			doc.save(function(err) {
+			    if(err) {
+				res.error(err);
+			    } else {
+				res.dust(listView, {subject:doc});
+			    }
+			});
+		    }
+		});
+	    }
 	}
     });
 };
@@ -102,3 +136,4 @@ exports.post = post;
 exports.upload = upload;
 exports.get = get;
 exports.download = download;
+exports.del = del;

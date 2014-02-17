@@ -6042,7 +6042,10 @@ textarea {
 		{/pluck}
 		<span class="submitted"><i class="fi-check"></i></span>
 		{:else}
-		<button class="deleteButton"><i class="fi-x"></i></button>
+		<form action="/subjects/{subject._id}/hand_in/{_id}" method="post">
+		  <input type="hidden" name="_method" value="delete"/>
+		  <button type="submit" class="deleteButton"><i class="fi-x"></i></button>
+		</form>
 	      {/eq}
 	    </li> 
 		{/subject.hand_in}

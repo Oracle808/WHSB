@@ -50,14 +50,11 @@ exports.putGridFileByPath = function(path, name, options, fn) {
 };
 
 exports.deleteGridFile = function(id, fn){
-    console.log('Deleting GridFile '+id);
-    var db= mongoose.connection.db,
-    id = new mongoose.mongo.BSONPure.ObjectID(id),
-    store = new GridStore(db, id, 'r', {root: 'fs'});
-
-    store.unlink(function(err, result){
-	if (err)
+    var db= mongoose.connection.db;
+    new GridStore(db, id, 'r', {root: 'fs'}).unlink(function(err, result){
+	if (err) {
 	    return fn(err);
+	}
 
 	return fn(null);
     });

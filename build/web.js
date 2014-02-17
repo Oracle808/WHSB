@@ -138,6 +138,7 @@ if(Program.createUser) {
     app.get("/subjects/:subject/hand_in/:hand_in_slot/files", auth, teacher, HandIn.get);
     app.post("/subjects/:subject/hand_in/:hand_in_slot/files", auth, busboy({limits: {files: 10, fileSize: 2 * 1024 * 1024}}), HandIn.upload);
     app.get("/subjects/:subject/hand_in/:hand_in_slot/files/:file", auth, HandIn.download);
+    app.del("/subjects/:subject/hand_in/:hand_in_slot", auth, teacher, HandIn.del);
     // APPS
     app.get("/apps", auth, Apps.index);
     app.get("/apps/codr", auth, Codr.index);
