@@ -126,6 +126,7 @@ if(Program.createUser) {
     app.post("/subjects/:subject/quizzes", auth, Quizzes.publish);
     app.get("/subjects/:subject/quizzes/:quiz", auth, Quizzes.get);
     app.post("/subjects/:subject/quizzes/:quiz", auth, Quizzes.submit);
+    app.del("/subjects/:subject/quizzes/:quiz", auth, teacher, Quizzes.del);
     // SUBJECT VOCAB QUIZZES
     app.get("/subjects/:subject/vocab_quizzes", auth, VocabQuizzes.index);
     app.get("/subjects/:subject/vocab_quizzes/:quiz", auth, VocabQuizzes.get);

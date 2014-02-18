@@ -1,13 +1,3 @@
-.toolbar {
-    @extend %bar;
-}
-
-#newSlotForm {
-    background-color:$foreground;
-    margin-top:$content-margin;
-    padding:$content-margin;
-}
-
 textarea {
     min-height:50px;
 }
@@ -15,17 +5,13 @@ textarea {
 #hand_in_slots, #handed_in_files {
     @include mobile-list();
 
-    .uploadButton, .deleteButton {
-	@include button-size($button-sml);
+    .uploadButton {
+	@include button-size($button-tny);
 	@extend .right;
     }
 
     .uploadButton {
 	@include button-style(#00b700);
-    }
-
-    .deleteButton {
-	@include button-style($warning);
     }
 
     x-destroy ~ * {

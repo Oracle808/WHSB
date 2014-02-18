@@ -1217,7 +1217,7 @@ img {
 .left {
   float: left !important; }
 
-.right, #hand_in_slots .uploadButton, #hand_in_slots .deleteButton, #handed_in_files .uploadButton, #handed_in_files .deleteButton {
+.right, #hand_in_slots li button, #hand_in_slots li .add-item, #hand_in_slots li .delete-item, #handed_in_files li button, #handed_in_files li .add-item, #handed_in_files li .delete-item, #hand_in_slots .uploadButton, #handed_in_files .uploadButton {
   float: right !important; }
 
 .clearfix {
@@ -2491,7 +2491,7 @@ select {
       content: " ";
       margin: 0; }
 
-button, .button {
+button, #hand_in_slots li .add-item, #hand_in_slots li .delete-item, #handed_in_files li .add-item, #handed_in_files li .delete-item, .button {
   border-style: solid;
   border-width: 0px;
   cursor: pointer;
@@ -2643,7 +2643,7 @@ button, .button {
         background-color: #f04124; }
 
 @media only screen and (min-width:40.063em) {
-  button, .button {
+  button, #hand_in_slots li .add-item, #hand_in_slots li .delete-item, #handed_in_files li .add-item, #handed_in_files li .delete-item, .button {
     display: inline-block; } }
 
 .button-group {
@@ -2658,45 +2658,45 @@ button, .button {
   .button-group > * {
     margin: 0;
     float: left; }
-    .button-group > * > button, .button-group > * .button {
+    .button-group > * > button, .button-group > * > #hand_in_slots li .add-item, #hand_in_slots li .button-group > * > .add-item, .button-group > * > #hand_in_slots li .delete-item, #hand_in_slots li .button-group > * > .delete-item, .button-group > * > #handed_in_files li .add-item, #handed_in_files li .button-group > * > .add-item, .button-group > * > #handed_in_files li .delete-item, #handed_in_files li .button-group > * > .delete-item, .button-group > * .button {
       border-right: 1px solid;
       border-color: rgba(255, 255, 255, 0.5); }
-    .button-group > *:last-child button, .button-group > *:last-child .button {
+    .button-group > *:last-child button, .button-group > *:last-child #hand_in_slots li .add-item, #hand_in_slots li .button-group > *:last-child .add-item, .button-group > *:last-child #hand_in_slots li .delete-item, #hand_in_slots li .button-group > *:last-child .delete-item, .button-group > *:last-child #handed_in_files li .add-item, #handed_in_files li .button-group > *:last-child .add-item, .button-group > *:last-child #handed_in_files li .delete-item, #handed_in_files li .button-group > *:last-child .delete-item, .button-group > *:last-child .button {
       border-right: 0; }
     .button-group > *:first-child {
       margin-left: 0; }
-  .button-group.radius > * > button, .button-group.radius > * .button {
+  .button-group.radius > * > button, .button-group.radius > * > #hand_in_slots li .add-item, #hand_in_slots li .button-group.radius > * > .add-item, .button-group.radius > * > #hand_in_slots li .delete-item, #hand_in_slots li .button-group.radius > * > .delete-item, .button-group.radius > * > #handed_in_files li .add-item, #handed_in_files li .button-group.radius > * > .add-item, .button-group.radius > * > #handed_in_files li .delete-item, #handed_in_files li .button-group.radius > * > .delete-item, .button-group.radius > * .button {
     border-right: 1px solid;
     border-color: rgba(255, 255, 255, 0.5); }
-  .button-group.radius > *:last-child button, .button-group.radius > *:last-child .button {
+  .button-group.radius > *:last-child button, .button-group.radius > *:last-child #hand_in_slots li .add-item, #hand_in_slots li .button-group.radius > *:last-child .add-item, .button-group.radius > *:last-child #hand_in_slots li .delete-item, #hand_in_slots li .button-group.radius > *:last-child .delete-item, .button-group.radius > *:last-child #handed_in_files li .add-item, #handed_in_files li .button-group.radius > *:last-child .add-item, .button-group.radius > *:last-child #handed_in_files li .delete-item, #handed_in_files li .button-group.radius > *:last-child .delete-item, .button-group.radius > *:last-child .button {
     border-right: 0; }
-  .button-group.radius > *:first-child, .button-group.radius > *:first-child > a, .button-group.radius > *:first-child > button, .button-group.radius > *:first-child > .button {
+  .button-group.radius > *:first-child, .button-group.radius > *:first-child > a, .button-group.radius > *:first-child > button, .button-group.radius > *:first-child > #hand_in_slots li .add-item, #hand_in_slots li .button-group.radius > *:first-child > .add-item, .button-group.radius > *:first-child > #hand_in_slots li .delete-item, #hand_in_slots li .button-group.radius > *:first-child > .delete-item, .button-group.radius > *:first-child > #handed_in_files li .add-item, #handed_in_files li .button-group.radius > *:first-child > .add-item, .button-group.radius > *:first-child > #handed_in_files li .delete-item, #handed_in_files li .button-group.radius > *:first-child > .delete-item, .button-group.radius > *:first-child > .button {
     -moz-border-radius-bottomleft: 3px;
     -moz-border-radius-topleft: 3px;
     -webkit-border-bottom-left-radius: 3px;
     -webkit-border-top-left-radius: 3px;
     border-bottom-left-radius: 3px;
     border-top-left-radius: 3px; }
-  .button-group.radius > *:last-child, .button-group.radius > *:last-child > a, .button-group.radius > *:last-child > button, .button-group.radius > *:last-child > .button {
+  .button-group.radius > *:last-child, .button-group.radius > *:last-child > a, .button-group.radius > *:last-child > button, .button-group.radius > *:last-child > #hand_in_slots li .add-item, #hand_in_slots li .button-group.radius > *:last-child > .add-item, .button-group.radius > *:last-child > #hand_in_slots li .delete-item, #hand_in_slots li .button-group.radius > *:last-child > .delete-item, .button-group.radius > *:last-child > #handed_in_files li .add-item, #handed_in_files li .button-group.radius > *:last-child > .add-item, .button-group.radius > *:last-child > #handed_in_files li .delete-item, #handed_in_files li .button-group.radius > *:last-child > .delete-item, .button-group.radius > *:last-child > .button {
     -moz-border-radius-topright: 3px;
     -moz-border-radius-bottomright: 3px;
     -webkit-border-top-right-radius: 3px;
     -webkit-border-bottom-right-radius: 3px;
     border-top-right-radius: 3px;
     border-bottom-right-radius: 3px; }
-  .button-group.round > * > button, .button-group.round > * .button {
+  .button-group.round > * > button, .button-group.round > * > #hand_in_slots li .add-item, #hand_in_slots li .button-group.round > * > .add-item, .button-group.round > * > #hand_in_slots li .delete-item, #hand_in_slots li .button-group.round > * > .delete-item, .button-group.round > * > #handed_in_files li .add-item, #handed_in_files li .button-group.round > * > .add-item, .button-group.round > * > #handed_in_files li .delete-item, #handed_in_files li .button-group.round > * > .delete-item, .button-group.round > * .button {
     border-right: 1px solid;
     border-color: rgba(255, 255, 255, 0.5); }
-  .button-group.round > *:last-child button, .button-group.round > *:last-child .button {
+  .button-group.round > *:last-child button, .button-group.round > *:last-child #hand_in_slots li .add-item, #hand_in_slots li .button-group.round > *:last-child .add-item, .button-group.round > *:last-child #hand_in_slots li .delete-item, #hand_in_slots li .button-group.round > *:last-child .delete-item, .button-group.round > *:last-child #handed_in_files li .add-item, #handed_in_files li .button-group.round > *:last-child .add-item, .button-group.round > *:last-child #handed_in_files li .delete-item, #handed_in_files li .button-group.round > *:last-child .delete-item, .button-group.round > *:last-child .button {
     border-right: 0; }
-  .button-group.round > *:first-child, .button-group.round > *:first-child > a, .button-group.round > *:first-child > button, .button-group.round > *:first-child > .button {
+  .button-group.round > *:first-child, .button-group.round > *:first-child > a, .button-group.round > *:first-child > button, .button-group.round > *:first-child > #hand_in_slots li .add-item, #hand_in_slots li .button-group.round > *:first-child > .add-item, .button-group.round > *:first-child > #hand_in_slots li .delete-item, #hand_in_slots li .button-group.round > *:first-child > .delete-item, .button-group.round > *:first-child > #handed_in_files li .add-item, #handed_in_files li .button-group.round > *:first-child > .add-item, .button-group.round > *:first-child > #handed_in_files li .delete-item, #handed_in_files li .button-group.round > *:first-child > .delete-item, .button-group.round > *:first-child > .button {
     -moz-border-radius-bottomleft: 1000px;
     -moz-border-radius-topleft: 1000px;
     -webkit-border-bottom-left-radius: 1000px;
     -webkit-border-top-left-radius: 1000px;
     border-bottom-left-radius: 1000px;
     border-top-left-radius: 1000px; }
-  .button-group.round > *:last-child, .button-group.round > *:last-child > a, .button-group.round > *:last-child > button, .button-group.round > *:last-child > .button {
+  .button-group.round > *:last-child, .button-group.round > *:last-child > a, .button-group.round > *:last-child > button, .button-group.round > *:last-child > #hand_in_slots li .add-item, #hand_in_slots li .button-group.round > *:last-child > .add-item, .button-group.round > *:last-child > #hand_in_slots li .delete-item, #hand_in_slots li .button-group.round > *:last-child > .delete-item, .button-group.round > *:last-child > #handed_in_files li .add-item, #handed_in_files li .button-group.round > *:last-child > .add-item, .button-group.round > *:last-child > #handed_in_files li .delete-item, #handed_in_files li .button-group.round > *:last-child > .delete-item, .button-group.round > *:last-child > .button {
     -moz-border-radius-topright: 1000px;
     -moz-border-radius-bottomright: 1000px;
     -webkit-border-top-right-radius: 1000px;
@@ -2705,66 +2705,66 @@ button, .button {
     border-bottom-right-radius: 1000px; }
   .button-group.even-2 li {
     width: 50%; }
-    .button-group.even-2 li > button, .button-group.even-2 li .button {
+    .button-group.even-2 li > button, .button-group.even-2 li > #hand_in_slots li .add-item, #hand_in_slots li .button-group.even-2 li > .add-item, .button-group.even-2 li > #hand_in_slots li .delete-item, #hand_in_slots li .button-group.even-2 li > .delete-item, .button-group.even-2 li > #handed_in_files li .add-item, #handed_in_files li .button-group.even-2 li > .add-item, .button-group.even-2 li > #handed_in_files li .delete-item, #handed_in_files li .button-group.even-2 li > .delete-item, .button-group.even-2 li .button {
       border-right: 1px solid;
       border-color: rgba(255, 255, 255, 0.5); }
-    .button-group.even-2 li:last-child button, .button-group.even-2 li:last-child .button {
+    .button-group.even-2 li:last-child button, .button-group.even-2 li:last-child #hand_in_slots li .add-item, #hand_in_slots li .button-group.even-2 li:last-child .add-item, .button-group.even-2 li:last-child #hand_in_slots li .delete-item, #hand_in_slots li .button-group.even-2 li:last-child .delete-item, .button-group.even-2 li:last-child #handed_in_files li .add-item, #handed_in_files li .button-group.even-2 li:last-child .add-item, .button-group.even-2 li:last-child #handed_in_files li .delete-item, #handed_in_files li .button-group.even-2 li:last-child .delete-item, .button-group.even-2 li:last-child .button {
       border-right: 0; }
-    .button-group.even-2 li button, .button-group.even-2 li .button {
+    .button-group.even-2 li button, .button-group.even-2 li #hand_in_slots li .add-item, #hand_in_slots li .button-group.even-2 li .add-item, .button-group.even-2 li #hand_in_slots li .delete-item, #hand_in_slots li .button-group.even-2 li .delete-item, .button-group.even-2 li #handed_in_files li .add-item, #handed_in_files li .button-group.even-2 li .add-item, .button-group.even-2 li #handed_in_files li .delete-item, #handed_in_files li .button-group.even-2 li .delete-item, .button-group.even-2 li .button {
       width: 100%; }
   .button-group.even-3 li {
     width: 33.33333%; }
-    .button-group.even-3 li > button, .button-group.even-3 li .button {
+    .button-group.even-3 li > button, .button-group.even-3 li > #hand_in_slots li .add-item, #hand_in_slots li .button-group.even-3 li > .add-item, .button-group.even-3 li > #hand_in_slots li .delete-item, #hand_in_slots li .button-group.even-3 li > .delete-item, .button-group.even-3 li > #handed_in_files li .add-item, #handed_in_files li .button-group.even-3 li > .add-item, .button-group.even-3 li > #handed_in_files li .delete-item, #handed_in_files li .button-group.even-3 li > .delete-item, .button-group.even-3 li .button {
       border-right: 1px solid;
       border-color: rgba(255, 255, 255, 0.5); }
-    .button-group.even-3 li:last-child button, .button-group.even-3 li:last-child .button {
+    .button-group.even-3 li:last-child button, .button-group.even-3 li:last-child #hand_in_slots li .add-item, #hand_in_slots li .button-group.even-3 li:last-child .add-item, .button-group.even-3 li:last-child #hand_in_slots li .delete-item, #hand_in_slots li .button-group.even-3 li:last-child .delete-item, .button-group.even-3 li:last-child #handed_in_files li .add-item, #handed_in_files li .button-group.even-3 li:last-child .add-item, .button-group.even-3 li:last-child #handed_in_files li .delete-item, #handed_in_files li .button-group.even-3 li:last-child .delete-item, .button-group.even-3 li:last-child .button {
       border-right: 0; }
-    .button-group.even-3 li button, .button-group.even-3 li .button {
+    .button-group.even-3 li button, .button-group.even-3 li #hand_in_slots li .add-item, #hand_in_slots li .button-group.even-3 li .add-item, .button-group.even-3 li #hand_in_slots li .delete-item, #hand_in_slots li .button-group.even-3 li .delete-item, .button-group.even-3 li #handed_in_files li .add-item, #handed_in_files li .button-group.even-3 li .add-item, .button-group.even-3 li #handed_in_files li .delete-item, #handed_in_files li .button-group.even-3 li .delete-item, .button-group.even-3 li .button {
       width: 100%; }
   .button-group.even-4 li {
     width: 25%; }
-    .button-group.even-4 li > button, .button-group.even-4 li .button {
+    .button-group.even-4 li > button, .button-group.even-4 li > #hand_in_slots li .add-item, #hand_in_slots li .button-group.even-4 li > .add-item, .button-group.even-4 li > #hand_in_slots li .delete-item, #hand_in_slots li .button-group.even-4 li > .delete-item, .button-group.even-4 li > #handed_in_files li .add-item, #handed_in_files li .button-group.even-4 li > .add-item, .button-group.even-4 li > #handed_in_files li .delete-item, #handed_in_files li .button-group.even-4 li > .delete-item, .button-group.even-4 li .button {
       border-right: 1px solid;
       border-color: rgba(255, 255, 255, 0.5); }
-    .button-group.even-4 li:last-child button, .button-group.even-4 li:last-child .button {
+    .button-group.even-4 li:last-child button, .button-group.even-4 li:last-child #hand_in_slots li .add-item, #hand_in_slots li .button-group.even-4 li:last-child .add-item, .button-group.even-4 li:last-child #hand_in_slots li .delete-item, #hand_in_slots li .button-group.even-4 li:last-child .delete-item, .button-group.even-4 li:last-child #handed_in_files li .add-item, #handed_in_files li .button-group.even-4 li:last-child .add-item, .button-group.even-4 li:last-child #handed_in_files li .delete-item, #handed_in_files li .button-group.even-4 li:last-child .delete-item, .button-group.even-4 li:last-child .button {
       border-right: 0; }
-    .button-group.even-4 li button, .button-group.even-4 li .button {
+    .button-group.even-4 li button, .button-group.even-4 li #hand_in_slots li .add-item, #hand_in_slots li .button-group.even-4 li .add-item, .button-group.even-4 li #hand_in_slots li .delete-item, #hand_in_slots li .button-group.even-4 li .delete-item, .button-group.even-4 li #handed_in_files li .add-item, #handed_in_files li .button-group.even-4 li .add-item, .button-group.even-4 li #handed_in_files li .delete-item, #handed_in_files li .button-group.even-4 li .delete-item, .button-group.even-4 li .button {
       width: 100%; }
   .button-group.even-5 li {
     width: 20%; }
-    .button-group.even-5 li > button, .button-group.even-5 li .button {
+    .button-group.even-5 li > button, .button-group.even-5 li > #hand_in_slots li .add-item, #hand_in_slots li .button-group.even-5 li > .add-item, .button-group.even-5 li > #hand_in_slots li .delete-item, #hand_in_slots li .button-group.even-5 li > .delete-item, .button-group.even-5 li > #handed_in_files li .add-item, #handed_in_files li .button-group.even-5 li > .add-item, .button-group.even-5 li > #handed_in_files li .delete-item, #handed_in_files li .button-group.even-5 li > .delete-item, .button-group.even-5 li .button {
       border-right: 1px solid;
       border-color: rgba(255, 255, 255, 0.5); }
-    .button-group.even-5 li:last-child button, .button-group.even-5 li:last-child .button {
+    .button-group.even-5 li:last-child button, .button-group.even-5 li:last-child #hand_in_slots li .add-item, #hand_in_slots li .button-group.even-5 li:last-child .add-item, .button-group.even-5 li:last-child #hand_in_slots li .delete-item, #hand_in_slots li .button-group.even-5 li:last-child .delete-item, .button-group.even-5 li:last-child #handed_in_files li .add-item, #handed_in_files li .button-group.even-5 li:last-child .add-item, .button-group.even-5 li:last-child #handed_in_files li .delete-item, #handed_in_files li .button-group.even-5 li:last-child .delete-item, .button-group.even-5 li:last-child .button {
       border-right: 0; }
-    .button-group.even-5 li button, .button-group.even-5 li .button {
+    .button-group.even-5 li button, .button-group.even-5 li #hand_in_slots li .add-item, #hand_in_slots li .button-group.even-5 li .add-item, .button-group.even-5 li #hand_in_slots li .delete-item, #hand_in_slots li .button-group.even-5 li .delete-item, .button-group.even-5 li #handed_in_files li .add-item, #handed_in_files li .button-group.even-5 li .add-item, .button-group.even-5 li #handed_in_files li .delete-item, #handed_in_files li .button-group.even-5 li .delete-item, .button-group.even-5 li .button {
       width: 100%; }
   .button-group.even-6 li {
     width: 16.66667%; }
-    .button-group.even-6 li > button, .button-group.even-6 li .button {
+    .button-group.even-6 li > button, .button-group.even-6 li > #hand_in_slots li .add-item, #hand_in_slots li .button-group.even-6 li > .add-item, .button-group.even-6 li > #hand_in_slots li .delete-item, #hand_in_slots li .button-group.even-6 li > .delete-item, .button-group.even-6 li > #handed_in_files li .add-item, #handed_in_files li .button-group.even-6 li > .add-item, .button-group.even-6 li > #handed_in_files li .delete-item, #handed_in_files li .button-group.even-6 li > .delete-item, .button-group.even-6 li .button {
       border-right: 1px solid;
       border-color: rgba(255, 255, 255, 0.5); }
-    .button-group.even-6 li:last-child button, .button-group.even-6 li:last-child .button {
+    .button-group.even-6 li:last-child button, .button-group.even-6 li:last-child #hand_in_slots li .add-item, #hand_in_slots li .button-group.even-6 li:last-child .add-item, .button-group.even-6 li:last-child #hand_in_slots li .delete-item, #hand_in_slots li .button-group.even-6 li:last-child .delete-item, .button-group.even-6 li:last-child #handed_in_files li .add-item, #handed_in_files li .button-group.even-6 li:last-child .add-item, .button-group.even-6 li:last-child #handed_in_files li .delete-item, #handed_in_files li .button-group.even-6 li:last-child .delete-item, .button-group.even-6 li:last-child .button {
       border-right: 0; }
-    .button-group.even-6 li button, .button-group.even-6 li .button {
+    .button-group.even-6 li button, .button-group.even-6 li #hand_in_slots li .add-item, #hand_in_slots li .button-group.even-6 li .add-item, .button-group.even-6 li #hand_in_slots li .delete-item, #hand_in_slots li .button-group.even-6 li .delete-item, .button-group.even-6 li #handed_in_files li .add-item, #handed_in_files li .button-group.even-6 li .add-item, .button-group.even-6 li #handed_in_files li .delete-item, #handed_in_files li .button-group.even-6 li .delete-item, .button-group.even-6 li .button {
       width: 100%; }
   .button-group.even-7 li {
     width: 14.28571%; }
-    .button-group.even-7 li > button, .button-group.even-7 li .button {
+    .button-group.even-7 li > button, .button-group.even-7 li > #hand_in_slots li .add-item, #hand_in_slots li .button-group.even-7 li > .add-item, .button-group.even-7 li > #hand_in_slots li .delete-item, #hand_in_slots li .button-group.even-7 li > .delete-item, .button-group.even-7 li > #handed_in_files li .add-item, #handed_in_files li .button-group.even-7 li > .add-item, .button-group.even-7 li > #handed_in_files li .delete-item, #handed_in_files li .button-group.even-7 li > .delete-item, .button-group.even-7 li .button {
       border-right: 1px solid;
       border-color: rgba(255, 255, 255, 0.5); }
-    .button-group.even-7 li:last-child button, .button-group.even-7 li:last-child .button {
+    .button-group.even-7 li:last-child button, .button-group.even-7 li:last-child #hand_in_slots li .add-item, #hand_in_slots li .button-group.even-7 li:last-child .add-item, .button-group.even-7 li:last-child #hand_in_slots li .delete-item, #hand_in_slots li .button-group.even-7 li:last-child .delete-item, .button-group.even-7 li:last-child #handed_in_files li .add-item, #handed_in_files li .button-group.even-7 li:last-child .add-item, .button-group.even-7 li:last-child #handed_in_files li .delete-item, #handed_in_files li .button-group.even-7 li:last-child .delete-item, .button-group.even-7 li:last-child .button {
       border-right: 0; }
-    .button-group.even-7 li button, .button-group.even-7 li .button {
+    .button-group.even-7 li button, .button-group.even-7 li #hand_in_slots li .add-item, #hand_in_slots li .button-group.even-7 li .add-item, .button-group.even-7 li #hand_in_slots li .delete-item, #hand_in_slots li .button-group.even-7 li .delete-item, .button-group.even-7 li #handed_in_files li .add-item, #handed_in_files li .button-group.even-7 li .add-item, .button-group.even-7 li #handed_in_files li .delete-item, #handed_in_files li .button-group.even-7 li .delete-item, .button-group.even-7 li .button {
       width: 100%; }
   .button-group.even-8 li {
     width: 12.5%; }
-    .button-group.even-8 li > button, .button-group.even-8 li .button {
+    .button-group.even-8 li > button, .button-group.even-8 li > #hand_in_slots li .add-item, #hand_in_slots li .button-group.even-8 li > .add-item, .button-group.even-8 li > #hand_in_slots li .delete-item, #hand_in_slots li .button-group.even-8 li > .delete-item, .button-group.even-8 li > #handed_in_files li .add-item, #handed_in_files li .button-group.even-8 li > .add-item, .button-group.even-8 li > #handed_in_files li .delete-item, #handed_in_files li .button-group.even-8 li > .delete-item, .button-group.even-8 li .button {
       border-right: 1px solid;
       border-color: rgba(255, 255, 255, 0.5); }
-    .button-group.even-8 li:last-child button, .button-group.even-8 li:last-child .button {
+    .button-group.even-8 li:last-child button, .button-group.even-8 li:last-child #hand_in_slots li .add-item, #hand_in_slots li .button-group.even-8 li:last-child .add-item, .button-group.even-8 li:last-child #hand_in_slots li .delete-item, #hand_in_slots li .button-group.even-8 li:last-child .delete-item, .button-group.even-8 li:last-child #handed_in_files li .add-item, #handed_in_files li .button-group.even-8 li:last-child .add-item, .button-group.even-8 li:last-child #handed_in_files li .delete-item, #handed_in_files li .button-group.even-8 li:last-child .delete-item, .button-group.even-8 li:last-child .button {
       border-right: 0; }
-    .button-group.even-8 li button, .button-group.even-8 li .button {
+    .button-group.even-8 li button, .button-group.even-8 li #hand_in_slots li .add-item, #hand_in_slots li .button-group.even-8 li .add-item, .button-group.even-8 li #hand_in_slots li .delete-item, #hand_in_slots li .button-group.even-8 li .delete-item, .button-group.even-8 li #handed_in_files li .add-item, #handed_in_files li .button-group.even-8 li .add-item, .button-group.even-8 li #handed_in_files li .delete-item, #handed_in_files li .button-group.even-8 li .delete-item, .button-group.even-8 li .button {
       width: 100%; }
 
 .button-bar {
@@ -5672,129 +5672,114 @@ x-snowfall {
   height: 100%;
   position: relative; }
 
-nav#intraSubjectNavigation {
-  position: relative;
-  padding-left: 0.9375rem;
-  padding-right: 0.9375rem;
-  width: 100%;
-  float: left; }
-  @media only screen and (max-width: 40em) {
-    nav#intraSubjectNavigation {
-      position: relative;
-      padding-left: 0;
-      padding-right: 0;
-      width: 25%;
-      right: 25%;
-      left: auto;
-      float: left; } }
-  @media only screen and (min-width:40.063em) {
-    nav#intraSubjectNavigation {
-      position: relative;
-      padding-left: 0;
-      padding-right: 0;
-      width: 25%;
-      float: left;
-      background-color: #f0f4f4; }
-    nav#intraSubjectNavigation ~ main {
-      position: relative;
-      padding-left: 0.9375rem;
-      padding-right: 0.9375rem;
-      width: 75%;
-      float: left; }
-    nav#intraSubjectNavigation ul {
-      display: block;
-      margin: 0;
-      padding: 0.875rem 0;
-      list-style-type: none;
-      list-style-position: inside;
-      font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif; }
-      nav#intraSubjectNavigation ul li {
-        margin: 0px;
-        font-size: 0.875rem; }
-        nav#intraSubjectNavigation ul li a {
-          display: block;
-          color: #008cba; }
-        nav#intraSubjectNavigation ul li.active > a:first-child {
-          color: #4d4d4d;
-          font-weight: normal;
-          font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif; }
-        nav#intraSubjectNavigation ul li.divider {
-          border-top: 1px solid;
-          height: 0;
-          padding: 0;
-          list-style: none;
-          border-top-color: white; }
-    nav#intraSubjectNavigation h4 {
-      padding-top: 20px; }
-    nav#intraSubjectNavigation h4, nav#intraSubjectNavigation form, nav#intraSubjectNavigation ul li {
-      padding-left: 20px;
-      padding-right: 20px; }
+@media only screen and (max-width: 40em) {
+  nav#intraSubjectNavigation {
+    position: relative;
+    padding-left: 0.9375rem;
+    padding-right: 0.9375rem;
+    width: 100%;
+    right: 100%;
+    left: auto;
+    float: left; } }
+@media only screen and (min-width:40.063em) {
+  nav#intraSubjectNavigation {
+    position: relative;
+    padding-left: 0;
+    padding-right: 0;
+    width: 25%;
+    float: left;
+    background-color: #f0f4f4; }
+  nav#intraSubjectNavigation ~ main {
+    position: relative;
+    padding-left: 0.9375rem;
+    padding-right: 0.9375rem;
+    width: 75%;
+    float: left; }
+  nav#intraSubjectNavigation ul {
+    display: block;
+    margin: 0;
+    padding: 0.875rem 0;
+    list-style-type: none;
+    list-style-position: inside;
+    font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif; }
     nav#intraSubjectNavigation ul li {
-      padding-top: 5px;
-      padding-bottom: 5px; }
-    nav#intraSubjectNavigation ul li:hover {
-      background-color: #e1e9e9; }
-    nav#intraSubjectNavigation ul li.header {
-      text-transform: uppercase; }
-    nav#intraSubjectNavigation #numberOfDrafts {
-      font-weight: normal;
-      font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
-      text-align: center;
-      text-decoration: none;
-      line-height: 1;
-      white-space: nowrap;
-      display: inline-block;
-      position: relative;
-      margin-bottom: inherit;
-      padding: 0.25rem 0.5rem 0.375rem;
-      font-size: 0.6875rem;
-      background-color: #008cba;
-      color: white;
-      vertical-align: bottom; }
-    nav#intraSubjectNavigation #newLink {
-      border-style: solid;
-      border-width: 0px;
-      cursor: pointer;
-      font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
-      font-weight: normal;
-      line-height: normal;
-      margin: 0 0 0px;
-      position: relative;
-      text-decoration: none;
-      text-align: center;
-      display: inline-block;
-      padding-top: 1rem;
-      padding-right: 2rem;
-      padding-bottom: 1.0625rem;
-      padding-left: 2rem;
-      font-size: 1rem;
-      /*     @else                            { font-size: $padding - rem-calc(2); } */
-      padding-top: 1rem;
-      padding-bottom: 1.0625rem;
-      padding-right: 0;
-      padding-left: 0;
-      width: 100%;
-      background-color: #008cba;
-      border-color: #007295;
-      color: white; }
-      nav#intraSubjectNavigation #newLink:hover, nav#intraSubjectNavigation #newLink:focus {
-        background-color: #007295; }
-      nav#intraSubjectNavigation #newLink:hover, nav#intraSubjectNavigation #newLink:focus {
-        color: white; } }
+      margin: 0px;
+      font-size: 0.875rem; }
+      nav#intraSubjectNavigation ul li a {
+        display: block;
+        color: #008cba; }
+      nav#intraSubjectNavigation ul li.active > a:first-child {
+        color: #4d4d4d;
+        font-weight: normal;
+        font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif; }
+      nav#intraSubjectNavigation ul li.divider {
+        border-top: 1px solid;
+        height: 0;
+        padding: 0;
+        list-style: none;
+        border-top-color: white; }
+  nav#intraSubjectNavigation h4 {
+    padding-top: 20px; }
+  nav#intraSubjectNavigation h4, nav#intraSubjectNavigation form, nav#intraSubjectNavigation ul li {
+    padding-left: 20px;
+    padding-right: 20px; }
+  nav#intraSubjectNavigation ul li {
+    padding-top: 5px;
+    padding-bottom: 5px; }
+  nav#intraSubjectNavigation ul li:hover {
+    background-color: #e1e9e9; }
+  nav#intraSubjectNavigation ul li.header {
+    text-transform: uppercase; }
+  nav#intraSubjectNavigation #numberOfDrafts {
+    font-weight: normal;
+    font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+    text-align: center;
+    text-decoration: none;
+    line-height: 1;
+    white-space: nowrap;
+    display: inline-block;
+    position: relative;
+    margin-bottom: inherit;
+    padding: 0.25rem 0.5rem 0.375rem;
+    font-size: 0.6875rem;
+    background-color: #008cba;
+    color: white;
+    vertical-align: bottom; }
+  nav#intraSubjectNavigation #newLink {
+    border-style: solid;
+    border-width: 0px;
+    cursor: pointer;
+    font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+    font-weight: normal;
+    line-height: normal;
+    margin: 0 0 0px;
+    position: relative;
+    text-decoration: none;
+    text-align: center;
+    display: inline-block;
+    padding-top: 1rem;
+    padding-right: 2rem;
+    padding-bottom: 1.0625rem;
+    padding-left: 2rem;
+    font-size: 1rem;
+    /*     @else                            { font-size: $padding - rem-calc(2); } */
+    padding-top: 1rem;
+    padding-bottom: 1.0625rem;
+    padding-right: 0;
+    padding-left: 0;
+    width: 100%;
+    background-color: #008cba;
+    border-color: #007295;
+    color: white; }
+    nav#intraSubjectNavigation #newLink:hover, nav#intraSubjectNavigation #newLink:focus {
+      background-color: #007295; }
+    nav#intraSubjectNavigation #newLink:hover, nav#intraSubjectNavigation #newLink:focus {
+      color: white; } }
 
 #newLinkForm {
   background-color: white;
   padding: 20px; }
 
-.toolbar {
-  padding: 5px;
-  background-color: #f0f4f4; }
-
-
-#newSlotForm {
-  background-color: white;
-  margin-top: 20px;
-  padding: 20px; }
 
 textarea {
   min-height: 50px; }
@@ -5819,14 +5804,38 @@ textarea {
       display: table; }
     #hand_in_slots li:after, #handed_in_files li:after {
       clear: both; }
-  #hand_in_slots li:last-child, #handed_in_files li:last-child {
+    #hand_in_slots li button, #hand_in_slots li #hand_in_slots li .add-item, #hand_in_slots li #hand_in_slots li .add-item, #hand_in_slots li #hand_in_slots li .delete-item, #hand_in_slots li #hand_in_slots li .delete-item, #hand_in_slots li #handed_in_files li .add-item, #handed_in_files li #hand_in_slots li .add-item, #hand_in_slots li #handed_in_files li .delete-item, #handed_in_files li #hand_in_slots li .delete-item, #hand_in_slots li .add-item, #hand_in_slots li .delete-item, #handed_in_files li button, #handed_in_files li #hand_in_slots li .add-item, #hand_in_slots li #handed_in_files li .add-item, #handed_in_files li #hand_in_slots li .delete-item, #hand_in_slots li #handed_in_files li .delete-item, #handed_in_files li #handed_in_files li .add-item, #handed_in_files li #handed_in_files li .add-item, #handed_in_files li #handed_in_files li .delete-item, #handed_in_files li #handed_in_files li .delete-item, #handed_in_files li .add-item, #handed_in_files li .delete-item {
+      padding-top: 0.375rem;
+      padding-right: 0.75rem;
+      padding-bottom: 0.4375rem;
+      padding-left: 0.75rem;
+      font-size: 0.75rem;
+      /*     @else                            { font-size: $padding - rem-calc(2); } */ }
+    #hand_in_slots li .delete-item, #handed_in_files li .delete-item {
+      background-color: #e55b00;
+      border-color: #b74600;
+      color: white; }
+      #hand_in_slots li .delete-item:hover, #hand_in_slots li .delete-item:focus, #handed_in_files li .delete-item:hover, #handed_in_files li .delete-item:focus {
+        background-color: #b74600; }
+      #hand_in_slots li .delete-item:hover, #hand_in_slots li .delete-item:focus, #handed_in_files li .delete-item:hover, #handed_in_files li .delete-item:focus {
+        color: white; }
+  #hand_in_slots form, #handed_in_files form {
+    display: inline; }
+  #hand_in_slots li.nothing, #hand_in_slots li.heading, #handed_in_files li.nothing, #handed_in_files li.heading {
+    text-align: center; }
+  #hand_in_slots li.heading, #handed_in_files li.heading {
+    background-color: deepskyblue;
+    font-weight: bold; }
+  #hand_in_slots li.nothing, #handed_in_files li.nothing {
+    padding: 20px; }
+  #hand_in_slots > li:last-child, #hand_in_slots li.heading, #handed_in_files > li:last-child, #handed_in_files li.heading {
     border-bottom: none; }
-  #hand_in_slots .uploadButton, #hand_in_slots .deleteButton, #handed_in_files .uploadButton, #handed_in_files .deleteButton {
-    padding-top: 0.625rem;
-    padding-right: 1.25rem;
-    padding-bottom: 0.6875rem;
-    padding-left: 1.25rem;
-    font-size: 0.875rem;
+  #hand_in_slots .uploadButton, #handed_in_files .uploadButton {
+    padding-top: 0.375rem;
+    padding-right: 0.75rem;
+    padding-bottom: 0.4375rem;
+    padding-left: 0.75rem;
+    font-size: 0.75rem;
     /*     @else                            { font-size: $padding - rem-calc(2); } */ }
   #hand_in_slots .uploadButton, #handed_in_files .uploadButton {
     background-color: #00b700;
@@ -5835,14 +5844,6 @@ textarea {
     #hand_in_slots .uploadButton:hover, #hand_in_slots .uploadButton:focus, #handed_in_files .uploadButton:hover, #handed_in_files .uploadButton:focus {
       background-color: #029200; }
     #hand_in_slots .uploadButton:hover, #hand_in_slots .uploadButton:focus, #handed_in_files .uploadButton:hover, #handed_in_files .uploadButton:focus {
-      color: white; }
-  #hand_in_slots .deleteButton, #handed_in_files .deleteButton {
-    background-color: #e55b00;
-    border-color: #b74600;
-    color: white; }
-    #hand_in_slots .deleteButton:hover, #hand_in_slots .deleteButton:focus, #handed_in_files .deleteButton:hover, #handed_in_files .deleteButton:focus {
-      background-color: #b74600; }
-    #hand_in_slots .deleteButton:hover, #hand_in_slots .deleteButton:focus, #handed_in_files .deleteButton:hover, #handed_in_files .deleteButton:focus {
       color: white; }
   #hand_in_slots x-destroy ~ *, #handed_in_files x-destroy ~ * {
     display: none; }

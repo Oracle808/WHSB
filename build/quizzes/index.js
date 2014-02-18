@@ -45,7 +45,7 @@ var submit = function(req, res) {
 		    req.body[q] = req.body[q].toString();
 		} else if(typeof quiz.questions[attempt.answers.length].solution === "number") {
 		    req.body[q] = parseInt(req.body[q]);
-		} 
+		}
 		if(req.body[q] === quiz.questions[attempt.answers.length].solution) {
 		    attempt.score++;
 		}
@@ -97,8 +97,17 @@ var publish = function(req, res) {
 	if(err) {
 	    res.error(err);
 	} else {
-	    console.log(doc);
 	    res.dust(listView, {subject:doc, route:"quizzes", quizzes: doc.quizzes, title:"Quizzes"});
+	}
+    });
+};
+
+var del = function(req, res) {
+    Subject.findByIdAndUpdate(req.param("subject"), {$pull: {quizzes: {_id: req.param("quiz")}}}, function(err, doc) {
+	if(err) {
+	    res.error(err);
+	} else {
+	    res.dust(listView, {subject:doc, route: "quizzes", quizzes: doc.quizzes, title: "Quizzes"});
 	}
     });
 };
@@ -108,3 +117,4 @@ exports.get = get;
 exports.submit = submit;
 exports.nova = nova;
 exports.publish = publish;
+exports.del = del;

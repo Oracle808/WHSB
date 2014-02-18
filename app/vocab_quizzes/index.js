@@ -24,4 +24,14 @@ var get = function(req, res) {
     });
 };
 
-export { index, get };
+var del = function(req, res) {
+    Subject.findByIdAndUpdate(req.param("subject"), {vocab_quizzes: {$pull: {_id: req.param("quiz")}}}, function(err, doc) {
+	if(err) {
+	    res.error(err);
+	} else {
+	    res.dust(vocabQuizList, {subject: doc, quizzes: doc.vocab_quizzes, title: "Vocabulary Quizzes", route: "vocab_quizzes"});
+	}
+    });
+};
+
+export { index, get, del };

@@ -70,9 +70,8 @@ x-snowfall {
 }
 
 nav#intraSubjectNavigation {
-    @include grid-column(12);
     @media #{$small-only} {
-	@include grid-column(3, $collapse: true, $pull: 3);
+	@include grid-column(12, $pull:12);
     }
     @media #{$medium-up} {
 	& {
@@ -115,7 +114,7 @@ nav#intraSubjectNavigation {
 
 #newLinkForm {
     background-color:white;
-    padding:20px;
+    padding:$content-margin;
 }
 
 // mobile-list
@@ -128,10 +127,40 @@ nav#intraSubjectNavigation {
 	@include grid-row();
 	background-color:$bg;
 	border-bottom:1px solid darken($bg, 10%);
-	padding:5px;
+	padding:$minor-margin;
 
+	button, .add-item, .delete-item {
+	    @extend .right;
+	    @include button-size($button-tny);
+	}
+
+	.add-item, .delete-item {
+	    @extend button;
+	}
+
+	.delete-item {
+	    @include button-style($warning);
+	}
     }
-    li:last-child {
+
+    form {
+	display:inline;
+    }
+
+    li.nothing, li.heading {
+	text-align:center;
+    }
+
+    li.heading {
+	background-color:deepskyblue;
+	font-weight:bold;
+    }
+
+    li.nothing {
+	padding:$content-margin;
+    }
+
+    > li:last-child, li.heading {
 	border-bottom:none;
     }
 }

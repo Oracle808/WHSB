@@ -13,12 +13,23 @@
     {>"app/header/head.dust"/}
     {>"app/subjects/nav.dust" active=route/}
     <main>
-      <article>
-	<h1>{title}</h1>
-      </article>
       <ol id="quizzes">
+	<li class="heading">{title}<a href="/subjects/{subject._id}/{route}/nova" class="add-item">Add</a></li>
 	{#quizzes}
-	  <li><a href="/subjects/{subject._id}/{route}/{_id}">{title}</a></li>
+	  <li>
+	    <a href="/subjects/{subject._id}/{route}/{_id}">{title}</a>
+	    <form action="/subjects/{subject._id}/{route}/{_id}" method="post">
+	      <input type="hidden" name="_method" value="delete"/>
+	      <button class="delete-item">Delete</button>
+	    </form>
+	  </li>
+	{:else}
+	  <li class="nothing">
+	    Nothing here at the moment.
+	    {@ne key=user.role value="student"}
+	      <br/>Why not add something?
+	    {/ne}
+	  </li>
 	{/quizzes}
       </ol> 
     </main> 

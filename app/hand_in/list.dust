@@ -17,18 +17,19 @@
     {>"app/header/head.dust"/}
     {>"app/subjects/nav.dust" active="hand_in"/}
     <main>
-      {@ne key=user.role value="student"}
-	<section class="toolbar">
-	  <button cite="#newSlotForm">Add Hand-in Folder</button>
-	</section>
-	<x-slidable id="newSlotForm" hidden>
-	  <form method="post">
-	    <input type="text" name="name" placeholder="Title" aria-required="true" required/>
-	    <button type="submit" class="publishButton">Submit</button>
-	  </form>
-	</x-slidable>
-      {/ne}
+
       <ul id="hand_in_slots">
+	<li class="heading">Hand-in<a cite="#newSlotForm" class="add-item"><i class="fi-plus"></i></a></li>
+	{@ne key=user.role value="student"}
+	  <x-slidable id="newSlotForm" hidden>
+	    <li>
+	      <form method="post">
+		<input type="text" name="name" placeholder="Title" aria-required="true" required/>
+		<button type="submit" class="publishButton">Submit</button>
+	      </form>
+	    </li>
+	  </x-slidable>
+	{/ne}
 	{#subject.hand_in}
 	  <li>
 	    <a href="/subjects/{subject._id}/hand_in/{_id}/files">{name}</a>
@@ -50,7 +51,7 @@
 		  {:else}
 	      <form action="/subjects/{subject._id}/hand_in/{_id}" method="post">
 		<input type="hidden" name="_method" value="delete"/>
-		<button type="submit" class="deleteButton"><i class="fi-x"></i></button>
+		<button type="submit" class="delete-item"><i class="fi-x"></i></button>
 	      </form>
 	    {/eq}
 	  </li> 

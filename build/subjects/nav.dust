@@ -31,16 +31,10 @@
     {?subject.links}
       <li class="header">Links</li>
       {#subject.links}
-	<li>
-	  <a href="{url}">{title}</a>
-	  <form action="/subjects/{subject._id}/links/{_id}" method="post">
-	    <input type="hidden" name="_method" value="delete"/>
-	    <button type="submit"><i class="fi-x"></i></button>
-	  </form>
-	</li>
+	<li><a href="{url}">{title}</a></li>
       {/subject.links}
     {/subject.links}
 
-    <li><a id="newLink" cite="#newLinkForm">New Link</a></li>
+    <li><a href="/subjects/{subject._id}/settings">Settings <i class="fi-widget"></i></a></li>
   </ul>	
 </nav>
