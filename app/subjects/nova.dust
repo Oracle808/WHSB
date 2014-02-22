@@ -2,11 +2,11 @@
 <html>
   <head>
     <title>New Subject</title>
-    <style src="./subject.scss"></style>
-    <style src="app/header/head.scss"></style>
+    <link href="/styles/ui/index.css" rel="stylesheet"/>
+    <link href="/styles/ui/topbar.css" rel="stylesheet"/>
   </head>
   <body>
-    {>"app/header/head.dust"/}
+    {>"app/partials/head.dust"/}
     <main>
       <article>
 	<h2>New Subject</h2>

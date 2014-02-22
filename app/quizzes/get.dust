@@ -2,34 +2,33 @@
 <html>
   <head>
     <title>{quiz.title}</title>
-    <style src="app/subjects/subject.scss"></style>
-    <style src="app/header/head.scss"></style>
-    {>"app/header/global.dust"/}
+    <link href="/styles/ui/index.css" rel="stylesheet"/>
+    <link href="/styles/ui/topbar.css" rel="stylesheet"/>
+    {>"app/partials/global.dust"/}
   </head>
   <body>
-    {>"app/header/head.dust"/}
-    {>"app/subjects/nav.dust" active="quizzes"/}
+    {>"app/partials/head.dust"/}
+    {>"app/partials/nav.dust" active="quizzes"/}
     <main>
       {?attempt}
-	  <h3>You got {attempt.score} out of {quiz.questions.length}</h3>
-	  <hr/>
-	  {/attempt}
-	  <form method="post" action="/subjects/{subject._id}/quizzes/{quiz._id}">
-	    {#quiz.questions}
-	      <div class="question">
-		<p class="problem">
-		  <b>{problem}</b>
-		  {help_text}
-		</p>
-		{@typeof key=solution}
-		  {@eq value="number"}
-		    <input name="answer{$idx}" type="number" {?attempt} value="{attempt.answers[$idx]}" disabled {/attempt} aria-required="true" required/>
-		  {/eq}
-		  {@eq value="string"}
-		    <input name="answer{$idx}" type="text" {?attempt} value="{attempt.answers[$idx]}" disabled {/attempt} aria-required="true" required/>
-		  {/eq}
-		{/typeof}
-	      </div>
+	<h3>You got {attempt.score} out of {quiz.questions.length}</h3>
+	{/attempt}
+	<form method="post" action="/subjects/{subject._id}/quizzes/{quiz._id}">
+	  {#quiz.questions}
+	    <div class="question">
+	      <p class="problem">
+		<b>{problem}</b>
+		{help_text}
+	      </p>
+	      {@typeof key=solution}
+		{@eq value="number"}
+		  <input name="answer{$idx}" type="number" {?attempt} value="{attempt.answers[$idx]}" disabled {/attempt} aria-required="true" required/>
+		{/eq}
+		{@eq value="string"}
+		  <input name="answer{$idx}" type="text" {?attempt} value="{attempt.answers[$idx]}" disabled {/attempt} aria-required="true" required/>
+		{/eq}
+	      {/typeof}
+	    </div>
 	    {/quiz.questions}
 	    <button type="submit">Submit</button>
 	  </form>

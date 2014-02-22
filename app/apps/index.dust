@@ -2,12 +2,11 @@
 <html lang="en-GB">
   <head>
     <title>WHSB</title>
-    <style src="app/home/index.scss"></style>
-    <style src="app/header/head.scss"></style>
-    {>"app/header/global.dust"/}
+    <link href="/styles/home/index.css"/>
+    {>"app/partials/global.dust"/}
   </head>
   <body>
-    {>"app/header/head.dust"/}
+    {>"app/partials/head.dust"/}
     <main>
       <ul>
 	<li>

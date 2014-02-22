@@ -3,7 +3,7 @@ var mongoose = require("mongoose");
 var Subject = mongoose.model("Subject");
 var User = mongoose.model("User");
 
-var massUserCreation = function(req, res) {
+module.exports.massUserCreation = function(req, res) {
     Subject.find({}, function(err, docs) {
 	if(err) {
 	    res.error(err);
@@ -28,7 +28,7 @@ var getYear = function(date) {
     return year < 10 ? "0" + year : year.toString();
 };
 
-var postMassUserCreation = function(req, res) {
+module.exports.postMassUserCreation = function(req, res) {
     if(req.body.username && req.body.dofb) {
 	var docs = [];
 	for(var i = 0; (i < req.body.username.length) && (i < req.body.dofb.length); i++) {
@@ -49,5 +49,3 @@ var postMassUserCreation = function(req, res) {
     } 
     res.end();
 };
-
-export { massUserCreation, postMassUserCreation };

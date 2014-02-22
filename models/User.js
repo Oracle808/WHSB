@@ -159,4 +159,5 @@ var Subject = mongoose.Schema({
     }]
 });
 
-export { User, Subject };
+module.exports.User = User;
+module.exports.Subject = Subject;

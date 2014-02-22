@@ -1,9 +1,9 @@
 <html>
   <head>
     <title>Login</title>
-    <link href="./foundation-icons/foundation-icons.css" rel="stylesheet"/>
-    <style src="./login.scss"></style>
-    {>"app/header/global.dust"/}
+    <link href="/styles/home/login.css" rel="stylesheet"/>
+    <link href="/foundation-icons/foundation-icons.css" rel="stylesheet"/>
+    {>"app/partials/global.dust"/}
   </head>
   <body>
     <form action="/login" method="post">

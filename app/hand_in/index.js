@@ -2,11 +2,11 @@ var mongoose = require("mongoose");
 var Subject = mongoose.model("Subject");
 var listView = require("./list.dust");
 var detailView = require("./detail.dust");
-var GridFS = require("../../models/gridfs.common");
+var GridFS = require("../../models/gridfs");
 var uu = require("underscore");
 var async = require("async");
 
-var index = function(req, res) {
+module.exports.index = function(req, res) {
     Subject.findById(req.param("subject")).exec(function(err, doc) {
 	if(err) {
 	    res.error(err);
@@ -16,7 +16,7 @@ var index = function(req, res) {
     });
 };
 
-var post = function(req, res) {
+module.exports.post = function(req, res) {
     Subject.findByIdAndUpdate(req.param("subject"), {$push: {hand_in: {name: req.body.name, files: []}}}, function(err, doc) {
 	if(err) {
 	    res.error(err);
@@ -26,7 +26,7 @@ var post = function(req, res) {
     });
 };
 
-var upload = function(req, res) {
+module.exports.upload = function(req, res) {
     Subject.findById(req.param("subject"), function(err, doc) {
 	if(err) {
 	    res.error(err);
@@ -81,13 +81,13 @@ var upload = function(req, res) {
     });
 };
 
-var get = function(req, res) {
+module.exports.get = function(req, res) {
     Subject.findById(req.param("subject")).select({hand_in: { $elemMatch: {_id: req.param("hand_in_slot")}}}).populate("hand_in.files.user").exec(function(err, docs) {
 	res.dust(detailView, {subject: docs, hand_in_slot: docs.hand_in[0]});
     });
 };
 
-var download = function(req, res) {
+module.exports.download = function(req, res) {
     GridFS.getGridFile(req.param("file"), function(err, file) {
 	if(err) {
 	    res.error(err);
@@ -98,7 +98,7 @@ var download = function(req, res) {
     });
 };
 
-var del = function(req, res) {
+module.exports.del = function(req, res) {
     Subject.findById(req.param("subject")).exec(function(err, doc) {
 	if(err) {
 	    res.error(err);
@@ -130,5 +130,3 @@ var del = function(req, res) {
 	}
     });
 };
-
-export { index, post, upload, get, download, del };

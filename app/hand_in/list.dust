@@ -2,20 +2,17 @@
 <html>
   <head>
     <title>Hand-in</title>
-    <style src="app/subjects/subject.scss"></style>
-    <style src="app/header/head.scss"></style>
-    <style src="app/hand_in/list.scss"></style>
+    <link href="/stylesheets/hand_in/index.css" rel="stylesheet"/>
     <script src="app/subjects/polyfill.js"></script>
     <script src="components/x-bubble.js"></script>
     <script src="components/x-slidable.js"></script>
     <script src="components/x-opendialog.js"></script>
     <script src="components/x-destroy.js"></script>
-    <link href="/foundation-icons/foundation-icons.css" rel="stylesheet"/>
-    {>"app/header/global.dust"/}
+    {>"app/partials/global.dust"/}
   </head>
   <body>
-    {>"app/header/head.dust"/}
-    {>"app/subjects/nav.dust" active="hand_in"/}
+    {>"app/partials/head.dust"/}
+    {>"app/partials/nav.dust" active="hand_in"/}
     <main>
 
       <ul id="hand_in_slots">

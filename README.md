@@ -15,4 +15,17 @@ Following a new industry trend, to build experiences that work on mobiles, table
 Pandora uses no metaphors save that of files and folders. There is no concept of rooms: only subjects and clubs, which provide the bulk of the UX (User experience)
 
 #### Progressive enhancement
-Rather than the likes of many VLEs where the installation of program X is assumed (Java, Adobe Flash, JavaScript) we use the technique of progressive enhancement. We first assume that the client (i.e. Internet Explorer, Google Chrome, etc) has no support for any of these, and we send to the client a copy of a website fit for a JavaScript-less environment. After the page is loaded onto the client, if JavaScript is enabled scripts are run to enhance the website experience through the use of animations and transitions to load new content rather than an entire page load, etc. 
+Rather than the likes of many VLEs where the installation of program X is assumed (Java, Adobe Flash, JavaScript) we use the technique of progressive enhancement. We first assume that the client (i.e. Internet Explorer, Google Chrome, etc) has no support for any of these, and we send to the client a copy of a website fit for a JavaScript-less environment. After the page is loaded onto the client, if JavaScript is enabled scripts are run to enhance the website experience through the use of animations and transitions to load new content rather than an entire page load, etc.
+
+### Run locally
+Clone the project, and then type the following commands into the terminal:
+```bash
+# Install dependencies
+npm install
+# Build project
+npm run build
+# Test
+npm test
+# Start project
+npm start
+```

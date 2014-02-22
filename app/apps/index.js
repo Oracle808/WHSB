@@ -1,7 +1,10 @@
-var indexPage = require("./index.dust");
+var index = require("./index.dust");
+var codr = require("./codr.dust");
 
-var index = function(req, res) {
-    res.dust(indexPage);
+module.exports.index = function(req, res) {
+    res.dust(index);
 };
 
-export { index };
+module.exports.codr = function(req, res) {
+    res.dust(codr);
+};

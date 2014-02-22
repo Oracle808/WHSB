@@ -1,6 +1,6 @@
 var Program = require("commander");
 var Inquirer = require("inquirer");
-var Database = require("../models/index.common.js").Database;
+var Database = require("../models/index.js");
 var path = require("path");
 
 Program
@@ -55,9 +55,9 @@ if(Program.createUser) {
     var Quizzes = require("./quizzes");
     var VocabQuizzes = require("./vocab_quizzes");
     var Apps = require("./apps");
-    var Codr = require("./codr");
     var Users = require("./users");
     var HandIn = require("./hand_in");
+    var Settings = require("./settings");
 
     var auth = function(req, res, next) {
 	if(req.session.user) {
@@ -134,6 +134,8 @@ if(Program.createUser) {
     // SUBJECT LINKS
     app.post("/subjects/:subject/links", auth, teacher, Subjects.postLink);
     app.del("/subjects/:subject/links/:link", auth, Subjects.delLink);
+    // SUBJECT
+    app.get("/subjects/:subject/settings", auth, teacher, Settings.index);
     // HAND-IN
     app.get("/subjects/:subject/hand_in", auth, HandIn.index);
     app.post("/subjects/:subject/hand_in", auth, teacher, HandIn.post);
@@ -143,7 +145,7 @@ if(Program.createUser) {
     app.del("/subjects/:subject/hand_in/:hand_in_slot", auth, teacher, HandIn.del);
     // APPS
     app.get("/apps", auth, Apps.index);
-    app.get("/apps/codr", auth, Codr.index);
+    app.get("/apps/codr", auth, Apps.codr);
     // USERS
     app.get("/users/massUserCreation", auth, admin, Users.massUserCreation);
     app.post("/users/massUserCreation", auth, admin, Users.postMassUserCreation);

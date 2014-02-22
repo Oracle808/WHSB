@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Codr</title>
+    <link href="/styles/apps/codr.css" rel="stylesheet">    
+    <link href="/foundation-icons/foundation-icons.css" rel="stylesheet"/>
+    <script src="app/subjects/polyfill.js"></script>
+    <script src="components/x-coderunner.js"></script>
+    <script src="components/x-opendialog.js"></script>
+    <script src="components/x-savedialog.js"></script>
+  </head>
+  <body>
+    {>"app/partials/head.dust"/}
+    <main>
+      <article>
+	<header class="heading">
+	  <ul id="actions">
+	    <li><button cite="#codeBox"><i class="fi-play"></i></button></li>
+	    <li><button cite="#openFileDialog"><i class="fi-upload"></i></button></li>
+	    <li><button cite="#saveFileDialog"><i class="fi-archive"></i></button></li>
+	  </ul>
+	  <section id="title">
+	    <h2>Codr</h2>
+	  </section>
+	  <section id="links">
+	    <button cite="#documentation">Documentation</button>
+	  </section>
+	</header>
+
+	<section class="editor">
+	  <x-savedialog id="saveFileDialog" for="#codeBox">
+	    <x-opendialog id="openFileDialog" for="#codeBox">
+	      <x-coderunner id="codeBox" lang="javascript" for="#console"></x-coderunner>
+	    </x-opendialog>
+	  </x-savedialog>
+	</section>
+
+	<output id="console"></output>
+      </article>
+    </main>
+  </body>
+</html>
+

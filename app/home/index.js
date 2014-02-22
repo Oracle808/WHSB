@@ -5,7 +5,7 @@ var User = mongoose.model("User");
 var Subject = mongoose.model("Subject");
 var bcrypt = require("bcrypt");
 
-var index = function(req, res) {
+module.exports.index = function(req, res) {
     Subject
 	.where("_id").in(req.session.user.subjects)
 	.select("name subject_name")
@@ -18,13 +18,15 @@ var index = function(req, res) {
 	});
 }
 
-var login = {
+module.exports.login = {
     form: function(req, res) {
 	res.dust(loginPage, {redirect: req.param("redirect") || "/"});
     }, 
     attempt: function(req, res) {
 	User.findOne({username: req.body.username}, function(err, user) {
-	    if(user) {
+	    if(err) {
+		res.error(err);
+	    } else if(user) {
 		bcrypt.compare(req.body.password, user.password, function(err, identical) {
 		    if(err) {
 			res.error(err);
@@ -41,5 +43,3 @@ var login = {
 	});
     }
 }
-
-export { index, login };

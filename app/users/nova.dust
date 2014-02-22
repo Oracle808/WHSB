@@ -2,32 +2,12 @@
 <html>
   <head>
     <title>Mass User Creation</title>
-    <style src="app/subjects/subject.scss"></style>
-    <style src="app/header/head.scss"></style>
-    <style src="./nova.scss"></style>
-    <script src="app/subjects/polyfill.js"></script>
-    <script src="components/x-appendable.js"></script>
+    <link href="/styles/admin/users.css" rel="stylesheet"/>
     <link href="/foundation-icons/foundation-icons.css" rel="stylesheet"/>
-    {>"app/header/global.dust"/}
+    {>"app/partials/global.dust"/}
   </head>
   <body>
-    {>"app/header/head.dust"/}
-
-    <x-appendable id="newUser" to="instantiatedUsers" chain="instantiatedUsers">
-      <table>
-	<tr>
-	  <td>
-	    <input type="text" name="username[]" placeholder="Username" aria-required="true"/>
-	  </td>
-	  <td>
-	    <input type="date" name="dofb[]" placeholder="Date of Birth" aria-required="true"/>
-	  </td>
-	  <td>
-	    <button class="deleteButton"><i class="fi-x"></i></button>
-	  </td>
-	</tr>
-      </table>
-    </x-appendable>
+    {>"app/partials/head.dust"/}
 
     <main>
       <article>
@@ -35,42 +15,12 @@
 	<p>The passwords are formulated from the date such that a pupil born on the 5th May 2014, would have the password <i>050514</i>.</p>
 
 	<form method="post">
-	  <fieldset id="users">
+	  <fieldset>
 	    <legend>Users</legend>
-	    <div id="instantiatedUsers">
-	      <fieldset class="user" name="users[]">
-		<table>
-		  <tr>
-		    <td>
-		      <input type="text" name="username[]" placeholder="Username" aria-required="true" autofocus/>
-		    </td>
-		    <td>
-		      <input type="date" name="dofb[]"  placeholder="Date Of Birth" aria-required="true"/>
-		    </td>
-		    <td>
-		      <button class="deleteButton"><i class="fi-x"></i></button>
-		    </td>
-		  </tr>
-		</table>
-	      </fieldset>
-	    </div>
-
-	    <fieldset class="user" name="users[]" cite="#newUser">
-	      <table>
-		<tr>
-		  <td>
-		    <input type="text" placeholder="Click to add user" disabled/>
-		  </td>
-		  <td>
-		    <input type="date" disabled/>
-		  </td>
-		  <td>
-		    <button class="deleteButton" disabled><i class="fi-x"></i></button>
-		  </td>
-		</tr>
-	      </table>
-	    </fieldset>
-
+	    <table id="users">
+	      {>"app/users/row.dust"/}
+	      {>"app/users/row.dust" disabled="true"/}
+	    </table>
 	  </fieldset>
 	  
 	  <fieldset>
@@ -87,5 +37,6 @@
 
       </article>
     </main>
+    <script src="/scripts/admin/massUserCreation.js"></script>
   </body>
 </html>

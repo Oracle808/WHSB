@@ -173,7 +173,8 @@ module.exports.intercept = function(opts) {
 		if(opts && opts.errorPage) {
 		    res.render(opts.errorPage, {error: error});
 		} else {
-		    res.end("<html><head><title>" + res.statusCode + "</title></head><body><h1>" + res.statusCode + "</h1><p>" + error.toString() + "</p></body></html>");
+		    error = error.toString().replace(/\n/g, "<br/>");
+		    res.end("<html><head><title>" + res.statusCode + "</title></head><body><h1>" + res.statusCode + "</h1><p>" + error + "</p></body></html>");
 		}
 	    } else if(req.accepts("json")) {
 		if(uu.isString(error)) {

@@ -1,4 +1,7 @@
-main, x-quiz {
+@import "app/subjects/subject.scss";
+@import "app/header/head.scss";
+
+x-quiz {
     display:block;
 }
 

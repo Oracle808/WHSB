@@ -2,42 +2,26 @@
 <html lang="en-gb">
   <head>
     <title>New Quiz</title>
-    <style src="app/subjects/subject.scss"></style>
-    {>"app/header/global.dust"/}
-    <style src="app/header/head.scss"></style>
-    <style src="./nova.scss"></style>
-    <script src="app/subjects/polyfill.js"></script>
-    <script src="components/x-slidable.js"></script>
-    <script src="components/x-appendable.js"></script>
-    <script src="components/x-bubble.js"></script>
-    <script src="./nova.js"></script>
+    {>"app/partials/global.dust"/}
+    <link href="/styles/quizzes/nova.css" rel="stylesheet"/>
+    <script src="/scripts/quizzes/nova.js"></script>
   </head>
   <body>
-    {>"app/header/head.dust"/}
-    {>"app/subjects/nav.dust"/}
+    {>"app/partials/head.dust"/}
+    {>"app/partials/nav.dust"/}
     <main>
-	  <x-appendable id="newQuestion" to="questions">
-	    <article>
-	      <input type="text" name="questions" placeholder="Question" aria-required="true" required/>
-	      <input type="text" name="help_text" placeholder="Help Text"/>
-	      <select name="type" aria-required="true" required>
-		<option value="text" selected>Text</option>
-		<option value="number">Number</option>
-	      </select>
-	      <input name="answers" type="text" placeholder="Answer"/>
-	    </article>
-	  </x-appendable>	
-
-	  <form id="newQuizForm" action="/subjects/{subject._id}/quizzes" method="post">
-	    <header id="formHeader">
-	      <div id="quizTitle">
-		<input name="title" form="newQuizForm" placeholder="Name your quiz" type="text" aria-required="true" required/>
-	      </div>
-	      <button id="createButton" cite="#newQuestion">New Question</button>
-	      <button id="submitButton" type="submit">Submit</button>
-	    </header>
-	    <div id="questions"></div>
-	  </form>
+      <form id="newQuizForm" action="/subjects/{subject._id}/quizzes" method="post">
+	<header id="formHeader">
+	  <div id="quizTitle">
+	    <input name="title" form="newQuizForm" placeholder="Name your quiz" type="text" aria-required="true" required/>
+	  </div>
+	  <button id="add-question" cite="#newQuestion">New Question</button>
+	  <button type="submit">Submit</button>
+	</header>
+	<ul id="questions">
+	  {>"app/quizzes/question.dust" no="0"/}
+	</ul>
+      </form>
     </main>
   </body>
 </html>

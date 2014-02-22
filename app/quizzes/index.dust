@@ -1,26 +1,27 @@
 <!DOCTYPE html>
 <html lang="en-gb">
   <head>
-    <title>{title}</title>
-    <script src="../subjects/polyfill.js"></script>
-    <style src="../subjects/subject.scss"></style>
-    <style src="../header/head.scss"></style>
-    <style src="./index.scss"></style>
-    <script src="components/x-bubble.js"></script>
-    {>"app/header/global.dust"/}
+    <title>Quizzes</title>
+    <link href="/styles/quizzes/index.css" rel="stylesheet"/>
+    {@ne key=user.role value="student"}
+      <script src="public/scripts/results.js"></script>
+      <script src="bower_components/d3/d3.min.js"></script>
+      <script src="bower_components/oboe/dist/oboe-browser.min.js"></script>
+    {/ne}
+    {>"app/partials/global.dust"/}
   </head>
   <body>
-    {>"app/header/head.dust"/}
-    {>"app/subjects/nav.dust" active=route/}
+    {>"app/partials/head.dust"/}
+    {>"app/partials/nav.dust" active="quizzes"/}
     <main>
       <ol id="quizzes">
-	<li class="heading">{title}<a href="/subjects/{subject._id}/{route}/nova" class="add-item">Add</a></li>
+	<li class="heading">{title}<a href="/subjects/{subject._id}/quizzes/nova" class="add-item"><i class="fi-plus"></i></a></li>
 	{#quizzes}
 	  <li>
-	    <a href="/subjects/{subject._id}/{route}/{_id}">{title}</a>
-	    <form action="/subjects/{subject._id}/{route}/{_id}" method="post">
+	    <a href="/subjects/{subject._id}/quizzes/{_id}">{title}</a>
+	    <form action="/subjects/{subject._id}/quizzes/{_id}" method="post">
 	      <input type="hidden" name="_method" value="delete"/>
-	      <button class="delete-item">Delete</button>
+	      <button class="delete-item"><i class="fi-x"></i></button>
 	    </form>
 	  </li>
 	{:else}
@@ -31,7 +32,7 @@
 	    {/ne}
 	  </li>
 	{/quizzes}
-      </ol> 
+      </ol>
     </main> 
   </body>
 </html>

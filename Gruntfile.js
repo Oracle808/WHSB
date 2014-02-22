@@ -9,56 +9,68 @@ module.exports = function(grunt) {
 
     grunt.initConfig({
 	pkg: CONFIGURATION,
-	clean: {
-	    build: {
-		src: ["build/", "models/**/*.common.js"]
-	    }
-	},
 	asciify: {
 	    banner: {
 		// FOR THE WHIMSY OF IT
 		text: "HASHAN!"
 	    }
 	},
-	webify: {
-	    web: {
+	clean: {
+	    styles: {
+		src: ["public/styles/*"]
+	    },
+	    scripts: {
+		src: ["public/scripts/*"]
+	    }
+	},
+	copy: {
+	    bower: {
+		files: [{
+		    expand: true,
+		    cwd: "bower_components/",
+		    src: ["*", "**/*"],
+		    dest: "public/"
+		}]
+	    }
+	},
+	sass: {
+	    options: {
+		outputStyle: "compressed"
+	    },
+	    build: {
+		files: [{
+		    expand: "true",
+		    cwd: "styles/",
+		    src: "**/*.scss",
+		    dest: "public/styles/",
+		    ext: ".css"
+		}]
+	    }
+	},
+	browserify: {
+	    build: {
 		options: {
-		    esnext: true,
-		    sass: {
-			includePaths: ["app", "bower_components/foundation/scss"],
-			outputStyle: "expanded"
-		    }
+		    transform: ["browserify-dustjs"]
 		},
-		files: [
-		    {
-			expand: true,
-			cwd:"app/",
-			src: TEMPLATE_FILES,
-			dest: "build/"
-		    },
-		    {
-			expand: true,
-			cwd:"app/",
-			src: APP_FILES,
-			dest:"build/"
-		    },
-		    {
-			expand: true,
-			src: MODEL_FILES,
-			ext: ".common.js"
-		    }
-		]
+		files: [{
+		    expand:true,
+		    cwd: "scripts/",
+		    src: "**/*.js",
+		    dest:"public/scripts/"
+		}]
 	    }
 	}
     });
 
     // This is how you develop...
     grunt.loadNpmTasks("grunt-contrib-clean");           // CLEAN BUILD
+    grunt.loadNpmTasks("grunt-contrib-copy");
+    grunt.loadNpmTasks("grunt-sass");                    // BUILD SASS
+    grunt.loadNpmTasks("grunt-browserify");              // BROWSERFIY
     grunt.loadNpmTasks("grunt-asciify");                 // ASCIIFY MINIFIED FILES
-    grunt.loadNpmTasks("grunt-webify");                  // BUILD & MINIFY THEM FOR THE WEB
     grunt.loadNpmTasks("grunt-foreman");                 // TEST SERVER
 
-    grunt.registerTask("default", ["clean", "asciify", "webify"]);
+    grunt.registerTask("default", ["clean", "copy", "sass", "browserify"]);
     grunt.registerTask("serve", ["default", "foreman"]);
 
 };

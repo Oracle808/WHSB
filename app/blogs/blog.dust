@@ -2,22 +2,19 @@
 <html>
   <head>
     <title>{subject.title}</title>
-    <style src="app/subjects/subject.scss"></style>
-    <style src="app/blogs/blog.scss"></style>
-    <style src="app/header/head.scss"></style>
+    <link href="/styles/blogs/index.css" rel="stylesheet"/>
     <script src="app/subjects/polyfill.js"></script>
     <script src="components/x-slidable.js"></script>
     <script src="components/x-richtexteditor.js"></script>
     <script src="components/x-snowfall.js"></script>
     <script src="components/x-deletable.js"></script>
     <script src="components/x-bubble.js"></script>
-    <link href="/foundation-icons/foundation-icons.css" rel="stylesheet"/>
-    {>"app/header/global.dust"/}
+    {>"app/partials/global.dust"/}
   </head>
   <body>
     <x-snowfall count="800">
-      {>"app/header/head.dust"/}
-      {>"app/subjects/nav.dust" active="blog"/}
+      {>"app/partials/head.dust"/}
+      {>"app/partials/nav.dust" active="blog"/}
       <main>
 	<div id="action-bar">
 	  <a href="/subjects/{subject._id}?nova=true" cite="#newPostForm">New Post <i class="fi-plus"></i></a>
@@ -44,7 +41,6 @@
 		  <button exec="superscript"><i class="fi-superscript"></i></button>
 		</ul>
 	      </div>
-	      <br/>
 	      <x-richtexteditor class="jsmore" for="#content"></x-richtexteditor>
 	      <textarea name="body" class="jsless" id="content"></textarea>
 	      <span id="buttons">

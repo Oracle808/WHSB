@@ -2,24 +2,20 @@
 <html>
   <head>
     <title>View</title>
-    <style src="app/subjects/subject.scss"></style>
-    <style src="./list.scss"></style>
-    <style src="app/header/head.scss"></style>
+    <link href="/styles/hand_in/index.css" rel="stylesheet"/>
     <script src="app/subjects/polyfill.js"></script>
     <script src="components/x-bubble.js"></script>
-    {>"app/header/global.dust"/}
+    {>"app/partials/global.dust"/}
   </head>
   <body>
-    {>"app/header/head.dust"/}
+    {>"app/partials/head.dust"/}
+    {>"app/partials/nav.dust"/}
     <main>
-      {>"app/subjects/nav.dust"/}
-      <div>
-	<ul id="handed_in_files">
-	  {#hand_in_slot.files}
-	    <li>{user.username}<a href="/subjects/{subject._id}/hand_in/{hand_in_slot._id}/files/{file}/" class="viewButton">View</a></li>
+      <ul id="handed_in_files">
+	{#hand_in_slot.files}
+	  <li>{user.username}<a href="/subjects/{subject._id}/hand_in/{hand_in_slot._id}/files/{file}/" class="viewButton">View</a></li>
 	  {/hand_in_slot.files}
-	</ul>
-      </div>
+      </ul>
     </main>
   </body>
 </html>

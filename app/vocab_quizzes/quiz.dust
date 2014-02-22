@@ -3,11 +3,8 @@
   <head>
     <title>{quiz.title}</title>
     <script src="../subjects/polyfill.js"></script>
-    <style src="../subjects/subject.scss"></style>
-    <style src="./quiz.scss"></style>
+    <link href="stylesheets/vocab_quizzes/quiz.css" rel="stylesheet"/>
     <script src="./quiz.js"></script>
-    <style src="../header/head.scss"></style>
-    <link href="/foundation-icons/foundation-icons.css" rel="stylesheet"/>
     {>"app/header/global.dust"/}
   </head>
   <body>

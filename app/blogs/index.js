@@ -10,13 +10,13 @@ var query = function(id, select, update, cb) {
     var desirable = uu.extend({name: true, subject_name: true, vocab_quizzes: true, teacher: true, blog: true, links:true}, select);
     var query = Subject.findById(id).select(desirable).populate("teacher");
     if(typeof update === "function") {
-	query = query.exec(update);
+	query.exec(update);
     } else {
-	query = query.update(update).exec(cb);
+	query.update(update).exec(cb);
     }
 };
 
-var index = function(req, res) {
+module.exports.index = function(req, res) {
     var blogSelect = true;
     if(req.session.user.role === "student") {
 	blogSelect = {$elemMatch: {draft:false}};
@@ -34,7 +34,7 @@ var index = function(req, res) {
     });
 };
 
-var publish = function(req, res) {
+module.exports.publish = function(req, res) {
     var update = {
 	$push: {
 	    blog: {
@@ -57,7 +57,7 @@ var publish = function(req, res) {
     });
 };
 
-var get = function(req, res) {
+module.exports.get = function(req, res) {
     query(req.param("subject"), {blog: {$elemMatch: {_id: req.param("post")}}}, function(err, doc) {
 	if(err) {
 	    res.error(err);
@@ -68,32 +68,36 @@ var get = function(req, res) {
     });
 };
 
-var feed = function(req, res) {
+module.exports.feed = function(req, res) {
     query(req.param("subject"), {links: false, vocab_quizzes: false}, function(err, doc) {
-	var news = new RSS({
-	    title: doc.name,
-	    generator: "WHSB Feed Generator",
-	    feed_url: req.host + req.path,
-	    site: req.host,
-	    author: doc.teacher,
-	    webMaster: "Hashan Punchihewa",
-	    copyright: "Copyright Westcliff High School for Boys",
-	    language: "English",
-	    categories: ["School"]
-	});
-	doc.blog.forEach(function(post) {
-	    news.item({
-		title: post.title,
-		description: us.prune(post.body, 350),
-		guid: post._id,
-		date: post.date
+	if(err) {
+	    res.error(err);
+	} else {
+	    var news = new RSS({
+		title: doc.name,
+		generator: "WHSB Feed Generator",
+		feed_url: req.host + req.path,
+		site: req.host,
+		author: doc.teacher,
+		webMaster: "Hashan Punchihewa",
+		copyright: "Copyright Westcliff High School for Boys",
+		language: "English",
+		categories: ["School"]
 	    });
-	});
-	res.rss(news.xml());
+	    doc.blog.forEach(function(post) {
+		news.item({
+		    title: post.title,
+		    description: us.prune(post.body, 350),
+		    guid: post._id,
+		    date: post.date
+		});
+	    });
+	    res.rss(news.xml());
+	}
     });
 };
 
-var del = function(req, res) {
+module.exports.del = function(req, res) {
     query(req.param("subject"), {}, {$pull: {blog: {_id: req.param("post")}}}, function(err, doc) {
 	if(err) {
 	    res.error(err);
@@ -106,6 +110,3 @@ var del = function(req, res) {
 	}
     });
 };
-
-
-export { index, publish, get, feed, del };

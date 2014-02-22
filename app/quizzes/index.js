@@ -1,33 +1,43 @@
 var mongoose = require("mongoose");
 var Subject = mongoose.model("Subject");
-var listView = require("./index.dust");
-var getView = require("./get.dust");
-var novaView = require("./nova.dust");
 var uu = require("underscore");
 var us = require("underscore.string");
 var dateutil = require("dateutil");
 
-var list = function(req, res) {
-    Subject.findById(req.param("subject")).populate("teacher").exec(function(err, doc) {
+// Views
+var listView = require("./index.dust");
+var getView = require("./get.dust");
+var novaView = require("./nova.dust");
+var marksView = require("./marks.dust");
+
+var render = function(req, res) {
+    return function(err, doc) {
+	if(err) {
+	    res.error(err);
+	} else if(req.accepts("html")) {
+	    res.dust(listView, {subject: doc, route:"quizzes", quizzes: doc.quizzes, title:"Quizzes"});
+	} else {
+	    res.render(doc);
+	}
+    };
+};
+
+module.exports.list = function(req, res) {
+    Subject.findById(req.param("subject")).populate("teacher").exec(render(req, res));
+};
+
+module.exports.get = function(req, res) {
+    var populate = req.session.user.role === "student" ? "teacher" : "teacher quizzes.attempts.user";
+    Subject.findById(req.param("subject")).select({quizzes:{$elemMatch:{_id: req.param("quiz")}}}).populate(populate).exec(function(err, doc) {
 	if(err) {
 	    res.error(err);
 	} else {
-	    res.dust(listView, {subject:doc, route:"quizzes", quizzes: doc.quizzes, title:"Quizzes"});
+	    res.dust(req.session.user.role === "student" ? getView : marksView, {subject:doc, quiz: doc.quizzes[0]});
 	}
     });
 };
 
-var get = function(req, res) {
-    Subject.findById(req.param("subject")).select({quizzes:{$elemMatch:{_id: req.param("quiz")}}}).populate("teacher").exec(function(err, doc) {
-	if(err) {
-	    res.error(err);
-	} else {
-	    res.dust(getView, {subject:doc, quiz: doc.quizzes[0]});
-	}
-    });
-};
-
-var submit = function(req, res) {
+module.exports.submit = function(req, res) {
     Subject.findById(req.param("subject")).exec(function(err, doc) {
 	if(err) {
 	    return res.error(err);
@@ -63,53 +73,41 @@ var submit = function(req, res) {
     });
 };
 
-var nova = function(req, res) {
+module.exports.nova = function(req, res) {
     Subject.findById(req.param("subject")).exec(function(err, doc) {
 	res.dust(novaView, {subject:doc});
     });
 };
 
-var publish = function(req, res) {
+module.exports.publish = function(req, res) {
+    console.log(req.body);
     var update = {
 	title:req.body.title,
 	questions: [],
 	attempts: []
     };
-    console.log(req.body);
     for(var i = 0; i < req.body.type.length; i++) {
 	var doc = {
-	    solution: req.body.answers[i],
-	    problem: req.body.questions[i]
+	    solution: req.body.answer[i],
+	    problem: req.body.question[i]
 	};
 	if(req.body.type[i] === "text") {
 	    doc.solution = doc.solution.toString();
 	} else if(req.body.type[i] === "number") {
 	    doc.solution = parseInt(doc.solution);
-	} else if(req.bdoy.type === "date") {
+	} else if(req.body.type === "date") {
 	    doc.solution = dateutil.parse(doc.solution);
 	}
 	if(req.body.help_text[i]) {
 	    doc.help_text = req.body.help_text[i];
 	}
+	console.log(doc);
 	update.questions.push(doc);
     }
-    Subject.findByIdAndUpdate(req.param("subject"), {$push: {quizzes: update}}, function(err, doc) {
-	if(err) {
-	    res.error(err);
-	} else {
-	    res.dust(listView, {subject:doc, route:"quizzes", quizzes: doc.quizzes, title:"Quizzes"});
-	}
-    });
+    console.log(update);
+    Subject.findByIdAndUpdate(req.param("subject"), {$push: {quizzes: update}}, render(req, res));
 };
 
-var del = function(req, res) {
-    Subject.findByIdAndUpdate(req.param("subject"), {$pull: {quizzes: {_id: req.param("quiz")}}}, function(err, doc) {
-	if(err) {
-	    res.error(err);
-	} else {
-	    res.dust(listView, {subject:doc, route: "quizzes", quizzes: doc.quizzes, title: "Quizzes"});
-	}
-    });
+module.exports.del = function(req, res) {
+    Subject.findByIdAndUpdate(req.param("subject"), {$pull: {quizzes: {_id: req.param("quiz")}}}, render(req, res));
 };
-
-export { list, get, submit, nova, publish, del };

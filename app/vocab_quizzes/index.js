@@ -1,10 +1,10 @@
 var mongoose = require("mongoose");
 var Subject = mongoose.model("Subject");
-var vocabQuizList = require("../quizzes/index.dust");
+var vocabQuizList = require("./index.dust");
 var vocabQuizPage = require("./quiz.dust");
 var uu = require("underscore");
 
-var index = function(req, res) {
+module.exports.index = function(req, res) {
     Subject.findById(req.param("subject")).populate("teacher").exec(function(err, doc) {
 	if(err) {
 	    res.error(err);
@@ -14,7 +14,7 @@ var index = function(req, res) {
     });
 };
 
-var get = function(req, res) {
+module.exports.get = function(req, res) {
     Subject.findById(req.param("subject")).select({name: true, subject_name: true, teacher: true, vocab_quizzes: {$elemMatch: {_id: req.param("quiz")}}}).populate("teacher").exec(function(err, doc) {
 	if(err) {
 	    res.error(err);
@@ -24,7 +24,7 @@ var get = function(req, res) {
     });
 };
 
-var del = function(req, res) {
+module.exports.del = function(req, res) {
     Subject.findByIdAndUpdate(req.param("subject"), {vocab_quizzes: {$pull: {_id: req.param("quiz")}}}, function(err, doc) {
 	if(err) {
 	    res.error(err);
@@ -33,5 +33,3 @@ var del = function(req, res) {
 	}
     });
 };
-
-export { index, get, del };

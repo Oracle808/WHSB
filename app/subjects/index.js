@@ -1,4 +1,3 @@
-// A Beautiful Example of the Craft of a Controller
 var mongoose = require("mongoose");
 var Subject = mongoose.model("Subject");
 var User = mongoose.model("User");
@@ -7,7 +6,7 @@ var us = require("underscore.string");
 var fs = require("fs");
 var novaTemplate = require("./nova.dust");
 
-var nova = function(req, res) {
+module.exports.nova = function(req, res) {
     fs.readdir("public/icons", function(err, list) {
 	if(err) {
 	    res.error(err);
@@ -25,7 +24,7 @@ var nova = function(req, res) {
     });
 };
 
-var post = function(req, res) {
+module.exports.post = function(req, res) {
     var subject = {
 	subject_name: req.body.subject_name,
 	name: req.body.name, 
@@ -40,7 +39,7 @@ var post = function(req, res) {
     });
 };
 
-var postLink = function(req, res) {
+module.exports.postLink = function(req, res) {
     var update = {
 	$push: {
 	    links: {
@@ -62,7 +61,7 @@ var postLink = function(req, res) {
     });
 };
 
-var delLink = function(req, res) {
+module.exports.delLink = function(req, res) {
     Subject.findByIdAndUpdate(req.param("subject"), {$pull: {links: {_id: req.param("link")}}}, function(err, doc) {
 	if(err) {
 	    res.error(err);
@@ -71,5 +70,3 @@ var delLink = function(req, res) {
 	}
     });
 };
-
-export { nova, post, postLink, delLink };
