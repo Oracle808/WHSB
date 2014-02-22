@@ -59,7 +59,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks("grunt-asciify");                 // ASCIIFY MINIFIED FILES
     grunt.loadNpmTasks("grunt-foreman");                 // TEST SERVER
 
-    grunt.registerTask("default", ["clean", "copy", "sass", "browserify"]);
+    grunt.registerTask("default", ["clean", "sass", "browserify"]);
     grunt.registerTask("serve", ["default", "foreman"]);
 
 };
