@@ -23,16 +23,6 @@ module.exports = function(grunt) {
 		src: ["public/scripts/*"]
 	    }
 	},
-	copy: {
-	    bower: {
-		files: [{
-		    expand: true,
-		    cwd: "bower_components/",
-		    src: ["*", "**/*"],
-		    dest: "public/"
-		}]
-	    }
-	},
 	sass: {
 	    options: {
 		outputStyle: "compressed"
@@ -64,7 +54,6 @@ module.exports = function(grunt) {
 
     // This is how you develop...
     grunt.loadNpmTasks("grunt-contrib-clean");           // CLEAN BUILD
-    grunt.loadNpmTasks("grunt-contrib-copy");
     grunt.loadNpmTasks("grunt-sass");                    // BUILD SASS
     grunt.loadNpmTasks("grunt-browserify");              // BROWSERFIY
     grunt.loadNpmTasks("grunt-asciify");                 // ASCIIFY MINIFIED FILES

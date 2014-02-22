@@ -1,0 +1,23 @@
+{
+  "name": "WHSB",
+  "version": "0.0.1",
+  "homepage": "https://github.com/HashanP/WHSB",
+  "description": "A dependable, innovative, and exciting VLE for the 21st century",
+  "main": "app/web.js",
+  "keywords": [
+    "vle",
+    "http",
+    "education",
+    "whsb",
+    "innovation"
+  ],
+  "authors": [
+    "Hashan Punchihewa <hashan.punchihewa@gmail.com>"
+  ],
+  "private": true,
+  "dependencies": {
+    "foundation": "~5.1.1",
+    "foundation-icon-fonts": "*",
+    "respond": "~1.4.2"
+  }
+}
