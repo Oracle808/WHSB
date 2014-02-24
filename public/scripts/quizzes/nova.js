@@ -1,5 +1,5 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-var dust = require("dustjs-linkedin/lib/dust");module.exports="/Users/Hashan/Dropbox/Sites/Styles53/app/quizzes/question.dust";(function(){dust.register("/Users/Hashan/Dropbox/Sites/Styles53/app/quizzes/question.dust",body_0);function body_0(chk,ctx){return chk.write("<li><input type=\"text\" name=\"question[]\" placeholder=\"Question\" aria-required=\"true\" required/><input type=\"text\" name=\"help_text[]\" placeholder=\"Help Text\"/><select name=\"type[]\" aria-required=\"true\" required><option value=\"text\" selected/>Text</option><option value=\"number\">Number</option></select><input name=\"answer[").reference(ctx._get(false, ["no"]),ctx,"h").write("][]\" type=\"text\" placeholder=\"Answer\" aria-required=\"true\" required/></li>");}return body_0;})();
+var dust = require("dustjs-linkedin/lib/dust");module.exports="/Users/Hashan/Dropbox/Sites/Styles53/app/quizzes/question.dust";(function(){dust.register("/Users/Hashan/Dropbox/Sites/Styles53/app/quizzes/question.dust",body_0);function body_0(chk,ctx){return chk.write("<li><input type=\"text\" name=\"question[").reference(ctx._get(false, ["no"]),ctx,"h").write("]\" placeholder=\"Question\" aria-required=\"true\" required/><input type=\"text\" name=\"help_text[").reference(ctx._get(false, ["no"]),ctx,"h").write("]\" placeholder=\"Help Text\"/><select name=\"type[").reference(ctx._get(false, ["no"]),ctx,"h").write("]\" aria-required=\"true\" required><option value=\"text\" selected/>Text</option><option value=\"number\">Number</option>\t\t\t\t\t <option value=\"radio\">Multiple Choice</option><option value=\"checkbox\">Checkboxes</option></select><input name=\"answer[").reference(ctx._get(false, ["no"]),ctx,"h").write("]\" type=\"text\" placeholder=\"Answer\" aria-required=\"true\" required/></li>");}return body_0;})();
 },{"dustjs-linkedin/lib/dust":3}],2:[function(require,module,exports){
 var dustCompiler = (function(dust) {
 
@@ -4297,7 +4297,7 @@ var typeChanged = function(e) {
 
 document.addEventListener("DOMContentLoaded", function(e) {
     var questions = document.getElementById("questions");
-    var count = 0;
+    var count = 1;
 
     document.getElementById("add-question").addEventListener("click", function(e) {
 	e.preventDefault();

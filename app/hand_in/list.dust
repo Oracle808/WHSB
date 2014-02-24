@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>Hand-in</title>
-    <link href="/stylesheets/hand_in/index.css" rel="stylesheet"/>
+    <link href="/styles/hand_in/index.css" rel="stylesheet"/>
     <script src="app/subjects/polyfill.js"></script>
     <script src="components/x-bubble.js"></script>
     <script src="components/x-slidable.js"></script>
@@ -14,7 +14,6 @@
     {>"app/partials/head.dust"/}
     {>"app/partials/nav.dust" active="hand_in"/}
     <main>
-
       <ul id="hand_in_slots">
 	<li class="heading">Hand-in<a cite="#newSlotForm" class="add-item"><i class="fi-plus"></i></a></li>
 	{@ne key=user.role value="student"}

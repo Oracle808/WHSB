@@ -109,17 +109,16 @@ module.exports.del = function(req, res) {
 	}
 	async.each(uu.pluck(hand_in_slot.files, "file"), GridFS.deleteGridFile, function(err) {
 	    if(err) {
-		res.error(err);
-	    } else {
-		doc.hand_in.pull(hand_in_slot);
-		doc.save(function(err) {
-		    if(err) {
-			res.error(err);
-		    } else {
-			res.dust(listView, {subject:doc});
-		    }
-		});
-	    }
+		return res.error(err);
+	    } 
+	    doc.hand_in.pull(hand_in_slot);
+	    doc.save(function(err) {
+		if(err) {
+		    res.error(err);
+		} else {
+		    res.dust(listView, {subject:doc});
+		}
+	    });
 	});
     });
 };

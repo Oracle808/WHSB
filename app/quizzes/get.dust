@@ -17,7 +17,7 @@
 	  {#quiz.questions}
 	    <div class="question">
 	      <p class="problem">
-		<b>{problem}</b>
+		<b>{problem}</b><br/>
 		{help_text}
 	      </p>
 	      {@typeof key=solution}

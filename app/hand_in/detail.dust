@@ -12,9 +12,12 @@
     {>"app/partials/nav.dust"/}
     <main>
       <ul id="handed_in_files">
-	{#hand_in_slot.files}
-	  <li>{user.username}<a href="/subjects/{subject._id}/hand_in/{hand_in_slot._id}/files/{file}/" class="viewButton">View</a></li>
-	  {/hand_in_slot.files}
+	{#hand_in_slot}
+	  <li class="heading">{name}</li>
+	  {#files slot=_id}
+	    <li><a href="/subjects/{subject._id}/hand_in/{slot}/files/{file}/">{user.username}</a></li>
+	  {/files}
+	{/hand_in_slot}
       </ul>
     </main>
   </body>

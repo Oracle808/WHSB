@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en-GB">
+<html lang="en-gb">
   <head>
     <title>WHSB</title>
-    <link href="/styles/home/index.css"/>
+    <link href="/styles/home/index.css" rel="stylesheet"/>
     {>"app/partials/global.dust"/}
   </head>
   <body>

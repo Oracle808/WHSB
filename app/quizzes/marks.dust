@@ -10,6 +10,13 @@
     {>"app/partials/nav.dust" active="quizzes"/}
     <main>
       <div id="datahole">
+	{?quiz.attempts}
+	<h3>{quiz.name}</h3>
+	<section id="stats">
+	  Average Score: {average}
+	  Best Score: {best}
+	</section>
+
 	<div id="heatmap">
 	  <div><div></div>
 	    {#quiz.questions}
@@ -29,6 +36,9 @@
 	    </div>
 	  {/quiz.attempts}
 	</div>
+		{:else}
+	Nobody has taken the quiz. Why not encourage participation by using quizzes as a mechanism for homework?
+	{/quiz.attempts}
       </div> 
     </main>
   </body>
