@@ -32,7 +32,18 @@ module.exports.get = function(req, res) {
 	if(err) {
 	    res.error(err);
 	} else {
-	    res.dust(req.session.user.role === "student" ? getView : marksView, {subject:doc, quiz: doc.quizzes[0]});
+	    if(req.session.user.role !== "student") {
+		if(doc.quizzes[0].attempts.length !== 0) {
+		    var scores = uu.pluck(doc.quizzes[0].attempts, "score");
+		    var best = uu.max(scores);
+		    var average = uu.reduce(scores,  function(a, b) {
+			return (a+b) / 2;
+		    });
+		}
+		res.dust(marksView, {subject:doc, quiz:doc.quizzes[0], best: best, average: average});
+	    } else {
+		res.dust(getView, {subject:doc, quiz: doc.quizzes[0]});
+	    }
 	}
     });
 };
