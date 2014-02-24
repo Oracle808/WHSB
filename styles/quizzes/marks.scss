@@ -1,0 +1,63 @@
+@import "styles/ui/index.scss";
+@import "styles/ui/topbar.scss";
+
+#datahole {
+    background-color:$foreground;
+    width:100%;
+    padding:$minor-margin;
+}
+
+#heatmap {
+    display:table;
+    background-color:white;
+}
+
+#heatmap > div {
+    display:table-row;
+}
+
+#heatmap > div > div {
+    display:table-cell;
+    text-align:center;
+    vertical-align:middle;
+}
+
+#heatmap > div:first-child {
+    div {
+	padding:$minor-margin;
+    }
+}
+
+#heatmap > div > div:first-child {
+    width:150px;
+}
+
+#heatmap > div:nth-child(2) {
+    .incorrect, .correct {
+	border-top:2px solid black;
+    }
+}
+
+#heatmap > div:last-child {
+    .incorrect, .correct {
+	border-bottom:2px solid black;
+    }
+}
+
+.incorrect, .correct {
+    width:30px;
+    height:30px;
+    border-right: 2px solid black;
+
+    &:nth-child(2) {
+	border-left: 2px solid black;
+    }
+}
+
+.incorrect {
+    background-color:red;
+}
+
+.correct {
+    background-color:green;
+}

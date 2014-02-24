@@ -104,7 +104,6 @@ module.exports.publish = function(req, res) {
 	console.log(doc);
 	update.questions.push(doc);
     }
-    console.log(update);
     Subject.findByIdAndUpdate(req.param("subject"), {$push: {quizzes: update}}, render(req, res));
 };
 

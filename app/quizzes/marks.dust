@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Results</title>
+    <link href="/styles/quizzes/marks.css" rel="stylesheet"/>
+    {>"app/partials/global.dust"/}
+  </head>
+  <body>
+    {>"app/partials/head.dust"/}
+    {>"app/partials/nav.dust" active="quizzes"/}
+    <main>
+      <div id="datahole">
+	<div id="heatmap">
+	  <div><div></div>
+	    {#quiz.questions}
+	      <div>{@math key=$idx method="add" operand="1"/}</div>
+	    {/quiz.questions}
+	  </div>
+	  {#quiz.attempts}
+	    <div>
+	      <div>{user.username}</div>
+	      {#answers}
+		{@eq key=. value=quiz.questions[$idx].solution}
+		  <div class="correct"></div>
+		{:else}
+		  <div class="incorrect"></div>
+		{/eq}
+	      {/answers}
+	    </div>
+	  {/quiz.attempts}
+	</div>
+      </div> 
+    </main>
+  </body>
+</html>
