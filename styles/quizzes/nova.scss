@@ -1,0 +1,31 @@
+@import "styles/ui/index.scss";
+@import "styles/ui/topbar.scss";
+
+#newQuestion {
+    display:none;
+}
+
+#formHeader {
+    @include grid-row();
+    background-color:$foreground;
+    padding:$minor-margin;
+}
+
+#quizTitle {
+    @include grid-column(8);
+}
+
+#createButton, #submitButton {
+    @include button-size($button-sml);
+}
+
+#questions {
+    list-style-type:none;
+    margin-left:0;
+}
+
+#questions li {
+    background-color:$foreground;
+    margin-top:$content-margin;
+    padding:$minor-margin;
+}

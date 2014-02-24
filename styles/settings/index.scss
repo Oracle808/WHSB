@@ -1,0 +1,20 @@
+@import "styles/ui/index.scss";
+@import "styles/ui/topbar.scss";
+
+form[name="general"], form[name="delete"] {
+    @include grid-row();
+    background-color:$foreground;
+    margin-top:$content-margin;
+}
+
+form[name="general"] {
+    label, input, button {
+	@include grid-column(6);
+    }
+}
+    
+form[name="delete"] button {
+    @include button-size($button-lrg);
+    @include button-style($warning);
+    @include grid-column(12);
+}

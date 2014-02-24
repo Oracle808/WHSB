@@ -1,0 +1,40 @@
+@import "styles/ui/index.scss";
+@import "styles/ui/topbar.scss";
+
+.user {
+    @include grid-row();
+    border:none;
+    padding:0;
+}
+
+.user .data {
+    @include grid-column(6, $collapse:none);
+}
+
+select[multiple] {
+    height:auto !important;
+}
+
+#users table {
+    @include grid-row(12);
+}
+
+#users table, #users table input, #users table button {
+    margin:0;
+}
+
+#users table td {
+    padding:0;
+}
+
+#newUser {
+    display:none;
+}
+
+.deleteButton {
+    @include button(rem-calc(4), $bg:white);
+}
+
+.deleteButton[disabled] {
+    @include button(rem-calc(4), $bg:white, $disabled: true);
+}

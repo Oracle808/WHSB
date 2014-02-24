@@ -1,0 +1,12 @@
+<li>
+  <input type="text" name="question[{no}]" placeholder="Question" aria-required="true" required/>
+  <input type="text" name="help_text[{no}]" placeholder="Help Text"/>
+  <select name="type[{no}]" aria-required="true" required>
+    <option value="text" selected/>Text</option>
+    <option value="number">Number</option>					 
+    <option value="radio">Multiple Choice</option>
+    <option value="checkbox">Checkboxes</option>
+  </select>
+  <input name="answer[{no}]" type="text" placeholder="Answer" aria-required="true" required/>
+</li>
+  

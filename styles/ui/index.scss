@@ -1,0 +1,147 @@
+@import "settings";
+@import "public/components/foundation/scss/foundation";
+@import "public/components/foundation-icon-fonts/foundation-icons";
+
+main, x-slidable, x-richtexteditor, x-snowfall, x-deletable, x-bubble {
+    display:block;
+}
+
+* {
+    outline:none;
+}
+
+.jsmore {
+    display:none !important;
+}
+
+body {
+    @include grid-row();
+    width:100%;
+    height:100%;
+    background-image:url("/images/ios7_xlarge.png");
+    @media #{$xxlarge-up} {
+	background-image:url("/images/ios7.png");
+    }
+}
+
+x-snowfall {
+    width:100%;
+    height:100%;
+    position:relative;
+}
+
+@mixin content {
+    @include grid-row();
+    background-color:$foreground;
+    margin-top:$content-margin;
+    padding:20px;
+
+    input, input:focus, select, select:focus {
+	background-color:white;
+    }
+}
+
+nav#intraSubjectNavigation {
+    @media #{$small-only} {
+	@include grid-column(12, $pull:12);
+    }
+    @media #{$medium-up} {
+	& {
+	    @include grid-column(3, $collapse: true);
+	    background-color:$middleground;
+	}
+	& ~ main {
+	    @include grid-column(9);
+	}
+	ul {
+	    @include side-nav();
+	}
+	h4 {
+	    padding-top:$content-margin;
+	}
+	h4, form, ul li {
+	    padding-left:$content-margin;
+	    padding-right:$content-margin;
+	}
+	ul li {	    
+	    padding-top:$minor-margin;
+	    padding-bottom:$minor-margin;
+	}
+	ul li:hover {
+	    background-color:darken($middleground, 5%);
+	}
+	ul li.header {
+	    text-transform:uppercase;
+	}
+	ul li.active > a:first-child:not(.button) {
+	    font-weight:bold;
+	}
+	#numberOfDrafts {
+	    @include label();
+	    vertical-align:bottom;
+	}
+	#newLink {
+	    @include button($full-width:true);
+	}
+
+    }
+}
+
+#newLinkForm {
+    background-color:white;
+    padding:$content-margin;
+}
+
+// mobile-list
+@mixin mobile-list($bg: $foreground) {
+    margin-top:$content-margin;
+    margin-left:0;
+    list-style-type:none;
+    
+    li {
+	@include grid-row();
+	background-color:$bg;
+	border-bottom:1px solid darken($bg, 10%);
+	padding:$minor-margin;
+
+	button, .add-item, .delete-item {
+	    @extend .right;
+	    @include button-size($button-tny);
+	}
+
+	.add-item, .delete-item {
+	    @extend button;
+	}
+
+	.delete-item {
+	    @include button-style($warning);
+	}
+    }
+
+    form {
+	display:inline;
+    }
+
+    li.nothing, li.heading {
+	text-align:center;
+    }
+
+    li.heading {
+	background-color:deepskyblue;
+	font-weight:bold;
+    }
+
+    li.nothing {
+	padding:$content-margin;
+    }
+
+    > li:last-child, li.heading {
+	border-bottom:none;
+    }
+}
+
+// bar
+%bar {
+    padding: $minor-margin;
+    background-color:$middleground;
+}

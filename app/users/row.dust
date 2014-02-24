@@ -1,0 +1,12 @@
+<tr>
+  <td>
+    <input type="text" name="username[]" placeholder="Username" {?disabled} disabled {:else} aria-required="true" required {/disabled}/>
+  </td>
+  <td>
+    <input type="date" name="dofb[]" placeholder="Date of Birth" {?disabled} disabled {:else} aria-required="true" required {/disabled}/>
+  </td>
+  <td>
+    <button class="deleteButton"><i class="fi-x"></i></button>
+  </td>
+</tr>
+ 

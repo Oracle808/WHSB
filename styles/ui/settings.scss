@@ -1,0 +1,32 @@
+@import "public/components/foundation/scss/foundation/functions";
+
+// BACKGROUND
+$foreground: #fff;
+$middleground: #f0f4f4;
+
+// SPACING
+$minor-margin: 5px;
+$content-margin: $minor-margin * 4;
+
+// COLOURS
+$info: #33b5e5;
+$warning: #e55b00;
+$orange: #e58900;
+$red: #D84A33;
+$purple:#852b99;
+$green: #35aa47;
+
+// BUTTONS
+$button-tny: rem-calc(6);
+$button-sml: rem-calc(10);
+
+$button-font-tny: rem-calc(12);
+$button-font-sml: rem-calc(14);
+$button-margin-bottom: 0px;
+
+// SIDE NAV
+$side-nav-list-margin: 0px;
+$side-nav-link-color-active: #008CBA;
+
+// ICONS
+$fi-path: "/components/foundation-icon-fonts/";

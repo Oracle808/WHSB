@@ -1,0 +1,111 @@
+@import "styles/ui/index.scss";
+@import "styles/ui/topbar.scss";
+
+#action-bar {
+    @extend %bar;
+}
+
+#action-bar a {
+    @extend button;
+}
+
+#action-bar #rss-link {
+    @include button-style($orange);
+    float:right;
+}
+
+#newPostForm {
+    @include content;
+    margin-left:0px;
+    margin-right:0px;
+}
+
+textarea {
+    resize:vertical;
+    outline:none;
+}
+
+#newPostForm x-richtexteditor {
+    @extend textarea;
+    min-height:200px;
+}
+
+.toolbar ul {
+    @include button-group-container();
+    margin-right:10px;
+    display:inline-block;
+}
+
+.toolbar ul button {
+    @include button(
+	$padding:rem-calc(7),
+	$bg: $secondary-color
+    );
+    @include button-group-style(
+	$radius: true
+    );
+}
+
+.draftButton, .publishButton {
+    @include button-size($button-sml);
+}
+
+.publishButton {
+    @include button-style($warning);
+}
+
+
+main #newPostForm #buttons {
+    @include grid-column(12, $collapse:true);
+}
+
+article {
+    @include content;
+}
+
+article .postHeading {
+    & {
+	@include grid-column(10, $collapse:true);
+    }
+    h2 {
+	margin-bottom:0;
+	font-weight:bold;
+    }
+    h2 a {
+	transition: color 0.3s ease-in-out;
+    }
+    h2 a:not(:hover) {
+	color:#333;
+    }
+}
+
+article .postActions {
+    & {
+	@include grid-column(2, $collapse: true);
+	float:right;
+    }
+    a, button {
+	@include button-size($button-tny);
+	@include button-style($foreground);
+	float:right;
+    }
+}
+
+article .postMeta {
+    & {
+	@include grid-column(12, $collapse:true);
+    }
+    h6 {
+	font-weight:bold;
+	color:#777;
+    }
+    h6.indicatorDraft {
+	color:$warning;
+    }
+}
+
+article .postExcerpt {
+    @include grid-column(12, $collapse:true);
+    word-wrap:break-word;
+    text-align:justify;
+}

@@ -1,0 +1,6 @@
+@import "styles/ui/index.scss";
+@import "styles/ui/topbar.scss";
+
+#quizzes {
+    @include mobile-list();
+}

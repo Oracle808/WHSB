@@ -1,0 +1,52 @@
+@import "styles/ui/index.scss";
+@import "styles/ui/topbar.scss";
+
+x-coderunner {
+    @extend textarea;
+    display:block;
+    min-height:200px;
+    font-family: "Consolas", "monospace";
+}
+
+#actions {
+    @include button-group-container();
+}
+
+#actions li {
+    @include button-group-style();
+}
+
+button {
+    @include button-size($button-sml);
+}
+
+button[cite="#codeBox"] {
+    @include button-style($green);
+ 
+}
+
+button[cite="#openFileDialog"] {
+    @include button-style($purple);
+}
+
+button[cite="#saveFileDialog"] {
+    @include button-style($red);
+}
+
+button[cite="#documentation"] {
+    @include button-style($info);
+    float:right;
+}
+
+article .heading {
+    #actions, #title, #links {
+	@include grid-column(4);
+    }
+    #title {
+	text-align:center;
+    }
+}
+
+article .heding, article .editor {
+    @include grid-column(12);
+}

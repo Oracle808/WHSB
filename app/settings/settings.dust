@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{subject.name} - Settings</title>
+    <link href="styles/settings/index.css" rel="stylesheet"/>
+  </head>
+  <body>
+    {>"app/partials/head.dust"/}
+    {>"app/partials/nav.dust" active="settings"/}
+    <main>
+      <form name="general">
+	<label>Class Name</label>
+	<input type="text" aria-required="true" required/>
+
+	<label>Quizzes</label>
+	<input type="checkbox" aria-required="true" required/>
+
+	<label>Vocab Quizzes</label>
+	<input type="checkbox" aria-required="true" required/>
+
+	<label>Student Resources</label>
+	<input type="checkbox" aria-required="true" required/>
+
+	<label>Google Drive</label>
+	<button>Connect</button>
+      </form>
+      <form name="delete">
+	<input type="hidden" name="_method" value="delete"/>
+	<button type="submit">Delete Class</button>
+      </form>
+    </main>
+  </body>
+</html>

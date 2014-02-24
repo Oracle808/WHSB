@@ -1,0 +1,31 @@
+@import "styles/ui/index.scss";
+@import "styles/ui/topbar.scss";
+
+main {
+    @include grid-row();
+    display:block;
+}
+
+main ul {
+    @media #{$small-only} {
+	@include block-grid(2, $spacing: 15px);
+    }
+    @media #{$medium-up} {
+	@include block-grid(4, $spacing: 30px);
+	padding-top:10px;
+    }
+}
+
+main ul img {
+    @media #{$large-up} {
+	padding:20px;
+	-webkit-transition-property: padding;
+	-webkit-transition-duration: 0.5s;
+    }
+}
+
+main ul img:hover {
+    @media #{$large-up} {
+	padding:0px;
+    }
+}

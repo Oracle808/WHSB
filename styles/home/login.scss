@@ -1,0 +1,42 @@
+@import "public/components/foundation/scss/foundation";
+
+body {
+    @extend .row;
+}
+
+form {
+    position:relative;
+    margin-top:10px;
+
+    @extend .small-12;
+    @extend .medium-8;
+    @extend .medium-push-2;
+    @extend .large-6;
+    @extend .large-push-3;
+    @extend .xlarge-4;
+    @extend .xlarge-push-4;
+}
+
+form h2 {
+    margin-bottom:0.2rem;
+}
+
+form label#errorMessage {
+    @extend span.error;
+    padding-top:0.5rem;
+}
+
+form input {
+    @include grid-column(12);
+}
+
+footer {
+    @include grid-column(12);
+}
+
+footer #html5Logo {
+    margin-top:40px;
+    margin-left:auto;
+    margin-right:auto;
+    display:block;
+}
