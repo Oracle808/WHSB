@@ -101,32 +101,25 @@ module.exports.download = function(req, res) {
 module.exports.del = function(req, res) {
     Subject.findById(req.param("subject")).exec(function(err, doc) {
 	if(err) {
-	    res.error(err);
-	} else {
-	    var hand_in_slot;
-	    for(var i = 0; i < doc.hand_in.length; i++) {
-		if(doc.hand_in[i]._id.equals(req.param("hand_in_slot"))) {
-		    hand_in_slot = doc.hand_in[i];
-		}
-	    }
-	    if(!hand_in_slot) {
-		res.error("Hand in slot doesn't exist");
+	    return res.error(err);
+	}
+	var hand_in_slot = uu.findWhere(doc.hand_in, {id: req.param("hand_in_slot")});
+	if(!hand_in_slot) {
+	    return res.error("Hand in slot doesn't exist");
+	}
+	async.each(uu.pluck(hand_in_slot.files, "file"), GridFS.deleteGridFile, function(err) {
+	    if(err) {
+		res.error(err);
 	    } else {
-		async.each(uu.pluck(hand_in_slot.files, "file"), GridFS.deleteGridFile, function(err) {
+		doc.hand_in.pull(hand_in_slot);
+		doc.save(function(err) {
 		    if(err) {
 			res.error(err);
 		    } else {
-			doc.hand_in.pull(hand_in_slot);
-			doc.save(function(err) {
-			    if(err) {
-				res.error(err);
-			    } else {
-				res.dust(listView, {subject:doc});
-			    }
-			});
+			res.dust(listView, {subject:doc});
 		    }
 		});
 	    }
-	}
+	});
     });
 };
