@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>{subject.name} - Settings</title>
-    <link href="styles/settings/index.css" rel="stylesheet"/>
+    <link href="/styles/settings/index.css" rel="stylesheet"/>
   </head>
   <body>
     {>"app/partials/head.dust"/}
