@@ -1,8 +1,8 @@
 @import "styles/ui/subject.scss";
 @import "styles/ui/topbar.scss";
 
-#newQuestion {
-    display:none;
+header button {
+    @include button-size($button-sml);
 }
 
 #formHeader {

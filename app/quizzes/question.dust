@@ -1,12 +1,36 @@
-<li>
-  <input type="text" name="question[{no}]" placeholder="Question" aria-required="true" required/>
-  <input type="text" name="help_text[{no}]" placeholder="Help Text"/>
+<input type="text" name="question[{no}]" value="{question}" placeholder="Question" aria-required="true" required/>
+<input type="text" name="help_text[{no}]" value="{helpText}" placeholder="Help Text"/>
+{@select key=type}
   <select name="type[{no}]" aria-required="true" required>
-    <option value="text" selected/>Text</option>
-    <option value="number">Number</option>					 
-    <option value="radio">Multiple Choice</option>
-    <option value="checkbox">Checkboxes</option>
+    <option value="text" {@eq value="text"}selected{/eq}/>Text</option>
+    <option value="number" {@eq value="number"}selected{/eq}>Number</option>
+    <option value="radio" {@eq value="radio"}selected{/eq}>Multiple Choice</option>
+    <option value="checkbox" {@eq value="checkbox"}selected{/eq}>Checkboxes</option>
   </select>
-  <input name="answer[{no}]" type="text" placeholder="Answer" aria-required="true" required/>
-</li>
+
+  {@eq key=type value="text"}
+    <input name="answer[{no}]" type="text" value="{answer}" placeholder="Answer" aria-required="true" required/>
+  {/eq}
+  {@eq key=type value="number"}
+    <input name="answer[{no}]" type="number" value="{answer}" placeholder="Answer" aria-required="true" required/>
+  {/eq}
+  {@eq key=type value="radio"}
+    {#answer}
+      <label>Correct Answer?</label>
+      <input name="correct[{no}]" type="radio" value="{$idx}"/>
+      <input name="answer[{no}][]" type="text" value="{.}" placeholder="An option"/>
+    {/answer}
+    <button class="add-option">Add</button>
+  {/eq}
+  {@eq key=type value="checkbox"}
+    {#answer}
+      <div class="option">
+	<input name="answer[{no}][]" type="text" value="{.}" placeholder="An option"/>
+	<label>Correct Answer?</label>
+	<input name="correct[{no}][]" type="checkbox" value="{$idx}"/>
+      </div>
+    {/answer}
+    <button class="add-option">Add</button>
+  {/eq}
+{/select}
   

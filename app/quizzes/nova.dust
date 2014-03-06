@@ -15,11 +15,10 @@
 	  <div id="quizTitle">
 	    <input name="title" form="newQuizForm" placeholder="Name your quiz" type="text" aria-required="true" required/>
 	  </div>
-	  <button id="add-question" cite="#newQuestion">New Question</button>
+	  <button id="add-question"><i class="fi-plus"></i> Question</button>
 	  <button type="submit">Submit</button>
 	</header>
 	<ul id="questions">
-	  {>"app/quizzes/question.dust" no="0"/}
 	</ul>
       </form>
     </main>

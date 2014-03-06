@@ -16,9 +16,9 @@
   ],
   "private": true,
   "dependencies": {
-    "foundation": "~5.1.1",
     "foundation-icon-fonts": "*",
     "respond": "~1.4.2",
-    "normalize-scss": "~3.0.0"
+    "normalize-scss": "~3.0.0",
+    "foundation": "~5.1.1"
   }
 }

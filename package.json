@@ -25,7 +25,10 @@
     "rss": "0.2.1",
     "connect-busboy": "0.0.1",
     "dateutil": "~0.1.0",
-    "sliced": "0.0.5"
+    "sliced": "0.0.5",
+    "backbone": "~1.1.2",
+    "jquery": "~2.1.0",
+    "backbone.native": "~1.0.0"
   },
   "devDependencies": {
     "grunt": "~0.4.2",
