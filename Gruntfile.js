@@ -49,17 +49,29 @@ module.exports = function(grunt) {
 		    dest:"public/scripts/"
 		}]
 	    }
+	},
+	uglify: {
+	    build: {
+		options: {
+		    banner:"/*<%= asciify_banner %>\n Copyright Hashan Punchihewa 10C */\n"
+		},
+		files: [{
+		    expand: true,
+		    src:["public/scripts/**/*.js"]
+		}]
+	    }
 	}
     });
 
     // This is how you develop...
     grunt.loadNpmTasks("grunt-contrib-clean");           // CLEAN BUILD
+    grunt.loadNpmTasks("grunt-contrib-uglify");          // MINIFY JAVASCRIPT
     grunt.loadNpmTasks("grunt-sass");                    // BUILD SASS
     grunt.loadNpmTasks("grunt-browserify");              // BROWSERFIY
     grunt.loadNpmTasks("grunt-asciify");                 // ASCIIFY MINIFIED FILES
     grunt.loadNpmTasks("grunt-foreman");                 // TEST SERVER
 
-    grunt.registerTask("default", ["clean", "sass", "browserify"]);
+    grunt.registerTask("default", ["clean", "sass", "browserify", "asciify", "uglify"]);
     grunt.registerTask("serve", ["default", "foreman"]);
 
 };
