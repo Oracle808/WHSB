@@ -2,7 +2,6 @@
   <head>
     <title>Login</title>
     <link href="/styles/home/login.css" rel="stylesheet"/>
-    <link href="/foundation-icons/foundation-icons.css" rel="stylesheet"/>
     {>"app/partials/global.dust"/}
   </head>
   <body>
