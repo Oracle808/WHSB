@@ -11,12 +11,14 @@
     {>"app/partials/nav.dust"/}
     <main>
       <form id="newQuizForm" action="/subjects/{subject._id}/quizzes" method="post">
-	<header id="formHeader">
-	  <div id="quizTitle">
+	<header id="form-header">
+	  <div id="quiz-title">
 	    <input name="title" form="newQuizForm" placeholder="Name your quiz" type="text" aria-required="true" required/>
 	  </div>
-	  <button id="add-question"><i class="fi-plus"></i> Question</button>
-	  <button type="submit">Submit</button>
+	  <ul id="quiz-actions">
+	    <li><button id="add-question"><i class="fi-plus"></i> Question</button></li>
+	    <li><button type="submit">Submit</button></li>
+	  </ul>
 	</header>
 	<ul id="questions">
 	</ul>

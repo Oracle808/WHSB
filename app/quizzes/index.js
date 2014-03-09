@@ -42,7 +42,14 @@ module.exports.get = function(req, res) {
 		}
 		res.dust(marksView, {subject:doc, quiz:doc.quizzes[0], best: best, average: average});
 	    } else {
-		res.dust(getView, {subject:doc, quiz: doc.quizzes[0]});
+		var quiz = doc.quizzes[0].toObject();
+		quiz.questions = uu.map(quiz.questions, function(q) {
+		    if(q.opts) {
+			q.opts = uu.shuffle(q.opts);
+		    }
+		    return q;
+		});
+		res.dust(getView, {subject:doc, quiz: quiz});
 	    }
 	}
     });
@@ -60,19 +67,25 @@ module.exports.submit = function(req, res) {
 	    answers: [],
 	    score:0
 	};
-	for(var q in req.body) {
-	    if(us.startsWith(q, "answer")) {
-		if(typeof quiz.questions[attempt.answers.length].solution === "string") {
-		    req.body[q] = req.body[q].toString();
-		} else if(typeof quiz.questions[attempt.answers.length].solution === "number") {
-		    req.body[q] = parseInt(req.body[q]);
+	req.body.answer.forEach(function(answer, i) {
+	    if(quiz.questions[i].opts && typeof quiz.questions[i].solution === "object") {
+		console.log(uu.intersection(quiz.questions[i].solution, answer));
+		if(uu.intersection(quiz.questions[i].solution, answer).length === quiz.questions[i].solution.length) {
+		    attempt.answers.push(quiz.questions[i]);
+		    attempt.score++;
+		} else {
+		    attempt.answers.push(answer);
 		}
-		if(req.body[q] === quiz.questions[attempt.answers.length].solution) {
+	    } else {
+		if(typeof quiz.questions[i].solution === "number") {
+		    answer = parseInt(answer);
+		}
+		if(quiz.questions[i].solution === answer) {
 		    attempt.score++;
 		}
-		attempt.answers.push(req.body[q]);
+		attempt.answers.push(answer);
 	    }
-	}
+	});
 	quiz.attempts.push(attempt);
 	doc.save(function(err, doc) {
 	    if(err) {
@@ -106,8 +119,20 @@ module.exports.publish = function(req, res) {
 	    doc.solution = doc.solution.toString();
 	} else if(req.body.type[i] === "number") {
 	    doc.solution = parseInt(doc.solution);
-	} else if(req.body.type === "date") {
+	} else if(req.body.type[i] === "date") {
 	    doc.solution = dateutil.parse(doc.solution);
+	} else if(req.body.type[i] === "radio") {
+	    doc.opts = doc.solution;
+	    doc.solution = doc.opts[req.body.correct[i]];
+	} else if(req.body.type[i] === "checkbox") {
+	    doc.solution = [];
+	    doc.opts = [];
+	    uu.each(req.body.answer[i], function(answer, index) {
+		if(uu.indexOf(req.body.correct[i], index.toString()) !== -1) {
+		    doc.solution.push(answer);
+		}
+		doc.opts.push(answer);
+	    });
 	}
 	if(req.body.help_text[i]) {
 	    doc.help_text = req.body.help_text[i];

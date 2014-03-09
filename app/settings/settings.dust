@@ -12,17 +12,28 @@
 	<label>Class Name</label>
 	<input type="text" aria-required="true" required/>
 
-	<label>Quizzes</label>
-	<input type="checkbox" aria-required="true" required/>
+	<div class="option">
+	  <label>Quizzes</label>
+	  <input name="quizzes" value="active" type="radio" aria-required="true" required/>Active
+	  <input name="quizzes" value="inactive" type="radio" aria-required="true" required/>Inactive
+	</div>
 
-	<label>Vocab Quizzes</label>
-	<input type="checkbox" aria-required="true" required/>
+	<div class="option">
+	  <label>Vocab Quizzes</label>
+	  <input name="vocab_quizzes" value="active" type="radio" aria-required="true" required/>Active
+	  <input name="vocab_quizzes" value="inactive" type="radio" aria-required="true" required/>Inactive
+	</div>
 
-	<label>Student Resources</label>
-	<input type="checkbox" aria-required="true" required/>
-
-	<label>Google Drive</label>
-	<button>Connect</button>
+	<div class="option">
+	  <label>Student Resources</label>
+	  <input name="student_resources" value="active" type="radio" aria-required="true" required/>Active
+	  <input name="student_resources" value="inactive" type="radio" aria-required="true" required/>Inactive
+	</div>
+	
+	<div class="option">
+	  <label>Google Drive</label>
+	  <button>Connect</button>
+	</div>
       </form>
       <form name="delete">
 	<input type="hidden" name="_method" value="delete"/>

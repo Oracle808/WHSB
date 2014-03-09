@@ -100,7 +100,7 @@ var Subject = mongoose.Schema({
 		    type: Mixed,
 		    required: true
 		},
-		wrongs: [String]
+		opts: [String]
 	    }],
 	    required: true
 	},

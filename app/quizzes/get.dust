@@ -2,8 +2,7 @@
 <html>
   <head>
     <title>{quiz.title}</title>
-    <link href="/styles/ui/index.css" rel="stylesheet"/>
-    <link href="/styles/ui/topbar.css" rel="stylesheet"/>
+    <link href="/styles/quizzes/quiz.css" rel="stylesheet"/>
     {>"app/partials/global.dust"/}
   </head>
   <body>
@@ -20,14 +19,24 @@
 		<b>{problem}</b><br/>
 		{help_text}
 	      </p>
-	      {@typeof key=solution}
-		{@eq value="number"}
-		  <input name="answer{$idx}" type="number" {?attempt} value="{attempt.answers[$idx]}" disabled {/attempt} aria-required="true" required/>
-		{/eq}
-		{@eq value="string"}
-		  <input name="answer{$idx}" type="text" {?attempt} value="{attempt.answers[$idx]}" disabled {/attempt} aria-required="true" required/>
-		{/eq}
-	      {/typeof}
+	      {?opts}
+		{@typeof key=solution}
+		  {@eq value="object"}
+		    {#opts no=$idx}<input name="answer[{no}][]" value="{.}" type="checkbox"/> {.}<br/>{/opts}
+		   {:else}
+		    {#opts no=$idx}<input name="answer[{no}]" value="{.}" type="radio"/> {.}<br/>{/opts}
+		  {/eq}
+		{/typeof}
+	       {:else}
+		{@typeof key=solution}
+		  {@eq value="number"}
+		    <input name="answer[{$idx}]" type="number" {?attempt} value="{attempt.answers[$idx]}" disabled {/attempt} aria-required="true" required/>
+		  {/eq}
+		  {@eq value="string"}
+		    <input name="answer[{$idx}]" type="text" {?attempt} value="{attempt.answers[$idx]}" disabled {/attempt} aria-required="true" required/>
+		  {/eq}
+		{/typeof}
+	      {/opts}
 	    </div>
 	    {/quiz.questions}
 	    <button type="submit">Submit</button>

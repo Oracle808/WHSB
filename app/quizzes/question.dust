@@ -10,27 +10,38 @@
 
   {@eq key=type value="text"}
     <input name="answer[{no}]" type="text" value="{answer}" placeholder="Answer" aria-required="true" required/>
+    <input name="correct[{no}]" type="hidden" value="0"/>
   {/eq}
   {@eq key=type value="number"}
     <input name="answer[{no}]" type="number" value="{answer}" placeholder="Answer" aria-required="true" required/>
+    <input name="correct[{no}]" type="hidden" value="0"/>
   {/eq}
   {@eq key=type value="radio"}
     {#answer}
-      <label>Correct Answer?</label>
-      <input name="correct[{no}]" type="radio" value="{$idx}"/>
-      <input name="answer[{no}][]" type="text" value="{.}" placeholder="An option"/>
+      <div class="option">
+	<input name="answer[{no}][]" type="text" value="{name}" placeholder="An option"/>
+	<label>Correct Answer?</label>
+	<input name="correct[{no}]" type="radio" value="{$idx}" required {?active}checked="checked"{/active}/>
+      </div>
     {/answer}
-    <button class="add-option">Add</button>
   {/eq}
   {@eq key=type value="checkbox"}
     {#answer}
       <div class="option">
-	<input name="answer[{no}][]" type="text" value="{.}" placeholder="An option"/>
+	<input name="answer[{no}][]" type="text" value="{name}" placeholder="An option"/>
 	<label>Correct Answer?</label>
-	<input name="correct[{no}][]" type="checkbox" value="{$idx}"/>
+	<input name="correct[{no}][]" type="checkbox" value="{$idx}" {?active}checked="checked"{/active}/>
       </div>
     {/answer}
-    <button class="add-option">Add</button>
   {/eq}
+  <section class="question-actions">
+    {@eq key=type value="radio"}
+      <button class="add-option">Add Option</button>
+    {/eq}
+    {@eq key=type value="checkbox"}
+      <button class="add-option">Add Option</button>
+    {/eq}
+    <button class="delete-item">Delete</button>
+  </section>
 {/select}
   

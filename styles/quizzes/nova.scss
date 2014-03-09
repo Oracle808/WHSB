@@ -1,21 +1,35 @@
 @import "styles/ui/subject.scss";
 @import "styles/ui/topbar.scss";
 
-header button {
-    @include button-size($button-sml);
-}
-
-#formHeader {
-    @include grid-row();
+#form-header {
+    @include grid-row($behavior:nest-collapse);
     background-color:$foreground;
     padding:$minor-margin;
 }
 
-#quizTitle {
-    @include grid-column(8);
+#quiz-title {
+    @extend .columns;
+    @extend .small-12;
+    @extend .medium-8;
+    @extend .large-8;
 }
 
-#createButton, #submitButton {
+#quiz-actions {
+    @extend .columns;
+    @extend .small-12;
+    @extend .medium-4;
+    @extend .large-4;
+}
+
+#quiz-actions {
+    @include button-group-container();
+}
+
+#quiz-actions > li {
+    @include button-group-style();
+}
+
+#quiz-actions > li > button {
     @include button-size($button-sml);
 }
 
@@ -25,7 +39,40 @@ header button {
 }
 
 #questions li {
+    @include grid-row($behavior:nest-collapse);
     background-color:$foreground;
     margin-top:$content-margin;
     padding:$minor-margin;
+}
+
+.option, .question-actions {
+    @include grid-row($behavior:nest-collapse);
+}
+
+.option input, .option label {
+    @extend .columns;
+}
+
+.option input[type="text"] {
+    @extend .small-12;
+    @extend .medium-8;
+}
+
+.option label {
+    @extend .small-8;
+    @extend .medium-3;
+}
+
+.option input[type="radio"], .option input[type="checkbox"] {
+    @extend .small-4;
+    @extend .medium-1;
+}
+
+.question-actions button {
+    @include button-size($button-tny);    
+}
+
+.question-actions .delete-item {
+    @include button-style($warning);
+    @extend .right;
 }

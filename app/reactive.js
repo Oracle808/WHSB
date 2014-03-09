@@ -88,6 +88,11 @@ dust.helpers.pluck = function(chunk, ctx, bodies, params) {
     }
 };
 
+dust.helpers.shuffle = function(chunk, ctx, bodies, params) {
+    var key = dust.helpers.tap(params.key, chunk, ctx);
+    return chunk.render(bodies.block, ctx.push({isSelect: true, isResolved: false, selectKey: uu.shuffle(key)}));
+};
+
 dust.helpers.stringify = function(chunk, ctx, bodies, params) {
     var key = (params && params.key) ? dust.helpers.tap(params.key, chunk, ctx) : ctx.get("selectKey");
     if(uu.isArray(key)) {

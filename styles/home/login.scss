@@ -5,8 +5,8 @@ body {
 }
 
 form {
-    position:relative;
     margin-top:10px;
+    position:relative;
 
     @extend .small-12;
     @extend .medium-8;
@@ -26,11 +26,7 @@ form label#errorMessage {
     padding-top:0.5rem;
 }
 
-form input {
-    @include grid-column(12);
-}
-
-footer {
+form input, footer {
     @include grid-column(12);
 }
 

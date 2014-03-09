@@ -27,6 +27,7 @@ $button-margin-bottom: 0px;
 // SIDE NAV
 $side-nav-list-margin: 0px;
 $side-nav-link-color-active: #008CBA;
+$side-nav-link-color-hover: scale-color($side-nav-link-color-active, $lightness: -30%);
 
 // ICONS
 $fi-path: "/components/foundation-icon-fonts/";
