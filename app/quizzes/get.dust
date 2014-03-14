@@ -39,7 +39,9 @@
 	      {/opts}
 	    </div>
 	    {/quiz.questions}
-	    <button type="submit">Submit</button>
+	    {^attempt}
+	      <button type="submit">Submit</button>
+	    {/attempt}
 	  </form>
     </main>
   </body>
