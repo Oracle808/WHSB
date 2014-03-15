@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en-GB-oed" class="no-js">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <!--[if lte IE 8]>
+    <script src="/components/respond/dest/respond.min.js"></script>
+    {^exclude_jquery}
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>  
+    <![endif]-->
+    <!--[if gte IE 9]><!-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+    {/exclude_jquery}
+     <!--<![endif]-->
+    {+head}{/head}
+  </head>
+  <body>
+    {+body}{/body}
+  </body>
+</html>

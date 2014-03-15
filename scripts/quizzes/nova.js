@@ -2,7 +2,7 @@ var uu = require("underscore");
 var dust = require("dustjs-linkedin/lib/dust");
 dust.helper = require("dustjs-helpers");
 var Backbone = require("backbone");
-Backbone.$ = require("backbone.native");
+Backbone.$ = $;
 
 var QuestionView = require("../../app/quizzes/question.dust");
 
@@ -142,6 +142,7 @@ var MainController = Backbone.View.extend({
     }
 });
 
-document.addEventListener("DOMContentLoaded", function() {
-    new MainController({el: document.querySelector("main")});
+$(document).ready(function() {
+    console.log($);
+    new MainController({el: $("main")});
 });

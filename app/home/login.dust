@@ -1,4 +1,4 @@
-{>"app/partials/base.dust"/}
+{>"app/partials/base.dust" exclude_jquery="true"/}
 {<head}
     <title>Login</title>
     <link href="/styles/home/login.css" rel="stylesheet"/>
@@ -16,7 +16,6 @@
       <button type="submit"><i class="fi-lock"></i> Login</button>
     </form>
     <footer>
-      <!-- Because we're all in this together -->
       <img id="html5Logo" src="/images/html5.png" width="357" height="64" alt="HTML5 Powered with Connectivity / Realtime, CSS3 / Styling, Device Access, Graphics, 3D &amp; Effects, Multimedia, Performance &amp; Integration, Semantics, and Offline &amp; Storage" title="HTML5 Powered with Connectivity / Realtime, CSS3 / Styling, Device Access, Graphics, 3D &amp; Effects, Multimedia, Performance &amp; Integration, Semantics, and Offline &amp; Storage"/>
     </footer>
 {/body}
