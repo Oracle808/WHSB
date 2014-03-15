@@ -1,38 +1,35 @@
-<!DOCTYPE html>
-<html lang="en-gb">
-  <head>
-    <title>Quizzes</title>
-    <link href="/styles/quizzes/index.css" rel="stylesheet"/>
-    {@ne key=user.role value="student"}
-      <script src="public/scripts/results.js"></script>
-      <script src="bower_components/d3/d3.min.js"></script>
-      <script src="bower_components/oboe/dist/oboe-browser.min.js"></script>
-    {/ne}
-    {>"app/partials/global.dust"/}
-  </head>
-  <body>
-    {>"app/partials/head.dust"/}
-    {>"app/partials/nav.dust" active="quizzes"/}
-    <main>
-      <ol id="quizzes">
-	<li class="heading">{title}<a href="/subjects/{subject._id}/quizzes/nova" class="add-item"><i class="fi-plus"></i></a></li>
-	{#quizzes}
-	  <li>
-	    <a href="/subjects/{subject._id}/quizzes/{_id}">{title}</a>
-	    <form action="/subjects/{subject._id}/quizzes/{_id}" method="post">
-	      <input type="hidden" name="_method" value="delete"/>
-	      <button class="delete-item"><i class="fi-x"></i></button>
-	    </form>
-	  </li>
-	{:else}
-	  <li class="nothing">
-	    Nothing here at the moment.
-	    {@ne key=user.role value="student"}
-	      <br/>Why not add something?
-	    {/ne}
-	  </li>
-	{/quizzes}
-      </ol>
-    </main> 
-  </body>
-</html>
+{>"app/partials/base.dust"/}
+{<head}
+  <title>Quizzes</title>
+  <link href="/styles/quizzes/index.css" rel="stylesheet"/>
+  {@ne key=user.role value="student"}
+    <script src="public/scripts/results.js"></script>
+    <script src="bower_components/d3/d3.min.js"></script>
+    <script src="bower_components/oboe/dist/oboe-browser.min.js"></script>
+  {/ne}
+{/head}
+{<body}
+  {>"app/partials/head.dust"/}
+  {>"app/partials/nav.dust" active="quizzes"/}
+  <main>
+    <ol id="quizzes">
+      <li class="heading">{title}<a href="/subjects/{subject._id}/quizzes/nova" class="add-item"><i class="fi-plus"></i></a></li>
+      {#quizzes}
+	<li>
+	  <a href="/subjects/{subject._id}/quizzes/{_id}">{title}</a>
+	  <form action="/subjects/{subject._id}/quizzes/{_id}" method="post">
+	    <input type="hidden" name="_method" value="delete"/>
+	    <button class="delete-item"><i class="fi-x"></i></button>
+	  </form>
+	</li>
+      {:else}
+	<li class="nothing">
+	  Nothing here at the moment.
+	  {@ne key=user.role value="student"}
+	    <br/>Why not add something?
+	  {/ne}
+	</li>
+      {/quizzes}
+    </ol>
+  </main> 
+{/body}

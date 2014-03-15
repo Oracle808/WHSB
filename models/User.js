@@ -156,6 +156,16 @@ var Subject = mongoose.Schema({
 		required:true
 	    }
 	}]
+    }],
+    oral_activities: [{
+	name: {
+	    type: String,
+	    required: true
+	},
+	file: {
+	    type: ObjectId,
+	    required: true
+	}
     }]
 });
 

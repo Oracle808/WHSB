@@ -1,8 +1,9 @@
 var mongoose = require("mongoose");
+var gfs = require("../../models/gfs");
+var Busboy = require("busboy");
 var Subject = mongoose.model("Subject");
 var listView = require("./list.dust");
 var detailView = require("./detail.dust");
-var GridFS = require("../../models/gridfs");
 var uu = require("underscore");
 var async = require("async");
 
@@ -27,6 +28,13 @@ module.exports.post = function(req, res) {
 };
 
 module.exports.upload = function(req, res) {
+    var busboy = new Busboy({
+	headers: req.headers,
+	limits: {
+	    files: 1,
+	    fileSize: 1024 * 1024 * 5
+	}
+    });
     Subject.findById(req.param("subject"), function(err, doc) {
 	if(err) {
 	    res.error(err);
@@ -47,22 +55,14 @@ module.exports.upload = function(req, res) {
 		    }
 		}
 		var fileRefs = [];
-		req.busboy.on("file", function(fieldname, file, filename) {
-		    GridFS.openGridFile(filename, function(err, store) {
-			if(err) {
-			    res.error(err);
-			} else {
-			    fileRefs.push(store.fileId);
-			    file.on("data", function(data) {
-				store.write(data);
-			    });
-			    file.on("end", function() {
-				store.close();
-			    });
-			}
+		busboy.on("file", function(fieldname, file, filename, encoding, mime) {
+		    var store = gfs.createWriteStream(filename, {
+			content_type: mime
 		    });
+		    store.on("id", fileRefs.push);
+		    file.pipe(store);
 		});
-		req.busboy.on("end", function() {
+		busboy.on("end", function() {
 		    if(previousFile) {
 			handInSlot.files.pull(previousFile);
 		    }
@@ -75,7 +75,7 @@ module.exports.upload = function(req, res) {
 			}
 		    });
 		});
-		req.pipe(req.busboy);
+		req.pipe(busboy);
 	    }
 	}
     });
@@ -88,14 +88,9 @@ module.exports.get = function(req, res) {
 };
 
 module.exports.download = function(req, res) {
-    GridFS.getGridFile(req.param("file"), function(err, file) {
-	if(err) {
-	    res.error(err);
-	} else {
-	    res.attachment(file.filename);
-	    file.stream(true).pipe(res);
-	}
-    });
+    var store = gfs.createReadStream(req.param("file"));
+    store.on("filename", res.attachment);
+    store.pipe(res);
 };
 
 module.exports.del = function(req, res) {
@@ -107,10 +102,10 @@ module.exports.del = function(req, res) {
 	if(!hand_in_slot) {
 	    return res.error("Hand in slot doesn't exist");
 	}
-	async.each(uu.pluck(hand_in_slot.files, "file"), GridFS.deleteGridFile, function(err) {
+	async.each(uu.pluck(hand_in_slot.files, "file"), gfs.unlink, function(err) {
 	    if(err) {
 		return res.error(err);
-	    } 
+	    }
 	    doc.hand_in.pull(hand_in_slot);
 	    doc.save(function(err) {
 		if(err) {

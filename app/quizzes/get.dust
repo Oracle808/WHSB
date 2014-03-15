@@ -1,11 +1,9 @@
-<!DOCTYPE html>
-<html>
-  <head>
+{>"app/partials/base.dust"/}
+{<head}
     <title>{quiz.title}</title>
     <link href="/styles/quizzes/quiz.css" rel="stylesheet"/>
-    {>"app/partials/global.dust"/}
-  </head>
-  <body>
+{/head}
+{<body}
     {>"app/partials/head.dust"/}
     {>"app/partials/nav.dust" active="quizzes"/}
     <main>
@@ -44,5 +42,4 @@
 	    {/attempt}
 	  </form>
     </main>
-  </body>
-</html>
+{/body}

@@ -1,10 +1,9 @@
-<!DOCTYPE html>
-<html>
-  <head>
+{>"app/partials/base.dust"/}
+{<head}
     <title>{subject.name} - Settings</title>
     <link href="/styles/settings/index.css" rel="stylesheet"/>
-  </head>
-  <body>
+{/head}
+{<body}
     {>"app/partials/head.dust"/}
     {>"app/partials/nav.dust" active="settings"/}
     <main>
@@ -40,5 +39,4 @@
 	<button type="submit">Delete Class</button>
       </form>
     </main>
-  </body>
-</html>
+{/body}

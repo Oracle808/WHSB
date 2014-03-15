@@ -1,13 +1,11 @@
-<!DOCTYPE html>
-<html lang="en-gb">
-  <head>
+{>"app/partials/base.dust"/}
+{<head}
     <title>{quiz.title}</title>
     <script src="../subjects/polyfill.js"></script>
     <link href="stylesheets/vocab_quizzes/quiz.css" rel="stylesheet"/>
     <script src="./quiz.js"></script>
-    {>"app/header/global.dust"/}
-  </head>
-  <body>
+{/head}
+{<body}
     {>"app/header/head.dust"/}
     {>"app/subjects/nav.dust" active="vocab_quizzes"/}
     <main>
@@ -29,5 +27,4 @@
 	</x-clearable>
       {/quiz}
     </main>
-  </body>
-</html>
+{/body}

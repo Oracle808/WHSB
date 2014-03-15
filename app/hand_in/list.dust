@@ -1,58 +1,50 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Hand-in</title>
-    <link href="/styles/hand_in/index.css" rel="stylesheet"/>
-    <script src="app/subjects/polyfill.js"></script>
-    <script src="components/x-bubble.js"></script>
-    <script src="components/x-slidable.js"></script>
-    <script src="components/x-opendialog.js"></script>
-    <script src="components/x-destroy.js"></script>
-    {>"app/partials/global.dust"/}
-  </head>
-  <body>
-    {>"app/partials/head.dust"/}
-    {>"app/partials/nav.dust" active="hand_in"/}
-    <main>
-      <ul id="hand_in_slots">
-	<li class="heading">Hand-in<a cite="#newSlotForm" class="add-item"><i class="fi-plus"></i></a></li>
-	{@ne key=user.role value="student"}
-	  <x-slidable id="newSlotForm" hidden>
-	    <li>
-	      <form method="post">
-		<input type="text" name="name" placeholder="Title" aria-required="true" required/>
-		<button type="submit" class="publishButton">Submit</button>
-	      </form>
-	    </li>
-	  </x-slidable>
-	{/ne}
-	{#subject.hand_in}
+{>"app/partials/base.dust"/}
+{<head}
+  <title>Hand-in</title>
+  <link href="/styles/hand_in/index.css" rel="stylesheet"/>
+{/head}
+{<body}
+  {>"app/partials/head.dust"/}
+  {>"app/partials/nav.dust" active="hand_in"/}
+  <main>
+    <ul id="hand_in_slots">
+      <li class="heading">Hand-in<a cite="#newSlotForm" class="add-item"><i class="fi-plus"></i></a></li>
+      {@ne key=user.role value="student"}
+	<x-slidable id="newSlotForm" hidden>
 	  <li>
-	    <a href="/subjects/{subject._id}/hand_in/{_id}/files">{name}</a>
-	    {@eq key=user.role value="student"}
-	      {@pluck key=files value="user"}
-		{@stringify}		
-		  {@lacks value=user._id}
-		    <x-destroy id="destroy{$idx}">
-		      <x-opendialog id="handInSlot{$idx}" action="/subjects/{subject._id}/hand_in/{_id}/files" cite="destroy{$idx}">
-			<button class="uploadButton" cite="#handInSlot{$idx}">
-			  Submit		    
-			</button>
-		      </x-opendialog>
-		    </x-destroy>
-		  {/lacks}
-		{/stringify}
-	      {/pluck}
-	      <span class="submitted"><i class="fi-check"></i></span>
-		  {:else}
-	      <form action="/subjects/{subject._id}/hand_in/{_id}" method="post">
-		<input type="hidden" name="_method" value="delete"/>
-		<button type="submit" class="delete-item"><i class="fi-x"></i></button>
-	      </form>
-	    {/eq}
-	  </li> 
-	      {/subject.hand_in}
-      </ul>
-    </main>
-  </body>
-</html>
+	    <form method="post">
+	      <input type="text" name="name" placeholder="Title" aria-required="true" required/>
+	      <button type="submit" class="publishButton">Submit</button>
+	    </form>
+	  </li>
+	</x-slidable>
+      {/ne}
+      {#subject.hand_in}
+	<li>
+	  <a href="/subjects/{subject._id}/hand_in/{_id}/files">{name}</a>
+	  {@eq key=user.role value="student"}
+	    {@pluck key=files value="user"}
+	      {@stringify}		
+		{@lacks value=user._id}
+		  <x-destroy id="destroy{$idx}">
+		    <x-opendialog id="handInSlot{$idx}" action="/subjects/{subject._id}/hand_in/{_id}/files" cite="destroy{$idx}">
+		      <button class="uploadButton" cite="#handInSlot{$idx}">
+			Submit		    
+		      </button>
+		    </x-opendialog>
+		  </x-destroy>
+		{/lacks}
+	      {/stringify}
+	    {/pluck}
+	    <span class="submitted"><i class="fi-check"></i></span>
+		{:else}
+	    <form action="/subjects/{subject._id}/hand_in/{_id}" method="post">
+	      <input type="hidden" name="_method" value="delete"/>
+	      <button type="submit" class="delete-item"><i class="fi-x"></i></button>
+	    </form>
+	  {/eq}
+	</li> 
+	    {/subject.hand_in}
+    </ul>
+  </main>
+{/body}

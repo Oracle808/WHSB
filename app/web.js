@@ -45,8 +45,6 @@ if(Program.createUser) {
     var http = require("http");
     var express = require("express");
     var app = express();
-    var busboy = require("connect-busboy");
-
     var reactive = require("./reactive");
 
     var Atrium = require("./home");
@@ -58,6 +56,7 @@ if(Program.createUser) {
     var Users = require("./users");
     var HandIn = require("./hand_in");
     var Settings = require("./settings");
+    var OralActivities = require("./oral_activities");
 
     var auth = function(req, res, next) {
 	if(req.session.user) {
@@ -140,9 +139,12 @@ if(Program.createUser) {
     app.get("/subjects/:subject/hand_in", auth, HandIn.index);
     app.post("/subjects/:subject/hand_in", auth, teacher, HandIn.post);
     app.get("/subjects/:subject/hand_in/:hand_in_slot/files", auth, teacher, HandIn.get);
-    app.post("/subjects/:subject/hand_in/:hand_in_slot/files", auth, busboy({limits: {files: 10, fileSize: 2 * 1024 * 1024}}), HandIn.upload);
+    app.post("/subjects/:subject/hand_in/:hand_in_slot/files", auth, HandIn.upload);
     app.get("/subjects/:subject/hand_in/:hand_in_slot/files/:file", auth, HandIn.download);
     app.del("/subjects/:subject/hand_in/:hand_in_slot", auth, teacher, HandIn.del);
+    // ORAL ACTIVITIES
+    app.get("/subjects/:subject/oral_activities", auth, OralActivities.list);
+    app.post("/subjects/:subject/oral_activities", auth, teacher, OralActivities.post);
     // APPS
     app.get("/apps", auth, Apps.index);
     app.get("/apps/codr", auth, Apps.codr);

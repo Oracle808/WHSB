@@ -120,6 +120,8 @@ dust.helpers["typeof"] = function(chunk, ctx, bodies, params) {
 
 dust.onLoad = function(name, cb) {
     fs.readFile(name, function(err, out) {
+	console.log(name);
+	console.log(err);
 	cb(err, out.toString());
     });
 };

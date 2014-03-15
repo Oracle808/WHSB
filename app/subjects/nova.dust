@@ -1,33 +1,31 @@
-<!DOCTYPE html>
-<html>
-  <head>
+{>"app/partials/base.dust"/}
+{<head}
     <title>New Subject</title>
     <link href="/styles/ui/index.css" rel="stylesheet"/>
     <link href="/styles/ui/topbar.css" rel="stylesheet"/>
-  </head>
-  <body>
-    {>"app/partials/head.dust"/}
-    <main>
-      <article>
-	<h2>New Subject</h2>
-	<form action="/subjects/nova" method="post">
-	  <label>Name</label>
-	  <input type="text" name="name" placeholder="e.g. 9z/Sc1" aria-required="true" required/>
-	  <label>Subject Name</label>
-	  <select name="subject_name" aria-required="true" required>
-	    {#subjects}
-	      <option value="{.}">{.}</option>
-	    {/subjects}
-	  </select>
-	  <label>Teacher</label>
-	  <select name="teacher" aria-required="true" required>
-	    {#teachers}
-	      <option value="{_id}">{username}</option>
-	    {/teachers}
-	  </select>
-	  <button type="submit">Create</button>
-	</form>
-      </article>
-    </main>
-  </body>
-</html>
+{/head}
+{<body}
+  {>"app/partials/head.dust"/}
+  <main>
+    <article>
+      <h2>New Subject</h2>
+      <form action="/subjects/nova" method="post">
+	<label>Name</label>
+	<input type="text" name="name" placeholder="e.g. 9z/Sc1" aria-required="true" required/>
+	<label>Subject Name</label>
+	<select name="subject_name" aria-required="true" required>
+	  {#subjects}
+	    <option value="{.}">{.}</option>
+	  {/subjects}
+	</select>
+	<label>Teacher</label>
+	<select name="teacher" aria-required="true" required>
+	  {#teachers}
+	    <option value="{_id}">{username}</option>
+	  {/teachers}
+	</select>
+	<button type="submit">Create</button>
+      </form>
+    </article>
+  </main>
+{/body}

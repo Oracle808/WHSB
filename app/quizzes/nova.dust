@@ -1,12 +1,10 @@
-<!DOCTYPE html>
-<html lang="en-gb">
-  <head>
+{>"app/partials/base.dust"/}
+{<head}
     <title>New Quiz</title>
-    {>"app/partials/global.dust"/}
     <link href="/styles/quizzes/nova.css" rel="stylesheet"/>
     <script src="/scripts/quizzes/nova.js"></script>
-  </head>
-  <body>
+{/head}
+{<body}
     {>"app/partials/head.dust"/}
     {>"app/partials/nav.dust"/}
     <main>
@@ -24,5 +22,4 @@
 	</ul>
       </form>
     </main>
-  </body>
-</html>
+{/body}

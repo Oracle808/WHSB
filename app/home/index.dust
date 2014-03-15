@@ -1,22 +1,19 @@
-<!DOCTYPE html>
-<html lang="en-GB">
-  <head>
-    <title>WHSB</title>
-    <link href="/styles/home/index.css" rel="stylesheet"/>
-    {>"app/partials/global.dust"/}
-  </head>
-  <body>
-    {>"app/partials/head.dust"/}
-    <main>
-      <ul>
-	{#subjects}
-	  <li>
-	    <a href="/subjects/{_id}">
-	      <img src="/icons/{subject_name}.png"/>
-	    </a>
-	  </li>
-	{/subjects}
-      </ul>
-    </main>
-  </body>
-</html>
+{>"app/partials/base.dust"/}
+{<head}
+  <title>WHSB</title>
+  <link href="/styles/home/index.css" rel="stylesheet"/>
+{/head}
+{<body}
+  {>"app/partials/head.dust"/}
+  <main>
+    <ul>
+      {#subjects}
+	<li>
+	  <a href="/subjects/{_id}">
+	    <img src="/icons/{subject_name}.png"/>
+	  </a>
+	</li>
+      {/subjects}
+    </ul>
+  </main>
+{/body}

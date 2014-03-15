@@ -1,11 +1,9 @@
-<!DOCTYPE html>
-<html lang="en-gb">
-  <head>
+{>"app/partials/base.dust"/}
+{<head}
     <title>{title}</title>
     <link href="/styles/quizzes/index.css" rel="stylesheet"/>
-    {>"app/partials/global.dust"/}
-  </head>
-  <body>
+{/head}
+{<body}
     {>"app/partials/head.dust"/}
     {>"app/partials/nav.dust" active="vocab_quizzes"/}
     <main>
@@ -29,5 +27,4 @@
 	{/quizzes}
       </ol>
     </main> 
-  </body>
-</html>
+{/body}
