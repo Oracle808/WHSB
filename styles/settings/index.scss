@@ -1,5 +1,4 @@
 @import "styles/ui/subject.scss";
-@import "styles/ui/topbar.scss";
 
 form[name="general"], form[name="delete"] {
     @include grid-row();
