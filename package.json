@@ -28,7 +28,8 @@
     "backbone": "~1.1.2",
     "busboy": "~0.2.3",
     "mime": "~1.2.11",
-    "duplex-child-process": "0.0.2"
+    "duplex-child-process": "0.0.2",
+    "gridfs-stream": "~0.4.1"
   },
   "devDependencies": {
     "grunt": "~0.4.2",
