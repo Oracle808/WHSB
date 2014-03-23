@@ -3,3 +3,8 @@
 #recordings {
     @include mobile-list();
 }
+
+#recordings li audio {
+    @extend .right;
+    margin-right:$minor-margin;
+}
