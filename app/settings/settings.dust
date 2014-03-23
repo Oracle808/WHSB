@@ -8,31 +8,31 @@
     {>"app/partials/nav.dust" active="settings"/}
     <main>
       <form name="general">
-	<label>Class Name</label>
-	<input type="text" aria-required="true" required/>
+	<div class="option">
+	  <label>Class Name</label>
+	  <input type="text" value="{subject.name}" aria-required="true" required/>
+	</div>
 
 	<div class="option">
 	  <label>Quizzes</label>
-	  <input name="quizzes" value="active" type="radio" aria-required="true" required/>Active
-	  <input name="quizzes" value="inactive" type="radio" aria-required="true" required/>Inactive
+	  <input name="quizzes" type="checkbox"/>
 	</div>
 
 	<div class="option">
 	  <label>Vocab Quizzes</label>
-	  <input name="vocab_quizzes" value="active" type="radio" aria-required="true" required/>Active
-	  <input name="vocab_quizzes" value="inactive" type="radio" aria-required="true" required/>Inactive
+	  <input name="vocab_quizzes" type="checkbox"/>
 	</div>
 
 	<div class="option">
 	  <label>Student Resources</label>
-	  <input name="student_resources" value="active" type="radio" aria-required="true" required/>Active
-	  <input name="student_resources" value="inactive" type="radio" aria-required="true" required/>Inactive
+	  <input name="student_resources" type="checkbox"/>
 	</div>
 	
 	<div class="option">
-	  <label>Google Drive</label>
-	  <button>Connect</button>
+	  <label>Recordings</label>
+	  <input name="recordings" type="checkbox"/>
 	</div>
+
       </form>
       <form name="delete">
 	<input type="hidden" name="_method" value="delete"/>

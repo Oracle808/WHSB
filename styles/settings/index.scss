@@ -6,10 +6,22 @@ form[name="general"], form[name="delete"] {
     margin-top:$content-margin;
 }
 
+form[name="general"] {
+    padding:$content-margin;
+}
+
 .option {
-    @extend .row;
+    @include grid-row();
+}
+
+.option label, .option input {
+    @include grid-column(6, $collapse:true);
 }
     
+.option label {
+    @extend .inline;
+}
+
 form[name="delete"] button {
     @include button-size($button-lrg);
     @include button-style($warning);

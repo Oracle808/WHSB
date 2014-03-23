@@ -7,7 +7,7 @@ module.exports.index = function(req, res) {
 	if(err) {
 	    res.error(err);
 	} else {
-	    res.dust(settingsView);
+	    res.dust(settingsView, {subject: doc});
 	}
     });
 };
