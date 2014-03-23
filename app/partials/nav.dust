@@ -21,6 +21,7 @@
    
     <li><a href="/subjects/{subject._id}/hand_in">Hand-in</a></li>
     <li><a>Student Resources</a></li>
+    <li {@eq key=active value="recordings"}class="active"{/eq}><a href="/subjects/{subject._id}/recordings">Recordings</a></li>
 
     <li {@eq key=active value="quizzes"}class="active"{/eq}><a href="/subjects/{subject._id}/quizzes">Quizzes</a></li>
     

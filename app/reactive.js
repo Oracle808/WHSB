@@ -3,6 +3,7 @@ var us = require("underscore.string");
 var dust = require("dustjs-linkedin");
 var crypto = require('crypto');
 var fs = require("fs");
+var util = require("util");
 
 if (require.extensions) {
     require.extensions[".dust"] = function(module, filename) {
@@ -172,6 +173,7 @@ module.exports.intercept = function(opts) {
 	};
 	res.error = function(error) {
 	    console.log(error);
+	    util.inspect(error);
 	    if(!res.headersSent) {
 		res.writeHead(500);
 	    }

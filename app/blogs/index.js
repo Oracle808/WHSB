@@ -16,7 +16,7 @@ var query = function(id, select, update, cb) {
     }
 };
 
-module.exports.index = function(req, res) {
+module.exports.list = function(req, res) {
     var blogSelect = true;
     if(req.session.user.role === "student") {
 	blogSelect = {$elemMatch: {draft:false}};

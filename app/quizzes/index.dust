@@ -17,10 +17,7 @@
       {#quizzes}
 	<li>
 	  <a href="/subjects/{subject._id}/quizzes/{_id}">{title}</a>
-	  <form action="/subjects/{subject._id}/quizzes/{_id}" method="post">
-	    <input type="hidden" name="_method" value="delete"/>
-	    <button class="delete-item"><i class="fi-x"></i></button>
-	  </form>
+	  {>"app/partials/delete.dust" url="/subjects/{subject._id}/quizzes/{_id}" class="delete-item"/}
 	</li>
       {:else}
 	<li class="nothing">

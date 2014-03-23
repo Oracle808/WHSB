@@ -26,7 +26,10 @@
     "dateutil": "~0.1.0",
     "sliced": "0.0.5",
     "backbone": "~1.1.2",
-    "busboy": "~0.2.3"
+    "busboy": "~0.2.3",
+    "fluent-ffmpeg": "~1.6.0",
+    "mime": "~1.2.11",
+    "duplex-child-process": "0.0.2"
   },
   "devDependencies": {
     "grunt": "~0.4.2",

@@ -4,7 +4,7 @@ var vocabQuizList = require("./index.dust");
 var vocabQuizPage = require("./quiz.dust");
 var uu = require("underscore");
 
-module.exports.index = function(req, res) {
+module.exports.list = function(req, res) {
     Subject.findById(req.param("subject")).populate("teacher").exec(function(err, doc) {
 	if(err) {
 	    res.error(err);

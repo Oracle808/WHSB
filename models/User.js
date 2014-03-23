@@ -157,7 +157,7 @@ var Subject = mongoose.Schema({
 	    }
 	}]
     }],
-    oral_activities: [{
+    recordings: [{
 	name: {
 	    type: String,
 	    required: true

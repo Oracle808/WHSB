@@ -56,7 +56,7 @@ if(Program.createUser) {
     var Users = require("./users");
     var HandIn = require("./hand_in");
     var Settings = require("./settings");
-    var OralActivities = require("./oral_activities");
+    var Recordings = require("./recordings");
 
     var auth = function(req, res, next) {
 	if(req.session.user) {
@@ -114,7 +114,7 @@ if(Program.createUser) {
     app.get("/subjects/nova", auth, admin, Subjects.nova);
     app.post("/subjects/nova", auth, admin, Subjects.post);
     // SUBJECT BLOGS
-    app.get("/subjects/:subject", auth, Blogs.index);
+    app.get("/subjects/:subject", auth, Blogs.list);
     app.post("/subjects/:subject", auth, teacher, Blogs.publish);
     app.get("/subjects/:subject/feed", auth, Blogs.feed);
     app.get("/subjects/:subject/posts/:post", auth, Blogs.get);
@@ -127,7 +127,7 @@ if(Program.createUser) {
     app.post("/subjects/:subject/quizzes/:quiz", auth, Quizzes.submit);
     app.del("/subjects/:subject/quizzes/:quiz", auth, teacher, Quizzes.del);
     // SUBJECT VOCAB QUIZZES
-    app.get("/subjects/:subject/vocab_quizzes", auth, VocabQuizzes.index);
+    app.get("/subjects/:subject/vocab_quizzes", auth, VocabQuizzes.list);
     app.get("/subjects/:subject/vocab_quizzes/:quiz", auth, VocabQuizzes.get);
     app.del("/subjects/:subject/vocab_quizzes/:quiz", auth, teacher, VocabQuizzes.del);
     // SUBJECT LINKS
@@ -142,9 +142,11 @@ if(Program.createUser) {
     app.post("/subjects/:subject/hand_in/:hand_in_slot/files", auth, HandIn.upload);
     app.get("/subjects/:subject/hand_in/:hand_in_slot/files/:file", auth, HandIn.download);
     app.del("/subjects/:subject/hand_in/:hand_in_slot", auth, teacher, HandIn.del);
-    // ORAL ACTIVITIES
-    app.get("/subjects/:subject/oral_activities", auth, OralActivities.list);
-    app.post("/subjects/:subject/oral_activities", auth, teacher, OralActivities.post);
+    // RECORDINGS
+    app.get("/subjects/:subject/recordings", auth, Recordings.list);
+    app.post("/subjects/:subject/recordings", auth, teacher, Recordings.post);
+    app.get("/subjects/:subject/recordings/:recording", auth, Recordings.get);
+    app.del("/subjects/:subject/recordings/:recording", auth, Recordings.del);
     // APPS
     app.get("/apps", auth, Apps.index);
     app.get("/apps/codr", auth, Apps.codr);
@@ -153,6 +155,6 @@ if(Program.createUser) {
     app.post("/users/massUserCreation", auth, admin, Users.postMassUserCreation);
 
     http.createServer(app).listen(app.get("port"), function() {
-	console.log("Express server listening at " + app.get("port"));
+	console.log("Express server listening on port %d in %s mode", app.get("port"), app.settings.env);
     });
 }

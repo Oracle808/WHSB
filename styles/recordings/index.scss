@@ -1,0 +1,5 @@
+@import "styles/ui/subject.scss";
+
+#recordings {
+    @include mobile-list();
+}
