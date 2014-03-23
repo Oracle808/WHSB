@@ -1,0 +1,71 @@
+@import "styles/ui/subject";
+
+x-quiz {
+    display:block;
+}
+
+.container {
+    margin-top:20px;
+    border-top:1px solid #000;
+}
+
+.container label, .container input, .container input:focus {
+    @include grid-column(2, $collapse: true);
+    height:25px;
+    font-size:0.9em;
+    padding:4.5px;
+    text-align:center;
+    outline:none;
+    border:0;
+    border-left:1px solid #333;
+    border-right:1px solid #333;
+    border-bottom:1px solid #333;
+    margin:0;
+    color:#222;
+    box-shadow:none;
+
+    &:nth-child(-n+6) {
+	border-top:1px solid #333;
+    }
+}
+
+.container input:focus:not([readonly]) {
+    background:#ffff66;
+}
+
+.container label {
+    background:#555555;
+}
+
+.container input {
+    background:#bbb;
+    transition:none;
+}
+
+@mixin valid {
+    &:valid, &.valid {
+	@content;
+    }
+}
+
+@mixin invalid {
+    &:invalid, &.invalid {
+	@content;
+    }
+}
+
+@mixin user-error {
+    &:user-error, &.interacted.invalid, &:moz-ui-invalid {
+	@content;
+    }
+}
+
+.container input {
+    @include valid {
+	background-color: #66CD00;
+    }
+}
+
+.container input[formnovalidate] {
+    background-color:#ff0000;
+}
