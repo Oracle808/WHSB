@@ -1,13 +1,12 @@
 {>"app/partials/base.dust"/}
 {<head}
     <title>{quiz.title}</title>
-    <script src="../subjects/polyfill.js"></script>
-    <link href="stylesheets/vocab_quizzes/quiz.css" rel="stylesheet"/>
+    <link href="/styles/vocab_quizzes/quiz.css" rel="stylesheet"/>
     <script src="./quiz.js"></script>
 {/head}
 {<body}
-    {>"app/header/head.dust"/}
-    {>"app/subjects/nav.dust" active="vocab_quizzes"/}
+    {>"app/partials/head.dust"/}
+    {>"app/partials/nav.dust" active="vocab_quizzes"/}
     <main>
       {#quiz}
 	<header>
