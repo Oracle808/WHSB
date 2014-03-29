@@ -17,7 +17,6 @@ var Busboy = require("busboy");
 
 module.exports.list = function(req, res) {
     Subject.findById(req.param("subject"), function(err, doc) {
-	console.log(doc);
 	if(err) {
 	    res.error(err);
 	} else {
@@ -27,7 +26,6 @@ module.exports.list = function(req, res) {
 };
 
 module.exports.post = function(req, res) {
-    console.log("START");
     var name, id;
     var busboy = new Busboy({
 	headers: req.headers,
@@ -36,10 +34,8 @@ module.exports.post = function(req, res) {
 	    fileSize: 1024 * 1024 * 5
 	}
     });
-    console.log(busboy);
     busboy.on("file", function(fieldname, file, filename, encoding, mimetype) {
 	id = new ObjectID();
-	console.log(id);
 	var store = gfs.createWriteStream({
 	    content_type: mimetype,
 	    _id: id,
@@ -49,14 +45,11 @@ module.exports.post = function(req, res) {
 	file.pipe(store);
     });
     busboy.on("field", function(key, val) {
-	console.log("NEW FIELD");
 	if(key === "name") {
-	    console.log("WE HAVE A MATCH");
 	    name = val;
 	}
     });
     busboy.on("finish", function() {
-	console.log("FINISH");
 	if(!name || !id) {
 	    Subject.findById(req.param("subject"), function(err, doc) {
 		if(!name && !id) {
@@ -80,33 +73,28 @@ module.exports.post = function(req, res) {
     req.pipe(busboy);
 };
 
-var spawn = require("child_process").spawn;
-
 module.exports.get = function(req, res) {
     Subject.findById(req.param("subject"), function(err, doc) {
-	console.log(req.param("recording"));
-	console.log("fdsfds");
-	console.log(req.query.format);
 	var recording = uu.findWhere(doc.recordings, {id: req.param("recording")}).file;
-	gfs.files.find({_id:recording}).toArray(function(err, files) {
-	    console.log(files);
+	gfs.files.findOne({_id:recording}, function(err, file) {
 	    if(err) {
 		res.error(err);
 	    } else {
 		var store = gfs.createReadStream({_id: recording});
-		var contentType = mime.extension(files[0].contentType);
-		res.attachment(files[0].filename);
-		res.set("Content-Type", files[0].contentType);
-		res.set("Content-Length", files[0].length);
+		var contentType = mime.extension(file.contentType);
+		res.attachment(file.filename);
+		res.set("Content-Length", file.length);
 		console.log(req.query.format);
 		if(contentType === req.query.format) {
+		    res.set("Content-Type", file.contentType);
 		    store.pipe(res);
-		    console.log("hier");
 		} else if(req.query.format === "webm") {
+		    console.log("fsdfdssdffsd");
 		    var converter = child_process.spawn("ffmpeg", ["-f", contentType, "-acodec", "mp3", "-vn",  "-i", "pipe:0", "-ac", "2", "-strict", "experimental", "-acodec", "vorbis", "-f", "webm", "pipe:1"], {
 			customFds: [-1, -1, -1]
 		    });
 		    store.pipe(converter);
+		    res.set("Content-Type", mime.lookup("webm"));
 		    converter.pipe(res);
 		}
 	    }
