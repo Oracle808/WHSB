@@ -50,6 +50,15 @@ module.exports = function(grunt) {
 		}]
 	    }
 	},
+	modernizr: {
+	    build: {
+		devFile: "public/components/modernizr/modernizr.js",
+		outputFile: "public/scripts/modernizr.js",
+		files: {
+		    src:["public/styles/**/*", "public/scripts/**/*"]
+		}
+	    }
+	},
 	uglify: {
 	    build: {
 		options: {
@@ -68,10 +77,11 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks("grunt-contrib-uglify");          // MINIFY JAVASCRIPT
     grunt.loadNpmTasks("grunt-sass");                    // BUILD SASS
     grunt.loadNpmTasks("grunt-browserify");              // BROWSERFIY
+    grunt.loadNpmTasks("grunt-modernizr");               // BUILD MODERNIZR
     grunt.loadNpmTasks("grunt-asciify");                 // ASCIIFY MINIFIED FILES
     grunt.loadNpmTasks("grunt-foreman");                 // TEST SERVER
 
-    grunt.registerTask("default", ["clean", "sass", "browserify", "asciify", "uglify"]);
+    grunt.registerTask("default", ["clean", "sass", "browserify", "modernizr", "asciify", "uglify"]);
     grunt.registerTask("serve", ["default", "foreman"]);
 
 };

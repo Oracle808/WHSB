@@ -45,6 +45,10 @@ textarea {
     );
 }
 
+.toolbar ul button.active {
+    background-color: darken($secondary-color, 15%);
+}
+
 .draftButton, .publishButton {
     @include button-size($button-sml);
 }
@@ -107,4 +111,35 @@ article .postExcerpt {
     @include grid-column(12, $collapse:true);
     word-wrap:break-word;
     text-align:justify;
+}
+
+.js.contenteditable {
+    #new-blog-post-text {
+	display:none;
+    }
+}
+
+#views #preview, #views #editor {
+    display:none;
+}
+
+#views #preview.active, #views #editor.active {
+    display:block;
+}
+
+#editor {
+    @extend textarea;
+    font-size:17px;
+    min-height:150px;
+}
+
+#editor-type {
+    @include grid-column(4, $float:right);
+}
+
+dl dd {
+    float:left;
+    padding-left:5px;
+    padding-right:5px;
+    border:1px solid black;
 }

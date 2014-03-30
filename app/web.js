@@ -87,6 +87,17 @@ if(Program.createUser) {
 	res.redirect("/login");
     };
 
+    var loadSubject = function(req, res, next) {
+	Database.subject.findById(req.param("subject")).populate("teacher").exec(function(err, doc) {
+	    if(err) {
+		res.error(err);
+	    } else {
+		req.subject = res.locals.subject = doc;
+		next();
+	    }
+	});
+    };
+
     app.set('port', process.env.PORT || 3000);
     app.use(reactive.intercept());
     app.use(express.favicon());
@@ -130,9 +141,10 @@ if(Program.createUser) {
     app.get("/subjects/:subject/vocab_quizzes", auth, VocabQuizzes.list);
     app.get("/subjects/:subject/vocab_quizzes/:quiz", auth, VocabQuizzes.get);
     app.del("/subjects/:subject/vocab_quizzes/:quiz", auth, teacher, VocabQuizzes.del);
-    // SUBJECT LINKS
-    app.post("/subjects/:subject/links", auth, teacher, Subjects.postLink);
-    app.del("/subjects/:subject/links/:link", auth, Subjects.delLink);
+    // SUBJECT
+    app.post("/subjects/:subject/links", auth, teacher, Subjects.links.post);
+    app.del("/subjects/:subject/links/:link", auth, Subjects.links.del);
+    app.get("/subjects/:subject/students", auth, teacher, loadSubject, Subjects.students.list);
     // SUBJECT
     app.get("/subjects/:subject/settings", auth, teacher, Settings.index);
     // HAND-IN

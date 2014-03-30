@@ -37,6 +37,7 @@
       {/subject.links}
     {/subject.links}
 
+    <li><a href="/subjects/{subject._id}/students">Students <i class="fi-torsos"></i></a></li>
     <li><a href="/subjects/{subject._id}/settings">Settings <i class="fi-widget"></i></a></li>
   </ul>	
 </nav>

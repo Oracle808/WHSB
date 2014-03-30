@@ -5,6 +5,7 @@ var uu = require("underscore");
 var us = require("underscore.string");
 var fs = require("fs");
 var novaTemplate = require("./nova.dust");
+var studentsView = require("./students.dust");
 
 module.exports.nova = function(req, res) {
     fs.readdir("public/icons", function(err, list) {
@@ -39,7 +40,9 @@ module.exports.post = function(req, res) {
     });
 };
 
-module.exports.postLink = function(req, res) {
+module.exports.links = {};
+
+module.exports.links.post = function(req, res) {
     var update = {
 	$push: {
 	    links: {
@@ -61,12 +64,21 @@ module.exports.postLink = function(req, res) {
     });
 };
 
-module.exports.delLink = function(req, res) {
+module.exports.links.del = function(req, res) {
     Subject.findByIdAndUpdate(req.param("subject"), {$pull: {links: {_id: req.param("link")}}}, function(err, doc) {
 	if(err) {
 	    res.error(err);
 	} else {
 	    res.redirect("/subjects/" + req.param("subject"));
 	}
+    });
+};
+
+module.exports.students = {};
+
+module.exports.students.list =  function(req, res) {
+    User.find().where("subjects").in(req.subject._id).exec(function(err, docs) {
+	console.log(docs);
+	res.dust(studentsView, {students: docs});
     });
 };
