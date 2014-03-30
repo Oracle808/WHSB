@@ -1,0 +1,5 @@
+@import "styles/ui/subject.scss";
+
+#students {
+    @include mobile-list();
+}

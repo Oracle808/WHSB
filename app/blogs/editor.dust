@@ -1,0 +1,34 @@
+<div class="toolbar" id="editor-toolbar">
+  {@eq key=type value="rich"}
+    <ul>
+      <button class="bold"><i class="fi-bold"></i></button>
+      <button class="italic"><i class="fi-italic"></i></button>
+      <button class="underline"><i class="fi-underline"></i></button>
+    </ul>
+    <ul>
+      <button class="insertOrderedList"><i class="fi-list-number"></i></button>
+      <button class="insertUnorderedList"><i class="fi-list-bullet"></i></button>
+    </ul>
+    <ul>
+      <button class="subscript"><i class="fi-subscript"></i></button>
+      <button class="superscript"><i class="fi-superscript"></i></button>
+    </ul>
+  {:else}
+    <dl>
+      <dd class="active"><a aria-controls="editor">Editor</a></dd>
+      <dd><a aria-controls="preview">Preview</a></dd>
+    </dl>
+  {/eq}
+  <select id="editor-type">
+    <option value="rich" {@eq key=type value="rich"}selected{/eq}>Rich Text Editor</option>
+    <option value="latex" {@eq key=type value="latex"}selected{/eq}>Latex</option>
+  </select>
+</div>
+{@eq key=type value="rich"}
+  <div id="editor" contenteditable="true"></div>
+{:else}
+  <div id="views">
+    <textarea id="editor" class="active"></textarea>
+    <div id="preview"></div>
+  </div>
+{/eq}

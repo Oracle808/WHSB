@@ -1,0 +1,17 @@
+{>"app/partials/base.dust"/}
+{<head}
+  <title>Students</title>
+  <link href="/styles/subjects/students.css" rel="stylesheet"/>
+{/head}
+{<body}
+  {>"app/partials/head.dust"/}
+  {>"app/partials/nav.dust" active="students"/}
+  <main>
+    <ul id="students">
+      <li class="heading">Students</li>
+      {#students}
+	<li><a>{username}</a></li>
+      {/students}
+    </ul>
+  </main>
+{/body}
