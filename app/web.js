@@ -125,11 +125,11 @@ if(Program.createUser) {
     app.get("/subjects/nova", auth, admin, Subjects.nova);
     app.post("/subjects/nova", auth, admin, Subjects.post);
     // SUBJECT BLOGS
-    app.get("/subjects/:subject", auth, Blogs.list);
-    app.post("/subjects/:subject", auth, teacher, Blogs.publish);
-    app.get("/subjects/:subject/feed", auth, Blogs.feed);
-    app.get("/subjects/:subject/posts/:post", auth, Blogs.get);
-    app.del("/subjects/:subject/posts/:post", auth, teacher, Blogs.del);
+    app.get("/subjects/:subject", auth, loadSubject, Blogs.list);
+    app.post("/subjects/:subject", auth, teacher, loadSubject, Blogs.publish);
+    app.get("/subjects/:subject/feed", loadSubject, Blogs.feed); // Authentication not necessary so RSS clients can access
+    app.get("/subjects/:subject/posts/:post", auth, loadSubject, Blogs.get);
+    app.del("/subjects/:subject/posts/:post", auth, teacher, loadSubject, Blogs.del);
     // SUBJECT QUIZZES
     app.get("/subjects/:subject/quizzes", auth, Quizzes.list);
     app.get("/subjects/:subject/quizzes/nova", auth, Quizzes.nova);
