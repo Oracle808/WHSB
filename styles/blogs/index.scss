@@ -1,4 +1,4 @@
-@import "styles/ui/subject.scss";
+ @import "styles/ui/subject.scss";
 
 #action-bar {
     @extend %bar;
@@ -29,13 +29,13 @@ textarea {
     min-height:200px;
 }
 
-.toolbar ul {
+.editor-toolbar ul {
     @include button-group-container();
     margin-right:10px;
     display:inline-block;
 }
 
-.toolbar ul button {
+.editor-toolbar ul button {
     @include button(
 	$padding:rem-calc(7),
 	$bg: $secondary-color
@@ -45,7 +45,7 @@ textarea {
     );
 }
 
-.toolbar ul button.active {
+.editor-toolbar ul button.active {
     background-color: darken($secondary-color, 15%);
 }
 
@@ -119,7 +119,7 @@ article .postExcerpt {
     }
 }
 
-#views #preview, #views #editor {
+#views #preview, #views textarea#editor {
     display:none;
 }
 
@@ -128,16 +128,32 @@ article .postExcerpt {
 }
 
 #editor {
-    @extend textarea;
     font-size:17px;
     min-height:150px;
 }
 
-#editor-type {
-    @include grid-column(4, $float:right);
+.editor .editor-toolbar {
+    @include grid-row();
 }
 
-dl dd {
+.editor .editor-toolbar .editor-formating {
+    @include grid-column(6, $collapse: true);
+}
+
+.editor select {
+    @include grid-column(3);
+}
+
+.editor select.editor-mode {
+    @extend .right;
+}
+
+.editor .editor-preview {
+    text-align:center;
+    padding-bottom:20px;
+}
+
+ul[role="tablist"] li {
     float:left;
     padding-left:5px;
     padding-right:5px;

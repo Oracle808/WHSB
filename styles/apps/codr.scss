@@ -1,14 +1,28 @@
 @import "styles/ui/subject.scss";
 @import "styles/ui/topbar.scss";
 
-x-coderunner {
-    @extend textarea;
-    display:block;
-    min-height:200px;
-    font-family: "Consolas", "monospace";
+main {
+    padding:$content-margin;
+    background-color:$middleground;
 }
 
-#actions {
+#code {
+    min-height:200px;
+}
+
+main header, #code, output {
+    @include grid-row();
+}
+
+main header h2 {
+    text-align:center;
+}
+
+main header > * {
+    @include grid-column(4, $collapse:true);
+}
+
+#actions, #links {
     @include button-group-container();
 }
 
@@ -20,33 +34,20 @@ button {
     @include button-size($button-sml);
 }
 
-button[cite="#codeBox"] {
+button#runCode {
     @include button-style($green);
  
 }
 
-button[cite="#openFileDialog"] {
+button#openFile {
     @include button-style($purple);
 }
 
-button[cite="#saveFileDialog"] {
+button#saveFile {
     @include button-style($red);
 }
 
-button[cite="#documentation"] {
+button#documentation {
     @include button-style($info);
-    float:right;
-}
-
-article .heading {
-    #actions, #title, #links {
-	@include grid-column(4);
-    }
-    #title {
-	text-align:center;
-    }
-}
-
-article .heding, article .editor {
-    @include grid-column(12);
+    @extend .right;
 }

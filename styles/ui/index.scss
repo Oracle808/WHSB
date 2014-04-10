@@ -2,3 +2,33 @@
 @import "public/components/normalize-scss/normalize";
 @import "public/components/foundation/scss/foundation";
 @import "public/components/foundation-icon-fonts/foundation-icons";
+
+[contenteditable] {
+    @extend textarea;
+}
+
+.codebox {
+    font-family: "Consolas", "monospace";
+    font-size:1.05rem;
+
+    .string {
+	color:#090;
+    }
+
+    .comment {
+	color:#a50;
+    }
+
+    .parameter {
+	color:#219;
+    }
+
+    .keyword {
+	color:#708;
+    }
+
+    blockquote {
+	color:inherit;
+	line-height:inherit;
+    }
+}

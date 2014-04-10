@@ -1,6 +1,4 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-var dust = require("dustjs-linkedin/lib/dust");module.exports="/Users/Hashan/Dropbox/Sites/Styles53/app/blogs/editor.dust";(function(){dust.register("/Users/Hashan/Dropbox/Sites/Styles53/app/blogs/editor.dust",body_0);function body_0(chk,ctx){return chk.write("<div class=\"editor-toolbar\">").helper("eq",ctx,{"else":body_1,"block":body_2},{"key":ctx._get(false, ["mode"]),"value":"rich-text-editor"}).write("<select class=\"editor-mode\" name=\"mode\"><option value=\"rich-text-editor\" ").helper("eq",ctx,{"block":body_3},{"key":ctx._get(false, ["mode"]),"value":"rich-text-editor"}).write(">Rich Text Editor</option><option value=\"latex\" ").helper("eq",ctx,{"block":body_4},{"key":ctx._get(false, ["mode"]),"value":"latex"}).write(">Latex</option></select></div><div id=\"views\">").helper("eq",ctx,{"else":body_5,"block":body_6},{"key":ctx._get(false, ["mode"]),"value":"rich-text-editor"}).write("</div>");}function body_1(chk,ctx){return chk.write("<ul role=\"tablist\"><li class=\"active\"><a aria-controls=\"editor\">Editor</a></li><li class=\"active\"><a aria-controls=\"preview\">Preview</a></li></ul>");}function body_2(chk,ctx){return chk.write("<div class=\"editor-formating\"><ul><button value=\"bold\"><i class=\"fi-bold\"></i></button><button value=\"italic\"><i class=\"fi-italic\"></i></button><button value=\"underline\"><i class=\"fi-underline\"></i></button></ul><ul><button value=\"insertOrderedList\"><i class=\"fi-list-number\"></i></button><button value=\"insertUnorderedList\"><i class=\"fi-list-bullet\"></i></button></ul><ul><button value=\"subscript\"><i class=\"fi-subscript\"></i></button><button value=\"superscript\"><i class=\"fi-superscript\"></i></button></ul></div><select class=\"font-control\"><option value=\"Helvetica Neue\" selected>Helvetica Neue</option><option value=\"Arial\">Arial</option><option value=\"Arial Black\">Arial Black</option><option value=\"Comic Sans MS\">Comic Sans MS</option><option value=\"Times New Roman\">Times New Roman</option><option value=\"Tahoma\">Tahoma</option><option value=\"Verdana\">Verdana</option><option value=\"Courier New\">Courier New</option></select>");}function body_3(chk,ctx){return chk.write("selected");}function body_4(chk,ctx){return chk.write("selected");}function body_5(chk,ctx){return chk.write("<div id=\"editor\" contenteditable=\"true\" class=\"active\"></div><div class=\"editor-preview\" id=\"preview\"></div>");}function body_6(chk,ctx){return chk.write("<div id=\"editor\" contenteditable=\"true\" class=\"editor-rich\"></div>");}return body_0;})();
-},{"dustjs-linkedin/lib/dust":5}],2:[function(require,module,exports){
 //     Backbone.js 1.1.2
 
 //     (c) 2010-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -1610,7 +1608,7 @@ var dust = require("dustjs-linkedin/lib/dust");module.exports="/Users/Hashan/Dro
 
 }));
 
-},{"underscore":12}],3:[function(require,module,exports){
+},{"underscore":11}],2:[function(require,module,exports){
 (function(dust){
 
 // Note: all error conditions are logged to console and failed silently
@@ -2108,7 +2106,7 @@ dust.helpers = helpers;
 
 })(typeof exports !== 'undefined' ? module.exports = require('dustjs-linkedin') : dust);
 
-},{"dustjs-linkedin":5}],4:[function(require,module,exports){
+},{"dustjs-linkedin":4}],3:[function(require,module,exports){
 var dustCompiler = (function(dust) {
 
 dust.compile = function(source, name) {
@@ -2477,7 +2475,7 @@ if (typeof exports !== 'undefined') {
   dustCompiler(getGlobal());
 }
 
-},{}],5:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 (function (process){
 /*global console */
 var dust = {};
@@ -3306,7 +3304,7 @@ if (typeof exports !== 'undefined') {
 }
 
 }).call(this,require("/Users/Hashan/Dropbox/Sites/Styles53/node_modules/grunt-browserify/node_modules/browserify/node_modules/insert-module-globals/node_modules/process/browser.js"))
-},{"./server":7,"/Users/Hashan/Dropbox/Sites/Styles53/node_modules/grunt-browserify/node_modules/browserify/node_modules/insert-module-globals/node_modules/process/browser.js":8}],6:[function(require,module,exports){
+},{"./server":6,"/Users/Hashan/Dropbox/Sites/Styles53/node_modules/grunt-browserify/node_modules/browserify/node_modules/insert-module-globals/node_modules/process/browser.js":7}],5:[function(require,module,exports){
 (function(dust){
 
 var parser = (function(){
@@ -5935,7 +5933,7 @@ var parser = (function(){
 dust.parse = parser.parse;
 
 })(typeof exports !== 'undefined' ? exports : getGlobal());
-},{}],7:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 (function (process){
 var path = require('path'),
     parser = require('./parser'),
@@ -5958,7 +5956,7 @@ module.exports = function(dust) {
 }
 
 }).call(this,require("/Users/Hashan/Dropbox/Sites/Styles53/node_modules/grunt-browserify/node_modules/browserify/node_modules/insert-module-globals/node_modules/process/browser.js"))
-},{"./compiler":4,"./parser":6,"/Users/Hashan/Dropbox/Sites/Styles53/node_modules/grunt-browserify/node_modules/browserify/node_modules/insert-module-globals/node_modules/process/browser.js":8,"path":9,"vm":10}],8:[function(require,module,exports){
+},{"./compiler":3,"./parser":5,"/Users/Hashan/Dropbox/Sites/Styles53/node_modules/grunt-browserify/node_modules/browserify/node_modules/insert-module-globals/node_modules/process/browser.js":7,"path":8,"vm":9}],7:[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
@@ -6013,7 +6011,7 @@ process.chdir = function (dir) {
     throw new Error('process.chdir is not supported');
 };
 
-},{}],9:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 (function (process){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -6241,7 +6239,7 @@ var substr = 'ab'.substr(-1) === 'b'
 ;
 
 }).call(this,require("/Users/Hashan/Dropbox/Sites/Styles53/node_modules/grunt-browserify/node_modules/browserify/node_modules/insert-module-globals/node_modules/process/browser.js"))
-},{"/Users/Hashan/Dropbox/Sites/Styles53/node_modules/grunt-browserify/node_modules/browserify/node_modules/insert-module-globals/node_modules/process/browser.js":8}],10:[function(require,module,exports){
+},{"/Users/Hashan/Dropbox/Sites/Styles53/node_modules/grunt-browserify/node_modules/browserify/node_modules/insert-module-globals/node_modules/process/browser.js":7}],9:[function(require,module,exports){
 var indexOf = require('indexof');
 
 var Object_keys = function (obj) {
@@ -6381,7 +6379,7 @@ exports.createContext = Script.createContext = function (context) {
     return copy;
 };
 
-},{"indexof":11}],11:[function(require,module,exports){
+},{"indexof":10}],10:[function(require,module,exports){
 
 var indexOf = [].indexOf;
 
@@ -6392,7 +6390,7 @@ module.exports = function(arr, obj){
   }
   return -1;
 };
-},{}],12:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 //     Underscore.js 1.5.2
 //     http://underscorejs.org
 //     (c) 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -7670,7 +7668,7 @@ module.exports = function(arr, obj){
 
 }).call(this);
 
-},{}],13:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 var dust = require("dustjs-linkedin/lib/dust");
 dust.helper = require("dustjs-helpers");
 var Backbone = require("backbone");
@@ -7720,291 +7718,4 @@ Backbone.Controller = Backbone.View.extend({
 
 module.exports = Backbone;
 
-},{"backbone":2,"dustjs-helpers":3,"dustjs-linkedin/lib/dust":5,"underscore":12}],14:[function(require,module,exports){
-var Backbone = require("./backbone");
-var CodeBox = require("./codebox");
-
-MathJax.Hub.Config({
-    tex2jax: {
-	displayMath: [],
-	inlineMath: []
-    }
-});
-
-var getSelectionHtml = function() {
-    var html = "";
-    if (typeof window.getSelection != "undefined") {
-	var sel = window.getSelection();
-	if (sel.rangeCount) {
-	    var container = document.createElement("div");
-	    for (var i = 0, len = sel.rangeCount; i < len; ++i) {
-		container.appendChild(sel.getRangeAt(i).cloneContents());
-	    }
-	    html = container.innerHTML;
-	}
-    } else if (typeof document.selection != "undefined") {
-	if (document.selection.type == "Text") {
-	    html = document.selection.createRange().htmlText;
-	}
-    }
-    return html;
-};
-
-var EditorView = require("../app/blogs/editor.dust");
-
-var EditorState = Backbone.Model.extend({
-    defaults: {
-	mode: "rich-text-editor"
-    }
-});
-
-var EditorController = Backbone.Controller.extend({
-    template: EditorView,
-
-    className: "editor",
-
-    requires: Modernizr.contenteditable,
-
-    events: {
-	"change .editor-mode": "updateMode",
-	"click .editor-toolbar button": "updateFormat",
-	"change select.font-control": "updateFont",
-	"click .editor-rich": "reconfigure",
-	"keydown .editor-rich": "reconfigure",
-	"keyup #editor": "transpose",
-	"click ul[role=\"tablist\"] li a": "openTab"
-    },
-
-    initialize: function(options) {
-	this.controls = $("#" + options.controls);
-	this.state = new EditorState();
-	this.listenTo(this.state, "change", this.render);
-	this.$el.insertBefore(this.controls);
-	this.render();
-    },
-
-    updateMode: function(e) {
-	this.state.set("mode", e.target.value);
-	e.preventDefault();
-    },
-
-    // Controls everything from bold to insertUnorderedList
-    updateFormat: function(e) {
-	var target = $(e.target);
-	document.execCommand(target.val());
-	target.toggleClass("active");
-	e.preventDefault();
-    },
-
-    updateFont: function(e) {
-	document.execCommand("fontName", false, e.target.value);
-    },
-
-    reconfigure: function(e) {
-	console.log("Yep!");
-	["bold", "underline", "italic", "insertOrderedList", "insertUnorderedList"].forEach((function(option) {
-	    if(document.queryCommandState(option)) {
-		this.find("[value=\"" + option + "\"]").addClass("active");
-	    } else {
-		this.find("[value=\"" + option + "\"]").removeClass("active");
-	    }
-	}).bind(this));
-    },
-
-    transpose: function(e) {
-	if(this.controls) {
-	    var editor = this.findById("editor");
-	    console.log(this.state.get("mode"));
-	    console.log(this.editor);
-	    var val = (this.state.get("mode") === "rich-text-editor" ? editor.html() : this.editor.val());
-	    this.controls.val(val);
-	}
-    },
-
-    openTab: function(e) {
-	var el = $(e.target);
-	el.parent().siblings().removeClass("active");
-	el.parent().addClass("active");
-	var targetId = el.attr("aria-controls");
-	var target = $("#" + targetId);
-	if(targetId === "preview") {
-	    target.html($("<script type=\"math/tex\">").html(this.editor.val()));
-	    MathJax.Hub.Queue(["Typeset", MathJax.Hub, "preview"]);
-	}
-	target.siblings().hide();
-	target.show();
-    },
-
-    subviews: function(e) {
-	if(this.state.get("mode") === "latex") {
-	    this.editor = CodeBox.create({
-		el: this.findById("editor"),
-		mode: CodeBox.Modes.LaTeX
-	    });
-	} else {
-	    this.editor = undefined;
-	}
-    }
-});
-
-$(document).ready(function() {
-    var novaBlogPost = $("#new-blog-post");
-
-    $("#add-blog-post").on("click", function(e) {
-	novaBlogPost.stop();
-	novaBlogPost.slideToggle();
-	e.preventDefault();
-    });
-
-    EditorController.create({
-	controls: "new-blog-post-text"
-    });
-});
-
-},{"../app/blogs/editor.dust":1,"./backbone":13,"./codebox":15}],15:[function(require,module,exports){
-var Backbone = require("./backbone");
-
-var saveSelection, restoreSelection;
-
-if (window.getSelection && document.createRange) {
-    saveSelection = function(containerEl) {
-	var range = window.getSelection().getRangeAt(0);
-	var preSelectionRange = range.cloneRange();
-	preSelectionRange.selectNodeContents(containerEl);
-	preSelectionRange.setEnd(range.startContainer, range.startOffset);
-	var start = preSelectionRange.toString().length;
-
-	return {
-		start: start,
-		end: start + range.toString().length
-	    };
-    };
-
-    restoreSelection = function(containerEl, savedSel) {
-	var charIndex = 0, range = document.createRange();
-	range.setStart(containerEl, 0);
-	range.collapse(true);
-	var nodeStack = [containerEl], node, foundStart = false, stop = false;
-
-	while (!stop && (node = nodeStack.pop())) {
-		if (node.nodeType == 3) {
-		    var nextCharIndex = charIndex + node.length;
-		    if (!foundStart && savedSel.start >= charIndex && savedSel.start <= nextCharIndex) {
-			    range.setStart(node, savedSel.start - charIndex);
-			    foundStart = true;
-			}
-		    if (foundStart && savedSel.end >= charIndex && savedSel.end <= nextCharIndex) {
-			    range.setEnd(node, savedSel.end - charIndex);
-			    stop = true;
-			}
-		    charIndex = nextCharIndex;
-			} else {
-			    var i = node.childNodes.length;
-			    while (i--) {
-				    nodeStack.push(node.childNodes[i]);
-				}
-				}
-	    }
-
-	var sel = window.getSelection();
-	sel.removeAllRanges();
-	sel.addRange(range);
-    };
-} else if (document.selection) {
-    saveSelection = function(containerEl) {
-	var selectedTextRange = document.selection.createRange();
-	var preSelectionTextRange = document.body.createTextRange();
-	preSelectionTextRange.moveToElementText(containerEl);
-	preSelectionTextRange.setEndPoint("EndToStart", selectedTextRange);
-	var start = preSelectionTextRange.text.length;
-
-	return {
-	    start: start,
-	    end: start + selectedTextRange.text.length
-	};
-    };
-
-    restoreSelection = function(containerEl, savedSel) {
-	var textRange = document.body.createTextRange();
-	textRange.moveToElementText(containerEl);
-	textRange.collapse(true);
-	textRange.moveEnd("character", savedSel.end);
-	textRange.moveStart("character", savedSel.start);
-	textRange.select();
-    };
-}
-
-/*
-  CodeBox is a Backbone.Controller for any element which contiains code be it a <p>, or <code> or, <div>.
-  It even works with text editors such as <div contenteditable="true">.
-*/
-
-var CodeBox = Backbone.Controller.extend({
-    className: "codebox",
-
-    events: {
-	"keyup": "highlight", // Called after character is inserted into HTML
-	"keydown": "indent" // Called before character is inserted into HTML
-    },
-
-    initialize: function(options) {
-	this.mode = options.mode;
-	this.$el.attr("spellcheck", false); // Disable spellcheck
-    },
-
-    indent: function(e) {
-	if(e.keyCode === 9) { // Checks whether tab was pressed
-	    document.execCommand("indent");
-	    e.preventDefault();
-	}
-    },
-
-    highlight: function(e) {
-	console.log(saveSelection(this.el));
-	if(e && (e.keyCode === 13 || (e.keyCode >= 37 && e.keyCode <= 40) || e.keyCode === 9 || e.keyCode === 8)) {
-	    return; // we don't want highlighting occuring on a return, up, down, left, right, tab, back keypresses
-	}
-	var d = saveSelection(this.el);
-	var clone = this.$el.clone();
-	clone.find("span").contents().unwrap(); // Remove all span tags (http://stackoverflow.com/questions/11442464/jquery-strip-all-specifc-html-tags-from-string);
-	var data = clone.html();
-	["keyword", "string", "parameter", "comment"].forEach((function(token) {
-	    this.mode[token] && this.mode[token].forEach(function(regex) {
-		regex = new RegExp("(" + regex.source + ")" + /(?![^<>]*>)/.source, "g"); // This ensures text inside tags isn't matches
-		data =  data.replace(regex, function(match) {
-		    return "<span class=\"" + token + "\">" + match + "</span>";
-		});
-	    });
-	}).bind(this));
-	this.$el.html(("<div>" + data.replace(/\n/g, "</div><div>").replace(/\t/g + "     ") + "</div>").replace(/<div><\/div>/g, "<div><br></div>"));
-	restoreSelection(this.el, d);
-    },
-
-    val: function(value) {
-	if(!value) {
-	    return this.$el.html().replace(/<\/div>(?!$)/g, "\n").replace(/(<([^>]+)>)/ig,"");
-	} else {
-	    this.$el.html(value);
-	    this.highlight();
-	}
-    }
-
-},
-{
-    Modes: {
-	JavaScript: {
-	    string: [/"([a-zA-Z0-9]|\s|\}|\{|\(|\)|\s)*(")?/g, /'([^\\'\n]|\\.)*/g],
-	    keyword: [/\b(class)/g, /\b(function)/g, /\b(var)/g, /\b(new)/g],
-	    comment: [/\/\/.*$/g]
-	},
-	Python: {},
-	LaTeX: {
-	    string: [/\\[a-zA-Z]+/g],
-	    parameter: [/\\[a-zA-Z]+\{([a-zA-Z]+)\}/g]
-	}
-    }
-});
-
-module.exports = CodeBox;
-
-},{"./backbone":13}]},{},[14])
+},{"backbone":1,"dustjs-helpers":2,"dustjs-linkedin/lib/dust":4,"underscore":11}]},{},[12])

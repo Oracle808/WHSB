@@ -80,6 +80,10 @@ var Subject = mongoose.Schema({
 	date: {
 	    type: Date,
 	    default: Date.now
+	},
+	mode: {
+	    type: String
+	    // E.g. "rich-text-editing", "latex", and perhaps in the future "markdown"
 	}
     }],
     quizzes: [{
