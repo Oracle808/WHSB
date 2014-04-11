@@ -3,9 +3,8 @@ child_process = require("duplex-child-process"),
 mime = require("mime"),
 uu = require("underscore"),
 Grid = require("gridfs-stream"),
-ObjectID  = mongoose.mongo.BSONPure.ObjectID;
-
-var gfs = new Grid(mongoose.connection.db, mongoose.mongo);
+ObjectID  = mongoose.mongo.BSONPure.ObjectID,
+gfs = new Grid(mongoose.connection.db, mongoose.mongo);
 
 mime.define({
     "audio/mp3": ["mp3"]
@@ -16,13 +15,7 @@ var listView = require("./list.dust");
 var Busboy = require("busboy");
 
 module.exports.list = function(req, res) {
-    Subject.findById(req.param("subject"), function(err, doc) {
-	if(err) {
-	    res.error(err);
-	} else {
-	    res.dust(listView, {subject: doc});
-	}
-    });
+    res.dust(listView);
 };
 
 module.exports.post = function(req, res) {
@@ -51,22 +44,23 @@ module.exports.post = function(req, res) {
     });
     busboy.on("finish", function() {
 	if(!name || !id) {
-	    Subject.findById(req.param("subject"), function(err, doc) {
-		if(!name && !id) {
-		    res.dust(listView, {subject:doc, error: "A name and a file must be chosen required"});
-		} else if(!name) {
-		    res.dust(listView, {subject:doc, error: "A name must be chosen"});
-		} else if(!id) {
-		    res.dust(listView, {subject:doc, error: "A file must be chosen"});
-		}
-	    });
+	    if(!name && !id) {
+		res.dust(listView, {error: "A name and a file must be chosen required"});
+	    } else if(!name) {
+		res.dust(listView, {error: "A name must be chosen"});
+	    } else if(!id) {
+		res.dust(listView, {error: "A file must be chosen"});
+	    }
 	} else {
-	    Subject.findByIdAndUpdate(req.param("subject"), {$push: {recordings: {name: name, file: id}}}, function(err, doc) {
+	    req.subject.recordings.push({
+		name: name,
+		file:id
+	    });
+	    req.subject.save(function(err) {
 		if(err) {
-		    res.error(err);
-		} else {
-		    res.dust(listView, {subject:doc});
+		    return res.error(err);
 		}
+		module.exports.list(req, res);
 	    });
 	}
     });
@@ -103,17 +97,15 @@ module.exports.get = function(req, res) {
 };
 
 module.exports.del = function(req, res) {
-    Subject.findById(req.param("subject"), function(err, doc) {
-	var fileId = uu.findWhere(doc.recordings, {id: req.param("recording")}).file;
-	gfs.remove({_id:fileId}, function(err) {
-	    if(err) {
-		res.error(err);
-	    } else {
-		doc.recordings.pull(req.param("recording"));
-		doc.save(function(err) {
-		    res.dust(listView, {subject: doc});
-		});
-	    }
-	});
+    var fileId = uu.findWhere(req.subject.recordings, {id: req.param("recording")}).file;
+    gfs.remove({_id:fileId}, function(err) {
+	if(err) {
+	    res.error(err);
+	} else {
+	    req.subject.recordings.pull(req.param("recording"));
+	    req.subject.save(function(err) {
+		module.exports.list(req, res);
+	    });
+	}
     });
 };

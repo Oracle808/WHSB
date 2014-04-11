@@ -60,6 +60,7 @@ if(Program.createUser) {
 
     var auth = function(req, res, next) {
 	if(req.session.user) {
+	    res.locals.user = req.session.user;
 	    next();
 	} else {
 	    res.redirect("/login?redirect=" + encodeURIComponent(req.path));
@@ -138,9 +139,9 @@ if(Program.createUser) {
     app.post("/subjects/:subject/quizzes/:quiz", auth, Quizzes.submit);
     app.del("/subjects/:subject/quizzes/:quiz", auth, teacher, Quizzes.del);
     // SUBJECT VOCAB QUIZZES
-    app.get("/subjects/:subject/vocab_quizzes", auth, VocabQuizzes.list);
-    app.get("/subjects/:subject/vocab_quizzes/:quiz", auth, VocabQuizzes.get);
-    app.del("/subjects/:subject/vocab_quizzes/:quiz", auth, teacher, VocabQuizzes.del);
+    app.get("/subjects/:subject/vocab_quizzes", auth, loadSubject, VocabQuizzes.list);
+    app.get("/subjects/:subject/vocab_quizzes/:quiz", auth, loadSubject, VocabQuizzes.get);
+    app.del("/subjects/:subject/vocab_quizzes/:quiz", auth, teacher, loadSubject, VocabQuizzes.del);
     // SUBJECT
     app.post("/subjects/:subject/links", auth, teacher, Subjects.links.post);
     app.del("/subjects/:subject/links/:link", auth, Subjects.links.del);
@@ -148,17 +149,17 @@ if(Program.createUser) {
     // SUBJECT
     app.get("/subjects/:subject/settings", auth, teacher, Settings.index);
     // HAND-IN
-    app.get("/subjects/:subject/hand_in", auth, HandIn.index);
-    app.post("/subjects/:subject/hand_in", auth, teacher, HandIn.post);
+    app.get("/subjects/:subject/hand_in", auth, loadSubject, HandIn.index);
+    app.post("/subjects/:subject/hand_in", auth, teacher, loadSubject, HandIn.post);
     app.get("/subjects/:subject/hand_in/:hand_in_slot/files", auth, teacher, HandIn.get);
-    app.post("/subjects/:subject/hand_in/:hand_in_slot/files", auth, HandIn.upload);
+    app.post("/subjects/:subject/hand_in/:hand_in_slot/files", auth, loadSubject, HandIn.upload);
     app.get("/subjects/:subject/hand_in/:hand_in_slot/files/:file", auth, HandIn.download);
     app.del("/subjects/:subject/hand_in/:hand_in_slot", auth, teacher, HandIn.del);
     // RECORDINGS
-    app.get("/subjects/:subject/recordings", auth, Recordings.list);
-    app.post("/subjects/:subject/recordings", auth, teacher, Recordings.post);
+    app.get("/subjects/:subject/recordings", auth, loadSubject, Recordings.list);
+    app.post("/subjects/:subject/recordings", auth, teacher, loadSubject, Recordings.post);
     app.get("/subjects/:subject/recordings/:recording", auth, Recordings.get);
-    app.del("/subjects/:subject/recordings/:recording", auth, Recordings.del);
+    app.del("/subjects/:subject/recordings/:recording", auth, loadSubject, Recordings.del);
     // APPS
     app.get("/apps", auth, Apps.index);
     app.get("/apps/codr", auth, Apps.codr);
