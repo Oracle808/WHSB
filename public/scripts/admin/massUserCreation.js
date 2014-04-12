@@ -1,5 +1,5 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-var dust = require("dustjs-linkedin/lib/dust");module.exports="/Users/Hashan/Dropbox/Sites/Styles53/app/users/row.dust";(function(){dust.register("/Users/Hashan/Dropbox/Sites/Styles53/app/users/row.dust",body_0);function body_0(chk,ctx){return chk.write("<tr><td><input type=\"text\" name=\"username[]\" placeholder=\"Username\" ").exists(ctx._get(false, ["disabled"]),ctx,{"else":body_1,"block":body_2},null).write("/></td><td><input type=\"date\" name=\"dofb[]\" placeholder=\"Date of Birth\" ").exists(ctx._get(false, ["disabled"]),ctx,{"else":body_3,"block":body_4},null).write("/></td><td><button class=\"deleteButton\"><i class=\"fi-x\"></i></button></td></tr>");}function body_1(chk,ctx){return chk.write(" aria-required=\"true\" required ");}function body_2(chk,ctx){return chk.write(" disabled ");}function body_3(chk,ctx){return chk.write(" aria-required=\"true\" required ");}function body_4(chk,ctx){return chk.write(" disabled ");}return body_0;})();
+var dust = require("dustjs-linkedin/lib/dust");module.exports="/Users/Hashan/Dropbox/Sites/Styles53/app/admin/row.dust";(function(){dust.register("/Users/Hashan/Dropbox/Sites/Styles53/app/admin/row.dust",body_0);function body_0(chk,ctx){return chk.write("<tr><td><input type=\"text\" name=\"username[]\" placeholder=\"Username\" ").exists(ctx._get(false, ["disabled"]),ctx,{"else":body_1,"block":body_2},null).write("/></td><td><input type=\"date\" name=\"dofb[]\" placeholder=\"Date of Birth\" ").exists(ctx._get(false, ["disabled"]),ctx,{"else":body_3,"block":body_4},null).write("/></td><td><button class=\"deleteButton\"><i class=\"fi-x\"></i></button></td></tr>");}function body_1(chk,ctx){return chk.write(" aria-required=\"true\" required ");}function body_2(chk,ctx){return chk.write(" disabled ");}function body_3(chk,ctx){return chk.write(" aria-required=\"true\" required ");}function body_4(chk,ctx){return chk.write(" disabled ");}return body_0;})();
 },{"dustjs-linkedin/lib/dust":3}],2:[function(require,module,exports){
 var dustCompiler = (function(dust) {
 
@@ -4286,7 +4286,7 @@ module.exports = function(arr, obj){
 };
 },{}],10:[function(require,module,exports){
 var dust = require("dustjs-linkedin/lib/dust");
-var row = require("../../app/users/row.dust");
+var row = require("../../app/admin/row.dust");
 var users = document.getElementById("users");
 var stubRow = users.querySelector("tr:last-child");
 var parser = new DOMParser();
@@ -4299,4 +4299,4 @@ stubRow.addEventListener("click", function(e) {
     });
 });
 
-},{"../../app/users/row.dust":1,"dustjs-linkedin/lib/dust":3}]},{},[10])
+},{"../../app/admin/row.dust":1,"dustjs-linkedin/lib/dust":3}]},{},[10])

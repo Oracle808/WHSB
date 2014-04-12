@@ -1,5 +1,5 @@
 var dust = require("dustjs-linkedin/lib/dust");
-var row = require("../../app/users/row.dust");
+var row = require("../../app/admin/row.dust");
 var users = document.getElementById("users");
 var stubRow = users.querySelector("tr:last-child");
 var parser = new DOMParser();
