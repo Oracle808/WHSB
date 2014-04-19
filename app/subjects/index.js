@@ -28,14 +28,14 @@ module.exports.nova = function(req, res) {
 module.exports.post = function(req, res) {
     var subject = {
 	subject_name: req.body.subject_name,
-	name: req.body.name, 
+	name: req.body.name,
 	teacher: req.body.teacher
     };
     Subject.create(subject, function(err) {
 	if(err) {
 	    res.error(err);
 	} else {
-	    nova(req, res);
+	    exports.nova(req, res);
 	}
     });
 };
@@ -43,42 +43,36 @@ module.exports.post = function(req, res) {
 module.exports.links = {};
 
 module.exports.links.post = function(req, res) {
-    var update = {
-	$push: {
-	    links: {
-		title: req.body.title,
-		url: req.body.url
-	    }
-	}
-    };
-    Subject.findByIdAndUpdate(req.param("subject"), update, function(err, doc) {
+    req.subject.links.push({
+	title: req.body.title,
+	url: req.body.url
+    });
+    req.subject.save(function(err) {
 	if(err) {
-	    res.error(err);
-	} else {
-	    var blog = doc.blog.reverse();
-	    uu.each(blog, function(article) {
-		article.body = us.prune(article.body, 350);
-	    });
-	    res.dust(blogTemplate, {subject:doc, blog: blog});
+	    return res.error(err);
 	}
+	res.redirect("/subjects/" + req.param("subject") + "/settings");
     });
 };
 
 module.exports.links.del = function(req, res) {
-    Subject.findByIdAndUpdate(req.param("subject"), {$pull: {links: {_id: req.param("link")}}}, function(err, doc) {
+    req.subject.links.pull(req.param("link"));
+    req.subject.save(function(err) {
 	if(err) {
-	    res.error(err);
-	} else {
-	    res.redirect("/subjects/" + req.param("subject"));
+	    return res.error(err);
 	}
+	res.redirect("/subjects/" + req.param("subject") + "/settings");
     });
 };
 
 module.exports.students = {};
 
-module.exports.students.list =  function(req, res) {
-    User.find().where("subjects").in(req.subject._id).exec(function(err, docs) {
-	console.log(docs);
-	res.dust(studentsView, {students: docs});
+module.exports.students.list = function(req, res) {
+    User.find({subjects:{$in:[req.subject._id]}}, function(err, docs) {
+	if(err) {
+	    res.error(err);
+	} else {
+	    res.dust(studentsView, {students: docs});
+	}
     });
 };
