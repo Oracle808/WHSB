@@ -2,41 +2,69 @@
 {<head}
     <title>{subject.name} - Settings</title>
     <link href="/styles/settings/index.css" rel="stylesheet"/>
+    <script src="/scripts/settings.js"></script>
 {/head}
 {<body}
     {>"app/partials/head.dust"/}
     {>"app/partials/nav.dust" active="settings"/}
     <main>
-      <form name="general">
-	<div class="option">
-	  <label>Class Name</label>
-	  <input type="text" value="{subject.name}" aria-required="true" required/>
-	</div>
 
-	<div class="option">
-	  <label>Quizzes</label>
-	  <input name="quizzes" type="checkbox"/>
-	</div>
-
-	<div class="option">
-	  <label>Vocab Quizzes</label>
-	  <input name="vocab_quizzes" type="checkbox"/>
-	</div>
-
-	<div class="option">
-	  <label>Student Resources</label>
-	  <input name="student_resources" type="checkbox"/>
-	</div>
-	
-	<div class="option">
-	  <label>Recordings</label>
-	  <input name="recordings" type="checkbox"/>
-	</div>
-
+      <form method="post">
+	<ul id="general-settings">
+	  <li class="heading">General Settings<button type="submit">Save</button></li>
+	  <li><a>Class Name</a><input name="name" type="text" value="{subject.name}"/></li>
+	  <li>
+	    <a>Quizzes</a>
+	    <input name="quizzes" type="checkbox" {?subject.settings.quizzes}checked{/subject.settings.quizzes}/>
+	  </li>
+	  <li>
+	    <a>Vocabulary Quizzes</a>
+	    <input name="vocab_quizzes" type="checkbox" {?subject.settings.vocab_quizzes}checked{/subject.settings.vocab_quizzes}/>
+	  </li>
+	  <li>
+	    <a>Student Resources</a>
+	    <input name="student_resources" type="checkbox" {?subject.settings.student_resources}checked{/subject.settings.student_resources}/>
+	  </li>
+	  <li>
+	    <a>Recordings</a>
+	    <input name="recordings" type="checkbox" {?subject.settings.recordings}checked{/subject.settings.recordings}/>
+	  </li>
+	</ul>
       </form>
-      <form name="delete">
-	<input type="hidden" name="_method" value="delete"/>
-	<button type="submit">Delete Class</button>
-      </form>
+
+      <ul id="custom-pages">
+	<li class="heading">
+	  Custom Pages
+	  {>"app/partials/add.dust"/}
+	</li>
+	{#subject.pages}
+	  <li>
+	    <a>{title}</a>
+	    {>"app/partials/delete.dust" url="/subjects/{subject._id}/pages/{_id}"/}
+	  </li>
+	{:else}
+	  {>"app/partials/nothing_here.dust"/}
+	{/subject.pages}
+      </ul>
+
+      <ul id="links">
+	<li class="heading">Links
+	  {>"app/partials/add.dust"/}
+	</li>
+	<li id="new-link-form" hidden>
+	  <form action="/subjects/{subject._id}/links" method="post">
+	    Title: <input type="text" name="title" aria-required="true" required/>
+	    Url: <input type="text" name="url" aria-required="true" required/>
+	    <button type="submit">Save</button>
+	  </form>
+	</li>
+	{#subject.links}
+	  <li>
+	    <a href="{url}">{title}</a>
+	    {>"app/partials/delete.dust" src="/subjects/{subject._id}/links/{_id}" class="delete-item"/}
+	  </li>
+	{/subject.links}
+      </ul>
+
     </main>
 {/body}
