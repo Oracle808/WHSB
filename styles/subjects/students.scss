@@ -2,4 +2,9 @@
 
 #students {
     @include mobile-list();
+
+    .unenroll-student {
+	@extend .right;
+	@include button-style($purple);
+    }
 }

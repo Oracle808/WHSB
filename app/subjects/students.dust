@@ -10,7 +10,10 @@
     <ul id="students">
       <li class="heading">Students</li>
       {#students}
-	<li><a>{username}</a></li>
+	<li>
+	  <a>{username}</a>
+	  {>"app/partials/delete.dust" src="/subjects/{subject._id}/students/{_id}" text="Unenroll" class="unenroll-student"/}
+	</li>
       {/students}
     </ul>
   </main>

@@ -68,11 +68,21 @@ module.exports.links.del = function(req, res) {
 module.exports.students = {};
 
 module.exports.students.list = function(req, res) {
-    User.find({subjects:{$in:[req.subject._id]}}, function(err, docs) {
+    User.find({subjects:{$in:[req.subject._id]}, role:"student"}, function(err, docs) {
 	if(err) {
 	    res.error(err);
 	} else {
 	    res.dust(studentsView, {students: docs});
+	}
+    });
+};
+
+module.exports.students.unenroll = function(req, res) {
+    User.findByIdAndUpdate(req.param("student"), {$pull: {subjects: req.subject._id}}, function(err, doc) {
+	if(err) {
+	    res.error(err);
+	} else {
+	    res.redirect("/subjects/" + req.param("subject") + "/students");
 	}
     });
 };
