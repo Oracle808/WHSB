@@ -6,16 +6,6 @@ var RSS = require("rss");
 var uu = require("underscore");
 var us = require("underscore.string");
 
-var query = function(id, select, update, cb) {
-    var desirable = uu.extend({name: true, subject_name: true, vocab_quizzes: true, teacher: true, blog: true, links:true}, select);
-    var query = Subject.findById(id).select(desirable).populate("teacher");
-    if(typeof update === "function") {
-	query.exec(update);
-    } else {
-	query.update(update).exec(cb);
-    }
-};
-
 module.exports.list = function(req, res) {
     var blog = req.subject.blog.reverse(); // We want `blog` in reverse-chronological order
     if(req.session.user.role === "student") {
@@ -46,23 +36,16 @@ module.exports.publish = function(req, res) {
 };
 
 module.exports.get = function(req, res) {
-    query(req.param("subject"), {blog: {$elemMatch: {_id: req.param("post")}}}, function(err, doc) {
-	if(err) {
-	    res.error(err);
-	} else {
-	    var blog = doc.blog.reverse();
-	    res.dust(blogTemplate, {subject:doc, blog: blog});
-	}
-    });
+    res.dust(blogTemplate, {blog: uu.findWhere(req.subject.blog, {id:req.param("post")})});
 };
 
 module.exports.feed = function(req, res) {
     var news = new RSS({
-	title: doc.name,
+	title: req.subject.name,
 	generator: "WHSB Feed Generator",
 	feed_url: req.host + req.path,
 	site: req.host,
-	author: doc.teacher,
+	author: req.subject.teacher.username,
 	webMaster: "Hashan Punchihewa",
 	copyright: "Copyright Westcliff High School for Boys",
 	language: "English",
@@ -71,10 +54,10 @@ module.exports.feed = function(req, res) {
     var blog = req.subject.blog.reverse();
     uu.each(blog, function(article) {
 	news.item({
-	    title: post.title,
-	    description: us.prune(post.body, 350),
-	    guid: post._id,
-	    date: post.date
+	    title: article.title,
+	    description: us.prune(article.body, 350),
+	    guid: article._id,
+	    date: article.date
 	});
     });
     res.rss(news.xml());
@@ -83,7 +66,9 @@ module.exports.feed = function(req, res) {
 module.exports.del = function(req, res) {
     req.subject.blog.pull(req.param("post"));
     req.subject.save(function(err) {
-	if(req.xhr) {
+	if(err) {
+	    res.error(err);
+	} else if(req.xhr) {
 	    res.end();
 	} else {
 	    res.redirect("/subjects/" + req.param("subject"));

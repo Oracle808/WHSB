@@ -1,52 +1,12 @@
- @import "styles/ui/subject.scss";
-
-#action-bar {
-    @extend %bar;
-}
-
-#action-bar a {
-    @extend button;
-}
-
-#action-bar #rss-link {
-    @include button-style($orange);
-    float:right;
-}
+@import "styles/ui/subject.scss";
 
 #new-blog-post {
-    @include content;
     margin-left:0px;
     margin-right:0px;
 }
 
-textarea {
-    resize:vertical;
-    outline:none;
-}
-
-#newPostForm x-richtexteditor {
-    @extend textarea;
-    min-height:200px;
-}
-
-.editor-toolbar ul {
-    @include button-group-container();
-    margin-right:10px;
-    display:inline-block;
-}
-
-.editor-toolbar ul button {
-    @include button(
-	$padding:rem-calc(7),
-	$bg: $secondary-color
-    );
-    @include button-group-style(
-	$radius: true
-    );
-}
-
-.editor-toolbar ul button.active {
-    background-color: darken($secondary-color, 15%);
+#new-blog-post form {
+    @include grid-row();
 }
 
 .draftButton, .publishButton {
@@ -57,18 +17,31 @@ textarea {
     @include button-style($warning);
 }
 
+main > ul {
+    @include mobile-list();
+}
 
-main #newPostForm #buttons {
-    @include grid-column(12, $collapse:true);
+main ul .heading .rss-link {
+    @extend .right;
+    @extend button;
+    @include button-style($purple);    
+    @include button-size($button-tny);
+    margin-right:5px;
 }
 
 article {
-    @include content;
+    @include grid-row();
+    background-color:$foreground;
+    padding:$minor-margin;
+
+    input, input:focus, select, select:focus {
+	background-color:white;
+    }
 }
 
 article .postHeading {
     & {
-	@include grid-column(10, $collapse:true);
+	@include grid-column(12, $collapse:true);
     }
     h2 {
 	margin-bottom:0;
@@ -82,21 +55,9 @@ article .postHeading {
     }
 }
 
-article .postActions {
-    & {
-	@include grid-column(2, $collapse: true);
-	float:right;
-    }
-    a, button {
-	@include button-size($button-tny);
-	@include button-style($foreground);
-	float:right;
-    }
-}
-
 article .postMeta {
     & {
-	@include grid-column(12, $collapse:true);
+	@include grid-column(10, $collapse:true);
     }
     h6 {
 	font-weight:bold;
@@ -107,55 +68,24 @@ article .postMeta {
     }
 }
 
+article .postActions {
+    & {
+	@include grid-column(2, $collapse: true, $float:right);
+    }
+    a, button {
+	@include button-size($button-tny);
+	@include button-style($foreground);
+	float:right;
+    }
+}
+
 article .postExcerpt {
     @include grid-column(12, $collapse:true);
     word-wrap:break-word;
     text-align:justify;
 }
 
-.js.contenteditable {
-    #new-blog-post-text {
-	display:none;
-    }
-}
-
-#views #preview, #views textarea#editor {
-    display:none;
-}
-
-#views #preview.active, #views #editor.active {
-    display:block;
-}
-
-#editor {
-    font-size:17px;
-    min-height:150px;
-}
-
-.editor .editor-toolbar {
-    @include grid-row();
-}
-
-.editor .editor-toolbar .editor-formating {
-    @include grid-column(6, $collapse: true);
-}
-
-.editor select {
-    @include grid-column(3);
-}
-
-.editor select.editor-mode {
-    @extend .right;
-}
-
-.editor .editor-preview {
-    text-align:center;
-    padding-bottom:20px;
-}
-
-ul[role="tablist"] li {
-    float:left;
-    padding-left:5px;
-    padding-right:5px;
-    border:1px solid black;
+textarea {
+    resize:vertical;
+    outline:none;
 }
