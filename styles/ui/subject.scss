@@ -13,6 +13,16 @@ x-slidable, x-richtexteditor, x-snowfall, x-deletable, x-bubble {
     display:none !important;
 }
 
+.side-nav-open {
+    overflow:hidden; 
+}
+
+@media #{$medium-up} {
+    .toggle-side-nav {
+	display:none;
+    }
+}
+
 body {
     @include grid-row();
     width:100%;
@@ -41,48 +51,83 @@ x-snowfall {
 }
 
 nav#intraSubjectNavigation {
+
+    padding-top:$content-margin;
+    padding-bottom:$content-margin;
+
+    &, & ~ main {
+	transition: left 1s;
+    }
+
+    h4, form, ul li {
+	padding-left:$content-margin;
+	padding-right:$content-margin;
+    }
+
+    ul {
+	@include side-nav();
+    }
+
+    ul li:hover {
+	background-color:darken($middleground, 5%);
+    }
+
+    background-color:$middleground;
+
     @media #{$small-only} {
-	@include grid-column(12, $pull:12);
+	@include grid-column(9);
+	ul {
+	    @include side-nav($font-size:1.1rem);
+	}
+	position:absolute;
+	left:-75%;
+	border-right:1px solid black;
+	height:100%;
+	& ~ main {
+	    position:relative;
+	    left:0;
+	}
+	&.active {
+	    left:0;
+	    overflow:auto;
+	    @include grid-column(9);
+	}
+	&.active ~ main {
+	    left:75%;
+	}
+	ul {
+	    li {
+		padding:0.2rem 0.95rem;
+	    }
+	}
     }
     @media #{$medium-up} {
 	& {
 	    @include grid-column(3, $collapse: true);
-	    background-color:$middleground;
+
 	}
 	& ~ main {
 	    @include grid-column(9);
 	}
-	ul {
-	    @include side-nav();
-	}
-	h4 {
-	    padding-top:$content-margin;
-	}
-	h4, form, ul li {
-	    padding-left:$content-margin;
-	    padding-right:$content-margin;
-	}
+
 	ul li {	    
 	    padding-top:$minor-margin;
 	    padding-bottom:$minor-margin;
 	}
-	ul li:hover {
-	    background-color:darken($middleground, 5%);
-	}
+
 	ul li.header {
 	    text-transform:uppercase;
 	}
 	ul li.active > a:first-child:not(.button) {
 	    font-weight:bold;
 	}
-	#numberOfDrafts {
-	    @include label();
-	    vertical-align:bottom;
-	}
+
 	#newLink {
 	    @include button($full-width:true);
 	}
-
+	input {
+	    margin-bottom:0;
+	}
     }
 }
 
@@ -93,27 +138,41 @@ nav#intraSubjectNavigation {
 
 // mobile-list
 @mixin mobile-list($bg: $foreground) {
-    margin-top:$content-margin;
-    margin-left:0;
     list-style-type:none;
     
-    li {
+    > li {
 	@include grid-row();
 	background-color:$bg;
 	border-bottom:1px solid darken($bg, 10%);
 	padding:$minor-margin;
 
-	button, .add-item, .delete-item {
-	    @extend .right;
+	button {
+	    @extend .left;
+	}
+	
+	button, .add-item, .delete-item, .edit-item {
 	    @include button-size($button-tny);
 	}
 
-	.add-item, .delete-item {
+	.add-item, .delete-item, .edit-item {
 	    @extend button;
+	}
+
+	.add-item, .delete-item, .edit-item, button[type="submit"], > input {
+	    @extend .right;
+	    margin-bottom:0;
+	}
+
+	> input[type="text"] {
+	    @include grid-column(4);
 	}
 
 	.delete-item {
 	    @include button-style($warning);
+	}
+
+	.edit-item {
+	    @include button-style($purple);
 	}
     }
 
@@ -125,7 +184,7 @@ nav#intraSubjectNavigation {
 	text-align:center;
     }
 
-    li.heading {
+    li.heading, li.footer {
 	background-color:deepskyblue;
 	font-weight:bold;
     }
@@ -136,6 +195,17 @@ nav#intraSubjectNavigation {
 
     > li:last-child, li.heading {
 	border-bottom:none;
+    }
+
+    margin-left:0;
+
+    @media #{$medium-up} {
+	margin-top:$content-margin;
+    }
+
+    @media #{$small-only} {
+	margin-top:0;
+	margin-bottom:0;
     }
 }
 

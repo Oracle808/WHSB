@@ -5,144 +5,142 @@ var us = require("underscore.string");
 var dateutil = require("dateutil");
 
 // Views
-var listView = require("./index.dust");
+var listView = require("./list.dust");
 var getView = require("./get.dust");
 var novaView = require("./nova.dust");
 var marksView = require("./marks.dust");
 
-var render = function(req, res) {
-    return function(err, doc) {
-	if(err) {
-	    res.error(err);
-	} else if(req.accepts("html")) {
-	    res.dust(listView, {subject: doc, route:"quizzes", quizzes: doc.quizzes, title:"Quizzes"});
-	} else {
-	    res.render(doc);
+exports.list = function(req, res) {
+    res.dust(listView, {route:"quizzes", quizzes: req.subject.quizzes, title: "Quizzes"});
+};
+
+exports.get = function(req, res) {
+    if(req.session.user.role === "student") {
+	var quiz = uu.findWhere(req.subject.quizzes, {id: req.param("quiz")}).toObject();
+	if(quiz.randomise_questions) {
+	    quiz.questions = uu.shuffle(quiz.questions); // Randomise questions
 	}
-    };
-};
-
-module.exports.list = function(req, res) {
-    Subject.findById(req.param("subject")).populate("teacher").exec(render(req, res));
-};
-
-module.exports.get = function(req, res) {
-    var populate = req.session.user.role === "student" ? "teacher" : "teacher quizzes.attempts.user";
-    Subject.findById(req.param("subject")).select({quizzes:{$elemMatch:{_id: req.param("quiz")}}}).populate(populate).exec(function(err, doc) {
-	if(err) {
-	    res.error(err);
-	} else {
-	    if(req.session.user.role !== "student") {
-		if(doc.quizzes[0].attempts.length !== 0) {
-		    var scores = uu.pluck(doc.quizzes[0].attempts, "score");
-		    var best = uu.max(scores);
-		    var average = uu.reduce(scores,  function(a, b) {
-			return (a+b) / 2;
-		    });
-		}
-		res.dust(marksView, {subject:doc, quiz:doc.quizzes[0], best: best, average: average});
-	    } else {
-		var quiz = doc.quizzes[0].toObject();
-		quiz.questions = uu.map(quiz.questions, function(q) {
-		    if(q.opts) {
-			q.opts = uu.shuffle(q.opts);
-		    }
-		    return q;
-		});
-		res.dust(getView, {subject:doc, quiz: quiz});
+	quiz.questions = uu.map(quiz.questions, function(q) {
+	    if(q.opts) {
+		q.opts = uu.shuffle(q.opts);
 	    }
-	}
-    });
+	    return q;
+	});
+	res.dust(getView, {quiz: quiz});
+    } else {
+	req.subject.populate("quizzes.attempts.user", function(err) {
+	    var quiz = uu.findWhere(req.subject.quizzes, {id: req.param("quiz")});
+	    var scores, best, average;
+	    if(err) {
+		return res.error(err);
+	    } else if(quiz.attempts.length !== 0) { // if quiz.attempts is not and empty array
+		scores = uu.pluck(quiz.attempts, "score");
+		best = uu.max(scores);
+		average = uu.reduce(scores,  function(a, b) {
+		    return (a+b) / 2;
+		});
+	    }
+	    res.dust(marksView, {quiz:quiz, best: best, average: average});
+	});
+    }
 };
 
-module.exports.submit = function(req, res) {
-    Subject.findById(req.param("subject")).exec(function(err, doc) {
-	if(err) {
-	    return res.error(err);
-	}
-	var quiz = uu.findWhere(doc.quizzes, {id: req.param("quiz")});
-	console.log(quiz);
-	var attempt = {
-	    user: req.session.user._id,
-	    answers: [],
-	    score:0
-	};
-	req.body.answer.forEach(function(answer, i) {
-	    if(quiz.questions[i].opts && typeof quiz.questions[i].solution === "object") {
-		console.log(uu.intersection(quiz.questions[i].solution, answer));
-		if(uu.intersection(quiz.questions[i].solution, answer).length === quiz.questions[i].solution.length) {
-		    attempt.answers.push(quiz.questions[i]);
-		    attempt.score++;
-		} else {
-		    attempt.answers.push(answer);
-		}
+exports.submit = function(req, res) {
+    var quiz = uu.findWhere(req.subject.quizzes, {id: req.param("quiz")});
+    console.log(quiz);
+    var attempt = {
+	user: req.session.user._id,
+	answers: [],
+	score:0
+    };
+    req.body.answer.forEach(function(answer, i) {
+	if(quiz.questions[i].answer_type === "checkbox") {
+	    if(uu.intersection(quiz.questions[i].answer, answer).length === quiz.questions[i].answer.length) {
+		attempt.answers.push(quiz.questions[i].answer);
 	    } else {
-		if(typeof quiz.questions[i].solution === "number") {
-		    answer = parseInt(answer);
-		}
-		if(quiz.questions[i].solution === answer) {
-		    attempt.score++;
-		}
 		attempt.answers.push(answer);
 	    }
-	});
-	quiz.attempts.push(attempt);
-	doc.save(function(err, doc) {
-	    if(err) {
-		res.error(err);
-	    } else {
-		res.dust(getView, {subject:doc, quiz:quiz, attempt: attempt});
-	    }
-	});
+	} else if(quiz.questions[i].answer_type === "number") {
+	    attempt.answers.push(parseInt(answer));
+	} else if(quiz.questions[i].answer_type === "date") {
+	    attempt.answers.push(dateutil.parse(answer));
+	}
+
+	if(attempt.answers[i] === quiz.questions[i].answer) {
+	    attempt.score++;
+	}
+    });
+    quiz.attempts.push(attempt);
+    req.subject.save(function(err) {
+	if(err) {
+	    res.error(err);
+	} else {
+	    res.dust(getView, {quiz:quiz, attempt: attempt});
+	}
     });
 };
 
-module.exports.nova = function(req, res) {
-    Subject.findById(req.param("subject")).exec(function(err, doc) {
-	res.dust(novaView, {subject:doc});
-    });
+exports.nova = function(req, res) {
+    res.dust(novaView);
 };
 
-module.exports.publish = function(req, res) {
-    console.log(req.body);
+exports.edit = function(req, res) {
+    var quiz = uu.findWhere(req.subject.quizzes, {id:req.param("quiz")});
+    res.dust(novaView, {questions: quiz.questions});
+};
+
+exports.publish = function(req, res) {
     var update = {
 	title:req.body.title,
 	questions: [],
-	attempts: []
+	attempts: [],
+	randomise_questions: req.body.randomise_questions
     };
     for(var i = 0; i < req.body.type.length; i++) {
 	var doc = {
-	    solution: req.body.answer[i],
-	    problem: req.body.question[i]
+	    answer: req.body.answer[i],
+	    content: req.body.question[i],
+	    content_mode: req.body.question_mode[i],
+	    answer_type: req.body.type[i]
 	};
-	if(req.body.type[i] === "text") {
-	    doc.solution = doc.solution.toString();
-	} else if(req.body.type[i] === "number") {
-	    doc.solution = parseInt(doc.solution);
+	if(req.body.type[i] === "number") {
+	    doc.answer = parseInt(doc.answer);
 	} else if(req.body.type[i] === "date") {
-	    doc.solution = dateutil.parse(doc.solution);
+	    doc.answer = dateutil.parse(doc.answer);
 	} else if(req.body.type[i] === "radio") {
-	    doc.opts = doc.solution;
-	    doc.solution = doc.opts[req.body.correct[i]];
+	    doc.opts = doc.answer;
+	    doc.answer = doc.opts[req.body.correct[i]];
 	} else if(req.body.type[i] === "checkbox") {
-	    doc.solution = [];
+	    doc.answer = [];
 	    doc.opts = [];
 	    uu.each(req.body.answer[i], function(answer, index) {
 		if(uu.indexOf(req.body.correct[i], index.toString()) !== -1) {
-		    doc.solution.push(answer);
+		    doc.answer.push(answer);
 		}
 		doc.opts.push(answer);
 	    });
 	}
-	if(req.body.help_text[i]) {
-	    doc.help_text = req.body.help_text[i];
-	}
 	console.log(doc);
 	update.questions.push(doc);
     }
-    Subject.findByIdAndUpdate(req.param("subject"), {$push: {quizzes: update}}, render(req, res));
+    console.log(update);
+    req.subject.quizzes.push(update);
+    req.subject.save(function(err) {
+	if(err) {
+	    res.error(err);
+	} else {
+	    module.exports.list(req, res);
+	}
+    });
 };
 
-module.exports.del = function(req, res) {
-    Subject.findByIdAndUpdate(req.param("subject"), {$pull: {quizzes: {_id: req.param("quiz")}}}, render(req, res));
+exports.del = function(req, res) {
+    req.subject.quizzes.pull(req.param("quiz"));
+    req.subject.save(function(err) {
+	if(err) {
+	    res.error(err);
+	} else {
+	    module.exports.list(req, res);
+	}
+    });
 };

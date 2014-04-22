@@ -13,19 +13,18 @@
   {>"app/partials/nav.dust" active="quizzes"/}
   <main>
     <ol id="quizzes">
-      <li class="heading">{title}<a href="/subjects/{subject._id}/quizzes/nova" class="add-item"><i class="fi-plus"></i></a></li>
+      <li class="heading">
+	{>"app/partials/toggle_side_nav.dust"/}
+	{title}
+	<a href="/subjects/{subject._id}/quizzes/nova" class="add-item"><i class="fi-plus"></i></a></li>
       {#quizzes}
 	<li>
 	  <a href="/subjects/{subject._id}/quizzes/{_id}">{title}</a>
-	  {>"app/partials/delete.dust" url="/subjects/{subject._id}/quizzes/{_id}" class="delete-item"/}
+	  {>"app/partials/delete.dust" src="/subjects/{subject._id}/quizzes/{_id}" class="delete-item"/}
+	  {>"app/partials/edit.dust"/}
 	</li>
       {:else}
-	<li class="nothing">
-	  Nothing here at the moment.
-	  {@ne key=user.role value="student"}
-	    <br/>Why not add something?
-	  {/ne}
-	</li>
+	{>"app/partials/nothing_here.dust"/}
       {/quizzes}
     </ol>
   </main> 

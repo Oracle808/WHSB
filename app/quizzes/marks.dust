@@ -7,36 +7,41 @@
   {>"app/partials/head.dust"/}
   {>"app/partials/nav.dust" active="quizzes"/}
   <main>
-    <div id="datahole">
-      {?quiz.attempts}
-	<h3>{quiz.name}</h3>
-	<section id="stats">
-	  Average Score: {average}
-	  Best Score: {best}
-	</section>
-
-	<div id="heatmap">
-	  <div><div></div>
-	    {#quiz.questions}
-	      <div>{@math key=$idx method="add" operand="1"/}</div>
-	    {/quiz.questions}
-	  </div>
-	  {#quiz.attempts}
+      <ul id="container">
+	<li class="heading">
+	  {>"app/partials/toggle_side_nav.dust"/}
+	  {quiz.title}
+	</li>
+	{?quiz.attempts}
+	<li><b>Average Score:</b> {average}/{quiz.questions.length}</li>
+	<li><b>Best Score:</b> {best}/{quiz.questions.length}</li>
+	<li>	
+	  <div id="heatmap">
 	    <div>
-	      <div>{user.username}</div>
-	      {#answers}
-		{@eq key=. value=quiz.questions[$idx].solution}
-		  <div class="correct"></div>
-		{:else}
-		  <div class="incorrect"></div>
-		{/eq}
-	      {/answers}
+	      <div>Question</div>
+	      {#quiz.questions}
+		<div>{@math key=$idx method="add" operand="1"/}</div>
+	      {/quiz.questions}
 	    </div>
-	  {/quiz.attempts}
-	</div>
-		{:else}
-	Nobody has taken the quiz. Why not encourage participation by using quizzes as a mechanism for homework?
+	    {#quiz.attempts}
+	      <div>
+		<div>{user.username}</div>
+		{#answers}
+		  {@eq key=. value=quiz.questions[$idx].solution}
+		    <div class="correct"></div>
+		  {:else}
+		    <div class="incorrect"></div>
+		  {/eq}
+		{/answers}
+	      </div>
+	    {/quiz.attempts}
+	  </div>
+	</li>
+		  {:else}
+	<li class="nothing_here">
+	  Nobody has taken the quiz. Why not encourage participation by using quizzes as a mechanism for homework?
+	</li>
 	{/quiz.attempts}
-    </div> 
+      </ul>
   </main>
 {/body}

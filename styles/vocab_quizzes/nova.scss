@@ -1,0 +1,10 @@
+@import "styles/ui/subject";
+
+#new-quiz, #questions {
+    @include mobile-list();
+}
+
+#questions > li > input {
+    @include grid-column(6);
+    float:left !important;
+}

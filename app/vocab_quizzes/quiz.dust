@@ -2,28 +2,28 @@
 {<head}
     <title>{quiz.title}</title>
     <link href="/styles/vocab_quizzes/quiz.css" rel="stylesheet"/>
-    <script src="./quiz.js"></script>
+    <script src="/scripts/vocab_quizzes.js"></script>
 {/head}
 {<body}
     {>"app/partials/head.dust"/}
     {>"app/partials/nav.dust" active="vocab_quizzes"/}
     <main>
       {#quiz}
-	<header>
-	  <h1>{title}</h1>
-	</header>
-	<section>
-	  <a class="checkAnswers" cite="#quiz_{$idx}"><i class="fi-check" title="Check"></i></a>
-	  <a cite="#quiz_clear_{$idx}"><i class="fi-refresh" title="Redo"></i></a>
-	</section>
-	<x-clearable id="quiz_clear_{$idx}" readonly formnovalidate>
-	  <x-quiz id="quiz_{$idx}">
-	    {#body}
-	      <label>{question}</label>
-	      <input type="text" required {@first}autofocus{/first} pattern="{#answer}{.}{@sep}|{/sep}{/answer}"/>
-	    {/body}
-	  </x-quiz>
-	</x-clearable>
+	<ul id="quiz">
+	  <li class="heading">
+	    {>"app/partials/toggle_side_nav.dust"/}
+	    {title}
+	    <button class="quiz-correct"><i class="fi-check" title="Check"></i></button>
+	    <button class="quiz-redo"><i class="fi-refresh" title="Redo"></i></button>
+	  <li>
+	    <div>
+	      {#body}
+		<label>{question}</label>
+		<input type="text" {@first}autofocus{/first} data-answer="{#answer}{.}{@sep},{/sep}{/answer}"/>
+	      {/body}
+	    </div>
+	  </li>
+	</ul>
       {/quiz}
     </main>
 {/body}

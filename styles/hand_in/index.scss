@@ -23,4 +23,9 @@ textarea {
     .submitted {
 	@include grid-column(1, $float:right);
     }
+
+    .progress {
+	@include grid-column(4);
+	display:none;
+    }
 }

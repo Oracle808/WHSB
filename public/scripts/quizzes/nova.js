@@ -1,6 +1,8 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-var dust = require("dustjs-linkedin/lib/dust");module.exports="/Users/Hashan/Dropbox/Sites/Styles53/app/quizzes/question.dust";(function(){dust.register("/Users/Hashan/Dropbox/Sites/Styles53/app/quizzes/question.dust",body_0);function body_0(chk,ctx){return chk.write("<input type=\"text\" name=\"question[").reference(ctx._get(false, ["no"]),ctx,"h").write("]\" value=\"").reference(ctx._get(false, ["question"]),ctx,"h").write("\" placeholder=\"Question\" aria-required=\"true\" required/><input type=\"text\" name=\"help_text[").reference(ctx._get(false, ["no"]),ctx,"h").write("]\" value=\"").reference(ctx._get(false, ["helpText"]),ctx,"h").write("\" placeholder=\"Help Text\"/>").helper("select",ctx,{"block":body_1},{"key":ctx._get(false, ["type"])});}function body_1(chk,ctx){return chk.write("<select name=\"type[").reference(ctx._get(false, ["no"]),ctx,"h").write("]\" aria-required=\"true\" required><option value=\"text\" ").helper("eq",ctx,{"block":body_2},{"value":"text"}).write("/>Text</option><option value=\"number\" ").helper("eq",ctx,{"block":body_3},{"value":"number"}).write(">Number</option><option value=\"radio\" ").helper("eq",ctx,{"block":body_4},{"value":"radio"}).write(">Multiple Choice</option><option value=\"checkbox\" ").helper("eq",ctx,{"block":body_5},{"value":"checkbox"}).write(">Checkboxes</option></select>").helper("eq",ctx,{"block":body_6},{"key":ctx._get(false, ["type"]),"value":"text"}).helper("eq",ctx,{"block":body_7},{"key":ctx._get(false, ["type"]),"value":"number"}).helper("eq",ctx,{"block":body_8},{"key":ctx._get(false, ["type"]),"value":"radio"}).helper("eq",ctx,{"block":body_11},{"key":ctx._get(false, ["type"]),"value":"checkbox"}).write("<section class=\"question-actions\">").helper("eq",ctx,{"block":body_14},{"key":ctx._get(false, ["type"]),"value":"radio"}).helper("eq",ctx,{"block":body_15},{"key":ctx._get(false, ["type"]),"value":"checkbox"}).write("<button class=\"delete-item\">Delete</button></section>");}function body_2(chk,ctx){return chk.write("selected");}function body_3(chk,ctx){return chk.write("selected");}function body_4(chk,ctx){return chk.write("selected");}function body_5(chk,ctx){return chk.write("selected");}function body_6(chk,ctx){return chk.write("<input name=\"answer[").reference(ctx._get(false, ["no"]),ctx,"h").write("]\" type=\"text\" value=\"").reference(ctx._get(false, ["answer"]),ctx,"h").write("\" placeholder=\"Answer\" aria-required=\"true\" required/><input name=\"correct[").reference(ctx._get(false, ["no"]),ctx,"h").write("]\" type=\"hidden\" value=\"0\"/>");}function body_7(chk,ctx){return chk.write("<input name=\"answer[").reference(ctx._get(false, ["no"]),ctx,"h").write("]\" type=\"number\" value=\"").reference(ctx._get(false, ["answer"]),ctx,"h").write("\" placeholder=\"Answer\" aria-required=\"true\" required/><input name=\"correct[").reference(ctx._get(false, ["no"]),ctx,"h").write("]\" type=\"hidden\" value=\"0\"/>");}function body_8(chk,ctx){return chk.section(ctx._get(false, ["answer"]),ctx,{"block":body_9},null);}function body_9(chk,ctx){return chk.write("<div class=\"option\"><input name=\"answer[").reference(ctx._get(false, ["no"]),ctx,"h").write("][]\" type=\"text\" value=\"").reference(ctx._get(false, ["name"]),ctx,"h").write("\" placeholder=\"An option\"/><label>Correct Answer?</label><input name=\"correct[").reference(ctx._get(false, ["no"]),ctx,"h").write("]\" type=\"radio\" value=\"").reference(ctx._get(false, ["$idx"]),ctx,"h").write("\" required ").exists(ctx._get(false, ["active"]),ctx,{"block":body_10},null).write("/></div>");}function body_10(chk,ctx){return chk.write("checked=\"checked\"");}function body_11(chk,ctx){return chk.section(ctx._get(false, ["answer"]),ctx,{"block":body_12},null);}function body_12(chk,ctx){return chk.write("<div class=\"option\"><input name=\"answer[").reference(ctx._get(false, ["no"]),ctx,"h").write("][]\" type=\"text\" value=\"").reference(ctx._get(false, ["name"]),ctx,"h").write("\" placeholder=\"An option\"/><label>Correct Answer?</label><input name=\"correct[").reference(ctx._get(false, ["no"]),ctx,"h").write("][]\" type=\"checkbox\" value=\"").reference(ctx._get(false, ["$idx"]),ctx,"h").write("\" ").exists(ctx._get(false, ["active"]),ctx,{"block":body_13},null).write("/></div>");}function body_13(chk,ctx){return chk.write("checked=\"checked\"");}function body_14(chk,ctx){return chk.write("<button class=\"add-option\">Add Option</button>");}function body_15(chk,ctx){return chk.write("<button class=\"add-option\">Add Option</button>");}return body_0;})();
-},{"dustjs-linkedin/lib/dust":5}],2:[function(require,module,exports){
+var dust = require("dustjs-linkedin/lib/dust");module.exports="/Users/Hashan/Dropbox/Sites/Styles53/app/blogs/editor.dust";(function(){dust.register("/Users/Hashan/Dropbox/Sites/Styles53/app/blogs/editor.dust",body_0);function body_0(chk,ctx){return chk.write("<div class=\"editor-toolbar\">").helper("eq",ctx,{"else":body_1,"block":body_2},{"key":ctx._get(false, ["mode"]),"value":"rich-text-editor"}).write("<select class=\"editor-mode\" name=\"").reference(ctx._get(false, ["modeName"]),ctx,"h").write("\"><option value=\"rich-text-editor\" ").helper("eq",ctx,{"block":body_3},{"key":ctx._get(false, ["mode"]),"value":"rich-text-editor"}).write(">Rich Text Editor</option><option value=\"latex\" ").helper("eq",ctx,{"block":body_4},{"key":ctx._get(false, ["mode"]),"value":"latex"}).write(">Latex</option></select></div><div class=\"editor-views\">").helper("eq",ctx,{"else":body_5,"block":body_6},{"key":ctx._get(false, ["mode"]),"value":"rich-text-editor"}).write("</div>");}function body_1(chk,ctx){return chk.write("<ul role=\"tablist\"><li class=\"active\"><a class=\"open-editor\">Editor</a></li><li><a class=\"open-preview\">Preview</a></li></ul>");}function body_2(chk,ctx){return chk.write("<div class=\"editor-formating\"><ul><button value=\"bold\"><i class=\"fi-bold\"></i></button><button value=\"italic\"><i class=\"fi-italic\"></i></button><button value=\"underline\"><i class=\"fi-underline\"></i></button></ul><ul><button value=\"insertOrderedList\"><i class=\"fi-list-number\"></i></button><button value=\"insertUnorderedList\"><i class=\"fi-list-bullet\"></i></button></ul><ul><button value=\"subscript\"><i class=\"fi-subscript\"></i></button><button value=\"superscript\"><i class=\"fi-superscript\"></i></button></ul></div><select class=\"font-control\"><option value=\"Helvetica Neue\" selected>Helvetica Neue</option><option value=\"Arial\">Arial</option><option value=\"Arial Black\">Arial Black</option><option value=\"Comic Sans MS\">Comic Sans MS</option><option value=\"Times New Roman\">Times New Roman</option><option value=\"Tahoma\">Tahoma</option><option value=\"Verdana\">Verdana</option><option value=\"Courier New\">Courier New</option></select>");}function body_3(chk,ctx){return chk.write("selected");}function body_4(chk,ctx){return chk.write("selected");}function body_5(chk,ctx){return chk.write("<div contenteditable=\"true\" class=\"active editor-content\"></div><div class=\"editor-preview\"></div>");}function body_6(chk,ctx){return chk.write("<div contenteditable=\"true\" class=\"editor-rich editor-content\"></div>");}return body_0;})();
+},{"dustjs-linkedin/lib/dust":6}],2:[function(require,module,exports){
+var dust = require("dustjs-linkedin/lib/dust");module.exports="/Users/Hashan/Dropbox/Sites/Styles53/app/quizzes/question.dust";(function(){dust.register("/Users/Hashan/Dropbox/Sites/Styles53/app/quizzes/question.dust",body_0);function body_0(chk,ctx){return chk.write("<textarea name=\"question[").reference(ctx._get(false, ["no"]),ctx,"h").write("]\" class=\"question\" aria-required=\"true\" required>").reference(ctx._get(false, ["question"]),ctx,"h").write("</textarea>").helper("select",ctx,{"block":body_1},{"key":ctx._get(false, ["type"])});}function body_1(chk,ctx){return chk.write("<select name=\"type[").reference(ctx._get(false, ["no"]),ctx,"h").write("]\" aria-required=\"true\" required><option value=\"text\" ").helper("eq",ctx,{"block":body_2},{"value":"text"}).write(">Text</option><option value=\"number\" ").helper("eq",ctx,{"block":body_3},{"value":"number"}).write(">Number</option><option value=\"radio\" ").helper("eq",ctx,{"block":body_4},{"value":"radio"}).write(">Multiple Choice</option><option value=\"checkbox\" ").helper("eq",ctx,{"block":body_5},{"value":"checkbox"}).write(">Checkboxes</option></select>").helper("eq",ctx,{"block":body_6},{"key":ctx._get(false, ["type"]),"value":"text"}).helper("eq",ctx,{"block":body_7},{"key":ctx._get(false, ["type"]),"value":"number"}).helper("eq",ctx,{"block":body_8},{"key":ctx._get(false, ["type"]),"value":"radio"}).helper("eq",ctx,{"block":body_11},{"key":ctx._get(false, ["type"]),"value":"checkbox"}).write("<section class=\"question-actions\">").helper("eq",ctx,{"block":body_14},{"key":ctx._get(false, ["type"]),"value":"radio"}).helper("eq",ctx,{"block":body_15},{"key":ctx._get(false, ["type"]),"value":"checkbox"}).write("<button class=\"delete-item\">Delete</button></section>");}function body_2(chk,ctx){return chk.write("selected");}function body_3(chk,ctx){return chk.write("selected");}function body_4(chk,ctx){return chk.write("selected");}function body_5(chk,ctx){return chk.write("selected");}function body_6(chk,ctx){return chk.write("<input name=\"answer[").reference(ctx._get(false, ["no"]),ctx,"h").write("]\" type=\"text\" value=\"").reference(ctx._get(false, ["answer"]),ctx,"h").write("\" placeholder=\"Answer\" aria-required=\"true\" required/><input name=\"correct[").reference(ctx._get(false, ["no"]),ctx,"h").write("]\" type=\"hidden\" value=\"0\"/>");}function body_7(chk,ctx){return chk.write("<input name=\"answer[").reference(ctx._get(false, ["no"]),ctx,"h").write("]\" type=\"number\" value=\"").reference(ctx._get(false, ["answer"]),ctx,"h").write("\" placeholder=\"Answer\" aria-required=\"true\" required/><input name=\"correct[").reference(ctx._get(false, ["no"]),ctx,"h").write("]\" type=\"hidden\" value=\"0\"/>");}function body_8(chk,ctx){return chk.section(ctx._get(false, ["answer"]),ctx,{"block":body_9},null);}function body_9(chk,ctx){return chk.write("<div class=\"option\"><input name=\"answer[").reference(ctx._get(false, ["no"]),ctx,"h").write("][]\" type=\"text\" value=\"").reference(ctx._get(false, ["name"]),ctx,"h").write("\" placeholder=\"An option\"/><label>Correct Answer?</label><input name=\"correct[").reference(ctx._get(false, ["no"]),ctx,"h").write("]\" type=\"radio\" value=\"").reference(ctx._get(false, ["$idx"]),ctx,"h").write("\" required ").exists(ctx._get(false, ["active"]),ctx,{"block":body_10},null).write("/></div>");}function body_10(chk,ctx){return chk.write("checked=\"checked\"");}function body_11(chk,ctx){return chk.section(ctx._get(false, ["answer"]),ctx,{"block":body_12},null);}function body_12(chk,ctx){return chk.write("<div class=\"option\"><input name=\"answer[").reference(ctx._get(false, ["no"]),ctx,"h").write("][]\" type=\"text\" value=\"").reference(ctx._get(false, ["name"]),ctx,"h").write("\" placeholder=\"An option\"/><label>Correct Answer?</label><input name=\"correct[").reference(ctx._get(false, ["no"]),ctx,"h").write("][]\" type=\"checkbox\" value=\"").reference(ctx._get(false, ["$idx"]),ctx,"h").write("\" ").exists(ctx._get(false, ["active"]),ctx,{"block":body_13},null).write("/></div>");}function body_13(chk,ctx){return chk.write("checked=\"checked\"");}function body_14(chk,ctx){return chk.write("<button class=\"add-option\">Add Option</button>");}function body_15(chk,ctx){return chk.write("<button class=\"add-option\">Add Option</button>");}return body_0;})();
+},{"dustjs-linkedin/lib/dust":6}],3:[function(require,module,exports){
 //     Backbone.js 1.1.2
 
 //     (c) 2010-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -1610,7 +1612,7 @@ var dust = require("dustjs-linkedin/lib/dust");module.exports="/Users/Hashan/Dro
 
 }));
 
-},{"underscore":12}],3:[function(require,module,exports){
+},{"underscore":13}],4:[function(require,module,exports){
 (function(dust){
 
 // Note: all error conditions are logged to console and failed silently
@@ -2108,7 +2110,7 @@ dust.helpers = helpers;
 
 })(typeof exports !== 'undefined' ? module.exports = require('dustjs-linkedin') : dust);
 
-},{"dustjs-linkedin":5}],4:[function(require,module,exports){
+},{"dustjs-linkedin":6}],5:[function(require,module,exports){
 var dustCompiler = (function(dust) {
 
 dust.compile = function(source, name) {
@@ -2477,7 +2479,7 @@ if (typeof exports !== 'undefined') {
   dustCompiler(getGlobal());
 }
 
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 (function (process){
 /*global console */
 var dust = {};
@@ -3306,7 +3308,7 @@ if (typeof exports !== 'undefined') {
 }
 
 }).call(this,require("/Users/Hashan/Dropbox/Sites/Styles53/node_modules/grunt-browserify/node_modules/browserify/node_modules/insert-module-globals/node_modules/process/browser.js"))
-},{"./server":7,"/Users/Hashan/Dropbox/Sites/Styles53/node_modules/grunt-browserify/node_modules/browserify/node_modules/insert-module-globals/node_modules/process/browser.js":8}],6:[function(require,module,exports){
+},{"./server":8,"/Users/Hashan/Dropbox/Sites/Styles53/node_modules/grunt-browserify/node_modules/browserify/node_modules/insert-module-globals/node_modules/process/browser.js":9}],7:[function(require,module,exports){
 (function(dust){
 
 var parser = (function(){
@@ -5935,7 +5937,7 @@ var parser = (function(){
 dust.parse = parser.parse;
 
 })(typeof exports !== 'undefined' ? exports : getGlobal());
-},{}],7:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 (function (process){
 var path = require('path'),
     parser = require('./parser'),
@@ -5958,7 +5960,7 @@ module.exports = function(dust) {
 }
 
 }).call(this,require("/Users/Hashan/Dropbox/Sites/Styles53/node_modules/grunt-browserify/node_modules/browserify/node_modules/insert-module-globals/node_modules/process/browser.js"))
-},{"./compiler":4,"./parser":6,"/Users/Hashan/Dropbox/Sites/Styles53/node_modules/grunt-browserify/node_modules/browserify/node_modules/insert-module-globals/node_modules/process/browser.js":8,"path":9,"vm":10}],8:[function(require,module,exports){
+},{"./compiler":5,"./parser":7,"/Users/Hashan/Dropbox/Sites/Styles53/node_modules/grunt-browserify/node_modules/browserify/node_modules/insert-module-globals/node_modules/process/browser.js":9,"path":10,"vm":11}],9:[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
@@ -6013,7 +6015,7 @@ process.chdir = function (dir) {
     throw new Error('process.chdir is not supported');
 };
 
-},{}],9:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 (function (process){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -6241,7 +6243,7 @@ var substr = 'ab'.substr(-1) === 'b'
 ;
 
 }).call(this,require("/Users/Hashan/Dropbox/Sites/Styles53/node_modules/grunt-browserify/node_modules/browserify/node_modules/insert-module-globals/node_modules/process/browser.js"))
-},{"/Users/Hashan/Dropbox/Sites/Styles53/node_modules/grunt-browserify/node_modules/browserify/node_modules/insert-module-globals/node_modules/process/browser.js":8}],10:[function(require,module,exports){
+},{"/Users/Hashan/Dropbox/Sites/Styles53/node_modules/grunt-browserify/node_modules/browserify/node_modules/insert-module-globals/node_modules/process/browser.js":9}],11:[function(require,module,exports){
 var indexOf = require('indexof');
 
 var Object_keys = function (obj) {
@@ -6381,7 +6383,7 @@ exports.createContext = Script.createContext = function (context) {
     return copy;
 };
 
-},{"indexof":11}],11:[function(require,module,exports){
+},{"indexof":12}],12:[function(require,module,exports){
 
 var indexOf = [].indexOf;
 
@@ -6392,7 +6394,7 @@ module.exports = function(arr, obj){
   }
   return -1;
 };
-},{}],12:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 //     Underscore.js 1.5.2
 //     http://underscorejs.org
 //     (c) 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -7670,12 +7672,341 @@ module.exports = function(arr, obj){
 
 }).call(this);
 
-},{}],13:[function(require,module,exports){
-var uu = require("underscore");
+},{}],14:[function(require,module,exports){
 var dust = require("dustjs-linkedin/lib/dust");
 dust.helper = require("dustjs-helpers");
 var Backbone = require("backbone");
 Backbone.$ = $;
+var uu = require("underscore");
+
+Backbone.Controller = Backbone.View.extend({
+    render: function(options) {
+	if(!options) {
+	    options = {};
+	}
+	if(this.state) {
+	    options = uu.extend(options, this.state.toJSON());
+	}
+	if(this.model) {
+	    options = uu.extend(options, this.model.toJSON());
+	}
+	dust.render(this.template, options, (function(err, html) {
+	    this.$el.html(html);
+	    this.delegateEvents();
+	    if(this.subviews) {
+		this.subviews();
+	    }
+	}).bind(this));
+	return this;
+    },
+
+    find: function(selector) {
+	return this.$el.find(selector);
+    },
+
+    findById: function(id) {
+	return this.find("#" + id);
+    }
+
+},
+{
+    create: function(options) {
+	if(this.prototype.requires === undefined || this.prototype.requires !== false) {
+	    console.log("foux");
+	    var c = new this(options);
+	    console.log(c);
+	    c.$el.addClass(this.prototype.className);
+	    return c;
+	}
+    }
+});
+
+module.exports = Backbone;
+
+},{"backbone":3,"dustjs-helpers":4,"dustjs-linkedin/lib/dust":6,"underscore":13}],15:[function(require,module,exports){
+var Backbone = require("./backbone");
+
+var saveSelection, restoreSelection;
+
+if (window.getSelection && document.createRange) {
+    saveSelection = function(containerEl) {
+	var range = window.getSelection().getRangeAt(0);
+	var preSelectionRange = range.cloneRange();
+	preSelectionRange.selectNodeContents(containerEl);
+	preSelectionRange.setEnd(range.startContainer, range.startOffset);
+	var start = preSelectionRange.toString().length;
+
+	return {
+		start: start,
+		end: start + range.toString().length
+	    };
+    };
+
+    restoreSelection = function(containerEl, savedSel) {
+	var charIndex = 0, range = document.createRange();
+	range.setStart(containerEl, 0);
+	range.collapse(true);
+	var nodeStack = [containerEl], node, foundStart = false, stop = false;
+
+	while (!stop && (node = nodeStack.pop())) {
+		if (node.nodeType == 3) {
+		    var nextCharIndex = charIndex + node.length;
+		    if (!foundStart && savedSel.start >= charIndex && savedSel.start <= nextCharIndex) {
+			    range.setStart(node, savedSel.start - charIndex);
+			    foundStart = true;
+			}
+		    if (foundStart && savedSel.end >= charIndex && savedSel.end <= nextCharIndex) {
+			    range.setEnd(node, savedSel.end - charIndex);
+			    stop = true;
+			}
+		    charIndex = nextCharIndex;
+			} else {
+			    var i = node.childNodes.length;
+			    while (i--) {
+				    nodeStack.push(node.childNodes[i]);
+				}
+				}
+	    }
+
+	var sel = window.getSelection();
+	sel.removeAllRanges();
+	sel.addRange(range);
+    };
+} else if (document.selection) {
+    saveSelection = function(containerEl) {
+	var selectedTextRange = document.selection.createRange();
+	var preSelectionTextRange = document.body.createTextRange();
+	preSelectionTextRange.moveToElementText(containerEl);
+	preSelectionTextRange.setEndPoint("EndToStart", selectedTextRange);
+	var start = preSelectionTextRange.text.length;
+
+	return {
+	    start: start,
+	    end: start + selectedTextRange.text.length
+	};
+    };
+
+    restoreSelection = function(containerEl, savedSel) {
+	var textRange = document.body.createTextRange();
+	textRange.moveToElementText(containerEl);
+	textRange.collapse(true);
+	textRange.moveEnd("character", savedSel.end);
+	textRange.moveStart("character", savedSel.start);
+	textRange.select();
+    };
+}
+
+/*
+  CodeBox is a Backbone.Controller for any element which contiains code be it a <p>, or <code> or, <div>.
+  It even works with text editors such as <div contenteditable="true">.
+*/
+
+var CodeBox = Backbone.Controller.extend({
+    className: "codebox",
+
+    events: {
+	"keyup": "highlight", // Called after character is inserted into HTML
+	"keydown": "indent" // Called before character is inserted into HTML
+    },
+
+    initialize: function(options) {
+	this.mode = options.mode;
+	this.$el.attr("spellcheck", false); // Disable spellcheck
+    },
+
+    indent: function(e) {
+	if(e.keyCode === 9) { // Checks whether tab was pressed
+	    document.execCommand("indent");
+	    e.preventDefault();
+	}
+    },
+
+    highlight: function(e) {
+	console.log(saveSelection(this.el));
+	if(e && (e.keyCode === 13 || (e.keyCode >= 37 && e.keyCode <= 40) || e.keyCode === 9 || e.keyCode === 8)) {
+	    return; // we don't want highlighting occuring on a return, up, down, left, right, tab, back keypresses
+	}
+	var d = saveSelection(this.el);
+	var clone = this.$el.clone();
+	clone.find("span").contents().unwrap(); // Remove all span tags (http://stackoverflow.com/questions/11442464/jquery-strip-all-specifc-html-tags-from-string);
+	var data = clone.html();
+	["keyword", "string", "parameter", "comment"].forEach((function(token) {
+	    this.mode[token] && this.mode[token].forEach(function(regex) {
+		regex = new RegExp("(" + regex.source + ")" + /(?![^<>]*>)/.source, "g"); // This ensures text inside tags isn't matches
+		data =  data.replace(regex, function(match) {
+		    return "<span class=\"" + token + "\">" + match + "</span>";
+		});
+	    });
+	}).bind(this));
+	this.$el.html(("<div>" + data.replace(/\n/g, "</div><div>").replace(/\t/g + "     ") + "</div>").replace(/<div><\/div>/g, "<div><br></div>"));
+	restoreSelection(this.el, d);
+    },
+
+    val: function(value) {
+	if(!value) {
+	    return this.$el.html().replace(/<\/div>(?!$)/g, "\n").replace(/(<([^>]+)>)/ig,"");
+	} else {
+	    this.$el.html(value);
+	    this.highlight();
+	}
+    }
+
+},
+{
+    Modes: {
+	JavaScript: {
+	    string: [/"([a-zA-Z0-9]|\s|\}|\{|\(|\)|\s)*(")?/g, /'([^\\'\n]|\\.)*/g],
+	    keyword: [/\b(class)/g, /\b(function)/g, /\b(var)/g, /\b(new)/g],
+	    comment: [/\/\/.*$/g]
+	},
+	Python: {},
+	LaTeX: {
+	    string: [/\\[a-zA-Z]+/g],
+	    parameter: [/\\[a-zA-Z]+\{([a-zA-Z]+)\}/g]
+	}
+    }
+});
+
+module.exports = CodeBox;
+
+},{"./backbone":14}],16:[function(require,module,exports){
+var Backbone = require("./backbone");
+var CodeBox = require("./codebox");
+
+var getSelectionHtml = function() {
+    var html = "";
+    if (typeof window.getSelection != "undefined") {
+	var sel = window.getSelection();
+	if (sel.rangeCount) {
+	    var container = document.createElement("div");
+	    for (var i = 0, len = sel.rangeCount; i < len; ++i) {
+		container.appendChild(sel.getRangeAt(i).cloneContents());
+	    }
+	    html = container.innerHTML;
+	}
+    } else if (typeof document.selection != "undefined") {
+	if (document.selection.type == "Text") {
+	    html = document.selection.createRange().htmlText;
+	}
+    }
+    return html;
+};
+
+var EditorView = require("../app/blogs/editor.dust");
+
+var EditorState = Backbone.Model.extend({
+    defaults: {
+	mode: "rich-text-editor"
+    }
+});
+
+var EditorController = Backbone.Controller.extend({
+    template: EditorView,
+
+    className: "editor",
+
+    requires: Modernizr.contenteditable,
+
+    events: {
+	"change .editor-mode": "updateMode",
+	"click .editor-toolbar button": "updateFormat",
+	"change select.font-control": "updateFont",
+	"click .editor-rich": "reconfigure",
+	"keydown .editor-rich": "reconfigure",
+	"keyup .editor-content": "transpose",
+	"click .open-editor": "openEditor",
+	"click .open-preview": "openPreview"
+    },
+
+    setControl: function(ctrl) {
+	this.controls = ctrl;
+	this.controls.hide();
+	this.$el.insertBefore(this.controls);
+	this.render();
+	this.$el.find(".editor-content").html(this.controls.val());
+    },
+
+    initialize: function(options) {
+	this.state = new EditorState();
+	this.state.set("modeName", options.modeName);
+	this.listenTo(this.state, "change", this.render);
+	this.setControl(options.controls);
+    },
+
+    updateMode: function(e) {
+	this.state.set("mode", e.target.value);
+	this.trigger("change", "");
+	e.preventDefault();
+    },
+
+    // Controls everything from bold to insertUnorderedList
+    updateFormat: function(e) {
+	var target = $(e.target);
+	document.execCommand(target.val());
+	target.toggleClass("active");
+	e.preventDefault();
+    },
+
+    updateFont: function(e) {
+	document.execCommand("fontName", false, e.target.value);
+    },
+
+    reconfigure: function(e) {
+	["bold", "underline", "italic", "insertOrderedList", "insertUnorderedList"].forEach((function(option) {
+	    if(document.queryCommandState(option)) {
+		this.find("[value=\"" + option + "\"]").addClass("active");
+	    } else {
+		this.find("[value=\"" + option + "\"]").removeClass("active");
+	    }
+	}).bind(this));
+    },
+
+    transpose: function(e) {
+	if(this.controls) {
+	    var editor = this.find(".editor-content");
+	    var val = (this.state.get("mode") === "rich-text-editor" ? editor.html() : this.editor.val());
+	    this.trigger("change", val);
+	    console.log("fsdsdfsdf");
+	}
+    },
+
+    openEditor: function(e) {
+	this.find(".editor-preview").hide();
+	this.find(".editor-content").show();
+	$(e.target).toggleClass("active");
+	$(e.target).siblings().removeClass("active");
+    },
+
+    openPreview: function(e) {
+	$(e.target).toggleClass("active");
+	$(e.target).siblings().removeClass("active");
+	this.find(".editor-content").hide();
+	var editorPreview = this.find(".editor-preview");
+	editorPreview.html($("<script type=\"math/tex\">").html(this.editor.val()));
+	editorPreview.show();
+	MathJax.Hub.Queue(["Typeset", MathJax.Hub, editorPreview.get(0)]);
+    },
+
+    subviews: function(e) {
+	console.log(this.controls.val());
+	this.$el.find(".editor-content").val(this.controls.val());
+	if(this.state.get("mode") === "latex") {
+	    this.editor = CodeBox.create({
+		el: this.find(".editor-content"),
+		mode: CodeBox.Modes.LaTeX
+	    });
+	} else {
+	    this.editor = undefined;
+	}
+    }
+});
+
+module.exports = EditorController;
+
+},{"../app/blogs/editor.dust":1,"./backbone":14,"./codebox":15}],17:[function(require,module,exports){
+var uu = require("underscore");
+var Backbone = require("backbone");
+var Editor = require("../editor");
 
 var QuestionView = require("../../app/quizzes/question.dust");
 
@@ -7705,78 +8036,81 @@ var QuestionState = Backbone.Model.extend({
     }
 });
 
-var QuestionController = Backbone.View.extend({
+var QuestionController = Backbone.Controller.extend({
     tagName: "li",
 
+    template: QuestionView,
+
     initialize: function(options) {
-	this.data = options.data;
-	this.listenTo(this.data, "change:answer change:type change:no", this.render);
+	this.state = options.data;
+	this.listenTo(this.state, "change:answer change:type change:no", this.render);
 	this.render();
+	this.editor = Editor.create({
+	    controls:this.$el.find("textarea"),
+	    modeName: "question_mode[" + this.state.get("no") + "]"
+	});
+	this.listenTo(this.editor, "change", this.questionBind);
     },
 
     events: {
-	"change input[name^=\"question\"]" : "questionBind",
 	"change input[name^=\"help_text\"]": "helpTextBind",
 	"change select[name^=\"type\"]": "typeBind",
 	"click .add-option": "addOption",
 	"click .delete-item": "remove"
     },
 
-    render: function() {
-	console.log(this.data.toJSON());
-	dust.render(QuestionView, this.data.toJSON(), (function(err, html) {
-	    this.el.innerHTML = html;
-	    if(this.data.type !== "select" || this.data.type !== "checkbox") {
-		uu.each(this.el.querySelectorAll("input[name^=\"answer\"]"), (function(el, i) {
-		    el.addEventListener("change", (function(e) {
-			this.data.get("answer").at(i).set("name", e.target.value);
-		    }).bind(this));
+    subviews: function() {
+	if(this.editor) {
+	    this.editor.setControl(this.$el.find("textarea"));
+	    console.log("fsddsf");
+	}
+	if(this.state.type !== "select" || this.state.type !== "checkbox") {
+	    uu.each(this.el.querySelectorAll("input[name^=\"answer\"]"), (function(el, i) {
+		el.addEventListener("change", (function(e) {
+		    this.state.get("answer").at(i).set("name", e.target.value);
 		}).bind(this));
+	    }).bind(this));
 
-		uu.each(this.el.querySelectorAll("input[name^=\"correct\"]"), (function(el, i) {
-		    el.addEventListener("click", (function(e) {
-			if(this.data.get("type") === "radio" && el.selected) {
-			    this.data.get("answer").each(function(option, index) {
-				console.log(i);
-				console.log(index);
-				option.active = (i === index);
-			    });
-			} else if(el.checked) {
-			    this.data.get("answer").at(i).set("active", true);
-			}
-		    }).bind(this));
+	    uu.each(this.el.querySelectorAll("input[name^=\"correct\"]"), (function(el, i) {
+		el.addEventListener("click", (function(e) {
+		    if(this.state.get("type") === "radio" && el.selected) {
+			this.state.get("answer").each(function(option, index) {
+			    console.log(i);
+			    console.log(index);
+			    option.active = (i === index);
+			});
+		    } else if(el.checked) {
+			this.state.get("answer").at(i).set("active", true);
+		    }
 		}).bind(this));
-	    } else {
-		this.el.querySelector("input[name^=\"answer\"]").addEventListener("change", (function(e) {
-		    this.data.set("answer", e.target.value);
-		}).bind(this));
-	    }
-	}).bind(this));
-    },
-
-    questionBind: function(e) {
-	this.data.set("question", e.target.value);
-    },
-
-    helpTextBind: function(e) {
-	this.data.set("helpText", e.target.value);
-    },
-
-    typeBind: function(e) {
-	if(e.target.value === "radio" || e.target.value === "checkbox") {
-	    this.data.set({"type": e.target.value});
+	    }).bind(this));
 	} else {
-	    this.data.unset("answer", {silent: true});
-	    this.data.set({"type": e.target.value});
+	    this.el.querySelector("input[name^=\"answer\"]").addEventListener("change", (function(e) {
+		this.state.set("answer", e.target.value);
+	    }).bind(this));
 	}
     },
 
+    questionBind: function(val) {
+	console.log(val);
+	this.state.set("question", val);
+    },
+
+/*    helpTextBind: function(e) {
+	this.state.set("helpText", e.target.value);
+    },*/
+
+    typeBind: function(e) {
+	this.state.unset("answer", {silent: true});
+	this.state.set({"type": e.target.value});
+    },
+
     addOption: function() {
-	this.data.get("answer").add({name:"", active:false});
+	this.state.get("answer").add({name:"", active:false});
     },
 
     remove: function() {
-	this.data.destroy();
+	this.state.destroy();
 	this.trigger("remove");
 	Backbone.View.prototype.remove.apply(this);
     }
@@ -7816,8 +8150,7 @@ var MainController = Backbone.View.extend({
 });
 
 $(document).ready(function() {
-    console.log($);
     new MainController({el: $("main")});
 });
 
-},{"../../app/quizzes/question.dust":1,"backbone":2,"dustjs-helpers":3,"dustjs-linkedin/lib/dust":5,"underscore":12}]},{},[13])
+},{"../../app/quizzes/question.dust":2,"../editor":16,"backbone":3,"underscore":13}]},{},[17])

@@ -23,8 +23,13 @@
 	      <li class="question">
 		<div>
 		  <p class="problem">
-		    <b>{problem}</b><br/>
-		    {help_text}
+		    <b>
+		      {@eq key=content_mode value="latex"}
+			<script type="math/tex">{content}</script>
+		      {:else}
+			{content}
+		      {/eq}
+		    </b>
 		  </p>
 		  {@eq key=answer_type value="text"}
 		    <input name="answer[{$idx}]" type="text" {?attempt} value="{attempt.answers[$idx]}" disabled {/attempt} aria-required="true" required/>

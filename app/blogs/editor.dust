@@ -27,20 +27,20 @@
     </select>
   {:else}
     <ul role="tablist">
-      <li class="active"><a aria-controls="editor">Editor</a></li>
-      <li class="active"><a aria-controls="preview">Preview</a></li>
+      <li class="active"><a class="open-editor">Editor</a></li>
+      <li><a class="open-preview">Preview</a></li>
     </ul>
   {/eq}
-  <select class="editor-mode" name="mode">
+  <select class="editor-mode" name="{modeName}">
     <option value="rich-text-editor" {@eq key=mode value="rich-text-editor"}selected{/eq}>Rich Text Editor</option>
     <option value="latex" {@eq key=mode value="latex"}selected{/eq}>Latex</option>
   </select>
 </div>
-<div id="views">
+<div class="editor-views">
   {@eq key=mode value="rich-text-editor"}
-    <div id="editor" contenteditable="true" class="editor-rich"></div>
+    <div contenteditable="true" class="editor-rich editor-content"></div>
   {:else}
-    <div id="editor" contenteditable="true" class="active"></div>
-    <div class="editor-preview" id="preview"></div>
+    <div contenteditable="true" class="active editor-content"></div>
+    <div class="editor-preview"></div>
   {/eq}
 </div>

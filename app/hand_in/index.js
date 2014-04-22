@@ -1,33 +1,32 @@
-var mongoose = require("mongoose");
-var gfs = require("../../models/gfs");
-var Busboy = require("busboy");
-var Subject = mongoose.model("Subject");
-var listView = require("./list.dust");
-var detailView = require("./detail.dust");
-var uu = require("underscore");
-var async = require("async");
+var Busboy = require("busboy"),
+listView = require("./list.dust"),
+detailView = require("./detail.dust"),
+mongoose = require("mongoose"),
+uu = require("underscore"),
+async = require("async"),
+ObjectID = mongoose.mongo.BSONPure.ObjectID,
+gfs = require("../../models/gfs");
 
-module.exports.index = function(req, res) {
-    Subject.findById(req.param("subject")).exec(function(err, doc) {
+exports.index = function(req, res) {
+    res.dust(listView);
+};
+
+exports.post = function(req, res) {
+    req.subject.hand_in.push({
+	name: req.body.name,
+	files: []
+    });
+    req.subject.save(function(err) {
 	if(err) {
 	    res.error(err);
 	} else {
-	    res.dust(listView, {subject: doc});
+	    module.exports.index(req, res);
 	}
     });
 };
 
-module.exports.post = function(req, res) {
-    Subject.findByIdAndUpdate(req.param("subject"), {$push: {hand_in: {name: req.body.name, files: []}}}, function(err, doc) {
-	if(err) {
-	    res.error(err);
-	} else {
-	    res.dust(listView, {subject: doc});
-	}
-    });
-};
-
-module.exports.upload = function(req, res) {
+exports.upload = function(req, res) {
+    console.log("upload start");
     var busboy = new Busboy({
 	headers: req.headers,
 	limits: {
@@ -35,85 +34,92 @@ module.exports.upload = function(req, res) {
 	    fileSize: 1024 * 1024 * 5
 	}
     });
-    Subject.findById(req.param("subject"), function(err, doc) {
-	if(err) {
-	    res.error(err);
-	} else {
-	    var previousFile;
-	    var handInSlot;
-	    for(var i = 0; i < doc.hand_in.length; i++) {
-		if(doc.hand_in[i]._id.equals(req.param("hand_in_slot"))) {
-		    handInSlot = doc.hand_in[i];
-		}
-	    }
-	    if(!handInSlot) {
-		res.error("An attempt was made to upload a file to a hand in slot which is non-existant");
-	    } else {
-		for(i = 0; i < handInSlot.files.length; i++) {
-		    if(handInSlot.files[i].user.equals(req.session.user._id)) {
-			previousFile = handInSlot.files[i]._id;
-		    }
-		}
-		var fileRefs = [];
-		busboy.on("file", function(fieldname, file, filename, encoding, mime) {
-		    var store = gfs.createWriteStream(filename, {
-			content_type: mime
-		    });
-		    store.on("id", fileRefs.push);
-		    file.pipe(store);
-		});
-		busboy.on("end", function() {
-		    if(previousFile) {
-			handInSlot.files.pull(previousFile);
-		    }
+    console.log("busboy set up");
+    var previousFile;
+    var handInSlot = uu.findWhere(req.subject.hand_in, {id: req.param("hand_in_slot")});
+    console.log(handInSlot);
+
+    if(!handInSlot) {
+	console.log("no hand_in_slot");
+	return res.error("An attempt was made to upload a file to a hand in slot which is non-existant");
+    }
+    for(var i = 0; i < handInSlot.files.length; i++) {
+	if(handInSlot.files[i].user.equals(req.session.user._id)) {
+	    previousFile = handInSlot.files[i]._id;
+	}
+    }
+    var fileRefs = [];
+    busboy.on("file", function(fieldname, file, filename, encoding, mimetype) {
+	fileRefs.push(new ObjectID());
+	console.log(fileRefs[0]);
+	var store = gfs.createWriteStream({
+	    filename: filename,
+	    content_type: mimetype,
+	    _id: fileRefs[0],
+	    mode:"w"
+	});
+	file.pipe(store);
+	console.log("begun uploading to database");
+    });
+    busboy.on("finish", function() {
+	console.log("at end");
+	if(previousFile) {
+	    gfs.remove({_id: previousFile.file}, function(err) {
+		if(err) {
+		    res.error(err);
+		    handInSlot.files.pull(previousFile);
 		    handInSlot.files.push({user: req.session.user._id, file: fileRefs[0]});
-		    doc.save(function(err, doc) {
+		    req.subject.save(function(err, doc) {
 			if(err) {
 			    res.error(err);
 			} else {
 			    res.end();
 			}
 		    });
-		});
-		req.pipe(busboy);
-	    }
+		}
+	    });
+	} else {
+	    handInSlot.files.push({user: req.session.user._id, file: fileRefs[0]});
+	    req.subject.save(function(err, doc) {
+		if(err) {
+		    res.error(err);
+		} else {
+		    res.end();
+		}
+	    });
 	}
     });
+    req.pipe(busboy);
 };
 
-module.exports.get = function(req, res) {
-    Subject.findById(req.param("subject")).select({hand_in: { $elemMatch: {_id: req.param("hand_in_slot")}}}).populate("hand_in.files.user").exec(function(err, docs) {
-	res.dust(detailView, {subject: docs, hand_in_slot: docs.hand_in[0]});
+exports.get = function(req, res) {
+    req.subject.populate("hand_in.user", function(err, doc) {
+	res.dust(detailView, {hand_in_slot: uu.findWhere(doc.hand_in, {id: req.param("hand_in_slot")})});
     });
 };
 
-module.exports.download = function(req, res) {
+exports.download = function(req, res) {
     var store = gfs.createReadStream(req.param("file"));
     store.on("filename", res.attachment);
     store.pipe(res);
 };
 
-module.exports.del = function(req, res) {
-    Subject.findById(req.param("subject")).exec(function(err, doc) {
+exports.del = function(req, res) {
+    var hand_in_slot = uu.findWhere(req.subject.hand_in, {id: req.param("hand_in_slot")});
+    if(!hand_in_slot) {
+	return res.error("Hand in slot doesn't exist");
+    }
+    async.each(uu.pluck(hand_in_slot.files, "file"), gfs.unlink, function(err) {
 	if(err) {
 	    return res.error(err);
 	}
-	var hand_in_slot = uu.findWhere(doc.hand_in, {id: req.param("hand_in_slot")});
-	if(!hand_in_slot) {
-	    return res.error("Hand in slot doesn't exist");
-	}
-	async.each(uu.pluck(hand_in_slot.files, "file"), gfs.unlink, function(err) {
+	req.subject.hand_in.pull(hand_in_slot);
+	req.subject.save(function(err) {
 	    if(err) {
-		return res.error(err);
+		res.error(err);
+	    } else {
+		res.dust(listView);
 	    }
-	    doc.hand_in.pull(hand_in_slot);
-	    doc.save(function(err) {
-		if(err) {
-		    res.error(err);
-		} else {
-		    res.dust(listView, {subject:doc});
-		}
-	    });
 	});
     });
 };

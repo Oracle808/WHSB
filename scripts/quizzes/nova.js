@@ -1,8 +1,6 @@
 var uu = require("underscore");
-var dust = require("dustjs-linkedin/lib/dust");
-dust.helper = require("dustjs-helpers");
 var Backbone = require("backbone");
-Backbone.$ = $;
+var Editor = require("../editor");
 
 var QuestionView = require("../../app/quizzes/question.dust");
 
@@ -32,78 +30,81 @@ var QuestionState = Backbone.Model.extend({
     }
 });
 
-var QuestionController = Backbone.View.extend({
+var QuestionController = Backbone.Controller.extend({
     tagName: "li",
 
+    template: QuestionView,
+
     initialize: function(options) {
-	this.data = options.data;
-	this.listenTo(this.data, "change:answer change:type change:no", this.render);
+	this.state = options.data;
+	this.listenTo(this.state, "change:answer change:type change:no", this.render);
 	this.render();
+	this.editor = Editor.create({
+	    controls:this.$el.find("textarea"),
+	    modeName: "question_mode[" + this.state.get("no") + "]"
+	});
+	this.listenTo(this.editor, "change", this.questionBind);
     },
 
     events: {
-	"change input[name^=\"question\"]" : "questionBind",
 	"change input[name^=\"help_text\"]": "helpTextBind",
 	"change select[name^=\"type\"]": "typeBind",
 	"click .add-option": "addOption",
 	"click .delete-item": "remove"
     },
 
-    render: function() {
-	console.log(this.data.toJSON());
-	dust.render(QuestionView, this.data.toJSON(), (function(err, html) {
-	    this.el.innerHTML = html;
-	    if(this.data.type !== "select" || this.data.type !== "checkbox") {
-		uu.each(this.el.querySelectorAll("input[name^=\"answer\"]"), (function(el, i) {
-		    el.addEventListener("change", (function(e) {
-			this.data.get("answer").at(i).set("name", e.target.value);
-		    }).bind(this));
+    subviews: function() {
+	if(this.editor) {
+	    this.editor.setControl(this.$el.find("textarea"));
+	    console.log("fsddsf");
+	}
+	if(this.state.type !== "select" || this.state.type !== "checkbox") {
+	    uu.each(this.el.querySelectorAll("input[name^=\"answer\"]"), (function(el, i) {
+		el.addEventListener("change", (function(e) {
+		    this.state.get("answer").at(i).set("name", e.target.value);
 		}).bind(this));
+	    }).bind(this));
 
-		uu.each(this.el.querySelectorAll("input[name^=\"correct\"]"), (function(el, i) {
-		    el.addEventListener("click", (function(e) {
-			if(this.data.get("type") === "radio" && el.selected) {
-			    this.data.get("answer").each(function(option, index) {
-				console.log(i);
-				console.log(index);
-				option.active = (i === index);
-			    });
-			} else if(el.checked) {
-			    this.data.get("answer").at(i).set("active", true);
-			}
-		    }).bind(this));
+	    uu.each(this.el.querySelectorAll("input[name^=\"correct\"]"), (function(el, i) {
+		el.addEventListener("click", (function(e) {
+		    if(this.state.get("type") === "radio" && el.selected) {
+			this.state.get("answer").each(function(option, index) {
+			    console.log(i);
+			    console.log(index);
+			    option.active = (i === index);
+			});
+		    } else if(el.checked) {
+			this.state.get("answer").at(i).set("active", true);
+		    }
 		}).bind(this));
-	    } else {
-		this.el.querySelector("input[name^=\"answer\"]").addEventListener("change", (function(e) {
-		    this.data.set("answer", e.target.value);
-		}).bind(this));
-	    }
-	}).bind(this));
-    },
-
-    questionBind: function(e) {
-	this.data.set("question", e.target.value);
-    },
-
-    helpTextBind: function(e) {
-	this.data.set("helpText", e.target.value);
-    },
-
-    typeBind: function(e) {
-	if(e.target.value === "radio" || e.target.value === "checkbox") {
-	    this.data.set({"type": e.target.value});
+	    }).bind(this));
 	} else {
-	    this.data.unset("answer", {silent: true});
-	    this.data.set({"type": e.target.value});
+	    this.el.querySelector("input[name^=\"answer\"]").addEventListener("change", (function(e) {
+		this.state.set("answer", e.target.value);
+	    }).bind(this));
 	}
     },
 
+    questionBind: function(val) {
+	console.log(val);
+	this.state.set("question", val);
+    },
+
+/*    helpTextBind: function(e) {
+	this.state.set("helpText", e.target.value);
+    },*/
+
+    typeBind: function(e) {
+	this.state.unset("answer", {silent: true});
+	this.state.set({"type": e.target.value});
+    },
+
     addOption: function() {
-	this.data.get("answer").add({name:"", active:false});
+	this.state.get("answer").add({name:"", active:false});
     },
 
     remove: function() {
-	this.data.destroy();
+	this.state.destroy();
 	this.trigger("remove");
 	Backbone.View.prototype.remove.apply(this);
     }
@@ -143,6 +144,5 @@ var MainController = Backbone.View.extend({
 });
 
 $(document).ready(function() {
-    console.log($);
     new MainController({el: $("main")});
 });

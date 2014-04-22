@@ -1,37 +1,5 @@
 @import "styles/ui/subject.scss";
 
-#form-header {
-    @include grid-row($behavior:nest-collapse);
-    background-color:$foreground;
-    padding:$minor-margin;
-}
-
-#quiz-title {
-    @extend .columns;
-    @extend .small-12;
-    @extend .medium-8;
-    @extend .large-8;
-}
-
-#quiz-actions {
-    @extend .columns;
-    @extend .small-12;
-    @extend .medium-4;
-    @extend .large-4;
-}
-
-#quiz-actions {
-    @include button-group-container();
-}
-
-#quiz-actions > li {
-    @include button-group-style();
-}
-
-#quiz-actions > li > button {
-    @include button-size($button-sml);
-}
-
 #questions {
     list-style-type:none;
     margin-left:0;
@@ -74,4 +42,12 @@
 .question-actions .delete-item {
     @include button-style($warning);
     @extend .right;
+}
+
+#general-settings {
+    @include mobile-list();
+    
+    li.heading .add-item {
+	margin-right:5px;
+    }
 }

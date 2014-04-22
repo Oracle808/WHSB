@@ -1,19 +1,19 @@
 <header class="fixed">
- <nav class="top-bar" data-topbar>
+ <nav class="top-bar" id="centralNavigation">
   <div class="row"> 
   <ul class="title-area">
     <li class="name">
       <h1><a href="#">WHSB</a></h1>
     </li>
-    <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+    <li class="toggle-topbar menu-icon mobile-toggle-central-nav"><a href="#">Menu</a></li>
   </ul>
 
   <section class="top-bar-section">
     <!-- Right Nav Section -->
     <ul class="right">
       <li class="has-dropdown">
-        <a href="#userOptions">{user.username} <span class="label round">{user.role|c}</span></a>
-        <ul class="dropdown" id="userOptions">
+        <a aria-controls="dropdown">{user.username} <span class="label round">{user.role|c}</span></a>
+        <ul id="dropdown" class="dropdown">
 	  {@eq key=user.role value="admin"}
 	    <li><a href="/subjects/nova">Create a New Subject</a></li>
             <li><a href="/users">Manages Users</a></li>

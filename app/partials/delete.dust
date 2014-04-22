@@ -1,4 +1,4 @@
-<form action="{url}" method="post">
+<form action="{src}" method="post">
   <input type="hidden" name="_method" value="delete"/>
-  <button type="submit" {?class}class="{class}"{/class}><i class="fi-x"></i></button>
+  <button type="submit" {?class}class="{class}"{/class}>{?text}{text}{:else}<i class="fi-x"></i>{/text}</button>
 </form>

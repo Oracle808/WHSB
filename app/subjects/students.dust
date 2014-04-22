@@ -2,13 +2,23 @@
 {<head}
   <title>Students</title>
   <link href="/styles/subjects/students.css" rel="stylesheet"/>
+  <script src="/components/typeahead.js/dist/typeahead.jquery.min.js"></script>
+  <script src="/scripts/students.js"></script>
 {/head}
 {<body}
   {>"app/partials/head.dust"/}
   {>"app/partials/nav.dust" active="students"/}
   <main>
     <ul id="students">
-      <li class="heading">Students</li>
+      <li class="heading">
+	{>"app/partials/toggle_side_nav.dust"/}
+	Students
+	{>"app/partials/add.dust"/}
+      </li>
+      <li id="add-student" hidden>
+	<input type="text" name="username" id="add-student-username" aria-required="true" required/>
+	<button type="submit">Save</button>
+      </li>
       {#students}
 	<li>
 	  <a>{username}</a>

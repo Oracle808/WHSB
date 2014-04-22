@@ -1,0 +1,3 @@
+<a class="add-item" {?src}href="{src}"{/src}>
+  <i class="fi-plus"></i>
+</a>

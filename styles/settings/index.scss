@@ -1,29 +1,9 @@
 @import "styles/ui/subject.scss";
 
-form[name="general"], form[name="delete"] {
-    @include grid-row();
-    background-color:$foreground;
-    margin-top:$content-margin;
+#general-settings, #standard-pages, #custom-pages, #links {
+    @include mobile-list();
 }
 
-form[name="general"] {
-    padding:$content-margin;
-}
-
-.option {
-    @include grid-row();
-}
-
-.option label, .option input {
-    @include grid-column(6, $collapse:true);
-}
-    
-.option label {
-    @extend .inline;
-}
-
-form[name="delete"] button {
-    @include button-size($button-lrg);
-    @include button-style($warning);
-    @include grid-column(12);
+#settings button {
+    @extend .right;
 }

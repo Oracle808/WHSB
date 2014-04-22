@@ -2,4 +2,8 @@
 
 #quizzes {
     @include mobile-list();
+
+    .edit-item {
+	margin-right:5px !important;
+    }
 }

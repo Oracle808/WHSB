@@ -11,7 +11,11 @@
 
       <form method="post">
 	<ul id="general-settings">
-	  <li class="heading">General Settings<button type="submit">Save</button></li>
+	  <li class="heading">
+	    {>"app/partials/toggle_side_nav.dust"/}
+	    General Settings
+	    <button type="submit">Save</button>
+	  </li>
 	  <li><a>Class Name</a><input name="name" type="text" value="{subject.name}"/></li>
 	  <li>
 	    <a>Quizzes</a>

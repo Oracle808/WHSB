@@ -2,46 +2,49 @@
 {<head}
   <title>Hand-in</title>
   <link href="/styles/hand_in/index.css" rel="stylesheet"/>
+  <script src="/scripts/hand_in.js"></script>
 {/head}
 {<body}
   {>"app/partials/head.dust"/}
   {>"app/partials/nav.dust" active="hand_in"/}
   <main>
     <ul id="hand_in_slots">
-      <li class="heading">Hand-in<a cite="#newSlotForm" class="add-item"><i class="fi-plus"></i></a></li>
+      <li class="heading">
+	{>"app/partials/toggle_side_nav.dust"/}
+	Hand-in
+	<a class="add-item"><i class="fi-plus"></i></a></li>
       {@ne key=user.role value="student"}
-	<x-slidable id="newSlotForm" hidden>
-	  <li>
-	    <form method="post">
-	      <input type="text" name="name" placeholder="Title" aria-required="true" required/>
-	      <button type="submit" class="publishButton">Submit</button>
-	    </form>
-	  </li>
-	</x-slidable>
+	<li id="newSlotForm" hidden>
+	  <form method="post">
+	    <input type="text" name="name" placeholder="Title" aria-required="true" required/>
+	    <button type="submit" class="publishButton">Submit</button>
+	  </form>
+	</li>
       {/ne}
       {#subject.hand_in}
 	<li>
 	  <a href="/subjects/{subject._id}/hand_in/{_id}/files">{name}</a>
 	  {@eq key=user.role value="student"}
 	    {@pluck key=files value="user"}
-	      {@stringify}		
+	      {@stringify}	
+		<div class="progress">
+		  <span class="meter"></span>
+		</div>	
+		<button value="/subjects/{subject._id}/hand_in/{_id}/files" class="submit-file">
 		{@lacks value=user._id}
-		  <x-destroy id="destroy{$idx}">
-		    <x-opendialog id="handInSlot{$idx}" action="/subjects/{subject._id}/hand_in/{_id}/files" cite="destroy{$idx}">
-		      <button class="uploadButton" cite="#handInSlot{$idx}">
-			Submit		    
-		      </button>
-		    </x-opendialog>
-		  </x-destroy>
+		  Submit
+		{:else}
+		  Resubmit
 		{/lacks}
+		</button>
 	      {/stringify}
 	    {/pluck}
 	    <span class="submitted"><i class="fi-check"></i></span>
 		{:else}
-	    {>"app/partials/delete.dust" url="/subjects/{subject._id}/hand_in/{_id}" class="delete-item"/}
+	    {>"app/partials/delete.dust" src="/subjects/{subject._id}/hand_in/{_id}" class="delete-item"/}
 	  {/eq}
 	</li> 
-		    {/subject.hand_in}
+		{/subject.hand_in}
     </ul>
   </main>
 {/body}

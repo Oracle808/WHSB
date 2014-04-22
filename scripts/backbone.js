@@ -39,6 +39,7 @@ Backbone.Controller = Backbone.View.extend({
 	if(this.prototype.requires === undefined || this.prototype.requires !== false) {
 	    console.log("foux");
 	    var c = new this(options);
+	    console.log(c);
 	    c.$el.addClass(this.prototype.className);
 	    return c;
 	}

@@ -4,6 +4,7 @@
 main {
     padding:$content-margin;
     background-color:$middleground;
+    height:100%;
 }
 
 #code {
@@ -50,4 +51,33 @@ button#saveFile {
 button#documentation {
     @include button-style($info);
     @extend .right;
+}
+
+/* For Flip Effect */
+.flip-container {
+    -webkit-perspective:1000;
+}
+
+.flip-container.flipped .flipper {
+      -webkit-transform: rotateY(-180deg);
+}
+
+.flipper {
+    -webkit-transition: 0.6s;
+    -webkit-transform-style: preserve-3d;
+    position: relative;
+}
+
+.flipper > * {
+    -webkit-backface-visibility: hidden;
+    position:absolute;
+    width:100%;
+}
+
+.flipper .front {
+    z-index:2;
+}
+
+.flipper .back {
+    -webkit-transform: rotateY(180deg);
 }

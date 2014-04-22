@@ -1,8 +1,7 @@
-<input type="text" name="question[{no}]" value="{question}" placeholder="Question" aria-required="true" required/>
-<input type="text" name="help_text[{no}]" value="{helpText}" placeholder="Help Text"/>
+<textarea name="question[{no}]" class="question" aria-required="true" required>{question}</textarea>
 {@select key=type}
   <select name="type[{no}]" aria-required="true" required>
-    <option value="text" {@eq value="text"}selected{/eq}/>Text</option>
+    <option value="text" {@eq value="text"}selected{/eq}>Text</option>
     <option value="number" {@eq value="number"}selected{/eq}>Number</option>
     <option value="radio" {@eq value="radio"}selected{/eq}>Multiple Choice</option>
     <option value="checkbox" {@eq value="checkbox"}selected{/eq}>Checkboxes</option>

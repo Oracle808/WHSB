@@ -1,5 +1,5 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-var dust = require("dustjs-linkedin/lib/dust");module.exports="/Users/Hashan/Dropbox/Sites/Styles53/app/blogs/editor.dust";(function(){dust.register("/Users/Hashan/Dropbox/Sites/Styles53/app/blogs/editor.dust",body_0);function body_0(chk,ctx){return chk.write("<div class=\"editor-toolbar\">").helper("eq",ctx,{"else":body_1,"block":body_2},{"key":ctx._get(false, ["mode"]),"value":"rich-text-editor"}).write("<select class=\"editor-mode\" name=\"mode\"><option value=\"rich-text-editor\" ").helper("eq",ctx,{"block":body_3},{"key":ctx._get(false, ["mode"]),"value":"rich-text-editor"}).write(">Rich Text Editor</option><option value=\"latex\" ").helper("eq",ctx,{"block":body_4},{"key":ctx._get(false, ["mode"]),"value":"latex"}).write(">Latex</option></select></div><div id=\"views\">").helper("eq",ctx,{"else":body_5,"block":body_6},{"key":ctx._get(false, ["mode"]),"value":"rich-text-editor"}).write("</div>");}function body_1(chk,ctx){return chk.write("<ul role=\"tablist\"><li class=\"active\"><a aria-controls=\"editor\">Editor</a></li><li class=\"active\"><a aria-controls=\"preview\">Preview</a></li></ul>");}function body_2(chk,ctx){return chk.write("<div class=\"editor-formating\"><ul><button value=\"bold\"><i class=\"fi-bold\"></i></button><button value=\"italic\"><i class=\"fi-italic\"></i></button><button value=\"underline\"><i class=\"fi-underline\"></i></button></ul><ul><button value=\"insertOrderedList\"><i class=\"fi-list-number\"></i></button><button value=\"insertUnorderedList\"><i class=\"fi-list-bullet\"></i></button></ul><ul><button value=\"subscript\"><i class=\"fi-subscript\"></i></button><button value=\"superscript\"><i class=\"fi-superscript\"></i></button></ul></div><select class=\"font-control\"><option value=\"Helvetica Neue\" selected>Helvetica Neue</option><option value=\"Arial\">Arial</option><option value=\"Arial Black\">Arial Black</option><option value=\"Comic Sans MS\">Comic Sans MS</option><option value=\"Times New Roman\">Times New Roman</option><option value=\"Tahoma\">Tahoma</option><option value=\"Verdana\">Verdana</option><option value=\"Courier New\">Courier New</option></select>");}function body_3(chk,ctx){return chk.write("selected");}function body_4(chk,ctx){return chk.write("selected");}function body_5(chk,ctx){return chk.write("<div id=\"editor\" contenteditable=\"true\" class=\"active\"></div><div class=\"editor-preview\" id=\"preview\"></div>");}function body_6(chk,ctx){return chk.write("<div id=\"editor\" contenteditable=\"true\" class=\"editor-rich\"></div>");}return body_0;})();
+var dust = require("dustjs-linkedin/lib/dust");module.exports="/Users/Hashan/Dropbox/Sites/Styles53/app/blogs/editor.dust";(function(){dust.register("/Users/Hashan/Dropbox/Sites/Styles53/app/blogs/editor.dust",body_0);function body_0(chk,ctx){return chk.write("<div class=\"editor-toolbar\">").helper("eq",ctx,{"else":body_1,"block":body_2},{"key":ctx._get(false, ["mode"]),"value":"rich-text-editor"}).write("<select class=\"editor-mode\" name=\"").reference(ctx._get(false, ["modeName"]),ctx,"h").write("\"><option value=\"rich-text-editor\" ").helper("eq",ctx,{"block":body_3},{"key":ctx._get(false, ["mode"]),"value":"rich-text-editor"}).write(">Rich Text Editor</option><option value=\"latex\" ").helper("eq",ctx,{"block":body_4},{"key":ctx._get(false, ["mode"]),"value":"latex"}).write(">Latex</option></select></div><div class=\"editor-views\">").helper("eq",ctx,{"else":body_5,"block":body_6},{"key":ctx._get(false, ["mode"]),"value":"rich-text-editor"}).write("</div>");}function body_1(chk,ctx){return chk.write("<ul role=\"tablist\"><li class=\"active\"><a class=\"open-editor\">Editor</a></li><li><a class=\"open-preview\">Preview</a></li></ul>");}function body_2(chk,ctx){return chk.write("<div class=\"editor-formating\"><ul><button value=\"bold\"><i class=\"fi-bold\"></i></button><button value=\"italic\"><i class=\"fi-italic\"></i></button><button value=\"underline\"><i class=\"fi-underline\"></i></button></ul><ul><button value=\"insertOrderedList\"><i class=\"fi-list-number\"></i></button><button value=\"insertUnorderedList\"><i class=\"fi-list-bullet\"></i></button></ul><ul><button value=\"subscript\"><i class=\"fi-subscript\"></i></button><button value=\"superscript\"><i class=\"fi-superscript\"></i></button></ul></div><select class=\"font-control\"><option value=\"Helvetica Neue\" selected>Helvetica Neue</option><option value=\"Arial\">Arial</option><option value=\"Arial Black\">Arial Black</option><option value=\"Comic Sans MS\">Comic Sans MS</option><option value=\"Times New Roman\">Times New Roman</option><option value=\"Tahoma\">Tahoma</option><option value=\"Verdana\">Verdana</option><option value=\"Courier New\">Courier New</option></select>");}function body_3(chk,ctx){return chk.write("selected");}function body_4(chk,ctx){return chk.write("selected");}function body_5(chk,ctx){return chk.write("<div contenteditable=\"true\" class=\"active editor-content\"></div><div class=\"editor-preview\"></div>");}function body_6(chk,ctx){return chk.write("<div contenteditable=\"true\" class=\"editor-rich editor-content\"></div>");}return body_0;})();
 },{"dustjs-linkedin/lib/dust":5}],2:[function(require,module,exports){
 //     Backbone.js 1.1.2
 
@@ -7712,6 +7712,7 @@ Backbone.Controller = Backbone.View.extend({
 	if(this.prototype.requires === undefined || this.prototype.requires !== false) {
 	    console.log("foux");
 	    var c = new this(options);
+	    console.log(c);
 	    c.$el.addClass(this.prototype.className);
 	    return c;
 	}
@@ -7721,131 +7722,7 @@ Backbone.Controller = Backbone.View.extend({
 module.exports = Backbone;
 
 },{"backbone":2,"dustjs-helpers":3,"dustjs-linkedin/lib/dust":5,"underscore":12}],14:[function(require,module,exports){
-var Backbone = require("./backbone");
-var CodeBox = require("./codebox");
-
-MathJax.Hub.Config({
-    tex2jax: {
-	displayMath: [],
-	inlineMath: []
-    }
-});
-
-var getSelectionHtml = function() {
-    var html = "";
-    if (typeof window.getSelection != "undefined") {
-	var sel = window.getSelection();
-	if (sel.rangeCount) {
-	    var container = document.createElement("div");
-	    for (var i = 0, len = sel.rangeCount; i < len; ++i) {
-		container.appendChild(sel.getRangeAt(i).cloneContents());
-	    }
-	    html = container.innerHTML;
-	}
-    } else if (typeof document.selection != "undefined") {
-	if (document.selection.type == "Text") {
-	    html = document.selection.createRange().htmlText;
-	}
-    }
-    return html;
-};
-
-var EditorView = require("../app/blogs/editor.dust");
-
-var EditorState = Backbone.Model.extend({
-    defaults: {
-	mode: "rich-text-editor"
-    }
-});
-
-var EditorController = Backbone.Controller.extend({
-    template: EditorView,
-
-    className: "editor",
-
-    requires: Modernizr.contenteditable,
-
-    events: {
-	"change .editor-mode": "updateMode",
-	"click .editor-toolbar button": "updateFormat",
-	"change select.font-control": "updateFont",
-	"click .editor-rich": "reconfigure",
-	"keydown .editor-rich": "reconfigure",
-	"keyup #editor": "transpose",
-	"click ul[role=\"tablist\"] li a": "openTab"
-    },
-
-    initialize: function(options) {
-	this.controls = $("#" + options.controls);
-	this.state = new EditorState();
-	this.listenTo(this.state, "change", this.render);
-	this.$el.insertBefore(this.controls);
-	this.render();
-    },
-
-    updateMode: function(e) {
-	this.state.set("mode", e.target.value);
-	e.preventDefault();
-    },
-
-    // Controls everything from bold to insertUnorderedList
-    updateFormat: function(e) {
-	var target = $(e.target);
-	document.execCommand(target.val());
-	target.toggleClass("active");
-	e.preventDefault();
-    },
-
-    updateFont: function(e) {
-	document.execCommand("fontName", false, e.target.value);
-    },
-
-    reconfigure: function(e) {
-	console.log("Yep!");
-	["bold", "underline", "italic", "insertOrderedList", "insertUnorderedList"].forEach((function(option) {
-	    if(document.queryCommandState(option)) {
-		this.find("[value=\"" + option + "\"]").addClass("active");
-	    } else {
-		this.find("[value=\"" + option + "\"]").removeClass("active");
-	    }
-	}).bind(this));
-    },
-
-    transpose: function(e) {
-	if(this.controls) {
-	    var editor = this.findById("editor");
-	    console.log(this.state.get("mode"));
-	    console.log(this.editor);
-	    var val = (this.state.get("mode") === "rich-text-editor" ? editor.html() : this.editor.val());
-	    this.controls.val(val);
-	}
-    },
-
-    openTab: function(e) {
-	var el = $(e.target);
-	el.parent().siblings().removeClass("active");
-	el.parent().addClass("active");
-	var targetId = el.attr("aria-controls");
-	var target = $("#" + targetId);
-	if(targetId === "preview") {
-	    target.html($("<script type=\"math/tex\">").html(this.editor.val()));
-	    MathJax.Hub.Queue(["Typeset", MathJax.Hub, "preview"]);
-	}
-	target.siblings().hide();
-	target.show();
-    },
-
-    subviews: function(e) {
-	if(this.state.get("mode") === "latex") {
-	    this.editor = CodeBox.create({
-		el: this.findById("editor"),
-		mode: CodeBox.Modes.LaTeX
-	    });
-	} else {
-	    this.editor = undefined;
-	}
-    }
-});
+var EditorController = require("./editor");
 
 $(document).ready(function() {
     var novaBlogPost = $("#new-blog-post");
@@ -7857,11 +7734,12 @@ $(document).ready(function() {
     });
 
     EditorController.create({
-	controls: "new-blog-post-text"
+	controls: $("#new-blog-post-text"),
+	modeName: "mode"
     });
 });
 
-},{"../app/blogs/editor.dust":1,"./backbone":13,"./codebox":15}],15:[function(require,module,exports){
+},{"./editor":16}],15:[function(require,module,exports){
 var Backbone = require("./backbone");
 
 var saveSelection, restoreSelection;
@@ -8007,4 +7885,138 @@ var CodeBox = Backbone.Controller.extend({
 
 module.exports = CodeBox;
 
-},{"./backbone":13}]},{},[14])
+},{"./backbone":13}],16:[function(require,module,exports){
+var Backbone = require("./backbone");
+var CodeBox = require("./codebox");
+
+var getSelectionHtml = function() {
+    var html = "";
+    if (typeof window.getSelection != "undefined") {
+	var sel = window.getSelection();
+	if (sel.rangeCount) {
+	    var container = document.createElement("div");
+	    for (var i = 0, len = sel.rangeCount; i < len; ++i) {
+		container.appendChild(sel.getRangeAt(i).cloneContents());
+	    }
+	    html = container.innerHTML;
+	}
+    } else if (typeof document.selection != "undefined") {
+	if (document.selection.type == "Text") {
+	    html = document.selection.createRange().htmlText;
+	}
+    }
+    return html;
+};
+
+var EditorView = require("../app/blogs/editor.dust");
+
+var EditorState = Backbone.Model.extend({
+    defaults: {
+	mode: "rich-text-editor"
+    }
+});
+
+var EditorController = Backbone.Controller.extend({
+    template: EditorView,
+
+    className: "editor",
+
+    requires: Modernizr.contenteditable,
+
+    events: {
+	"change .editor-mode": "updateMode",
+	"click .editor-toolbar button": "updateFormat",
+	"change select.font-control": "updateFont",
+	"click .editor-rich": "reconfigure",
+	"keydown .editor-rich": "reconfigure",
+	"keyup .editor-content": "transpose",
+	"click .open-editor": "openEditor",
+	"click .open-preview": "openPreview"
+    },
+
+    setControl: function(ctrl) {
+	this.controls = ctrl;
+	this.controls.hide();
+	this.$el.insertBefore(this.controls);
+	this.render();
+	this.$el.find(".editor-content").html(this.controls.val());
+    },
+
+    initialize: function(options) {
+	this.state = new EditorState();
+	this.state.set("modeName", options.modeName);
+	this.listenTo(this.state, "change", this.render);
+	this.setControl(options.controls);
+    },
+
+    updateMode: function(e) {
+	this.state.set("mode", e.target.value);
+	this.trigger("change", "");
+	e.preventDefault();
+    },
+
+    // Controls everything from bold to insertUnorderedList
+    updateFormat: function(e) {
+	var target = $(e.target);
+	document.execCommand(target.val());
+	target.toggleClass("active");
+	e.preventDefault();
+    },
+
+    updateFont: function(e) {
+	document.execCommand("fontName", false, e.target.value);
+    },
+
+    reconfigure: function(e) {
+	["bold", "underline", "italic", "insertOrderedList", "insertUnorderedList"].forEach((function(option) {
+	    if(document.queryCommandState(option)) {
+		this.find("[value=\"" + option + "\"]").addClass("active");
+	    } else {
+		this.find("[value=\"" + option + "\"]").removeClass("active");
+	    }
+	}).bind(this));
+    },
+
+    transpose: function(e) {
+	if(this.controls) {
+	    var editor = this.find(".editor-content");
+	    var val = (this.state.get("mode") === "rich-text-editor" ? editor.html() : this.editor.val());
+	    this.trigger("change", val);
+	    console.log("fsdsdfsdf");
+	}
+    },
+
+    openEditor: function(e) {
+	this.find(".editor-preview").hide();
+	this.find(".editor-content").show();
+	$(e.target).toggleClass("active");
+	$(e.target).siblings().removeClass("active");
+    },
+
+    openPreview: function(e) {
+	$(e.target).toggleClass("active");
+	$(e.target).siblings().removeClass("active");
+	this.find(".editor-content").hide();
+	var editorPreview = this.find(".editor-preview");
+	editorPreview.html($("<script type=\"math/tex\">").html(this.editor.val()));
+	editorPreview.show();
+	MathJax.Hub.Queue(["Typeset", MathJax.Hub, editorPreview.get(0)]);
+    },
+
+    subviews: function(e) {
+	console.log(this.controls.val());
+	this.$el.find(".editor-content").val(this.controls.val());
+	if(this.state.get("mode") === "latex") {
+	    this.editor = CodeBox.create({
+		el: this.find(".editor-content"),
+		mode: CodeBox.Modes.LaTeX
+	    });
+	} else {
+	    this.editor = undefined;
+	}
+    }
+});
+
+module.exports = EditorController;
+
+},{"../app/blogs/editor.dust":1,"./backbone":13,"./codebox":15}]},{},[14])

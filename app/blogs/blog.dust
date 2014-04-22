@@ -2,7 +2,6 @@
 {<head}
   <title>{subject.title}</title>
   <link href="/styles/blogs/index.css" rel="stylesheet"/>
-  <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
   <script src="/scripts/blogs.js"></script>
 {/head}
 {<body}

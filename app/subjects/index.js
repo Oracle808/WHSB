@@ -7,7 +7,7 @@ var fs = require("fs");
 var novaTemplate = require("./nova.dust");
 var studentsView = require("./students.dust");
 
-module.exports.nova = function(req, res) {
+exports.nova = function(req, res) {
     fs.readdir("public/icons", function(err, list) {
 	if(err) {
 	    res.error(err);
@@ -25,7 +25,7 @@ module.exports.nova = function(req, res) {
     });
 };
 
-module.exports.post = function(req, res) {
+exports.post = function(req, res) {
     var subject = {
 	subject_name: req.body.subject_name,
 	name: req.body.name,
@@ -40,9 +40,19 @@ module.exports.post = function(req, res) {
     });
 };
 
-module.exports.links = {};
+exports.del = function(req, res) {
+    req.subject.remove(function(err) {
+	if(err) {
+	    res.error(err);
+	} else {
+	    res.redirect("/");
+	}
+    });
+};
 
-module.exports.links.post = function(req, res) {
+exports.links = {};
+
+exports.links.post = function(req, res) {
     req.subject.links.push({
 	title: req.body.title,
 	url: req.body.url
@@ -55,7 +65,7 @@ module.exports.links.post = function(req, res) {
     });
 };
 
-module.exports.links.del = function(req, res) {
+exports.links.del = function(req, res) {
     req.subject.links.pull(req.param("link"));
     req.subject.save(function(err) {
 	if(err) {
@@ -65,9 +75,9 @@ module.exports.links.del = function(req, res) {
     });
 };
 
-module.exports.students = {};
+exports.students = {};
 
-module.exports.students.list = function(req, res) {
+exports.students.list = function(req, res) {
     User.find({subjects:{$in:[req.subject._id]}, role:"student"}, function(err, docs) {
 	if(err) {
 	    res.error(err);
@@ -77,7 +87,7 @@ module.exports.students.list = function(req, res) {
     });
 };
 
-module.exports.students.unenroll = function(req, res) {
+exports.students.unenroll = function(req, res) {
     User.findByIdAndUpdate(req.param("student"), {$pull: {subjects: req.subject._id}}, function(err, doc) {
 	if(err) {
 	    res.error(err);

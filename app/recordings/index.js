@@ -2,9 +2,8 @@ var mongoose = require("mongoose"),
 child_process = require("duplex-child-process"),
 mime = require("mime"),
 uu = require("underscore"),
-Grid = require("gridfs-stream"),
-ObjectID  = mongoose.mongo.BSONPure.ObjectID,
-gfs = new Grid(mongoose.connection.db, mongoose.mongo);
+gfs = require("../../models/gfs"),
+ObjectID  = mongoose.mongo.BSONPure.ObjectID
 
 mime.define({
     "audio/mp3": ["mp3"]
@@ -68,31 +67,29 @@ module.exports.post = function(req, res) {
 };
 
 module.exports.get = function(req, res) {
-    Subject.findById(req.param("subject"), function(err, doc) {
-	var recording = uu.findWhere(doc.recordings, {id: req.param("recording")}).file;
-	gfs.files.findOne({_id:recording}, function(err, file) {
-	    if(err) {
-		res.error(err);
-	    } else {
-		var store = gfs.createReadStream({_id: recording});
-		var contentType = mime.extension(file.contentType);
-		res.attachment(file.filename);
-		res.set("Content-Length", file.length);
-		console.log(req.query.format);
-		if(contentType === req.query.format) {
-		    res.set("Content-Type", file.contentType);
-		    store.pipe(res);
-		} else if(req.query.format === "webm") {
-		    console.log("fsdfdssdffsd");
-		    var converter = child_process.spawn("ffmpeg", ["-f", contentType, "-acodec", "mp3", "-vn",  "-i", "pipe:0", "-ac", "2", "-strict", "experimental", "-acodec", "vorbis", "-f", "webm", "pipe:1"], {
-			customFds: [-1, -1, -1]
-		    });
-		    store.pipe(converter);
-		    res.set("Content-Type", mime.lookup("webm"));
-		    converter.pipe(res);
-		}
+    var recording = uu.findWhere(req.subject.recordings, {id: req.param("recording")}).file;
+    gfs.files.findOne({_id:recording}, function(err, file) {
+	if(err) {
+	    res.error(err);
+	} else {
+	    var store = gfs.createReadStream({_id: recording});
+	    var contentType = mime.extension(file.contentType);
+	    res.attachment(file.filename);
+	    res.set("Content-Length", file.length);
+	    console.log(req.query.format);
+	    if(contentType === req.query.format) {
+		res.set("Content-Type", file.contentType);
+		store.pipe(res);
+	    } else if(req.query.format === "webm") {
+		console.log("fsdfdssdffsd");
+		var converter = child_process.spawn("ffmpeg", ["-f", contentType, "-acodec", "mp3", "-vn",  "-i", "pipe:0", "-ac", "2", "-strict", "experimental", "-acodec", "vorbis", "-f", "webm", "pipe:1"], {
+		    customFds: [-1, -1, -1]
+		});
+		store.pipe(converter);
+		res.set("Content-Type", mime.lookup("webm"));
+		converter.pipe(res);
 	    }
-	});
+	}
     });
 };
 

@@ -1,0 +1,5 @@
+<li>
+  <input name="question[]" class="qusetion" type="text" placeholder="Question" {?question}value="{question}"{/question}/>
+  <input name="answer[]" class="answer" type="text" placeholder="Answer" {?answer}value="{answer}"{/answer}/>
+</li>
+

@@ -9,16 +9,30 @@
     {>"app/partials/nav.dust"/}
     <main>
       <form id="newQuizForm" action="/subjects/{subject._id}/quizzes" method="post">
-	<header id="form-header">
-	  <div id="quiz-title">
+	<ul id="general-settings">
+	  <li class="heading">
+	    {>"app/partials/toggle_side_nav.dust"/}
+	    New Quiz
+	    <button type="submit">
+	      Submit
+	    </button>
+	    <button id="add-question" class="add-item">
+	      <i class="fi-plus"></i>
+	    </button>
+	  </li>
+	  <li id="form-header">
+	    <a>Quiz Title</a>
 	    <input name="title" form="newQuizForm" placeholder="Name your quiz" type="text" aria-required="true" required/>
-	  </div>
-	  <ul id="quiz-actions">
-	    <li><button id="add-question"><i class="fi-plus"></i> Question</button></li>
-	    <li><button type="submit">Submit</button></li>
-	  </ul>
-	</header>
+	  </li>
+	  <li>
+	    <a>Randomise Questions</a>  
+	    <input name="randomise_questions" type="checkbox" checked/>
+	  </li>
+	</ul>
 	<ul id="questions">
+	  {#questions}
+	    {>"app/quizzes/question.dust"/}
+	  {/questions}
 	</ul>
       </form>
     </main>

@@ -8,9 +8,7 @@
 
 <nav id="intraSubjectNavigation">
   <h4>{subject.subject_name} <small>{subject.teacher.username}</small></h4>
-  <form>
-    <input type="search" placeholder="Search"></input>
-  </form>
+
   <ul>
     
     <li {@eq key=active value="blog"}class="active"{/eq}>
@@ -20,15 +18,30 @@
     </li>
    
     <li><a href="/subjects/{subject._id}/hand_in">Hand-in</a></li>
-    <li><a>Student Resources</a></li>
-    <li {@eq key=active value="recordings"}class="active"{/eq}><a href="/subjects/{subject._id}/recordings">Recordings</a></li>
 
+    {?subject.settings.student_resources}
+    <li><a>Student Resources</a></li>
+    {/subject.settings.student_resources}
+
+    {?subject.settings.recordings}
+    <li {@eq key=active value="recordings"}class="active"{/eq}><a href="/subjects/{subject._id}/recordings">Recordings</a></li>
+    {/subject.settings.recordings}
+
+    {?subject.settings.quizzes}
     <li {@eq key=active value="quizzes"}class="active"{/eq}><a href="/subjects/{subject._id}/quizzes">Quizzes</a></li>
-    
-    {?subject.vocab_quizzes}
+    {/subject.settings.quizzes}
+
+    {?subject.settings.vocab_quizzes}
       <li {@eq key=active value="vocab_quizzes"}class="active"{/eq}><a href="/subjects/{subject._id}/vocab_quizzes">Vocab Quizzes</a></li>
-    {/subject.vocab_quizzes}
+    {/subject.settings.vocab_quizzes}
    
+
+    {?subject.pages}
+      <li class="header">Pages</li>
+      {#subject.pages}
+	<li><a href="/subjects/{subject._id}/pages/{_id}">{title}</a></li>
+      {/subject.pages}
+    {/subject.pages}
 
     {?subject.links}
       <li class="header">Links</li>
@@ -37,7 +50,9 @@
       {/subject.links}
     {/subject.links}
 
-    <li><a href="/subjects/{subject._id}/students">Students <i class="fi-torsos"></i></a></li>
-    <li><a href="/subjects/{subject._id}/settings">Settings <i class="fi-widget"></i></a></li>
+    {@ne key=user.role value="student"}
+      <li><a href="/subjects/{subject._id}/students">Students <i class="fi-torsos"></i></a></li>
+      <li><a href="/subjects/{subject._id}/settings">Settings <i class="fi-widget"></i></a></li>
+    {/ne}
   </ul>	
 </nav>

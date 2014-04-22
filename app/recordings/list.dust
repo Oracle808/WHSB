@@ -20,7 +20,7 @@
       </li>
       {#subject.recordings}
 	<li>{name} 
-	  {>"app/partials/delete.dust" url="/subjects/{subject._id}/recordings/{_id}" class="delete-item"/}
+	  {>"app/partials/delete.dust" src="/subjects/{subject._id}/recordings/{_id}" class="delete-item"/}
 	  {>"app/partials/audio.dust" src="/subjects/{subject._id}/recordings/{_id}"/}
 	</li>
       {/subject.recordings}

@@ -1,17 +1,38 @@
 @import "styles/ui/subject";
 
-x-quiz {
-    display:block;
+#quiz {
+    @include mobile-list();
+
+    .quiz-redo, .quiz-correct {
+	@extend .right;
+	margin-right:5px;
+    }
 }
 
-.container {
-    margin-top:20px;
-    border-top:1px solid #000;
+#quiz li:nth-term(2) {
+    padding:0;
 }
 
-.container label, .container input, .container input:focus {
-    @include grid-column(2, $collapse: true);
-    height:25px;
+#quiz label, #quiz input, #quiz input:focus {
+    @media #{$large-up} {
+	@include grid-column(2, $collapse: true);
+	&:nth-child(-n+6) {
+	    border-top:1px solid #333;
+	}
+    }
+    @media #{$medium-only} {
+	@include grid-column(3, $collapse: true);
+	&:nth-child(-n+4) {
+	    border-top:1px solid #333;
+	}
+    }
+    @media #{$small-only} {
+	@include grid-column(6, $collapse: true);
+	&:nth-child(-n+2) {
+	    border-top:1px solid #333;
+	}
+    }
+    height:30px;
     font-size:0.9em;
     padding:4.5px;
     text-align:center;
@@ -23,49 +44,25 @@ x-quiz {
     margin:0;
     color:#222;
     box-shadow:none;
-
-    &:nth-child(-n+6) {
-	border-top:1px solid #333;
-    }
 }
 
-.container input:focus:not([readonly]) {
-    background:#ffff66;
-}
-
-.container label {
+#quiz label {
     background:#555555;
 }
 
-.container input {
+#quiz input {
     background:#bbb;
     transition:none;
 }
 
-@mixin valid {
-    &:valid, &.valid {
-	@content;
-    }
+#quiz input.correct {
+    background-color: #66CD00;
 }
 
-@mixin invalid {
-    &:invalid, &.invalid {
-	@content;
-    }
+#quiz input:focus:not([readonly]) {
+    background:#ffff66;
 }
 
-@mixin user-error {
-    &:user-error, &.interacted.invalid, &:moz-ui-invalid {
-	@content;
-    }
-}
-
-.container input {
-    @include valid {
-	background-color: #66CD00;
-    }
-}
-
-.container input[formnovalidate] {
+#quiz input[readonly]:not(.correct) {
     background-color:#ff0000;
 }

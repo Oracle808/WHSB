@@ -31,8 +31,8 @@ dust.helpers.first = function(chunk, ctx, bodies, params) {
 
 dust.helpers.contains = function(chunk, ctx, bodies, params) {
     try {
-	var key = params.key ? dust.helper.helpers.tap(params.key, chunk, ctx) : ctx.get("selectKey");
-	var value = dust.helper.helpers.tap(params.value, chunk, ctx);
+	var key = params.key ? dust.helpers.tap(params.key, chunk, ctx) : ctx.get("selectKey");
+	var value = params.value ? dust.helpers.tap(params.value, chunk, ctx) : ctx.get("selectKey");
     } catch (e) {
 	throw e;
     }
@@ -54,8 +54,8 @@ dust.helpers.contains = function(chunk, ctx, bodies, params) {
 dust.helpers.lacks = function(chunk, ctx, bodies, params) {
     console.log("vcxvxccv");
     try {
-	var key = params.key ? dust.helper.helpers.tap(params.key, chunk, ctx) : ctx.get("selectKey");
-	var value = dust.helper.helpers.tap(params.value, chunk, ctx);
+	var key = params.key ? dust.helpers.tap(params.key, chunk, ctx) : ctx.get("selectKey");
+	var value = dust.helpers.tap(params.value, chunk, ctx);
     } catch (e) {
 	throw e;
     }
@@ -171,25 +171,24 @@ module.exports.intercept = function(opts) {
 	    res.type("application/rss+xml");
 	    res.end(xml);
 	};
-	res.error = function(error) {
-	    console.log(error);
-	    util.inspect(error);
+	res.error = function(err) {
+	    util.inspect(err);
 	    if(!res.headersSent) {
 		res.writeHead(500);
 	    }
 
 	    if(req.accepts("html")) {
 		if(opts && opts.errorPage) {
-		    res.render(opts.errorPage, {error: error});
+		    res.render(opts.errorPage, {error: err});
 		} else {
-		    error = error.toString().replace(/\n/g, "<br/>");
-		    res.end("<html><head><title>" + res.statusCode + "</title></head><body><h1>" + res.statusCode + "</h1><p>" + error + "</p></body></html>");
+		    err = err.toString().replace(/\n/g, "<br/>");
+		    res.end("<html><head><title>" + res.statusCode + "</title></head><body><h1>" + res.statusCode + "</h1><p>" + err + "</p></body></html>");
 		}
 	    } else if(req.accepts("json")) {
-		if(uu.isString(error)) {
-		    res.json({error: error});
+		if(uu.isString(err)) {
+		    res.json({error: err});
 		} else {
-		    res.json(error);
+		    res.json(err);
 		}
 	    }
 	};

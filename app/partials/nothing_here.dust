@@ -1,0 +1,6 @@
+<li class="nothing">
+  Nothing here.
+  {@ne key=user.role value="student"}
+    <br/>Why not add something?
+  {/ne}
+</li>

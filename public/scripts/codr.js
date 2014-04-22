@@ -7710,6 +7710,7 @@ Backbone.Controller = Backbone.View.extend({
 	if(this.prototype.requires === undefined || this.prototype.requires !== false) {
 	    console.log("foux");
 	    var c = new this(options);
+	    console.log(c);
 	    c.$el.addClass(this.prototype.className);
 	    return c;
 	}
@@ -7880,6 +7881,14 @@ $(document).ready(function() {
 
     console.log(code);
 
+    $("#runCode").on("click", function() {
+	var console = {};
+	console.log = function(text) {
+	    $(".code-output").append($("<pre>").text(text));
+	};
+	eval(code.val());
+    });
+
     $("#openFile").on("click", function() {
 	console.log("hi");
 	Files.openFileAsText(function(filename2, text) {
@@ -7892,23 +7901,41 @@ $(document).ready(function() {
     $("#saveFile").on("click", function() {
 	Files.saveFile(filename, code.val());
     });
+
+    $("#documentation").on("click", function() {
+	$(".flip-container").toggleClass("flipped");
+    });
 });
 
 },{"./codebox":13,"./files":15}],15:[function(require,module,exports){
 var uu = require("underscore");
+
+module.exports.openFile = function(cb) {
+    // cb is a function which tags one parameter: a file
+    var fileEl = $("<input type=\"file\">"); // creates virtual <input> tag
+    fileEl.on("change", function() {
+	cb(fileEl.get(0).files[0]);
+    });
+    fileEl.click(); // simulates mouse click
+};
+
+module.exports.openFiles = function(cb) {
+    var fileEl = $("<input type=\"file\" multiple>"); // creates virtual <input> tag  
+    fileEl.on("change", function() {
+	cb(fileEl.get(0).files);
+    });
+    fileEl.click();
+};
+
 module.exports.openFileAsText = function(cb) {
     // cb is a function which tags two parameters
     // first a filename, second actual text
-    var fileEl = $("<input type=\"file\">"); // creates virtual <input> tag
-    fileEl.on("change", function() {
+    openFile(function(filename, file) {
 	var reader = new FileReader();
-	fileEl = fileEl.get(0);
 	reader.addEventListener("load", function(e) {
-	    cb(fileEl.files[0].name, e.target.result);
+	    cb(filename, e.target.result);
 	});
-	reader.readAsText(fileEl.files[0]);
     });
-    fileEl.click(); // simulates mouse click
 };
 
 var URL = window.URL || window.webkitURL;
@@ -7918,7 +7945,7 @@ module.exports.saveFile = function(filename, file) {
     if(uu.isString(file)) {
 	file = new Blob([file], {type: "text"}); // Convert file to a Blob if it's a string
     }
-    linkEl.href(URL.createObjectURL(file));
+    linkEl.attr("href", URL.createObjectURL(file));
     linkEl.click(); // simulates mouse click
 };
 

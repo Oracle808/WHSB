@@ -90,24 +90,28 @@ var Subject = mongoose.Schema({
 	title: {
 	    type: String,
 	    required: true
-	}, 
-	questions: {
-	    type: [{
-		problem: {
-		    type: String,
-		    required: true
-		},
-		help_text: {
-		    type: String
-		},
-		solution: {
-		    type: Mixed,
-		    required: true
-		},
-		opts: [String]
-	    }],
-	    required: true
 	},
+	questions: [{
+	    answer_type: { // "text", "number", "radio", "checkbox"
+		type: String,
+		required: true
+	    },
+	    content: {
+		type: String
+	    },
+	    content_mode: {
+		type: String,
+		default:"rich-text-editing" 
+	    },
+	    help_text: {
+		type: String
+	    },
+	    answer: {
+		type: Mixed, // Type depends on `answer_type`
+		required: true
+	    },
+	    opts: [String]
+	}],
 	attempts: [{
 	    date: {
 		type: Date,
@@ -123,7 +127,12 @@ var Subject = mongoose.Schema({
 		ref: "User"
 	    },
 	    answers: [Mixed]
-	}]
+	}],
+	randomise_questions: {
+	    type: Boolean,
+	    required: true,
+	    default: true
+	}
     }],
     vocab_quizzes: [{
 	title: {
@@ -170,7 +179,39 @@ var Subject = mongoose.Schema({
 	    type: ObjectId,
 	    required: true
 	}
-    }]
+    }],
+    pages: [{
+	title: {
+	    type: String,
+	    required: true
+	},
+	content: {
+	    type: String,
+	    required: true
+	}
+    }],
+    settings: {
+	quizzes: {
+	    type: Boolean,
+	    required: true,
+	    default: true
+	},
+	vocab_quizzes: {
+	    type: Boolean,
+	    required: true,
+	    default: false
+	},
+	student_resources: {
+	    type: Boolean,
+	    required: true,
+	    default: true
+	},
+	recordings: {
+	    type: Boolean,
+	    required: true,
+	    default: false
+	}
+    }
 });
 
 module.exports.User = User;

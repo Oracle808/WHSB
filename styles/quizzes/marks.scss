@@ -1,9 +1,7 @@
 @import "styles/ui/subject.scss";
 
-#datahole {
-    background-color:$foreground;
-    width:100%;
-    padding:$minor-margin;
+#container {
+    @include mobile-list();
 }
 
 #heatmap {
@@ -24,6 +22,7 @@
 #heatmap > div:first-child {
     div {
 	padding:$minor-margin;
+	font-weight:bold;
     }
 }
 

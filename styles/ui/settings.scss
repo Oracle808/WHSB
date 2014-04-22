@@ -1,3 +1,7 @@
+/*
+ *  UNIVERSAL VARIABLES ARE DEFINED HERE
+ */
+
 @import "public/components/foundation/scss/foundation/functions";
 
 // BACKGROUND
@@ -13,7 +17,7 @@ $info: #33b5e5;
 $warning: #e55b00;
 $orange: #e58900;
 $red: #D84A33;
-$purple:#852b99;
+$purple:#8459ab;
 $green: #35aa47;
 
 // BUTTONS
@@ -25,6 +29,7 @@ $button-font-sml: rem-calc(14);
 $button-margin-bottom: 0px;
 
 // SIDE NAV
+$side-nav-padding: 0px;
 $side-nav-list-margin: 0px;
 $side-nav-link-color-active: #008CBA;
 $side-nav-link-color-hover: scale-color($side-nav-link-color-active, $lightness: -30%);
