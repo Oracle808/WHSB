@@ -78,10 +78,10 @@
 	padding-bottom:20px;
 	border:1px solid #ccc;
     }
-    .editor-views .editor-preview, .editor-views textarea.editor-content {
+    .editor-views .editor-preview, .editor-views .editor-content:not(.editor-rich) {
 	display:none;
     }
-    .editor-views .editor-preview.active, .editor-views .editor-content {
+    .editor-views .editor-preview.active, .editor-views .editor-content.active {
 	display:block;
     }
     .editor-content {
