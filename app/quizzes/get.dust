@@ -7,39 +7,46 @@
     {>"app/partials/head.dust"/}
     {>"app/partials/nav.dust" active="quizzes"/}
     <main>
-      {?attempt}
-	<h3>You got {attempt.score} out of {quiz.questions.length}</h3>
-	{/attempt}
+
 	<form method="post" action="/subjects/{subject._id}/quizzes/{quiz._id}">
-	  {#quiz.questions}
-	    <div class="question">
-	      <p class="problem">
-		<b>{problem}</b><br/>
-		{help_text}
-	      </p>
-	      {?opts}
-		{@typeof key=solution}
-		  {@eq value="object"}
-		    {#opts no=$idx}<input name="answer[{no}][]" value="{.}" type="checkbox"/> {.}<br/>{/opts}
-		   {:else}
-		    {#opts no=$idx}<input name="answer[{no}]" value="{.}" type="radio"/> {.}<br/>{/opts}
-		  {/eq}
-		{/typeof}
-	       {:else}
-		{@typeof key=solution}
-		  {@eq value="number"}
-		    <input name="answer[{$idx}]" type="number" {?attempt} value="{attempt.answers[$idx]}" disabled {/attempt} aria-required="true" required/>
-		  {/eq}
-		  {@eq value="string"}
+	  <ul id="questions">
+	    <li class="heading">
+	      {>"app/partials/toggle_side_nav.dust"/}
+	      {quiz.title}
+	    </li>
+	    {?attempt}
+	      <li>
+		<h3>You got {attempt.score} out of {quiz.questions.length}</h3>
+	      </li>
+		{/attempt}
+	    {#quiz.questions}
+	      <li class="question">
+		<div>
+		  <p class="problem">
+		    <b>{problem}</b><br/>
+		    {help_text}
+		  </p>
+		  {@eq key=answer_type value="text"}
 		    <input name="answer[{$idx}]" type="text" {?attempt} value="{attempt.answers[$idx]}" disabled {/attempt} aria-required="true" required/>
 		  {/eq}
-		{/typeof}
-	      {/opts}
-	    </div>
+		  {@eq key=answer_type value="number"}
+		    <input name="answer[{$idx}]" type="number" {?attempt} value="{attempt.answers[$idx]}" disabled {/attempt} aria-required="true" required/>
+		  {/eq}
+		  {@eq key=answer_type value="checkbox"}
+		    {#opts no=$idx}<input name="answer[{no}][]" value="{.}" type="checkbox"  {?attempt}{@contains key=attempts.answers[$idx] value=.}checked{/contains} disabled{/attempt}/> {.}<br/>{/opts}
+		  {/eq}
+		  {@eq key=answer_type value="radio"}
+		    {#opts no=$idx}<input name="answer[{no}]" value="{.}" type="radio" {?attempt}{@eq key=. value=attempt.answers[$idx]}selected{/eq} disabled{/attempt}/> {.}<br/>{/opts}
+		  {/eq}
+		</div>
+	      </li>
 	    {/quiz.questions}
 	    {^attempt}
-	      <button type="submit">Submit</button>
+	      <li class="footer">
+		<button type="submit">Submit</button>
+	      </li>
 	    {/attempt}
-	  </form>
+	  </ul>
+	</form>
     </main>
 {/body}
