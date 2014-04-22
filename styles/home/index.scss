@@ -5,7 +5,7 @@ main {
     @include grid-row();
 }
 
-main ul {
+#subjects-student {
     @media #{$small-only} {
 	@include block-grid(2, $spacing: 15px);
     }
@@ -15,7 +15,7 @@ main ul {
     }
 }
 
-main ul img {
+#subjects-student img {
     @media #{$large-up} {
 	padding:20px;
 	-webkit-transition-property: padding;
@@ -23,8 +23,12 @@ main ul img {
     }
 }
 
-main ul img:hover {
+#subjects-student img:hover {
     @media #{$large-up} {
 	padding:0px;
     }
+}
+
+#subjects {
+    @include mobile-list();
 }

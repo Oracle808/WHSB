@@ -6,16 +6,28 @@ var Subject = mongoose.model("Subject");
 var bcrypt = require("bcrypt");
 
 module.exports.index = function(req, res) {
-    Subject
-	.where("_id").in(req.session.user.subjects)
-	.select("name subject_name")
-	.exec(function(err, subjects) {
-	    if(err) {
-		res.error(err);
-	    } else {
-		res.dust(indexPage, {subjects: subjects});
-	    }
+    if(req.session.user.role === "student") {
+	Subject
+	    .where("_id").in(req.session.user.subjects)
+	    .select("name subject_name")
+	    .exec(function(err, subjects) {
+		if(err) {
+		    res.error(err);
+		} else {
+		    res.dust(indexPage, {subjects: subjects});
+		}
+	    });
+    } else if(req.session.user.role === "teacher") {
+	Subject.find({teacher:req.session.user._id}, function(err, subjects) {
+	    res.dust(indexPage, {subjects:subjects});
+	});	    
+    } else if(req.session.user.role === "admin") {
+	Subject.find({}, function(err, subjects) {
+	     // subjects will be a list of all subjects
+	    res.dust(indexPage, {subjects: subjects});
 	});
+    }
+
 }
 
 module.exports.login = {

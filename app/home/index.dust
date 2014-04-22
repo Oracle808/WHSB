@@ -6,14 +6,35 @@
 {<body}
   {>"app/partials/head.dust"/}
   <main>
-    <ul>
-      {#subjects}
-	<li>
-	  <a href="/subjects/{_id}">
-	    <img src="/icons/{subject_name}.png"/>
-	  </a>
-	</li>
-      {/subjects}
-    </ul>
+    {@eq key=user.role value="student"}
+	<ul id="subjects-student">
+	  {#subjects}
+	    <li>
+	      <a href="/subjects/{_id}">
+		<img src="/icons/{subject_name}.png"/>
+	      </a>
+	    </li>
+	  {/subjects}
+	</ul>
+      {:else}
+	<ul id="subjects">
+	  <li class="heading">
+	    Subjects
+	    {@eq key=user.role value="admin"}
+	      {>"app/partials/add.dust" src="/subjects/new"/}
+	    {/eq}
+	  </li>
+	  {#subjects}
+	    <li>
+	      <a href="/subjects/{_id}">
+		{name}
+	      </a>
+	      {@eq key=user.role value="admin"}
+		{>"app/partials/delete.dust" src="/subjects/{subject._id}" class="delete-item"/}
+	      {/eq}
+	    </li>
+	  {/subjects}
+	</ul>
+    {/eq}
   </main>
 {/body}
