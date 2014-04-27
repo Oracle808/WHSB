@@ -1,0 +1,50 @@
+{>"views/base.dust"/}
+{<head}
+  <title>Hand-in</title>
+  <link href="/styles/hand_in.css" rel="stylesheet"/>
+  <script src="/scripts/hand_in.js"></script>
+{/head}
+{<body}
+  {>"views/topbar.dust"/}
+  {>"views/nav.dust" active="hand_in"/}
+  <main>
+    <ul id="hand_in_slots">
+      <li class="heading">
+	{>"views/toggle_side_nav.dust"/}
+	Hand-in
+	<a class="add-item"><i class="fi-plus"></i></a></li>
+      {@ne key=user.role value="student"}
+	<li id="newSlotForm" hidden>
+	  <form method="post">
+	    <input type="text" name="name" placeholder="Title" aria-required="true" required/>
+	    <button type="submit" class="publishButton">Submit</button>
+	  </form>
+	</li>
+      {/ne}
+      {#subject.hand_in}
+	<li>
+	  <a href="/subjects/{subject._id}/hand_in/{_id}/files">{name}</a>
+	  {@eq key=user.role value="student"}
+	    {@pluck key=files value="user"}
+	      {@stringify}	
+		<div class="progress">
+		  <span class="meter"></span>
+		</div>	
+		<button value="/subjects/{subject._id}/hand_in/{_id}/files" class="submit-file">
+		{@lacks value=user._id}
+		  Submit
+		{:else}
+		  Resubmit
+		{/lacks}
+		</button>
+	      {/stringify}
+	    {/pluck}
+	    <span class="submitted"><i class="fi-check"></i></span>
+		{:else}
+	    {>"views/delete.dust" src="/subjects/{subject._id}/hand_in/{_id}" class="delete-item"/}
+	  {/eq}
+	</li> 
+		{/subject.hand_in}
+    </ul>
+  </main>
+{/body}

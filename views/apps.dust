@@ -1,0 +1,17 @@
+{>"views/base.dust"/}
+{<head}
+  <title>WHSB</title>
+  <link href="/styles/home.css" rel="stylesheet"/>
+{/head}
+{<body}
+  {>"views/topbar.dust"/}
+  <main>
+    <ul id="subjects-student">
+      <li>
+	<a href="/apps/codr">
+	  <img src="/images/Codr.png"/>
+	</a>
+      </li>
+    </ul>
+  </main>
+{/body} 

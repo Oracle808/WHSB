@@ -1,0 +1,54 @@
+/*
+Syntax error: File to import not found or unreadable: styles/ui/subject.
+              Load paths:
+                /Users/Hashan/Dropbox/Sites/Styles53/styles
+                /Users/Hashan/Dropbox/Sites/styles53/styles
+        on line 1 of /Users/Hashan/Dropbox/Sites/styles53/styles/vocab_quizzes/nova.scss
+
+1: @import "styles/ui/subject";
+2: 
+3: #new-quiz, #questions {
+4:     @include mobile-list();
+5: }
+6: 
+
+Backtrace:
+/Users/Hashan/Dropbox/Sites/styles53/styles/vocab_quizzes/nova.scss:1
+/usr/local/Cellar/ruby/2.0.0-p247/lib/ruby/gems/2.0.0/gems/sass-3.2.12/lib/sass/tree/import_node.rb:67:in `rescue in import'
+/usr/local/Cellar/ruby/2.0.0-p247/lib/ruby/gems/2.0.0/gems/sass-3.2.12/lib/sass/tree/import_node.rb:45:in `import'
+/usr/local/Cellar/ruby/2.0.0-p247/lib/ruby/gems/2.0.0/gems/sass-3.2.12/lib/sass/tree/import_node.rb:28:in `imported_file'
+/usr/local/Cellar/ruby/2.0.0-p247/lib/ruby/gems/2.0.0/gems/sass-3.2.12/lib/sass/tree/import_node.rb:37:in `css_import?'
+/usr/local/Cellar/ruby/2.0.0-p247/lib/ruby/gems/2.0.0/gems/sass-3.2.12/lib/sass/tree/visitors/perform.rb:217:in `visit_import'
+/usr/local/Cellar/ruby/2.0.0-p247/lib/ruby/gems/2.0.0/gems/sass-3.2.12/lib/sass/tree/visitors/base.rb:37:in `visit'
+/usr/local/Cellar/ruby/2.0.0-p247/lib/ruby/gems/2.0.0/gems/sass-3.2.12/lib/sass/tree/visitors/perform.rb:100:in `visit'
+/usr/local/Cellar/ruby/2.0.0-p247/lib/ruby/gems/2.0.0/gems/sass-3.2.12/lib/sass/tree/visitors/base.rb:53:in `block in visit_children'
+/usr/local/Cellar/ruby/2.0.0-p247/lib/ruby/gems/2.0.0/gems/sass-3.2.12/lib/sass/tree/visitors/base.rb:53:in `map'
+/usr/local/Cellar/ruby/2.0.0-p247/lib/ruby/gems/2.0.0/gems/sass-3.2.12/lib/sass/tree/visitors/base.rb:53:in `visit_children'
+/usr/local/Cellar/ruby/2.0.0-p247/lib/ruby/gems/2.0.0/gems/sass-3.2.12/lib/sass/tree/visitors/perform.rb:109:in `block in visit_children'
+/usr/local/Cellar/ruby/2.0.0-p247/lib/ruby/gems/2.0.0/gems/sass-3.2.12/lib/sass/tree/visitors/perform.rb:121:in `with_environment'
+/usr/local/Cellar/ruby/2.0.0-p247/lib/ruby/gems/2.0.0/gems/sass-3.2.12/lib/sass/tree/visitors/perform.rb:108:in `visit_children'
+/usr/local/Cellar/ruby/2.0.0-p247/lib/ruby/gems/2.0.0/gems/sass-3.2.12/lib/sass/tree/visitors/base.rb:37:in `block in visit'
+/usr/local/Cellar/ruby/2.0.0-p247/lib/ruby/gems/2.0.0/gems/sass-3.2.12/lib/sass/tree/visitors/perform.rb:128:in `visit_root'
+/usr/local/Cellar/ruby/2.0.0-p247/lib/ruby/gems/2.0.0/gems/sass-3.2.12/lib/sass/tree/visitors/base.rb:37:in `visit'
+/usr/local/Cellar/ruby/2.0.0-p247/lib/ruby/gems/2.0.0/gems/sass-3.2.12/lib/sass/tree/visitors/perform.rb:100:in `visit'
+/usr/local/Cellar/ruby/2.0.0-p247/lib/ruby/gems/2.0.0/gems/sass-3.2.12/lib/sass/tree/visitors/perform.rb:7:in `visit'
+/usr/local/Cellar/ruby/2.0.0-p247/lib/ruby/gems/2.0.0/gems/sass-3.2.12/lib/sass/tree/root_node.rb:20:in `render'
+/usr/local/Cellar/ruby/2.0.0-p247/lib/ruby/gems/2.0.0/gems/sass-3.2.12/lib/sass/engine.rb:315:in `_render'
+/usr/local/Cellar/ruby/2.0.0-p247/lib/ruby/gems/2.0.0/gems/sass-3.2.12/lib/sass/engine.rb:262:in `render'
+/usr/local/Cellar/ruby/2.0.0-p247/lib/ruby/gems/2.0.0/gems/sass-3.2.12/lib/sass/plugin/compiler.rb:362:in `update_stylesheet'
+/usr/local/Cellar/ruby/2.0.0-p247/lib/ruby/gems/2.0.0/gems/sass-3.2.12/lib/sass/plugin/compiler.rb:203:in `block in update_stylesheets'
+/usr/local/Cellar/ruby/2.0.0-p247/lib/ruby/gems/2.0.0/gems/sass-3.2.12/lib/sass/plugin/compiler.rb:201:in `each'
+/usr/local/Cellar/ruby/2.0.0-p247/lib/ruby/gems/2.0.0/gems/sass-3.2.12/lib/sass/plugin/compiler.rb:201:in `update_stylesheets'
+/usr/local/Cellar/ruby/2.0.0-p247/lib/ruby/gems/2.0.0/gems/sass-3.2.12/lib/sass/plugin.rb:81:in `update_stylesheets'
+/usr/local/Cellar/ruby/2.0.0-p247/lib/ruby/gems/2.0.0/gems/sass-3.2.12/lib/sass/exec.rb:443:in `watch_or_update'
+/usr/local/Cellar/ruby/2.0.0-p247/lib/ruby/gems/2.0.0/gems/sass-3.2.12/lib/sass/exec.rb:326:in `process_result'
+/usr/local/Cellar/ruby/2.0.0-p247/lib/ruby/gems/2.0.0/gems/sass-3.2.12/lib/sass/exec.rb:41:in `parse'
+/usr/local/Cellar/ruby/2.0.0-p247/lib/ruby/gems/2.0.0/gems/sass-3.2.12/lib/sass/exec.rb:21:in `parse!'
+/usr/local/Cellar/ruby/2.0.0-p247/lib/ruby/gems/2.0.0/gems/sass-3.2.12/bin/sass:9:in `<top (required)>'
+/usr/local/opt/ruby/bin/sass:23:in `load'
+/usr/local/opt/ruby/bin/sass:23:in `<main>'
+*/
+body:before {
+  white-space: pre;
+  font-family: monospace;
+  content: "Syntax error: File to import not found or unreadable: styles/ui/subject.\A               Load paths:\A                 /Users/Hashan/Dropbox/Sites/Styles53/styles\A                 /Users/Hashan/Dropbox/Sites/styles53/styles\A         on line 1 of /Users/Hashan/Dropbox/Sites/styles53/styles/vocab_quizzes/nova.scss\A \A 1: @import \"styles/ui/subject\";\A 2: \A 3: #new-quiz, #questions {\A 4:     @include mobile-list();\A 5: }\A 6: "; }

@@ -1,0 +1,21 @@
+{>"views/base.dust" exclude_jquery="true"/}
+{<head}
+    <title>Login</title>
+    <link href="/styles/login.css" rel="stylesheet"/>
+{/head}
+{<body}
+    <form action="/login" method="post">
+      <img src="/images/emblem.png"/>
+      <h2>Login</h2>
+      {?message}
+	<label id="errorMessage">{message}</label>
+      {/message}
+      <input type="hidden" name="redirect" value="{redirect}"/>
+      <input type="text" name="username" placeholder="Username" aria-required="true" required/><br/>
+      <input type="password" name="password" placeholder="Password" aria-required="true" required/><br/>
+      <button type="submit"><i class="fi-lock"></i> Login</button>
+    </form>
+    <footer>
+      <img id="html5Logo" src="/images/html5.png" width="357" height="64" alt="HTML5 Powered with Connectivity / Realtime, CSS3 / Styling, Device Access, Graphics, 3D &amp; Effects, Multimedia, Performance &amp; Integration, Semantics, and Offline &amp; Storage" title="HTML5 Powered with Connectivity / Realtime, CSS3 / Styling, Device Access, Graphics, 3D &amp; Effects, Multimedia, Performance &amp; Integration, Semantics, and Offline &amp; Storage"/>
+    </footer>
+{/body}

@@ -2,7 +2,7 @@ var uu = require("underscore");
 var Backbone = require("backbone");
 var Editor = require("./editor");
 
-var QuestionView = require("../app/quizzes/question.dust");
+var QuestionView = require("../views/question.dust");
 
 var Answers = Backbone.Collection.extend({
     model:Backbone.Model

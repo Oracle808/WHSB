@@ -1,0 +1,76 @@
+{>"views/base.dust"/}
+{<head}
+  <title>{subject.title}</title>
+  <link href="/styles/blogs.css" rel="stylesheet"/>
+  <script src="/scripts/blogs.js"></script>
+{/head}
+{<body}
+  {>"views/topbar.dust"/}
+  {>"views/nav.dust" active="blog"/}
+  <main>
+    <ul>
+      <li class="heading">
+	{>"views/toggle_side_nav.dust"/}
+	Blog
+	<a href="/subjects/{subject._id}?nova=true" class="add-item" id="add-blog-post">
+	  <i class="fi-plus"></i>
+	</a>	
+	<a href="/subjects/{subject._id}/feed" class="rss-link">
+	  RSS <i class="fi-rss"></i>
+	</a>
+      </li>
+      {@ne key=user.role value="student"}
+	<li id="new-blog-post" {^nova}hidden{/nova}>
+	  <form action="/subjects/{subject._id}" method="post">
+	    <input name="title" type="text" placeholder="Title" required/>
+	    <textarea name="body" class="jsless" id="new-blog-post-text"></textarea>
+	    <span id="buttons">
+	      <button type="submit" class="publishButton">Publish</button>
+	      <button type="submit" class="draftButton" formaction="/subjects/{subject._id}?drafts=true">Save As Draft</button>
+	    </span>
+	  </form>
+	</li>
+      {/ne}
+      {#blog}
+	<li>
+	  <article class="post">
+	    <header class="postHeading">
+	      <h2><a href="/subjects/{subject._id}/posts/{_id}">{title}</a></h2>
+	    </header>
+
+	    <section class="postMeta">
+	      {?draft}
+		<h6 class="indicatorDraft">Draft</h6>
+	      {:else}
+		<h6>Published on {date}</h6>
+	      {/draft}
+	    </section>
+
+	    <section class="postActions">
+	      {@ne key=user.role value="student"}
+		<form action="/subjects/{subject._id}/posts/{_id}" method="post">
+	      	  <input type="hidden" name="_method" value="delete"/>
+	     	  <button class="deletePost" title="Remove" cite="#post_{$idx}" type="submit"><i class="fi-x"></i></button>
+		</form>
+		<button class="editPost" title="Edit"><i class="fi-pencil"></i></button>
+		{?draft}
+	    	  <button class="publishPost" title="Publish"><i class="fi-check"></i></button>
+		{/draft}
+	      {/ne}
+	    </section>	   
+
+	    <section class="postExcerpt">
+	      {@eq key=mode value="latex"}
+		<script type="math/tex">{body}</script>
+	      {:else}
+		{body|s}
+	      {/eq}
+	    </section>
+	  </article>
+	</li>
+      {:else}
+	{>"views/nothing_here.dust"/}
+      {/blog}
+    </ul> 
+  </main>
+{/body}

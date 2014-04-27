@@ -1,0 +1,57 @@
+{>"views/base.dust"/}
+{<head}
+    <title>{quiz.title}</title>
+    <link href="/styles/quizzes/quiz.css" rel="stylesheet"/>
+{/head}
+{<body}
+    {>"views/topbar.dust"/}
+    {>"views/nav.dust" active="quizzes"/}
+    <main>
+
+	<form method="post" action="/subjects/{subject._id}/quizzes/{quiz._id}">
+	  <ul id="questions">
+	    <li class="heading">
+	      {>"views/toggle_side_nav.dust"/}
+	      {quiz.title}
+	    </li>
+	    {?attempt}
+	      <li>
+		<h3>You got {attempt.score} out of {quiz.questions.length}</h3>
+	      </li>
+		{/attempt}
+	    {#quiz.questions}
+	      <li class="question">
+		<div>
+		  <p class="problem">
+		    <b>
+		      {@eq key=content_mode value="latex"}
+			<script type="math/tex">{content}</script>
+		      {:else}
+			{content}
+		      {/eq}
+		    </b>
+		  </p>
+		  {@eq key=answer_type value="text"}
+		    <input name="answer[{$idx}]" type="text" {?attempt} value="{attempt.answers[$idx]}" disabled {/attempt} aria-required="true" required/>
+		  {/eq}
+		  {@eq key=answer_type value="number"}
+		    <input name="answer[{$idx}]" type="number" {?attempt} value="{attempt.answers[$idx]}" disabled {/attempt} aria-required="true" required/>
+		  {/eq}
+		  {@eq key=answer_type value="checkbox"}
+		    {#opts no=$idx}<input name="answer[{no}][]" value="{.}" type="checkbox"  {?attempt}{@contains key=attempts.answers[$idx] value=.}checked{/contains} disabled{/attempt}/> {.}<br/>{/opts}
+		  {/eq}
+		  {@eq key=answer_type value="radio"}
+		    {#opts no=$idx}<input name="answer[{no}]" value="{.}" type="radio" {?attempt}{@eq key=. value=attempt.answers[$idx]}selected{/eq} disabled{/attempt}/> {.}<br/>{/opts}
+		  {/eq}
+		</div>
+	      </li>
+	    {/quiz.questions}
+	    {^attempt}
+	      <li class="footer">
+		<button type="submit">Submit</button>
+	      </li>
+	    {/attempt}
+	  </ul>
+	</form>
+    </main>
+{/body}

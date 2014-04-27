@@ -1,0 +1,39 @@
+{>"views/base.dust"/}
+{<head}
+    <title>Mass User Creation</title>
+    <link href="/styles/users.css" rel="stylesheet"/>
+    <link href="/foundation-icons/foundation-icons.css" rel="stylesheet"/>
+{/head}
+{<body}
+  {>"views/topbar.dust"/}
+
+  <main>
+    <article>
+      <p>Mass User Creation is an easy way to create the user accounts for many pupils, who share some subjects. <i>Nota Bene:</i> Only the accounts of pupils can be created this way.</p>
+      <p>The passwords are formulated from the date such that a pupil born on the 5th May 2014, would have the password <i>050514</i>.</p>
+
+      <form method="post">
+	<fieldset>
+	  <legend>Users</legend>
+	  <table id="users">
+	    {>"views/user.dust"/}
+	    {>"views/user.dust" disabled="true"/}
+	  </table>
+	</fieldset>
+	
+	<fieldset>
+	  <legend>Shared Subjects</legend>
+	  <select multiple name="subjects[]" id="subjects">
+	    {#subjects}
+	      <option value="{_id}">{name}</option>
+	    {/subjects}
+	  </select>
+	</fieldset>
+	<button type="submit">Submit</button>
+      </form>
+
+
+    </article>
+  </main>
+  <script src="/scripts/admin/massUserCreation.js"></script>
+{/body}

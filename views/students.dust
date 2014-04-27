@@ -1,0 +1,30 @@
+{>"views/base.dust"/}
+{<head}
+  <title>Students</title>
+  <link href="/styles/students.css" rel="stylesheet"/>
+  <script src="/components/typeahead.js/dist/typeahead.jquery.min.js"></script>
+  <script src="/scripts/students.js"></script>
+{/head}
+{<body}
+  {>"views/topbar.dust"/}
+  {>"views/nav.dust" active="students"/}
+  <main>
+    <ul id="students">
+      <li class="heading">
+	{>"views/toggle_side_nav.dust"/}
+	Students
+	{>"views/add.dust"/}
+      </li>
+      <li id="add-student" hidden>
+	<input type="text" name="username" id="add-student-username" aria-required="true" required/>
+	<button type="submit">Save</button>
+      </li>
+      {#students}
+	<li>
+	  <a>{username}</a>
+	  {>"views/delete.dust" src="/subjects/{subject._id}/students/{_id}" text="Unenroll" class="unenroll-student"/}
+	</li>
+      {/students}
+    </ul>
+  </main>
+{/body}

@@ -20,7 +20,7 @@ var getSelectionHtml = function() {
     return html;
 };
 
-var EditorView = require("../app/blogs/editor.dust");
+var EditorView = require("../views/editor.dust");
 
 var EditorState = Backbone.Model.extend({
     defaults: {

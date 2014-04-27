@@ -1,0 +1,29 @@
+{>"views/base.dust"/}
+{<head}
+    <title>{quiz.title}</title>
+    <link href="/styles/vocab_quizzes/quiz.css" rel="stylesheet"/>
+    <script src="/scripts/vocab_quizzes.js"></script>
+{/head}
+{<body}
+    {>"views/topbar.dust"/}
+    {>"views/nav.dust" active="vocab_quizzes"/}
+    <main>
+      {#quiz}
+	<ul id="quiz">
+	  <li class="heading">
+	    {>"views/toggle_side_nav.dust"/}
+	    {title}
+	    <button class="quiz-correct"><i class="fi-check" title="Check"></i></button>
+	    <button class="quiz-redo"><i class="fi-refresh" title="Redo"></i></button>
+	  <li>
+	    <div>
+	      {#body}
+		<label>{question}</label>
+		<input type="text" {@first}autofocus{/first} data-answer="{#answer}{.}{@sep},{/sep}{/answer}"/>
+	      {/body}
+	    </div>
+	  </li>
+	</ul>
+      {/quiz}
+    </main>
+{/body}

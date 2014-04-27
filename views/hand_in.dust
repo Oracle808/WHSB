@@ -1,0 +1,20 @@
+{>"views/base.dust"/}
+{<head}
+  <title>View</title>
+  <link href="/styles/hand_in.css" rel="stylesheet"/>
+{/head}
+{<body}
+  {>"views/topbar.dust"/}
+  {>"views/nav.dust"/}
+  <main>
+    <ul id="handed_in_files">
+      {#hand_in_slot}
+	<li class="heading">{name}</li>
+	{#files slot=_id}
+	  <li><a href="/subjects/{subject._id}/hand_in/{slot}/files/{file}/">{user.username}</a></li>
+	{/files}
+      {/hand_in_slot}
+    </ul>
+  </main>
+{/body}
+

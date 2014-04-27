@@ -1,7 +1,7 @@
 var Backbone = require("./backbone");
 var dust = require("dustjs-linkedin/lib/dust");
 dust.helper = require("dustjs-helpers");
-var questionTemplate = require("../app/vocab_quizzes/question.dust");
+var questionTemplate = require("../views/vocab_question.dust");
 var NewVocabQuizController = Backbone.Controller.extend({
     events: {
 	"click .add-question": "addQuestion"

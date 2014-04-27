@@ -1,0 +1,29 @@
+{>"views/base.dust"/}
+{<head}
+  <title>Recordings</title>
+  <link href="/styles/recordings.css" rel="stylesheet"/>
+  <script src="/scripts/recordings/index.js"></script>
+{/head}
+{<body}
+  {>"views/topbar.dust"/}
+  {>"views/nav.dust" active="recordings"/}
+  <main>
+    <ul id="recordings">
+      <li class="heading">Recordings<a href="/subjects/{subject._id}/recordings?nova=true" class="add-item"><i class="fi-plus"></i></a></li>
+      <li id="new-recording" {^nova}hidden{/nova}>
+	<form action="/subjects/{subject._id}/recordings" method="post" enctype="multipart/form-data">
+	  {?error}<div class="error">{error}</div>{/error}
+	  <input type="text" name="name" placeholder="Name" aria-required="required" required/>
+	  <input type="file" name="file" accept="audio/*" aria-required="required" required/>
+	  <button type="submit">Submit</button>
+	</form>
+      </li>
+      {#subject.recordings}
+	<li>{name} 
+	  {>"views/delete.dust" src="/subjects/{subject._id}/recordings/{_id}" class="delete-item"/}
+	  {>"views/audio.dust" src="/subjects/{subject._id}/recordings/{_id}"/}
+	</li>
+      {/subject.recordings}
+    </ul>
+  </main>
+{/body}

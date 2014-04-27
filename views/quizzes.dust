@@ -1,0 +1,31 @@
+{>"views/base.dust"/}
+{<head}
+  <title>Quizzes</title>
+  <link href="/styles/quizzes/index.css" rel="stylesheet"/>
+  {@ne key=user.role value="student"}
+    <script src="public/scripts/results.js"></script>
+    <script src="bower_components/d3/d3.min.js"></script>
+    <script src="bower_components/oboe/dist/oboe-browser.min.js"></script>
+  {/ne}
+{/head}
+{<body}
+  {>"views/topbar.dust"/}
+  {>"views/nav.dust" active="quizzes"/}
+  <main>
+    <ol id="quizzes">
+      <li class="heading">
+	{>"views/toggle_side_nav.dust"/}
+	{title}
+	<a href="/subjects/{subject._id}/quizzes/nova" class="add-item"><i class="fi-plus"></i></a></li>
+      {#quizzes}
+	<li>
+	  <a href="/subjects/{subject._id}/quizzes/{_id}">{title}</a>
+	  {>"views/delete.dust" src="/subjects/{subject._id}/quizzes/{_id}" class="delete-item"/}
+	  {>"views/edit.dust"/}
+	</li>
+      {:else}
+	{>"views/nothing_here.dust"/}
+      {/quizzes}
+    </ol>
+  </main> 
+{/body}

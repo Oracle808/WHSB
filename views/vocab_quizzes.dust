@@ -1,0 +1,26 @@
+{>"views/base.dust"/}
+{<head}
+    <title>{title}</title>
+    <link href="/styles/quizzes/index.css" rel="stylesheet"/>
+{/head}
+{<body}
+    {>"views/topbar.dust"/}
+    {>"views/nav.dust" active="vocab_quizzes"/}
+    <main>
+      <ol id="quizzes">
+	<li class="heading">
+	  {>"views/toggle_side_nav.dust"/}
+	  {title}
+	  <a href="/subjects/{subject._id}/vocab_quizzes/nova" class="add-item"><i class="fi-plus"></i></a></li>
+	{#quizzes}
+	  <li>
+	    <a href="/subjects/{subject._id}/vocab_quizzes/{_id}">{title}</a>
+	    {>"views/delete.dust" src="/subjects/{subject._id}/vocab_quizzes/{_id}" class="delete-item"/}
+	    {>"views/edit.dust"/}
+	  </li>
+	{:else}
+	  {>"views/nothing_here.dust"/}
+	{/quizzes}
+      </ol>
+    </main> 
+{/body}

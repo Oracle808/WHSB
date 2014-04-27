@@ -1,0 +1,54 @@
+{>"views/base.dust"/}
+{<head}
+    <title>Codr</title>
+    <link href="/styles/codr.css" rel="stylesheet">    
+    <link href="/foundation-icons/foundation-icons.css" rel="stylesheet"/>
+    <script src="/scripts/codr.js"></script>
+{/head}
+{<body}
+    {>"views/topbar.dust"/}
+    <main>
+      <header class="heading">
+	<ul id="actions">
+	  <li><button id="runCode"><i class="fi-play"></i></button></li>
+	  <li><button id="openFile"><i class="fi-upload"></i></button></li>
+	  <li><button id="saveFile"><i class="fi-archive"></i></button></li>
+	</ul>
+	<h2>Codr</h2>
+
+	<ul id="links">
+	  <li><button id="documentation">Documentation</button></li>
+	</ul>
+      </header>
+
+      <div class="flip-container">
+	<div class="flipper">
+	  <section class="editor front">
+	    <div contenteditable="true" id="code"></div>
+	    <output class="code-output">
+
+	    </output>
+	  </section>
+	  <section class="documentation back">
+	    <dl class="accordion">
+	      <dd>
+		<a href="#panel1">console</a>
+		<div id="panel1" class="content active">
+		  <dl class="accordion">
+		    <dd>
+		      <a href="#panel1_log">console.log(<code>str</code>)</a>
+		      <div id="panel1_log">
+			Logs <code>str</code>to the console
+		      </div>
+		    </dd>
+		  </dl>
+		</div>
+	      </dd>
+	    </dl>
+	  </section>
+	</div>
+      </div>
+
+      <output id="console"></output>
+    </main>
+{/body}

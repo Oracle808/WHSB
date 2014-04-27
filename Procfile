@@ -1,1 +1,1 @@
-web: node app/web.js
+web: node controllers/web.js

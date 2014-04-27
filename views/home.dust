@@ -1,0 +1,40 @@
+{>"views/base.dust"/}
+{<head}
+  <title>WHSB</title>
+  <link href="/styles/home.css" rel="stylesheet"/>
+{/head}
+{<body}
+  {>"views/topbar.dust"/}
+  <main>
+    {@eq key=user.role value="student"}
+	<ul id="subjects-student">
+	  {#subjects}
+	    <li>
+	      <a href="/subjects/{_id}">
+		<img src="/icons/{subject_name}.png"/>
+	      </a>
+	    </li>
+	  {/subjects}
+	</ul>
+      {:else}
+	<ul id="subjects">
+	  <li class="heading">
+	    Subjects
+	    {@eq key=user.role value="admin"}
+	      {>"views/add.dust" src="/subjects/new"/}
+	    {/eq}
+	  </li>
+	  {#subjects}
+	    <li>
+	      <a href="/subjects/{_id}">
+		{name}
+	      </a>
+	      {@eq key=user.role value="admin"}
+		{>"views/delete.dust" src="/subjects/{subject._id}" class="delete-item"/}
+	      {/eq}
+	    </li>
+	  {/subjects}
+	</ul>
+    {/eq}
+  </main>
+{/body}
