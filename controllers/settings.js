@@ -3,7 +3,7 @@ async = require("async"),
 gfs = require("../models/gfs");
 
 exports.list = function(req, res) {
-    res.dust(settingsView);
+    res.render(settingsView);
 };
 
 exports.post = function(req, res) {

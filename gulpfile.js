@@ -1,33 +1,14 @@
-var gulp = require("gulp");
-var sass = require("gulp-sass");
-var browserify = require('gulp-browserify');
-var uglify = require('gulp-uglify');
-var clean = require('gulp-clean');
-var modernizr = require('gulp-modernizr');
-var prefix = require('gulp-autoprefixer');
+var gulp = require("gulp"),
+sass = require("gulp-sass"),
+browserify = require('gulp-browserify'),
+uglify = require('gulp-uglify'),
+clean = require('gulp-clean'),
+prefix = require('gulp-autoprefixer');
 
 gulp.task("clean", function() {
-    return gulp.src(["public/styles", "public/scripts"], {read:false}). // Do no read files
-	pipe(clean());
+    return gulp.src(["public/styles", "public/scripts"], {read:false}) // Do no read files
+	.pipe(clean());
 });
-
-var displayError = function(error) {
-
-    // Initial building up of the error
-    var errorString = '[' + error.plugin + ']';
-    errorString += ' ' + error.message.replace("\n",''); // Removes new line at the end
-
-    // If the error contains the filename or line number add it to the string
-    if(error.fileName)
-	errorString += ' in ' + error.fileName;
-
-    if(error.lineNumber)
-	errorString += ' on line ' + error.lineNumber;
-
-    // This will output an error like the following:
-    // [gulp-sass] error message in file_name on line 1
-    console.error(errorString);
-};
 
 gulp.task("styles", function() {
     return gulp.src("styles/**/*.scss")
@@ -50,10 +31,7 @@ gulp.task("scripts", function() {
 	.pipe(gulp.dest("./public/scripts"));
 });
 
-gulp.task("modernizr", function() {
-    gulp.src(["styles/**/*.scss", "scripts/**/*.js"])
-	.pipe(modernizr())
-	.pipe(gulp.dest("./public/scripts"));
+gulp.task("default", ["clean"], function() {
+    gulp.start("styles", "scripts");
 });
-
-gulp.task("default", ["clean", "styles", "scripts", "modernizr"]);
+gulp.task("heroku:production", ["default"]);

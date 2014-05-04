@@ -1,25 +1,6 @@
 var Backbone = require("./backbone");
 var CodeBox = require("./codebox");
 
-var getSelectionHtml = function() {
-    var html = "";
-    if (typeof window.getSelection != "undefined") {
-	var sel = window.getSelection();
-	if (sel.rangeCount) {
-	    var container = document.createElement("div");
-	    for (var i = 0, len = sel.rangeCount; i < len; ++i) {
-		container.appendChild(sel.getRangeAt(i).cloneContents());
-	    }
-	    html = container.innerHTML;
-	}
-    } else if (typeof document.selection != "undefined") {
-	if (document.selection.type == "Text") {
-	    html = document.selection.createRange().htmlText;
-	}
-    }
-    return html;
-};
-
 var EditorView = require("../views/editor.dust");
 
 var EditorState = Backbone.Model.extend({
@@ -33,15 +14,14 @@ var EditorController = Backbone.Controller.extend({
 
     className: "editor",
 
-    requires: Modernizr.contenteditable,
-
     events: {
 	"change .editor-mode": "updateMode",
 	"click .editor-toolbar button": "updateFormat",
 	"change select.font-control": "updateFont",
 	"click .editor-rich": "reconfigure",
 	"keydown .editor-rich": "reconfigure",
-	"keyup .editor-content": "transpose",
+	"DOMSubtreeModified .editor-rich": "transpose",
+	"change .editor-latex": "transpose",
 	"click .open-editor": "openEditor",
 	"click .open-preview": "openPreview"
     },
@@ -90,10 +70,12 @@ var EditorController = Backbone.Controller.extend({
     },
 
     transpose: function(e) {
+	console.log("fdsdfs");
 	if(this.controls) {
-	    var editor = this.find(".editor-content");
+	    var editor = $(e.target);
 	    var val = (this.state.get("mode") === "rich-text-editor" ? editor.html() : this.editor.val());
 	    this.trigger("change", val);
+	    this.controls.val(val);
 	    console.log("fsdsdfsdf");
 	}
     },

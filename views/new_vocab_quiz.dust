@@ -6,8 +6,8 @@
     <script src="/scripts/new_vocab_quiz.js"></script>
 {/head}
 {<body}
-  {>"view/topbar.dust"/}
-  {>"view/nav.dust" active="vocab_quizzes"/}
+  {>"views/topbar.dust"/}
+  {>"views/nav.dust" active="vocab_quizzes"/}
   <main>
     <form action="/subjects/{subject._id}/vocab_quizzes" method="post">
       <ul id="new-quiz">
@@ -29,7 +29,7 @@
 	  FYI, the shortcut for a new question is Ctrl-N/Cmd-N, and you can have multiple answers (just delimiter them with a comma).
 	</li>
 	{#questions}
-	  {>"view/question.dust"/}
+	  {>"views/question.dust"/}
 	{/questions}
       </ul>
     </form>

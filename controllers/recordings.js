@@ -3,21 +3,20 @@ child_process = require("duplex-child-process"),
 mime = require("mime"),
 uu = require("underscore"),
 gfs = require("../models/gfs"),
-ObjectID  = mongoose.mongo.BSONPure.ObjectID
+ObjectID  = mongoose.mongo.BSONPure.ObjectID;
 
 mime.define({
     "audio/mp3": ["mp3"]
 });
 
-var Subject = mongoose.model("Subject");
 var listView = require("../views/recordings.dust");
 var Busboy = require("busboy");
 
-module.exports.list = function(req, res) {
-    res.dust(listView);
+exports.list = function(req, res) {
+    res.render(listView);
 };
 
-module.exports.post = function(req, res) {
+exports.post = function(req, res) {
     var name, id;
     var busboy = new Busboy({
 	headers: req.headers,
@@ -59,14 +58,14 @@ module.exports.post = function(req, res) {
 		if(err) {
 		    return res.error(err);
 		}
-		module.exports.list(req, res);
+		exports.list(req, res);
 	    });
 	}
     });
     req.pipe(busboy);
 };
 
-module.exports.get = function(req, res) {
+exports.get = function(req, res) {
     var recording = uu.findWhere(req.subject.recordings, {id: req.param("recording")}).file;
     gfs.files.findOne({_id:recording}, function(err, file) {
 	if(err) {
@@ -101,7 +100,7 @@ module.exports.del = function(req, res) {
 	} else {
 	    req.subject.recordings.pull(req.param("recording"));
 	    req.subject.save(function(err) {
-		module.exports.list(req, res);
+		exports.list(req, res);
 	    });
 	}
     });

@@ -1,12 +1,9 @@
 var blogTemplate = require("../views/blog.dust");
-var mongoose = require("mongoose");
-var Subject = mongoose.model("Subject");
-var User = mongoose.model("User");
 var RSS = require("rss");
 var uu = require("underscore");
 var us = require("underscore.string");
 
-module.exports.list = function(req, res) {
+exports.list = function(req, res) {
     var blog = req.subject.blog.reverse(); // We want `blog` in reverse-chronological order
     if(req.session.user.role === "student") {
 	blog = uu.filter(blog, function(article) {
@@ -16,10 +13,10 @@ module.exports.list = function(req, res) {
     uu.each(blog, function(article) {
 	article.body = us.prune(article.body, 350);
     });
-    res.dust(blogTemplate, {blog:blog});
+    res.render(blogTemplate, {blog:blog});
 };
 
-module.exports.publish = function(req, res) {
+exports.publish = function(req, res) {
     req.subject.blog.push({
 	title: req.body.title,
 	body: decodeURIComponent(req.body.body),
@@ -30,16 +27,16 @@ module.exports.publish = function(req, res) {
 	if(err) {
 	    res.error(err);
 	} else {
-	    module.exports.list(req, res);
+	    exports.list(req, res);
 	}
     });
 };
 
-module.exports.get = function(req, res) {
-    res.dust(blogTemplate, {blog: uu.findWhere(req.subject.blog, {id:req.param("post")})});
+exports.get = function(req, res) {
+    res.render(blogTemplate, {blog: uu.findWhere(req.subject.blog, {id:req.param("post")})});
 };
 
-module.exports.feed = function(req, res) {
+exports.feed = function(req, res) {
     var news = new RSS({
 	title: req.subject.name,
 	generator: "WHSB Feed Generator",
@@ -60,10 +57,11 @@ module.exports.feed = function(req, res) {
 	    date: article.date
 	});
     });
-    res.rss(news.xml());
+    res.type("application/rss+xml");
+    res.end(news.xml());
 };
 
-module.exports.del = function(req, res) {
+exports.del = function(req, res) {
     req.subject.blog.pull(req.param("post"));
     req.subject.save(function(err) {
 	if(err) {

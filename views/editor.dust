@@ -40,7 +40,7 @@
   {@eq key=mode value="rich-text-editor"}
     <div contenteditable="true" class="editor-rich editor-content"></div>
   {:else}
-    <div contenteditable="true" class="active editor-content"></div>
+    <div contenteditable="true" class="active editor-latex editor-content"></div>
     <div class="editor-preview"></div>
   {/eq}
 </div>

@@ -19,7 +19,7 @@ exports.nova = function(req, res) {
 		return file.replace(/.png$/, "");
 	    });
 	    User.find({role:"teacher"}, function(err, ls) {
-		res.dust(novaTemplate, {subjects: list, teachers: ls});
+		res.render(novaTemplate, {subjects: list, teachers: ls});
 	    });
 	}
     });
@@ -82,7 +82,7 @@ exports.students.list = function(req, res) {
 	if(err) {
 	    res.error(err);
 	} else {
-	    res.dust(studentsView, {students: docs});
+	    res.render(studentsView, {students: docs});
 	}
     });
 };

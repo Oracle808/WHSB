@@ -1,16 +1,14 @@
-var mongoose = require("mongoose");
-var Subject = mongoose.model("Subject");
 var vocabQuizList = require("../views/vocab_quizzes.dust");
 var vocabQuizPage = require("../views/vocab_quiz.dust");
 var vocabQuizEdit = require("../views/new_vocab_quiz.dust");
 var uu = require("underscore");
 
 exports.list = function(req, res) {
-    res.dust(vocabQuizList, {quizzes: req.subject.vocab_quizzes, title: "Vocabulary Quizzes", route: "vocab_quizzes"});
+    res.render(vocabQuizList, {quizzes: req.subject.vocab_quizzes, title: "Vocabulary Quizzes", route: "vocab_quizzes"});
 };
 
 exports.get = function(req, res) {
-    res.dust(vocabQuizPage, {quiz: uu.findWhere(req.subject.vocab_quizzes, {id: req.param("quiz")})});
+    res.render(vocabQuizPage, {quiz: uu.findWhere(req.subject.vocab_quizzes, {id: req.param("quiz")})});
 };
 
 exports.del = function(req, res) {
@@ -19,12 +17,12 @@ exports.del = function(req, res) {
 	if(err) {
 	    return res.error(err);
 	}
-	module.exports.list(req, res);
+	exports.list(req, res);
     });
 };
 
 exports.nova = function(req, res) {
-    res.dust(vocabQuizEdit);
+    res.render(vocabQuizEdit);
 };
 
 exports.post = function(req, res) {

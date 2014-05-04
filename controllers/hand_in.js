@@ -8,7 +8,7 @@ ObjectID = mongoose.mongo.BSONPure.ObjectID,
 gfs = require("../models/gfs");
 
 exports.index = function(req, res) {
-    res.dust(listView);
+    res.render(listView);
 };
 
 exports.post = function(req, res) {
@@ -20,7 +20,7 @@ exports.post = function(req, res) {
 	if(err) {
 	    res.error(err);
 	} else {
-	    module.exports.index(req, res);
+	    exports.index(req, res);
 	}
     });
 };
@@ -94,7 +94,7 @@ exports.upload = function(req, res) {
 
 exports.get = function(req, res) {
     req.subject.populate("hand_in.user", function(err, doc) {
-	res.dust(detailView, {hand_in_slot: uu.findWhere(doc.hand_in, {id: req.param("hand_in_slot")})});
+	res.render(detailView, {hand_in_slot: uu.findWhere(doc.hand_in, {id: req.param("hand_in_slot")})});
     });
 };
 
@@ -118,7 +118,7 @@ exports.del = function(req, res) {
 	    if(err) {
 		res.error(err);
 	    } else {
-		res.dust(listView);
+		res.render(listView);
 	    }
 	});
     });

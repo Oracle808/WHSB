@@ -1,19 +1,16 @@
-var mongoose = require("mongoose");
-var Subject = mongoose.model("Subject");
 var uu = require("underscore");
-var us = require("underscore.string");
 var dateutil = require("dateutil");
-
-// Views
 var listView = require("../views/quizzes.dust");
 var getView = require("../views/quiz.dust");
-var novaView = require("../views/new_vocab_quiz.dust");
+var novaView = require("../views/new_quiz.dust");
 var marksView = require("../views/quiz_marks.dust");
 
+// List all quizzes
 exports.list = function(req, res) {
-    res.dust(listView, {route:"quizzes", quizzes: req.subject.quizzes, title: "Quizzes"});
+    res.render(listView, {route:"quizzes", quizzes: req.subject.quizzes, title: "Quizzes"});
 };
 
+// Get a quiz
 exports.get = function(req, res) {
     if(req.session.user.role === "student") {
 	var quiz = uu.findWhere(req.subject.quizzes, {id: req.param("quiz")}).toObject();
@@ -26,7 +23,7 @@ exports.get = function(req, res) {
 	    }
 	    return q;
 	});
-	res.dust(getView, {quiz: quiz});
+	res.render(getView, {quiz: quiz});
     } else {
 	req.subject.populate("quizzes.attempts.user", function(err) {
 	    var quiz = uu.findWhere(req.subject.quizzes, {id: req.param("quiz")});
@@ -40,11 +37,12 @@ exports.get = function(req, res) {
 		    return (a+b) / 2;
 		});
 	    }
-	    res.dust(marksView, {quiz:quiz, best: best, average: average});
+	    res.render(marksView, {quiz:quiz, best: best, average: average});
 	});
     }
 };
 
+// Submit a quiz
 exports.submit = function(req, res) {
     var quiz = uu.findWhere(req.subject.quizzes, {id: req.param("quiz")});
     console.log(quiz);
@@ -75,21 +73,24 @@ exports.submit = function(req, res) {
 	if(err) {
 	    res.error(err);
 	} else {
-	    res.dust(getView, {quiz:quiz, attempt: attempt});
+	    res.render(getView, {quiz:quiz, attempt: attempt});
 	}
     });
 };
 
+// New quiz form
 exports.nova = function(req, res) {
-    res.dust(novaView);
+    res.render(novaView);
 };
 
+// Edit quiz form
 exports.edit = function(req, res) {
     var quiz = uu.findWhere(req.subject.quizzes, {id:req.param("quiz")});
-    res.dust(novaView, {questions: quiz.questions});
+    res.render(novaView, {questions: quiz.questions});
 };
 
-exports.publish = function(req, res) {
+// Post quiz form
+exports.create = function(req, res) {
     var update = {
 	title:req.body.title,
 	questions: [],
@@ -129,18 +130,19 @@ exports.publish = function(req, res) {
 	if(err) {
 	    res.error(err);
 	} else {
-	    module.exports.list(req, res);
+	    exports.list(req, res);
 	}
     });
 };
 
+// Delete quiz
 exports.del = function(req, res) {
     req.subject.quizzes.pull(req.param("quiz"));
     req.subject.save(function(err) {
 	if(err) {
 	    res.error(err);
 	} else {
-	    module.exports.list(req, res);
+	    exports.list(req, res);
 	}
     });
 };
