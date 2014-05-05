@@ -10,5 +10,12 @@ inquirer.prompt([
 	username: data.username,
 	password: data.password,
 	role: data.role
+    }, function(err, data) {
+	if(err) {
+	    console.log("There was an error:" + err);
+	} else {
+	    console.log("A new user was created successfully");
+	}
+	db.disconnect();
     });
 });
