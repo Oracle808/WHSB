@@ -1,12 +1,12 @@
-var Inquirer = require("inquirer");
-var Database = require("../models/index.js");
+var inquirer = require("inquirer");
+var db = require("../models/index.js");
 
-Inquirer.prompt([
+inquirer.prompt([
     {name: "username", message: "Username: "},
     {name: "password", message: "Password: ", type: "password"},
     {name: "role", message: "Role: ", type: "list", choices: ["student", "teacher", "admin"]}
 ], function(data) {
-    Database.user.create({
+    db.users.create({
 	username: data.username,
 	password: data.password,
 	role: data.role
