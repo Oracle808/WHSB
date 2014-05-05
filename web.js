@@ -1,6 +1,6 @@
-var db = require("../models/index.js"),
+var db = require("./models/index.js"),
 http = require("http"),
-reactive = require("./reactive"),
+reactive = require("./controllers/reactive"),
 bodyParser = require("body-parser"),
 cookieParser = require("cookie-parser"),
 session = require("express-session"),
@@ -33,18 +33,18 @@ var loadSubject = function(req, res, next) {
     });
 };
 
-var Atrium = require("./home"),
-Blogs = require("./blogs"),
-Subjects = require("./subjects"),
-VocabQuizzes = require("./vocab_quizzes"),
-Apps = require("./apps"),
-HandIn = require("./hand_in"),
-Quizzes = require("./quizzes"),
-Settings = require("./settings"),
-Recordings = require("./recordings"),
-Users = require("./users");
+var Atrium = require("./controllers/home"),
+Blogs = require("./controllers/blogs"),
+Subjects = require("./controllers/subjects"),
+VocabQuizzes = require("./controllers/vocab_quizzes"),
+Apps = require("./controllers/apps"),
+HandIn = require("./controllers/hand_in"),
+Quizzes = require("./controllers/quizzes"),
+Settings = require("./controllers/settings"),
+Recordings = require("./controllers/recordings"),
+Users = require("./controllers/users");
 
-var Security = require("./security"),
+var Security = require("./controllers/security"),
 auth = Security.auth,
 teacher = Security.teacher,
 admin = Security.admin,
