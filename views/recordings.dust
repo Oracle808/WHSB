@@ -2,7 +2,7 @@
 {<head}
   <title>Recordings</title>
   <link href="/styles/recordings.css" rel="stylesheet"/>
-  <script src="/scripts/recordings/index.js"></script>
+  <script src="/scripts/recordings.js"></script>
 {/head}
 {<body}
   {>"views/topbar.dust"/}

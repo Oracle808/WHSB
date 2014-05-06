@@ -2,7 +2,7 @@
 {<head}
     <title>New Quiz</title>
     <link href="/styles/quizzes/nova.css" rel="stylesheet"/>
-    <script src="/scripts/quizzes/nova.js"></script>
+    <script src="/scripts/new_quiz.js"></script>
 {/head}
 {<body}
     {>"views/topbar.dust"/}

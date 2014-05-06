@@ -1,5 +1,3 @@
-var oboe = require("oboe");
-
 var loadResults = function(e) {
     var main = d3.select("main");
     var container = main.append("svg");

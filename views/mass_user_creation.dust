@@ -34,5 +34,5 @@
 
     </article>
   </main>
-  <script src="/scripts/admin/massUserCreation.js"></script>
+  <script src="/scripts/mass_user_creation.js"></script>
 {/body}
