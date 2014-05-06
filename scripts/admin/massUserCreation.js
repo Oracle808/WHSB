@@ -1,13 +1,14 @@
 var dust = require("dustjs-linkedin/lib/dust");
 var row = require("../views/user.dust");
-var users = document.getElementById("users");
-var stubRow = users.querySelector("tr:last-child");
+var users = $("#users");
+var stubRow = users.find("tr:last-child");
 var parser = new DOMParser();
 
-stubRow.addEventListener("click", function(e) {
+
+stubRow.on("click", function(e) {
     dust.render(row, {}, function(err, out) {
 	var table = document.createElement("table");
 	table.innerHTML = out;
-	users.insertBefore(table.querySelector("tr"), stubRow);
+	users.insertBefore(stubRow);
     });
 });

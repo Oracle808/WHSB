@@ -3,3 +3,4 @@
 .env
 public/scripts
 public/styles
+node_modules/
