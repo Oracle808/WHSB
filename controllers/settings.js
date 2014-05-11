@@ -1,6 +1,6 @@
 var settingsView = require("../views/settings.dust"),
 async = require("async"),
-gfs = require("../models/gfs");
+db = require("../models");
 
 exports.list = function(req, res) {
     res.render(settingsView);
@@ -29,7 +29,7 @@ exports.post = function(req, res) {
     }
    if(req.subject.settings.recordings !== req.body.recordings) {
        async.each(req.subject.recordings, function(recording, cb) {
-	   gfs.unlink({_id: recording.file}, function(err) {
+	   db.gfs.unlink({_id: recording.file}, function(err) {
 	       if(!err) {
 		   req.subject.recordings.pull(recording);
 	       }

@@ -1,13 +1,11 @@
 var loginPage = require("../views/login.dust");
 var indexPage = require("../views/home.dust");
-var mongoose = require("mongoose");
-var User = mongoose.model("User");
-var Subject = mongoose.model("Subject");
+var db = require("../models");
 var bcrypt = require("bcrypt-nodejs");
 
 exports.index = function(req, res) {
     if(req.session.user.role === "student") {
-	Subject
+	db.subjects
 	    .where("_id").in(req.session.user.subjects)
 	    .select("name subject_name")
 	    .exec(function(err, subjects) {
@@ -18,11 +16,11 @@ exports.index = function(req, res) {
 		}
 	    });
     } else if(req.session.user.role === "teacher") {
-	Subject.find({teacher:req.session.user._id}, function(err, subjects) {
+	db.subjects.find({teacher:req.session.user._id}, function(err, subjects) {
 	    res.render(indexPage, {subjects:subjects});
 	});
     } else if(req.session.user.role === "admin") {
-	Subject.find({}, function(err, subjects) {
+	db.subjects.find({}, function(err, subjects) {
 	     // subjects will be a list of all subjects
 	    res.render(indexPage, {subjects: subjects});
 	});
@@ -36,7 +34,7 @@ exports.login.form = function(req, res) {
 }
 
 exports.login.attempt = function(req, res) {
-    User.findOne({username: req.body.username}, function(err, user) {
+    db.users.findOne({username: req.body.username}, function(err, user) {
 	if(err) {
 	    res.error(err);
 	} else if(user) {

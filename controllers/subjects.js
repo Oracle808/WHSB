@@ -1,6 +1,4 @@
-var mongoose = require("mongoose");
-var Subject = mongoose.model("Subject");
-var User = mongoose.model("User");
+var db = require("../models");
 var uu = require("underscore");
 var us = require("underscore.string");
 var fs = require("fs");
@@ -18,7 +16,7 @@ exports.nova = function(req, res) {
 	    list = uu.map(list, function(file) {
 		return file.replace(/.png$/, "");
 	    });
-	    User.find({role:"teacher"}, function(err, ls) {
+	    db.users.find({role:"teacher"}, function(err, ls) {
 		res.render(novaTemplate, {subjects: list, teachers: ls});
 	    });
 	}
@@ -31,7 +29,7 @@ exports.post = function(req, res) {
 	name: req.body.name,
 	teacher: req.body.teacher
     };
-    Subject.create(subject, function(err) {
+    db.subjects.create(subject, function(err) {
 	if(err) {
 	    res.error(err);
 	} else {
@@ -78,7 +76,7 @@ exports.links.del = function(req, res) {
 exports.students = {};
 
 exports.students.list = function(req, res) {
-    User.find({subjects:{$in:[req.subject._id]}, role:"student"}, function(err, docs) {
+    db.users.find({subjects:{$in:[req.subject._id]}, role:"student"}, function(err, docs) {
 	if(err) {
 	    res.error(err);
 	} else {
@@ -88,7 +86,7 @@ exports.students.list = function(req, res) {
 };
 
 exports.students.unenroll = function(req, res) {
-    User.findByIdAndUpdate(req.param("student"), {$pull: {subjects: req.subject._id}}, function(err, doc) {
+    db.users.findByIdAndUpdate(req.param("student"), {$pull: {subjects: req.subject._id}}, function(err, doc) {
 	if(err) {
 	    res.error(err);
 	} else {

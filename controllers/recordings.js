@@ -1,9 +1,7 @@
-var mongoose = require("mongoose"),
-child_process = require("duplex-child-process"),
+var child_process = require("duplex-child-process"),
 mime = require("mime"),
 uu = require("underscore"),
-gfs = require("../models/gfs"),
-ObjectID  = mongoose.mongo.BSONPure.ObjectID;
+db = require("../models");
 
 mime.define({
     "audio/mp3": ["mp3"]
@@ -26,8 +24,8 @@ exports.post = function(req, res) {
 	}
     });
     busboy.on("file", function(fieldname, file, filename, encoding, mimetype) {
-	id = new ObjectID();
-	var store = gfs.createWriteStream({
+	id = new db.ObjectID();
+	var store = db.gfs.createWriteStream({
 	    content_type: mimetype,
 	    _id: id,
 	    filename: filename,
@@ -67,11 +65,11 @@ exports.post = function(req, res) {
 
 exports.get = function(req, res) {
     var recording = uu.findWhere(req.subject.recordings, {id: req.param("recording")}).file;
-    gfs.files.findOne({_id:recording}, function(err, file) {
+    db.gfs.files.findOne({_id:recording}, function(err, file) {
 	if(err) {
 	    res.error(err);
 	} else {
-	    var store = gfs.createReadStream({_id: recording});
+	    var store = db.gfs.createReadStream({_id: recording});
 	    var contentType = mime.extension(file.contentType);
 	    res.attachment(file.filename);
 	    res.set("Content-Length", file.length);
@@ -94,7 +92,7 @@ exports.get = function(req, res) {
 
 module.exports.del = function(req, res) {
     var fileId = uu.findWhere(req.subject.recordings, {id: req.param("recording")}).file;
-    gfs.remove({_id:fileId}, function(err) {
+    db.gfs.remove({_id:fileId}, function(err) {
 	if(err) {
 	    res.error(err);
 	} else {

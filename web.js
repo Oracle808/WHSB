@@ -1,4 +1,4 @@
-var db = require("./models/index.js"),
+var db = require("./models"),
 http = require("http"),
 reactive = require("./controllers/reactive"),
 bodyParser = require("body-parser"),

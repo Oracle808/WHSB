@@ -1,11 +1,9 @@
 var Busboy = require("busboy"),
 listView = require("../views/hand_ins.dust"),
 detailView = require("../views/hand_in.dust"),
-mongoose = require("mongoose"),
+db = require("../models"),
 uu = require("underscore"),
-async = require("async"),
-ObjectID = mongoose.mongo.BSONPure.ObjectID,
-gfs = require("../models/gfs");
+async = require("async");
 
 exports.index = function(req, res) {
     res.render(listView);
@@ -50,9 +48,9 @@ exports.upload = function(req, res) {
     }
     var fileRefs = [];
     busboy.on("file", function(fieldname, file, filename, encoding, mimetype) {
-	fileRefs.push(new ObjectID());
+	fileRefs.push(new db.ObjectID());
 	console.log(fileRefs[0]);
-	var store = gfs.createWriteStream({
+	var store = db.gfs.createWriteStream({
 	    filename: filename,
 	    content_type: mimetype,
 	    _id: fileRefs[0],
@@ -64,7 +62,7 @@ exports.upload = function(req, res) {
     busboy.on("finish", function() {
 	console.log("at end");
 	if(previousFile) {
-	    gfs.remove({_id: previousFile.file}, function(err) {
+	    db.gfs.remove({_id: previousFile.file}, function(err) {
 		if(err) {
 		    res.error(err);
 		    handInSlot.files.pull(previousFile);
@@ -99,7 +97,7 @@ exports.get = function(req, res) {
 };
 
 exports.download = function(req, res) {
-    var store = gfs.createReadStream(req.param("file"));
+    var store = db.gfs.createReadStream(req.param("file"));
     store.on("filename", res.attachment);
     store.pipe(res);
 };
@@ -109,7 +107,7 @@ exports.del = function(req, res) {
     if(!hand_in_slot) {
 	return res.error("Hand in slot doesn't exist");
     }
-    async.each(uu.pluck(hand_in_slot.files, "file"), gfs.unlink, function(err) {
+    async.each(uu.pluck(hand_in_slot.files, "file"), db.gfs.unlink, function(err) {
 	if(err) {
 	    return res.error(err);
 	}
